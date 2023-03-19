@@ -81,6 +81,7 @@ type Msg
     | UpdateStartingPointY String
     | AddRule
     | AssignSymbol
+    | ApplyAxiom
     | DrawTurtle
 
 
@@ -163,6 +164,8 @@ update msg model =
                     { model | rules = model.rules ++ [ newRule ], newRuleInput = "" }
             in
             { newModel | generatedSequence = generateSequence newModel.iterations newModel.axiom newModel.rules }
+        ApplyAxiom ->
+            { model | axiom = model.selectedSymbol }
 
         DrawTurtle ->
             { model | generatedSequence = generateSequence model.iterations model.axiom model.rules, drawnTurtle = True }
@@ -179,8 +182,9 @@ startingPointInput ( x, y ) =
         , Html.input [ placeholder "Y", value (String.fromFloat y), onInput UpdateStartingPointY ] []
         ]
 
-showRule : (Char, List Char.Char) -> String
-showRule (from, to) =
+
+showRule : ( Char, List Char.Char ) -> String
+showRule ( from, to ) =
     String.fromChar from ++ " → " ++ String.fromList to
 
 
@@ -197,28 +201,32 @@ view model =
         , text " -> "
         , input [ type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
         , button [ onClick AddRule ] [ text "Add Rule" ]
-        , div [ ]
+        , div []
             [ text "Rules: "
             , text <| String.join ", " <| List.map showRule model.rules
             ]
         , h2 [] [ text "Angle" ]
-        , input [ type_ "range", Html.Attributes.min "0", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.angle) ] []
+        , input [ type_ "range", Html.Attributes.min "0", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.angle), Html.Attributes.style "width" "400px" ] []
         , text (String.fromFloat model.angle ++ "°")
         , h2 [] [ text "Step Size" ]
         , input [ type_ "range", Html.Attributes.min "1", Html.Attributes.max "10", step "1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateStepSize), value (String.fromFloat model.stepSize) ] []
         , text (String.fromFloat model.stepSize)
         , h2 [] [ text "Axiom" ]
-        , select [ onInput SelectAxiom ] (List.map symbolOptionView model.symbolAssignments)
+        , input [ type_ "text", value model.axiom, onInput SelectAxiom ] []
+        , button [ onClick ApplyAxiom ] [ text "Apply Axiom" ]
         , text ("Axiom: " ++ model.axiom)
         , h2 [] [ text "Iterations" ]
         , input [ type_ "range", Html.Attributes.min "0", Html.Attributes.max "20", value (String.fromInt model.iterations), onInput (String.toInt >> Maybe.withDefault 0 >> UpdateIterations) ] []
         , text (String.fromInt model.iterations)
         , h2 [] [ text "Starting Point" ]
         , startingPointInput model.startingPoint
-        , button [ onClick DrawTurtle ] [ text "Draw" ]
-        ,svg [ viewBox 0 0 1000 1000, TypedSvg.Attributes.width (Px 1000), TypedSvg.Attributes.height (Px 1000) ] 
+        , div [ ]
+            [ button [ onClick DrawTurtle ] [ text "Draw" ] ]
+
+        , svg [ viewBox 0 0 1000 1000, TypedSvg.Attributes.width (Px 1000), TypedSvg.Attributes.height (Px 1000) ]
             (if model.drawnTurtle then
                 TurtleG.renderTurtleSegments <| generateTurtle model model.generatedSequence model.symbolAssignments model.stepSize model.angle
+
              else
                 []
             )
@@ -359,3 +367,4 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                     applyAction turtle symbolAssignment.action
     in
     List.foldl applySymbol (TurtleG.initTurtle model.startingPoint) sequence
+
