@@ -135,7 +135,7 @@ update msg model =
             { model | selectedSymbol = character }
 
         SelectAxiom newAxiom ->
-            { model | axiom = String.uncons newAxiom |> Maybe.map Tuple.first |> Maybe.withDefault ' ' |> String.fromChar }
+            { model | axiom = newAxiom }
 
         UpdateNewRuleInput input ->
             { model | newRuleInput = input }
@@ -165,7 +165,7 @@ update msg model =
             in
             { newModel | generatedSequence = generateSequence newModel.iterations newModel.axiom newModel.rules }
         ApplyAxiom ->
-            { model | axiom = model.selectedSymbol }
+            { model | generatedSequence = generateSequence model.iterations model.axiom model.rules }
 
         DrawTurtle ->
             { model | generatedSequence = generateSequence model.iterations model.axiom model.rules, drawnTurtle = True }
@@ -212,7 +212,7 @@ view model =
         , input [ type_ "range", Html.Attributes.min "1", Html.Attributes.max "10", step "1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateStepSize), value (String.fromFloat model.stepSize) ] []
         , text (String.fromFloat model.stepSize)
         , h2 [] [ text "Axiom" ]
-        , input [ type_ "text", value model.axiom, onInput SelectAxiom ] []
+        , input [ type_ "text", onInput SelectAxiom ] []
         , button [ onClick ApplyAxiom ] [ text "Apply Axiom" ]
         , text ("Axiom: " ++ model.axiom)
         , h2 [] [ text "Iterations" ]
