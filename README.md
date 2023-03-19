@@ -1,3 +1,3 @@
 # GUI-for-drawing-with-the-L-system-in-Elm
 
-example: https://i.ibb.co/1JYnkXr/LSystem-GUIex1.png
+example - Dragon curve: https://i.ibb.co/0sfTYkK/LSys-Ex-Dragon-Curve.png
