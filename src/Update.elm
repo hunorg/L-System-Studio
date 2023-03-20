@@ -13,6 +13,7 @@ type Msg
     | UpdateNewRuleInput String
     | UpdateAngle Float
     | UpdateStepSize Float
+    | UpdateFractionalStepSize Float
     | UpdateIterations Int
     | UpdateStartingPointX String
     | UpdateStartingPointY String
@@ -84,6 +85,9 @@ update msg model =
         UpdateStepSize newSize ->
             { model | stepSize = newSize }
 
+        UpdateFractionalStepSize newFractionalSize -> 
+            { model | fractionalStepSize = newFractionalSize }
+
         UpdateIterations newIterations ->
             { model | iterations = newIterations }
 
@@ -119,6 +123,9 @@ parseAction str =
         "Move" ->
             Move
 
+        "MoveFraction" -> 
+            MoveFraction
+
         "TurnLeft" ->
             TurnLeft
 
@@ -128,8 +135,21 @@ parseAction str =
         "Push" ->
             Push
 
+        "PushAndTurnLeft" -> 
+            PushAndTurnLeft
+
+        "PushAndTurnRight" -> 
+            PushAndTurnRight 
+
         "Pop" ->
             Pop
+
+        "PopAndTurnLeft" -> 
+            PopAndTurnLeft
+
+        "PopAndTurnRight" -> 
+            PopAndTurnRight
+
 
         "NoAction" ->
             NoAction 
