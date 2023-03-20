@@ -22,10 +22,15 @@ type alias Turtle =
 
 type Action
     = Move
+    | MoveFraction
     | TurnLeft
     | TurnRight
     | Push
+    | PushAndTurnLeft
+    | PushAndTurnRight
     | Pop
+    | PopAndTurnLeft
+    | PopAndTurnRight
     | NoAction
 
 
