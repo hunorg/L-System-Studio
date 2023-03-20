@@ -11,6 +11,7 @@ type alias Model =
     , newRuleInput : String
     , angle : Float
     , stepSize : Float
+    , fractionalStepSize : Float
     , axiom : String
     , iterations : Int
     , startingPoint : ( Float, Float )
@@ -39,6 +40,7 @@ init =
     , newRuleInput = ""
     , angle = 0
     , stepSize = 1
+    , fractionalStepSize = 0.3
     , axiom = ""
     , iterations = 0
     , startingPoint = ( 0, 0 )
