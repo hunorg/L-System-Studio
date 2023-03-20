@@ -48,6 +48,9 @@ view model =
         , h2 [] [ text "Step Size" ]
         , input [ type_ "range", Html.Attributes.min "1", Html.Attributes.max "10", step "1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateStepSize), value (String.fromFloat model.stepSize) ] []
         , text (String.fromFloat model.stepSize)
+         , h2 [] [ text "Fractional Step Size" ]
+        , input [ type_ "range", Html.Attributes.min "0.1", Html.Attributes.max "2.0", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateFractionalStepSize), value (String.fromFloat model.fractionalStepSize) ] []
+        , text (String.fromFloat model.fractionalStepSize)
         , h2 [] [ text "Axiom" ]
         , input [ type_ "text", onInput SelectAxiom ] []
         , button [ onClick ApplyAxiom ] [ text "Apply Axiom" ]
@@ -81,6 +84,9 @@ symbolAssignmentView symbol =
                 Move ->
                     "Move"
 
+                MoveFraction -> 
+                    "MoveFraction"
+
                 TurnLeft ->
                     "TurnLeft"
 
@@ -90,8 +96,21 @@ symbolAssignmentView symbol =
                 Push ->
                     "Push"
 
+                PushAndTurnLeft -> 
+                    "PushAndTurnLeft"
+
+                PushAndTurnRight -> 
+                    "PushAndTurnRight"
+
                 Pop ->
                     "Pop"
+
+                PopAndTurnLeft -> 
+                    "PopAndTurnLeft" 
+
+                PopAndTurnRight -> 
+                    "PopAndTurnRight"
+
 
                 NoAction ->
                     "NoAction"
@@ -107,6 +126,9 @@ optionView action =
                 Move ->
                     "Move"
 
+                MoveFraction -> 
+                    "MoveFraction"
+
                 TurnLeft ->
                     "TurnLeft"
 
@@ -116,8 +138,21 @@ optionView action =
                 Push ->
                     "Push"
 
+                PushAndTurnLeft -> 
+                    "PushAndTurnLeft"
+
+                PushAndTurnRight -> 
+                    "PushAndTurnRight"
+
                 Pop ->
                     "Pop"
+
+                PopAndTurnLeft -> 
+                    "PopAndTurnLeft"
+
+                PopAndTurnRight -> 
+                    "PopAndTurnRight"
+
 
                 NoAction ->
                     "NoAction"
@@ -132,4 +167,5 @@ symbolOptionView symbol =
 
 actionOptions : List Action
 actionOptions =
-    [ Move, TurnLeft, TurnRight, Push, Pop, NoAction]
+    [ Move, MoveFraction, TurnLeft, TurnRight, Push, PushAndTurnLeft, PushAndTurnRight, Pop, PopAndTurnLeft, PopAndTurnRight, NoAction]
+
