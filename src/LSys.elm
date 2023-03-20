@@ -34,6 +34,9 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                 Move ->
                     moveForward stepSize turtle
 
+                MoveFraction -> 
+                    moveForward (stepSize * model.fractionalStepSize) turtle
+
                 TurnLeft ->
                     turn -angle turtle
 
@@ -43,8 +46,25 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                 Push ->
                     push turtle
 
+                PushAndTurnLeft -> 
+                    push turtle 
+                        |> turn -angle 
+
+                PushAndTurnRight -> 
+                    push turtle 
+                        |> turn angle 
+
                 Pop ->
                     pop turtle
+
+                PopAndTurnLeft -> 
+                    pop turtle 
+                        |> turn -angle 
+
+                PopAndTurnRight -> 
+                    pop turtle 
+                        |> turn angle
+
 
                 NoAction ->
                     turtle
@@ -58,3 +78,4 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                     applyAction turtle symbolAssignment.action
     in
     List.foldl applySymbol (Turtle.initTurtle model.startingPoint |> Turtle.turn model.startingAngle) sequence
+
