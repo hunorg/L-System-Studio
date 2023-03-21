@@ -105,7 +105,7 @@ renderTurtleSegments turtle =
                 , TypedSvg.Attributes.y1 (px y1)
                 , TypedSvg.Attributes.x2 (px x2)
                 , TypedSvg.Attributes.y2 (px y2)
-                , stroke <| Paint Color.black
+                , stroke <| Paint Color.white
                 , strokeWidth (Px 1)
                 ]
                 []
