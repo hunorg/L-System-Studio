@@ -5,6 +5,7 @@ import Turtle exposing (Action(..))
 
 type alias Model =
     { symbolAssignments : List Symbol
+    , syntaxDisplay : Bool
     , rules : List ( Char, List Char )
     , selectedSymbol : String
     , selectedAction : Action
@@ -33,18 +34,28 @@ type alias Symbol =
 
 init : Model
 init =
-    { symbolAssignments = []
+    { symbolAssignments = 
+        [ { character = "F", action = Move }
+        , { character = "G", action = MoveFraction }
+        , { character = "+", action = TurnLeft }
+        , { character = "-", action = TurnRight }
+        , { character = "[", action = Push }
+        , { character = "]", action = Pop }
+        , { character = "X", action = NoAction }
+        ]
+    , syntaxDisplay = False
     , rules = []
     , selectedSymbol = ""
     , selectedAction = Move
     , newRuleInput = ""
     , angle = 0
     , stepSize = 1
-    , fractionalStepSize = 0.3
+    , fractionalStepSize = 0.1
     , axiom = ""
     , iterations = 0
-    , startingPoint = ( 0, 0 )
+    , startingPoint = ( 700, 500 )
     , startingAngle =0
     , generatedSequence = []
     , drawnTurtle = False
     }
+
