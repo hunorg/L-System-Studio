@@ -20,7 +20,7 @@ Future enchancements include:
   2.6 "("	   ->      Decrement turning angle by turning angle increment
   2.7 ")"	   ->      Increment turning angle by turning angle increment
 3. Drawing process animation.
-4. User-guided tutorials or examples: Provide example L-systems or step-by-step tutorials to help users get started and understand the capabilities of the application.
+4. User-guided tutorials or examples.
 5. Error handling and input validation.
 6. Tooltips and help text.
 7. Code optimization for performance.
