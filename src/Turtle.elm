@@ -13,6 +13,8 @@ type alias Turtle =
     , angle : Float
     , stack : List ( ( Float, Float ), Float )
     , segments : List ( ( Float, Float ), ( Float, Float ) )
+    , dots : List ( ( Float, Float ), Float )
+    , lineWidth : Float
     }
 
 
@@ -22,15 +24,15 @@ type alias Turtle =
 
 type Action
     = Move
-    | MoveFraction
+    | MoveWithoutDrawing
     | TurnLeft
     | TurnRight
+    | ReverseDirection
     | Push
-    | PushAndTurnLeft
-    | PushAndTurnRight
     | Pop
-    | PopAndTurnLeft
-    | PopAndTurnRight
+    | IncrementLineWidth 
+    | DecrementLineWidth
+    | DrawDot
     | NoAction
 
 
@@ -41,6 +43,8 @@ initTurtle pos =
     , stack = []
     , angle = 0
     , segments = []
+    , dots = []
+    , lineWidth = 1
     }
 
 
@@ -106,8 +110,22 @@ renderTurtleSegments turtle =
                 , TypedSvg.Attributes.x2 (px x2)
                 , TypedSvg.Attributes.y2 (px y2)
                 , stroke <| Paint Color.white
-                , strokeWidth (Px 1)
+                , strokeWidth (Px turtle.lineWidth)
                 ]
                 []
         )
         turtle.segments
+
+renderTurtleDots : Turtle -> List (Svg msg)
+renderTurtleDots turtle =
+    List.map
+        (\( ( x, y ), radius ) ->
+            circle
+                [ TypedSvg.Attributes.cx (px x)
+                , TypedSvg.Attributes.cy (px y)
+                , TypedSvg.Attributes.r (px radius)
+                , fill <| Paint Color.white
+                ]
+                []
+        )
+        turtle.dots
