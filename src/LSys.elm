@@ -2,7 +2,7 @@ module LSys exposing (generateSequence, generateTurtle)
 
 import Model exposing (Model, Symbol)
 import Turtle exposing (..)
-
+import List.Extra as Extra
 
 
 -- Generates an L-system sequence based on the given iterations, axiom, and rules.
@@ -11,13 +11,13 @@ import Turtle exposing (..)
 generateSequence : Int -> String -> List ( Char, List Char ) -> List Char
 generateSequence iterations axiom rules =
     let
-        expandSymbol symbol =
-            case List.filter (\( s, _ ) -> s == symbol) rules of
-                [] ->
-                    [ symbol ]
+       expandSymbol symbol =
+            case Extra.find (\(s, _) -> s == symbol) rules of
+                        Just (_, replacement) ->
+                            replacement
 
-                ( _, replacement ) :: _ ->
-                    replacement
+                        Nothing ->
+                            [symbol]
     in
     List.foldl (\_ seq -> List.concatMap expandSymbol seq) (String.toList axiom) (List.range 1 iterations)
 
@@ -43,10 +43,16 @@ generateTurtle model sequence symbolAssignments stepSize angle =
 
 
                 TurnLeft ->
-                    turn -angle turtle
+                    if turtle.swapPlusMinus then 
+                        turn angle turtle
+                    else 
+                        turn -angle turtle
 
                 TurnRight ->
-                    turn angle turtle
+                    if turtle.swapPlusMinus then 
+                        turn -angle turtle
+                    else 
+                        turn angle turtle
 
                 ReverseDirection ->
                     turn -180 turtle
@@ -65,6 +71,37 @@ generateTurtle model sequence symbolAssignments stepSize angle =
 
                 DrawDot ->
                     { turtle | dots = ( ( turtle.x, turtle.y ), turtle.lineWidth ) :: turtle.dots }
+
+                OpenPolygon ->
+                    { turtle | polygons = [] :: turtle.polygons }
+
+                ClosePolygon ->
+                    let
+                        currentPolygon = List.head turtle.polygons |> Maybe.withDefault []
+                        updatedPolygons = List.drop 1 turtle.polygons
+                    in
+                    { turtle | polygons = (currentPolygon :: updatedPolygons), filledPolygons = (currentPolygon, turtle.fillColor) :: turtle.filledPolygons }
+
+                MultiplyLength ->
+                    let
+                        newStepSize = model.lineLength * model.lineLengthScale
+                    in
+                    moveForward newStepSize turtle
+
+                DivideLength ->
+                    let
+                        newStepSize = model.lineLength / model.lineLengthScale
+                    in
+                    moveForward newStepSize turtle
+
+                SwapPlusMinus ->
+                    { turtle | swapPlusMinus = not turtle.swapPlusMinus }
+
+                IncrementTurningAngle ->
+                    { turtle | angle = turtle.angle + model.turningAngleIncrement }
+
+                DecrementTurningAngle ->
+                    { turtle | angle = turtle.angle - model.turningAngleIncrement }
 
 
                 NoAction ->
@@ -91,4 +128,6 @@ calculateNewPosition stepSize angle ( x, y ) =
             stepSize * sin (degreesToRadians angle)
     in
     ( x + deltaX, y + deltaY )
+
+
 
