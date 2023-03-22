@@ -6,6 +6,7 @@
 2. example - Sierpinski square: https://i.ibb.co/y8nbpBx/Sierpinski-Square.png
 3. example - Fractal plant: https://i.ibb.co/FJMbMcb/Fractal-Plant.png
 4. example - Crystal: https://i.ibb.co/R7HV6Cn/Crystal.png
+5. example - Algae: https://i.ibb.co/HG9c26S/Algae.png
 
 
 Future enchancements include: 
