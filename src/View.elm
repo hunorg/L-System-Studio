@@ -85,8 +85,8 @@ view model =
             , Html.Attributes.style "border-radius" "4px"
             ]
 
-        buttonsStyleSyntax = 
-             [ Html.Attributes.style "background-color" "#eb5160"
+        buttonsStyleSyntax =
+            [ Html.Attributes.style "background-color" "#eb5160"
             , Html.Attributes.style "border" "none"
             , Html.Attributes.style "color" "white"
             , Html.Attributes.style "padding" "0.5rem 1rem"
@@ -119,6 +119,7 @@ view model =
             , Html.Attributes.style "width" "10rem"
             , Html.Attributes.style "margin" "0.5rem"
             ]
+
         angleInputStyle =
             [ Html.Attributes.style "border" "1px solid #ced4da"
             , Html.Attributes.style "padding" "0.375rem 0.75rem"
@@ -131,65 +132,64 @@ view model =
             , Html.Attributes.style "margin" "0.5rem"
             ]
     in
-    div [Html.Attributes.style "background-color" "black", Html.Attributes.style "width" "100%", Html.Attributes.style "min-height" "100vh"]
+    div [ Html.Attributes.style "background-color" "black", Html.Attributes.style "width" "100%", Html.Attributes.style "min-height" "100vh" ]
         [ div appStyle
             [ div sectionStyle
                 [ div [ Html.Attributes.style "margin-left" "-40px", Html.Attributes.style "margin-top" "-50px" ]
                     [ button (buttonsStyleSyntax ++ [ onClick ToggleSyntaxDisplay ]) [ text "Syntax" ]
                     ]
                 , syntaxDisplayView model
-                , div [Html.Attributes.style "margin-top" "20px", Html.Attributes.style "margin-left" "-35px"]
+                , div [ Html.Attributes.style "margin-top" "20px", Html.Attributes.style "margin-left" "-35px" ]
                     [ select (dropdownStyle ++ [ onInput SelectSymbol ]) (List.map symbolOptionView model.symbolAssignments)
-                    ,input (inputStyle ++ [ type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ]) []
-                        , div [Html.Attributes.style "margin-left" "280px", Html.Attributes.style "margin-top" "-60px"] 
-                            [ button (buttonStyle ++ [ onClick AddRule ]) [ text "Add Rule" ]
-                            ]
-                        ]
-                    , div [Html.Attributes.style "margin-top" "10px"]
-                        [ text "Rules: "
-                        , text <| String.join ", " <| List.map showRule model.rules
+                    , input (inputStyle ++ [ type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ]) []
+                    , div [ Html.Attributes.style "margin-left" "280px", Html.Attributes.style "margin-top" "-60px" ]
+                        [ button (buttonStyle ++ [ onClick AddRule ]) [ text "Add Rule" ]
                         ]
                     ]
+                , div [ Html.Attributes.style "margin-top" "10px" ]
+                    [ text "Rules: "
+                    , text <| String.join ", " <| List.map showRule model.rules
+                    ]
+                ]
             , div sectionStyle
-                [ div [Html.Attributes.style "margin-left" "45px"]
+                [ div [ Html.Attributes.style "margin-left" "45px" ]
                     [ input (inputStyle ++ [ type_ "text", onInput SelectAxiom ]) []
                     , button (buttonStyle ++ [ onClick ApplyAxiom ]) [ text "Apply Axiom" ]
-                    , div [Html.Attributes.style "margin-left" "-45px"]
+                    , div [ Html.Attributes.style "margin-left" "-45px" ]
                         [ text ("Axiom: " ++ model.axiom) ]
                     ]
                 ]
             , div sectionStyle
-                [ Html.label labelStyle [ text "Angle " ]
-                , div [Html.Attributes.style "margin-left" "150px", Html.Attributes.style "margin-top" "-40px"] 
+                [ Html.label labelStyle [ text "Turning angle " ]
+                , div [ Html.Attributes.style "margin-left" "150px", Html.Attributes.style "margin-top" "-40px" ]
                     [ input (angleInputStyle ++ [ type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.angle) ]) []
                     , text (String.fromFloat model.angle ++ "°")
                     ]
                 ]
-                
             , div sectionStyle
-                [ Html.label labelStyle [ text "Step Size " ]
-                , div [Html.Attributes.style "margin-left" "200px", Html.Attributes.style "margin-top" "-25px"] 
-                    [ input [ type_ "range", Html.Attributes.min "1", Html.Attributes.max "10", step "1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateStepSize), value (String.fromFloat model.stepSize) ] []
-                , text (String.fromFloat model.stepSize)
-                ]
+                [ Html.label labelStyle [ text "Line length " ]
+                , div [ Html.Attributes.style "margin-left" "200px", Html.Attributes.style "margin-top" "-25px" ]
+                    [ input [ type_ "range", Html.Attributes.min "1", Html.Attributes.max "10", step "1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLength), value (String.fromFloat model.lineLength) ] []
+                    , text (String.fromFloat model.lineLength)
+                    ]
                 ]
             , div sectionStyle
-                [ Html.label labelStyle [ text "Fractional Step Size " ]
-                , div [Html.Attributes.style "margin-left" "200px", Html.Attributes.style "margin-top" "-25px"] 
-                    [ input [ type_ "range", Html.Attributes.min "0.1", Html.Attributes.max "2.0", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateFractionalStepSize), value (String.fromFloat model.fractionalStepSize) ] []
-                , text (String.fromFloat model.fractionalStepSize)
-                ]
+                [ Html.label labelStyle [ text "Line width increment" ]
+                , div [ Html.Attributes.style "margin-left" "200px", Html.Attributes.style "margin-top" "-25px" ]
+                    [ input [ type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3.0", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineWidthIncrement), value (String.fromFloat model.lineWidthIncrement) ] []
+                    , text (String.fromFloat model.lineWidthIncrement)
+                    ]
                 ]
             , div sectionStyle
                 [ Html.label labelStyle [ text "Iterations " ]
-                , div [Html.Attributes.style "margin-left" "200px", Html.Attributes.style "margin-top" "-25px"] 
-                    [input [ type_ "range", Html.Attributes.min "0", Html.Attributes.max "20", value (String.fromInt model.iterations), onInput (String.toInt >> Maybe.withDefault 0 >> UpdateIterations) ] []
-                , text (String.fromInt model.iterations)
-                ]
+                , div [ Html.Attributes.style "margin-left" "200px", Html.Attributes.style "margin-top" "-25px" ]
+                    [ input [ type_ "range", Html.Attributes.min "0", Html.Attributes.max "20", value (String.fromInt model.iterations), onInput (String.toInt >> Maybe.withDefault 0 >> UpdateIterations) ] []
+                    , text (String.fromInt model.iterations)
+                    ]
                 ]
             , div sectionStyle
                 [ Html.label labelStyle [ text "Starting Angle " ]
-                , div [Html.Attributes.style "margin-left" "150px", Html.Attributes.style "margin-top" "-40px"]
+                , div [ Html.Attributes.style "margin-left" "150px", Html.Attributes.style "margin-top" "-40px" ]
                     [ input (angleInputStyle ++ [ type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateStartingAngle), value (String.fromFloat model.startingAngle) ]) []
                     , text (String.fromFloat model.startingAngle ++ "°")
                     ]
@@ -201,7 +201,6 @@ view model =
             , div sectionStyle
                 [ button (buttonStyle ++ [ onClick DrawTurtle ]) [ text "Draw" ] ]
             ]
-            
         , div [ Html.Attributes.style "margin-left" "484px", Html.Attributes.style "margin-top" "-985px" ]
             [ svg
                 [ viewBox 0 0 1500 970
@@ -212,7 +211,8 @@ view model =
               <|
                 baseRect
                     ++ (if model.drawnTurtle then
-                            Turtle.renderTurtleSegments <| generateTurtle model model.generatedSequence model.symbolAssignments model.stepSize model.angle
+                            (Turtle.renderTurtleSegments <| generateTurtle model model.generatedSequence model.symbolAssignments model.lineLength model.angle)
+                            ++ (Turtle.renderTurtleDots <| generateTurtle model model.generatedSequence model.symbolAssignments model.lineLength model.angle)
 
                         else
                             []
@@ -221,97 +221,9 @@ view model =
         ]
 
 
-symbolAssignmentView : Symbol -> Html msg
-symbolAssignmentView symbol =
-    div []
-        [ text (symbol.character ++ ": ")
-        , text
-            (case symbol.action of
-                Move ->
-                    "Move"
-
-                MoveFraction ->
-                    "MoveFraction"
-
-                TurnLeft ->
-                    "TurnLeft"
-
-                TurnRight ->
-                    "TurnRight"
-
-                Push ->
-                    "Push"
-
-                PushAndTurnLeft ->
-                    "PushAndTurnLeft"
-
-                PushAndTurnRight ->
-                    "PushAndTurnRight"
-
-                Pop ->
-                    "Pop"
-
-                PopAndTurnLeft ->
-                    "PopAndTurnLeft"
-
-                PopAndTurnRight ->
-                    "PopAndTurnRight"
-
-                NoAction ->
-                    "NoAction"
-            )
-        ]
-
-
-optionView : Action -> Html msg
-optionView action =
-    let
-        actionStr =
-            case action of
-                Move ->
-                    "Move"
-
-                MoveFraction ->
-                    "MoveFraction"
-
-                TurnLeft ->
-                    "TurnLeft"
-
-                TurnRight ->
-                    "TurnRight"
-
-                Push ->
-                    "Push"
-
-                PushAndTurnLeft ->
-                    "PushAndTurnLeft"
-
-                PushAndTurnRight ->
-                    "PushAndTurnRight"
-
-                Pop ->
-                    "Pop"
-
-                PopAndTurnLeft ->
-                    "PopAndTurnLeft"
-
-                PopAndTurnRight ->
-                    "PopAndTurnRight"
-
-                NoAction ->
-                    "NoAction"
-    in
-    option [ value actionStr ] [ text actionStr ]
-
-
 symbolOptionView : Symbol -> Html msg
 symbolOptionView symbol =
     option [ value symbol.character ] [ text symbol.character ]
-
-
-actionOptions : List Action
-actionOptions =
-    [ Move, MoveFraction, TurnLeft, TurnRight, Push, PushAndTurnLeft, PushAndTurnRight, Pop, PopAndTurnLeft, PopAndTurnRight, NoAction ]
 
 
 baseRect =
@@ -321,7 +233,8 @@ baseRect =
         , width (Px 1500)
         , height (Px 970)
         , fill (Paint Color.black)
-        , stroke (Paint (Color.rgb255 235 81 96) ), strokeWidth (Px 6)
+        , stroke (Paint (Color.rgb255 235 81 96))
+        , strokeWidth (Px 6)
         ]
         []
     ]
@@ -333,13 +246,17 @@ syntaxDisplayView model =
         div []
             [ h2 [] [ text "Syntax" ]
             , Html.ul []
-                [ Html.li [] [ text "F -> Move" ]
-                , Html.li [] [ text "G -> Move by fraction" ]
+                [ Html.li [] [ text "F -> Move forward by line length drawing a line" ]
+                , Html.li [] [ text "G -> Move forward by line length without drawing a line" ]
                 , Html.li []
-                    [ text "+ -> Turn left"
-                    , Html.li [] [ text "- -> Turn right" ]
-                    , Html.li [] [ text "[ -> Push" ]
-                    , Html.li [] [ text "] -> Pop" ]
+                    [ text "+ -> Turn left by turning angle"
+                    , Html.li [] [ text "- -> Turn right by turning angle" ]
+                    , Html.li [] [ text "| -> Reverse direction (ie: turn by 180 degrees)" ]
+                    , Html.li [] [ text "[ -> Push current drawing state onto stack" ]
+                    , Html.li [] [ text "] -> Pop current drawing state from the stack" ]
+                    , Html.li [] [ text "# -> Increment the line width by line width increment" ]
+                    , Html.li [] [ text "! -> Decrement the line width by line width increment" ]
+                    , Html.li [] [ text "@ -> Draw a dot with line width radius" ]
                     , Html.li [] [ text "X -> No action" ]
                     ]
 
@@ -349,4 +266,3 @@ syntaxDisplayView model =
 
     else
         text ""
-
