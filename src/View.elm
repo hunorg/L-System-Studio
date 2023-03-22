@@ -1,6 +1,7 @@
 module View exposing (..)
 
-import Color 
+import Color
+import ColorPicker
 import Html exposing (Html, button, div, h2, input, option, select, text)
 import Html.Attributes exposing (placeholder, step, type_, value)
 import Html.Events exposing (onClick, onInput)
@@ -49,6 +50,7 @@ showRule ( from, to ) =
     String.fromChar from ++ " → " ++ String.fromList to
 
 
+
 view : Model -> Html Msg
 view model =
     let
@@ -95,6 +97,17 @@ view model =
             , Html.Attributes.style "border-radius" "4px"
             ]
 
+        buttonStyleDraw =
+            [ Html.Attributes.style "background-color" "#eb5160"
+            , Html.Attributes.style "border" "none"
+            , Html.Attributes.style "color" "white"
+            , Html.Attributes.style "padding" "0.5rem 1rem"
+            , Html.Attributes.style "margin-top" "1rem"
+            , Html.Attributes.style "cursor" "pointer"
+            , Html.Attributes.style "border-radius" "4px"
+            , Html.Attributes.style "font-size" "2rem"
+            ]
+
         dropdownStyle =
             [ Html.Attributes.style "border" "1px solid #dfe0e2"
             , Html.Attributes.style "padding" "0.375rem 0.75rem"
@@ -131,18 +144,23 @@ view model =
             , Html.Attributes.style "width" "4rem" -- Adjust the width here as needed
             , Html.Attributes.style "margin" "0.5rem"
             ]
+
     in
     div [ Html.Attributes.style "background-color" "black", Html.Attributes.style "width" "100%", Html.Attributes.style "min-height" "100vh" ]
         [ div appStyle
             [ div sectionStyle
-                [ div [ Html.Attributes.style "margin-left" "-40px", Html.Attributes.style "margin-top" "-50px" ]
+                [ text "for more information and examples, please visit: http://paulbourke.net/fractals/lsys/"
+                ]
+            , div sectionStyle
+                [ div [ Html.Attributes.style "margin-left" "-28px", Html.Attributes.style "margin-top" "-25px" ]
                     [ button (buttonsStyleSyntax ++ [ onClick ToggleSyntaxDisplay ]) [ text "Syntax" ]
                     ]
-                , syntaxDisplayView model
+                , div sectionStyle
+                    [ syntaxDisplayView model ]
                 , div [ Html.Attributes.style "margin-top" "20px", Html.Attributes.style "margin-left" "-35px" ]
                     [ select (dropdownStyle ++ [ onInput SelectSymbol ]) (List.map symbolOptionView model.symbolAssignments)
                     , input (inputStyle ++ [ type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ]) []
-                    , div [ Html.Attributes.style "margin-left" "280px", Html.Attributes.style "margin-top" "-60px" ]
+                    , div [ Html.Attributes.style "margin-left" "283px", Html.Attributes.style "margin-top" "-60px" ]
                         [ button (buttonStyle ++ [ onClick AddRule ]) [ text "Add Rule" ]
                         ]
                     ]
@@ -152,18 +170,25 @@ view model =
                     ]
                 ]
             , div sectionStyle
-                [ div [ Html.Attributes.style "margin-left" "45px" ]
+                [ div [ Html.Attributes.style "margin-left" "50px" ]
                     [ input (inputStyle ++ [ type_ "text", onInput SelectAxiom ]) []
                     , button (buttonStyle ++ [ onClick ApplyAxiom ]) [ text "Apply Axiom" ]
-                    , div [ Html.Attributes.style "margin-left" "-45px" ]
+                    , div [ Html.Attributes.style "margin-left" "-48px" ]
                         [ text ("Axiom: " ++ model.axiom) ]
                     ]
                 ]
             , div sectionStyle
                 [ Html.label labelStyle [ text "Turning angle " ]
-                , div [ Html.Attributes.style "margin-left" "150px", Html.Attributes.style "margin-top" "-40px" ]
-                    [ input (angleInputStyle ++ [ type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.angle) ]) []
-                    , text (String.fromFloat model.angle ++ "°")
+                , div [ Html.Attributes.style "margin-left" "220px", Html.Attributes.style "margin-top" "-40px" ]
+                    [ input (angleInputStyle ++ [ type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.turningAngle) ]) []
+                    , text (String.fromFloat model.turningAngle ++ "°")
+                    ]
+                ]
+            , div sectionStyle
+                [ Html.label labelStyle [ text "Turning angle increment " ]
+                , div [ Html.Attributes.style "margin-left" "220px", Html.Attributes.style "margin-top" "-40px" ]
+                    [ input (angleInputStyle ++ [ type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.turningAngleIncrement) ]) []
+                    , text (String.fromFloat model.turningAngleIncrement ++ "°")
                     ]
                 ]
             , div sectionStyle
@@ -174,11 +199,22 @@ view model =
                     ]
                 ]
             , div sectionStyle
+                [ Html.label labelStyle [ text "Line length scale" ]
+                , div [ Html.Attributes.style "margin-left" "200px", Html.Attributes.style "margin-top" "-25px" ]
+                    [ input [ type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLengthScale), value (String.fromFloat model.lineLengthScale) ] []
+                    , text (String.fromFloat model.lineLengthScale)
+                    ]
+                ]
+            , div sectionStyle
                 [ Html.label labelStyle [ text "Line width increment" ]
                 , div [ Html.Attributes.style "margin-left" "200px", Html.Attributes.style "margin-top" "-25px" ]
                     [ input [ type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3.0", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineWidthIncrement), value (String.fromFloat model.lineWidthIncrement) ] []
                     , text (String.fromFloat model.lineWidthIncrement)
                     ]
+                ]
+            , div sectionStyle
+                [ Html.label labelStyle [ text "Polygon fill colour" ]
+                , colorPickerView model.polygonFillColor model.colorPicker
                 ]
             , div sectionStyle
                 [ Html.label labelStyle [ text "Recursion depth " ]
@@ -189,7 +225,7 @@ view model =
                 ]
             , div sectionStyle
                 [ Html.label labelStyle [ text "Starting Angle " ]
-                , div [ Html.Attributes.style "margin-left" "150px", Html.Attributes.style "margin-top" "-40px" ]
+                , div [ Html.Attributes.style "margin-left" "220px", Html.Attributes.style "margin-top" "-40px" ]
                     [ input (angleInputStyle ++ [ type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateStartingAngle), value (String.fromFloat model.startingAngle) ]) []
                     , text (String.fromFloat model.startingAngle ++ "°")
                     ]
@@ -199,20 +235,35 @@ view model =
                 , startingPointInput model.startingPoint
                 ]
             , div sectionStyle
-                [ button (buttonStyle ++ [ onClick DrawTurtle ]) [ text "Draw" ] ]
+                [ div [ Html.Attributes.style "margin-left" "135px", Html.Attributes.style "margin-top" "-25px" ]
+                    [ button (buttonStyleDraw ++ [ onClick DrawTurtle ]) [ text "Draw" ] ]
+                ]
+            , div sectionStyle
+                [ Html.ul []
+                    [ Html.li [] [ text "created by: https://github.com/hunorg" ]
+                    , Html.li [] [ text "source code: https://github.com/hunorg/L-System-Studio" ]
+                    , Html.li [] [ text "work in progress" ]
+                    ]
+                ]
             ]
-        , div [ Html.Attributes.style "margin-left" "484px", Html.Attributes.style "margin-top" "-985px" ]
+        , div [ Html.Attributes.style "margin-left" "550px", Html.Attributes.style "margin-top" "-1650px" ]
             [ svg
-                [ viewBox 0 0 1500 970
-                , TypedSvg.Attributes.width (Px 1500)
-                , TypedSvg.Attributes.height (Px 970)
+                [ viewBox 0 0 1900 1600
+                , TypedSvg.Attributes.width (Px 1900)
+                , TypedSvg.Attributes.height (Px 1600)
                 , Html.Attributes.style "margin" "1rem"
                 ]
               <|
+                let
+                    generatedTurtle =
+                        generateTurtle model model.generatedSequence model.symbolAssignments model.lineLength model.turningAngle
+                in
                 baseRect
                     ++ (if model.drawnTurtle then
-                            (Turtle.renderTurtleSegments <| generateTurtle model model.generatedSequence model.symbolAssignments model.lineLength model.angle)
-                            ++ (Turtle.renderTurtleDots <| generateTurtle model model.generatedSequence model.symbolAssignments model.lineLength model.angle)
+                            (Turtle.renderTurtleSegments <| generateTurtle model model.generatedSequence model.symbolAssignments model.lineLength model.turningAngle)
+                                ++ (Turtle.renderTurtleDots <| generateTurtle model model.generatedSequence model.symbolAssignments model.lineLength model.turningAngle)
+                                ++ [ Turtle.drawFilledPolygons generatedTurtle.filledPolygons ]
+                            -- Add filled polygons
 
                         else
                             []
@@ -230,14 +281,21 @@ baseRect =
     [ rect
         [ x (Px 0)
         , y (Px 0)
-        , width (Px 1500)
-        , height (Px 970)
+        , width (Px 1900)
+        , height (Px 1600)
         , fill (Paint Color.black)
         , stroke (Paint (Color.rgb255 235 81 96))
         , strokeWidth (Px 6)
         ]
         []
     ]
+
+
+colorPickerView : Color.Color -> ColorPicker.State -> Html Msg
+colorPickerView color state =
+    ColorPicker.view color state
+        |> Html.map ColorPickerMsg
+
 
 syntaxDisplayView : Model -> Html Msg
 syntaxDisplayView model =
@@ -257,6 +315,13 @@ syntaxDisplayView model =
                     , Html.li [] [ text "# -> Increment the line width by line width increment" ]
                     , Html.li [] [ text "! -> Decrement the line width by line width increment" ]
                     , Html.li [] [ text "@ -> Draw a dot with line width radius" ]
+                    , Html.li [] [ text "{ -> Open a polygon" ]
+                    , Html.li [] [ text "} -> Close a polygon and fill it with fill colour" ]
+                    , Html.li [] [ text "< -> Multiply the line length by the line length scale" ]
+                    , Html.li [] [ text "> -> Divide the line length by the line length scale" ]
+                    , Html.li [] [ text "& -> Swap the meaning of + and -" ]
+                    , Html.li [] [ text "( -> Decrement turning angle by turning angle increment" ]
+                    , Html.li [] [ text ") -> Increment turning angle by turning angle increment" ]
                     , Html.li [] [ text "a to z (except f) -> No action" ]
                     ]
 
@@ -266,3 +331,4 @@ syntaxDisplayView model =
 
     else
         text ""
+
