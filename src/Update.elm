@@ -7,13 +7,13 @@ import Turtle exposing (Action(..))
 
 type Msg
     = AddSymbolAssignment String Action
-    | SelectAction String
+    | ToggleSyntaxDisplay
     | SelectSymbol String
     | SelectAxiom String
     | UpdateNewRuleInput String
     | UpdateAngle Float
-    | UpdateStepSize Float
-    | UpdateFractionalStepSize Float
+    | UpdateLineLength Float
+    | UpdateLineWidthIncrement Float
     | UpdateIterations Int
     | UpdateStartingPointX String
     | UpdateStartingPointY String
@@ -27,6 +27,9 @@ type Msg
 update : Msg -> Model -> Model
 update msg model =
     case msg of
+        ToggleSyntaxDisplay ->
+            { model | syntaxDisplay = not model.syntaxDisplay }
+
         AddSymbolAssignment characterString action ->
             let
                 updatedAssignments =
@@ -46,9 +49,6 @@ update msg model =
                                 model.symbolAssignments
             in
             { model | symbolAssignments = updatedAssignments }
-
-        SelectAction actionStr ->
-            { model | selectedAction = parseAction actionStr }
 
         AssignSymbol ->
             let
@@ -82,11 +82,11 @@ update msg model =
         UpdateAngle angle ->
             { model | angle = angle }
 
-        UpdateStepSize newSize ->
-            { model | stepSize = newSize }
+        UpdateLineLength newLength ->
+            { model | lineLength = newLength }
 
-        UpdateFractionalStepSize newFractionalSize -> 
-            { model | fractionalStepSize = newFractionalSize }
+        UpdateLineWidthIncrement newIncrementSize ->
+            { model | lineWidthIncrement = newIncrementSize }
 
         UpdateIterations newIterations ->
             { model | iterations = newIterations }
@@ -115,43 +115,3 @@ update msg model =
 
         DrawTurtle ->
             { model | generatedSequence = generateSequence model.iterations model.axiom model.rules, drawnTurtle = True }
-
-
-parseAction : String -> Action
-parseAction str =
-    case str of
-        "Move" ->
-            Move
-
-        "MoveFraction" -> 
-            MoveFraction
-
-        "TurnLeft" ->
-            TurnLeft
-
-        "TurnRight" ->
-            TurnRight
-
-        "Push" ->
-            Push
-
-        "PushAndTurnLeft" -> 
-            PushAndTurnLeft
-
-        "PushAndTurnRight" -> 
-            PushAndTurnRight 
-
-        "Pop" ->
-            Pop
-
-        "PopAndTurnLeft" -> 
-            PopAndTurnLeft
-
-        "PopAndTurnRight" -> 
-            PopAndTurnRight
-
-
-        "NoAction" ->
-            NoAction 
-        _ -> 
-            Move 
