@@ -10,7 +10,7 @@
 
 Future enchancements include: 
 
-1. Saving and loading L-system presets.
+1. Saving and loading L-system presets
 2. Advanced drawing options: 
   2.1 "{"	   ->      Open a polygon
   2.2 "}"	   ->      Close a polygon and fill it with fill colour
@@ -19,8 +19,8 @@ Future enchancements include:
   2.5 "&"	   ->      Swap the meaning of + and -
   2.6 "("	   ->      Decrement turning angle by turning angle increment
   2.7 ")"	   ->      Increment turning angle by turning angle increment
-3. Drawing process animation.
-4. User-guided tutorials or examples.
-5. Error handling and input validation.
-6. Tooltips and help text.
-7. Code optimization for performance.
+3. Drawing process animation
+4. User-guided tutorials or examples
+5. Error handling and input validation
+6. Tooltips and help text
+7. Code optimization for performance
