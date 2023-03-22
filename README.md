@@ -1,4 +1,4 @@
-# Comprehensive environment for creating and exploring L-Systems
+# Environment for creating and exploring L-Systems
 
 -work in progress-
 
