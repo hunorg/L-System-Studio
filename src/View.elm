@@ -1,6 +1,6 @@
 module View exposing (..)
 
-import Color exposing (lightBlue, red)
+import Color 
 import Html exposing (Html, button, div, h2, input, option, select, text)
 import Html.Attributes exposing (placeholder, step, type_, value)
 import Html.Events exposing (onClick, onInput)
@@ -259,6 +259,7 @@ syntaxDisplayView model =
                     , Html.li [] [ text "! -> Decrement the line width by line width increment" ]
                     , Html.li [] [ text "@ -> Draw a dot with line width radius" ]
                     , Html.li [] [ text "X -> No action" ]
+                    , Html.li [] [ text "a-z -> No action" ]
                     ]
 
                 -- Add more li elements for each symbol and action as needed
