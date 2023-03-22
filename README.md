@@ -1,4 +1,4 @@
-# GUI-for-drawing-with-the-L-system-in-Elm
+# Comprehensive environment for creating and exploring L-Systems
 
 -work in progress-
 
