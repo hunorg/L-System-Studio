@@ -10,7 +10,7 @@
 
 Future enchancements include: 
 
-1. Saving and loading L-system presets: Allow users to save and load their L-system configurations, making it easier to revisit and share interesting patterns.
+1. Saving and loading L-system presets.
 2. Advanced drawing options: 
   2.1 {	   ->      Open a polygon
   2.2 }	   ->      Close a polygon and fill it with fill colour
@@ -19,8 +19,8 @@ Future enchancements include:
   2.5 &	   ->      Swap the meaning of + and -
   2.6 (	   ->      Decrement turning angle by turning angle increment
   2.7 )	   ->      Increment turning angle by turning angle increment
-3. Animation: Add the ability to animate the drawing process, making it more visually engaging and easier to understand how the pattern is formed.
+3. Drawing process animation.
 4. User-guided tutorials or examples: Provide example L-systems or step-by-step tutorials to help users get started and understand the capabilities of the application.
-5. Adding error handling and input validation.
-6. Adding tooltips and help text.
-7. Optimizing the code for performance.
+5. Error handling and input validation.
+6. Tooltips and help text.
+7. Code optimization for performance.
