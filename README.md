@@ -2,9 +2,10 @@
 
 -work in progress-
 
-1. example - Dragon curve: https://i.ibb.co/7K91Nqw/Drag-Cur-Ex.png
-2. example - Sierpinski triangle: https://i.ibb.co/vczRP7m/STriEx.png
-3. example - Fractal plant: https://i.ibb.co/chsr5KK/FPlantEx.png
+1. example - Sierpinski triangle: https://i.ibb.co/8gpRhsY/Sierpinski-Triangle.png
+2. example - Sierpinski square: https://i.ibb.co/y8nbpBx/Sierpinski-Square.png
+3. example - Fractal plant: https://i.ibb.co/FJMbMcb/Fractal-Plant.png
+4. example - Crystal: https://i.ibb.co/R7HV6Cn/Crystal.png
 
 
 Future enchancements include: 
