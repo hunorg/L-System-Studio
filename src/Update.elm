@@ -3,6 +3,7 @@ module Update exposing (Msg(..), update)
 import LSys exposing (generateSequence)
 import Model exposing (Model)
 import Turtle exposing (Action(..))
+import ColorPicker
 
 
 type Msg
@@ -13,11 +14,13 @@ type Msg
     | UpdateNewRuleInput String
     | UpdateAngle Float
     | UpdateLineLength Float
+    | UpdateLineLengthScale Float
     | UpdateLineWidthIncrement Float
     | UpdateIterations Int
     | UpdateStartingPointX String
     | UpdateStartingPointY String
     | UpdateStartingAngle Float
+    | ColorPickerMsg ColorPicker.Msg
     | AddRule
     | AssignSymbol
     | ApplyAxiom
@@ -79,11 +82,14 @@ update msg model =
         UpdateNewRuleInput input ->
             { model | newRuleInput = input }
 
-        UpdateAngle angle ->
-            { model | angle = angle }
+        UpdateAngle turningAngle ->
+            { model | turningAngle = turningAngle }
 
         UpdateLineLength newLength ->
             { model | lineLength = newLength }
+
+        UpdateLineLengthScale newLengthScale ->
+            { model | lineLengthScale = newLengthScale }
 
         UpdateLineWidthIncrement newIncrementSize ->
             { model | lineWidthIncrement = newIncrementSize }
@@ -99,6 +105,17 @@ update msg model =
 
         UpdateStartingAngle newStartingAngle ->
             { model | startingAngle = newStartingAngle }
+
+        ColorPickerMsg colorPickerMsg ->
+            let
+                ( newColorPicker, newColorMaybe ) =
+                    ColorPicker.update colorPickerMsg model.polygonFillColor model.colorPicker
+            in
+             { model
+                | colorPicker = newColorPicker
+                , polygonFillColor = Maybe.withDefault model.polygonFillColor newColorMaybe
+              } 
+           
 
         AddRule ->
             let
