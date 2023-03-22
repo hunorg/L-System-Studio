@@ -34,8 +34,13 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                 Move ->
                     moveForward stepSize turtle
 
-                MoveFraction -> 
-                    moveForward (stepSize * model.fractionalStepSize) turtle
+                MoveWithoutDrawing ->
+                    let
+                        ( newX, newY ) =
+                            calculateNewPosition stepSize turtle.angle ( turtle.x, turtle.y )
+                    in
+                    { turtle | x = newX, y = newY }
+
 
                 TurnLeft ->
                     turn -angle turtle
@@ -43,27 +48,23 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                 TurnRight ->
                     turn angle turtle
 
+                ReverseDirection ->
+                    turn -180 turtle
+
                 Push ->
                     push turtle
-
-                PushAndTurnLeft -> 
-                    push turtle 
-                        |> turn -angle 
-
-                PushAndTurnRight -> 
-                    push turtle 
-                        |> turn angle 
 
                 Pop ->
                     pop turtle
 
-                PopAndTurnLeft -> 
-                    pop turtle 
-                        |> turn -angle 
+                IncrementLineWidth ->
+                    { turtle | lineWidth = turtle.lineWidth + model.lineWidthIncrement }
 
-                PopAndTurnRight -> 
-                    pop turtle 
-                        |> turn angle
+                DecrementLineWidth -> 
+                    { turtle | lineWidth = turtle.lineWidth - model.lineWidthIncrement }
+
+                DrawDot ->
+                    { turtle | dots = ( ( turtle.x, turtle.y ), turtle.lineWidth ) :: turtle.dots }
 
 
                 NoAction ->
@@ -78,4 +79,16 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                     applyAction turtle symbolAssignment.action
     in
     List.foldl applySymbol (Turtle.initTurtle model.startingPoint |> Turtle.turn model.startingAngle) sequence
+
+
+calculateNewPosition : Float -> Float -> ( Float, Float ) -> ( Float, Float )
+calculateNewPosition stepSize angle ( x, y ) =
+    let
+        deltaX =
+            stepSize * cos (degreesToRadians angle)
+
+        deltaY =
+            stepSize * sin (degreesToRadians angle)
+    in
+    ( x + deltaX, y + deltaY )
 
