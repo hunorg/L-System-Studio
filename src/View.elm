@@ -239,7 +239,6 @@ baseRect =
         []
     ]
 
-
 syntaxDisplayView : Model -> Html Msg
 syntaxDisplayView model =
     if model.syntaxDisplay then
@@ -258,8 +257,7 @@ syntaxDisplayView model =
                     , Html.li [] [ text "# -> Increment the line width by line width increment" ]
                     , Html.li [] [ text "! -> Decrement the line width by line width increment" ]
                     , Html.li [] [ text "@ -> Draw a dot with line width radius" ]
-                    , Html.li [] [ text "X -> No action" ]
-                    , Html.li [] [ text "a to z -> No action" ]
+                    , Html.li [] [ text "a to z (except f) -> No action" ]
                     ]
 
                 -- Add more li elements for each symbol and action as needed
