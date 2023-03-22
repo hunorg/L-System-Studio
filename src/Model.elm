@@ -36,6 +36,7 @@ init : Model
 init =
     { symbolAssignments =
         [ { character = "F", action = Move }
+        , { character = "G", action = Move }
         , { character = "f", action = MoveWithoutDrawing }
         , { character = "+", action = TurnLeft }
         , { character = "-", action = TurnRight }
