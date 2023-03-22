@@ -247,7 +247,8 @@ syntaxDisplayView model =
             [ h2 [] [ text "Syntax" ]
             , Html.ul []
                 [ Html.li [] [ text "F -> Move forward by line length drawing a line" ]
-                , Html.li [] [ text "G -> Move forward by line length without drawing a line" ]
+                , Html.li [] [ text "G -> Move forward by line length drawing a line" ]
+                , Html.li [] [ text "f -> Move forward by line length without drawing a line" ]
                 , Html.li []
                     [ text "+ -> Turn left by turning angle"
                     , Html.li [] [ text "- -> Turn right by turning angle" ]
