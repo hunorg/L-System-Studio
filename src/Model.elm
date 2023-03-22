@@ -47,7 +47,7 @@ init =
         , { character = "@", action = DrawDot }
 
         , { character = "X", action = NoAction }
-        ]
+        ] ++ emptySymbolAssignments
     , syntaxDisplay = False
     , rules = []
     , selectedSymbol = ""
@@ -63,3 +63,13 @@ init =
     , generatedSequence = []
     , drawnTurtle = False
     }
+
+emptySymbolAssignments : List Symbol
+emptySymbolAssignments =
+    let
+        lowercaseChars = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'] 
+
+        createSymbol char =
+            { character = String.fromChar char, action = NoAction }
+    in
+    List.map createSymbol lowercaseChars
