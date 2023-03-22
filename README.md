@@ -15,3 +15,5 @@ Future enchancements include:
 5. Error handling and input validation
 6. Tooltips and help text
 7. Code optimization for performance
+
+more information: http://paulbourke.net/fractals/lsys/ 
