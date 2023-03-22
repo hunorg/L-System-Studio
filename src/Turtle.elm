@@ -7,6 +7,8 @@ import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (Cursor(..), FillRule(..), Length(..), Paint(..), px)
 
 
+
+
 type alias Turtle =
     { x : Float
     , y : Float
@@ -14,7 +16,11 @@ type alias Turtle =
     , stack : List ( ( Float, Float ), Float )
     , segments : List ( ( Float, Float ), ( Float, Float ) )
     , dots : List ( ( Float, Float ), Float )
+    , polygons : List (List (Float, Float))
+    , filledPolygons : List (List (Float, Float), Color.Color)
+    , fillColor : Color.Color
     , lineWidth : Float
+    , swapPlusMinus : Bool
     }
 
 
@@ -33,6 +39,13 @@ type Action
     | IncrementLineWidth 
     | DecrementLineWidth
     | DrawDot
+    | OpenPolygon
+    | ClosePolygon
+    | MultiplyLength
+    | DivideLength
+    | SwapPlusMinus
+    | IncrementTurningAngle
+    | DecrementTurningAngle
     | NoAction
 
 
@@ -44,7 +57,11 @@ initTurtle pos =
     , angle = 0
     , segments = []
     , dots = []
+    , polygons = []
+    , filledPolygons = []
+    , fillColor = Color.black
     , lineWidth = 1
+    , swapPlusMinus = False
     }
 
 
@@ -54,23 +71,21 @@ degreesToRadians degrees =
 
 
 moveForward : Float -> Turtle -> Turtle
-moveForward distance turtle =
+moveForward stepSize turtle =
     let
-        dx =
-            distance * cos (degreesToRadians turtle.angle)
+        ( newX, newY ) =
+            calculateNewPosition stepSize turtle.angle ( turtle.x, turtle.y )
 
-        dy =
-            distance * sin (degreesToRadians turtle.angle)
-
-        newX =
-            turtle.x + dx
-
-        newY =
-            turtle.y - dy
-
-        -- Subtract dy because SVG coordinate system has the y-axis inverted
+        currentPolygon = List.head turtle.polygons |> Maybe.withDefault []
+        updatedPolygons = ( ( newX, newY ) :: currentPolygon ) :: List.drop 1 turtle.polygons
     in
-    { turtle | x = newX, y = newY, segments = ( ( turtle.x, turtle.y ), ( newX, newY ) ) :: turtle.segments }
+    { turtle
+        | x = newX
+        , y = newY
+        , segments = ( ( turtle.x, turtle.y ), ( newX, newY ) ) :: turtle.segments
+        , polygons = updatedPolygons
+    }
+
 
 
 turn : Float -> Turtle -> Turtle
@@ -129,3 +144,33 @@ renderTurtleDots turtle =
                 []
         )
         turtle.dots
+
+drawFilledPolygons : List (List (Float, Float), Color.Color) -> Svg msg
+drawFilledPolygons filledPolygons =
+    TypedSvg.g []
+        (List.map
+            (\(polygon, fillColor) ->
+                TypedSvg.polygon
+                    [ points (List.map (\(x, y) -> (x, y)) polygon)
+                    , TypedSvg.Attributes.style ("fill:" ++ Color.toCssString fillColor)
+                    ]
+                    []
+            )
+            filledPolygons
+        )
+
+
+calculateNewPosition : Float -> Float -> ( Float, Float ) -> ( Float, Float )
+calculateNewPosition stepSize angle ( x, y ) =
+    let
+        deltaX =
+            stepSize * cos (degreesToRadians angle)
+
+        deltaY =
+            stepSize * sin (degreesToRadians angle)
+    in
+    ( x + deltaX, y + deltaY )
+
+
+
+
