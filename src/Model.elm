@@ -11,8 +11,8 @@ type alias Model =
     , selectedAction : Action
     , newRuleInput : String
     , angle : Float
-    , stepSize : Float
-    , fractionalStepSize : Float
+    , lineLength : Float
+    , lineWidthIncrement : Float
     , axiom : String
     , iterations : Int
     , startingPoint : ( Float, Float )
@@ -34,13 +34,17 @@ type alias Symbol =
 
 init : Model
 init =
-    { symbolAssignments = 
+    { symbolAssignments =
         [ { character = "F", action = Move }
-        , { character = "G", action = MoveFraction }
+        , { character = "f", action = MoveWithoutDrawing }
         , { character = "+", action = TurnLeft }
         , { character = "-", action = TurnRight }
+        , { character = "|", action = ReverseDirection }
         , { character = "[", action = Push }
         , { character = "]", action = Pop }
+        , { character = "#", action = IncrementLineWidth }
+        , { character = "@", action = DrawDot }
+
         , { character = "X", action = NoAction }
         ]
     , syntaxDisplay = False
@@ -49,13 +53,12 @@ init =
     , selectedAction = Move
     , newRuleInput = ""
     , angle = 0
-    , stepSize = 1
-    , fractionalStepSize = 0.1
+    , lineLength = 1
+    , lineWidthIncrement = 0
     , axiom = ""
     , iterations = 0
     , startingPoint = ( 700, 500 )
-    , startingAngle =0
+    , startingAngle = 0
     , generatedSequence = []
     , drawnTurtle = False
     }
-
