@@ -181,7 +181,7 @@ view model =
                     ]
                 ]
             , div sectionStyle
-                [ Html.label labelStyle [ text "Iterations " ]
+                [ Html.label labelStyle [ text "Recursion depth " ]
                 , div [ Html.Attributes.style "margin-left" "200px", Html.Attributes.style "margin-top" "-25px" ]
                     [ input [ type_ "range", Html.Attributes.min "0", Html.Attributes.max "20", value (String.fromInt model.iterations), onInput (String.toInt >> Maybe.withDefault 0 >> UpdateIterations) ] []
                     , text (String.fromInt model.iterations)
