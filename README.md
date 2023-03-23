@@ -4,15 +4,11 @@ L-System Studio is an interactive web application built with Elm, designed to he
 
 ## Features
 
-L-System Studio offers the following features:
-
 - Easy-to-use graphical interface for designing L-systems
 - Support for various L-system rules, including context-sensitive and parametric L-systems
 - Real-time visualization of L-system fractals as you modify rules
 - Extensive symbol set for geometric interpretations (see [Symbols](#symbols) section)
 - Customizable rendering settings, including line width, colors, and angles
-
-These features make L-System Studio a powerful and flexible tool for creating and exploring L-system fractals.
 
 ## Sample output:
 
@@ -48,7 +44,7 @@ These symbols allow users to create a wide range of L-system rules and customize
 
 ## Getting started: 
 
-To use L-System Studio, simply clone the repository and follow the instructions in the README file to set up the development environment. Once you have the application running, you can start experimenting with different L-system rules and parameters to create your own unique fractals.
+Simply clone the repository and follow the instructions in the README file to set up the development environment. Once you have the application running, you can start experimenting with different L-system rules and parameters to create your own unique fractals.
 
 ## Further Reading
 
@@ -60,7 +56,7 @@ This resource provides extensive information about L-Systems, along with numerou
 
 ## Contributions 
 
-Contributions to L-System Studio are welcome! If you'd like to contribute, please fork the repository and submit a pull request with your changes. If you have any questions or need assistance, feel free to open an issue or contact the project maintainer.
+Contributions are welcome! If you'd like to contribute, please fork the repository and submit a pull request with your changes. If you have any questions or need assistance, feel free to open an issue or contact the project maintainer.
 
 
 ## Future enchancements include: 
@@ -72,7 +68,4 @@ Contributions to L-System Studio are welcome! If you'd like to contribute, pleas
 6. Tooltips and help text
 7. Code optimization for performance
 
-## License
-
-This project is licensed under the [MIT] License - see the [LICENSE](LICENSE) file for details.
 
