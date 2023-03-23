@@ -48,15 +48,15 @@ If you'd like to set up the development environment and run the application loca
 
 1. Clone the repository:
 
-\```
+```
 git clone https://github.com/hunorg/L-System-Studio.git
-\```
+```
 
 2. Navigate to the project directory:
 
-\```
+```
 cd L-System-Studio
-\```
+```
 
 ## Further Reading
 
