@@ -4635,7 +4635,7 @@ var $author$project$Model$init = {
 	polygonFillColor: $avh4$elm_color$Color$red,
 	rules: _List_Nil,
 	selectedAction: $author$project$Turtle$Move,
-	selectedSymbol: '',
+	selectedSymbol: 'F',
 	startingAngle: 0,
 	startingPoint: _Utils_Tuple2(700, 500),
 	symbolAssignments: _Utils_ap(
