@@ -72,3 +72,7 @@ Contributions to L-System Studio are welcome! If you'd like to contribute, pleas
 6. Tooltips and help text
 7. Code optimization for performance
 
+## License
+
+This project is licensed under the [MIT] License - see the [LICENSE](LICENSE) file for details.
+
