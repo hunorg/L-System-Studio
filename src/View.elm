@@ -50,7 +50,6 @@ showRule ( from, to ) =
     String.fromChar from ++ " → " ++ String.fromList to
 
 
-
 view : Model -> Html Msg
 view model =
     let
@@ -144,12 +143,11 @@ view model =
             , Html.Attributes.style "width" "4rem" -- Adjust the width here as needed
             , Html.Attributes.style "margin" "0.5rem"
             ]
-
     in
     div [ Html.Attributes.style "background-color" "black", Html.Attributes.style "width" "100%", Html.Attributes.style "min-height" "100vh" ]
         [ div appStyle
             [ div sectionStyle
-                [ text "for more information and examples, please visit: http://paulbourke.net/fractals/lsys/"
+                [ Html.a [ href "http://paulbourke.net/fractals/lsys/" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ]
                 ]
             , div sectionStyle
                 [ div [ Html.Attributes.style "margin-left" "-28px", Html.Attributes.style "margin-top" "-25px" ]
@@ -239,12 +237,10 @@ view model =
                     [ button (buttonStyleDraw ++ [ onClick DrawTurtle ]) [ text "Draw" ] ]
                 ]
             , div sectionStyle
-                [ Html.ul []
-                    [ Html.li [] [ text "created by: https://github.com/hunorg" ]
-                    , Html.li [] [ text "source code: https://github.com/hunorg/L-System-Studio" ]
-                    , Html.li [] [ text "work in progress" ]
-                    ]
-                ]
+                [ Html.a [ href "https://github.com/hunorg" ] [ text "created by @hunorg" ] ]
+            
+            , div sectionStyle
+                [ Html.a [ href "https://github.com/hunorg/L-System-Studio" ] [ text "source code" ] ]
             ]
         , div [ Html.Attributes.style "margin-left" "550px", Html.Attributes.style "margin-top" "-1650px" ]
             [ svg
@@ -324,8 +320,6 @@ syntaxDisplayView model =
                     , Html.li [] [ text ") -> Increment turning angle by turning angle increment" ]
                     , Html.li [] [ text "a to z (except f) -> No action" ]
                     ]
-
-                -- Add more li elements for each symbol and action as needed
                 ]
             ]
 
