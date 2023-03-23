@@ -1,14 +1,6 @@
 # L-System Studio 
 
-L-System Studio is an interactive web application built with Elm, designed to help users explore and visualize L-systems. With its intuitive graphical user interface, users can easily create, modify, and experiment with different L-system rules, and visualize the resulting fractals in real-time.
-
-## Features
-
-- Easy-to-use graphical interface for designing L-systems
-- Support for various L-system rules, including context-sensitive and parametric L-systems
-- Real-time visualization of L-system fractals as you modify rules
-- Extensive symbol set for geometric interpretations (see [Symbols](#symbols) section)
-- Customizable rendering settings, including line width, colors, and angles
+This is an interactive web application built with Elm, designed to help users explore and visualize L-systems.
 
 ## Sample output:
 
@@ -18,7 +10,7 @@ L-System Studio is an interactive web application built with Elm, designed to he
 
 ## Symbols
 
-L-System Studio uses the following characters with specific geometric interpretations to define the L-system rules:
+The following characters are used with specific geometric interpretations to define the L-system rules:
 
 | Character | Meaning                                                     |
 |-----------|-------------------------------------------------------------|
