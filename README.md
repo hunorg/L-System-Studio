@@ -42,7 +42,21 @@ You can try it out by visiting the live link:
 
 [**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/875c6e64596ec394387799e27f5d771f50cbd184/index.html)
 
+### Run locally
 
+If you'd like to set up the development environment and run the application locally, follow these steps:
+
+1. Clone the repository:
+
+\```
+git clone https://github.com/hunorg/L-System-Studio.git
+\```
+
+2. Navigate to the project directory:
+
+\```
+cd L-System-Studio
+\```
 
 ## Further Reading
 
