@@ -62,7 +62,7 @@ init =
             ++ emptySymbolAssignments
     , syntaxDisplay = False
     , rules = []
-    , selectedSymbol = ""
+    , selectedSymbol = "F"
     , selectedAction = Move
     , newRuleInput = ""
     , turningAngle = 0
