@@ -34,9 +34,15 @@ The following characters are used with specific geometric interpretations to def
 
 These symbols allow users to create a wide range of L-system rules and customize the generated fractals to their liking.
 
-## Getting started: 
+## Getting started:
 
-Simply clone the repository and follow the instructions in the README file to set up the development environment. Once you have the application running, you can start experimenting with different L-system rules and parameters to create your own unique fractals.
+### Try it live
+
+You can try out the L-System Studio web application by visiting the live link:
+
+[**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/875c6e64596ec394387799e27f5d771f50cbd184/index.html)
+
+
 
 ## Further Reading
 
