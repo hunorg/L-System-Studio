@@ -11,7 +11,11 @@
             "elm/browser": "1.0.2",
             "elm/core": "1.0.5",
             "elm/html": "1.0.0",
-            "elm-community/typed-svg": "7.0.0"
+            "elm/svg": "1.0.1",
+            "elm-community/list-extra": "8.7.0",
+            "elm-community/typed-svg": "7.0.0",
+            "mdgriffith/elm-animator": "1.1.1",
+            "simonh1000/elm-colorpicker": "2.0.3"
         },
         "indirect": {
             "Spaxe/svg-pathd": "3.0.2",
@@ -19,7 +23,7 @@
             "elm/time": "1.0.0",
             "elm/url": "1.0.0",
             "elm/virtual-dom": "1.0.3",
-            "elm-community/list-extra": "8.7.0"
+            "ianmackenzie/elm-units": "2.9.0"
         }
     },
     "test-dependencies": {
