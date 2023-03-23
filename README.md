@@ -38,7 +38,7 @@ These symbols allow users to create a wide range of L-system rules and customize
 
 ### Try it live
 
-You can try out the L-System Studio web application by visiting the live link:
+You can try it out by visiting the live link:
 
 [**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/875c6e64596ec394387799e27f5d771f50cbd184/index.html)
 
