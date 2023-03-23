@@ -1,6 +1,6 @@
 # L-System Studio 
 
-This is an interactive web application built with Elm, designed to help users explore and visualize L-systems.
+interactive web application built with Elm, designed to help users explore and visualize L-systems
 
 ## Sample output:
 
