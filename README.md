@@ -40,7 +40,7 @@ These symbols allow users to create a wide range of L-system rules and customize
 
 You can try it out by visiting the live link:
 
-[**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/8d4da9cbfbb61c7cd4806c7312267c896e29f980/index.html)
+[**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/e0057fe7e3a5e9020a670ac928c2d8820c55496d/index.html)
 
 ### Run locally
 
