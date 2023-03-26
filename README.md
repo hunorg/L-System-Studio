@@ -11,7 +11,7 @@ interactive web application built with Elm, designed to help users explore and v
 
 ## Symbols
 
-The following characters are used with specific geometric interpretations to define the L-system rules:
+the following characters are used with specific geometric interpretations to define the L-system rules:
 
 | Character | Meaning                                                     |
 |-----------|-------------------------------------------------------------|
@@ -39,21 +39,21 @@ These symbols allow users to create a wide range of L-system rules and customize
 
 ### Try it live
 
-You can try it out by visiting the live link:
+you can try it out by visiting the live link:
 
 [**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/eda53a47f51a30dc96c289c3a9dca4d55ae0ab46/index.html)
 
 ### Run locally
 
-If you'd like to set up the development environment and run the application locally, follow these steps:
+if you'd like to set up the development environment and run the application locally, follow these steps:
 
-1. Clone the repository:
+1. clone the repository:
 
 ```
 git clone https://github.com/hunorg/L-System-Studio.git
 ```
 
-2. Navigate to the project directory:
+2. navigate to the project directory:
 
 ```
 cd L-System-Studio
@@ -61,24 +61,24 @@ cd L-System-Studio
 
 ## Further Reading
 
-For more information on L-Systems and a collection of examples, please visit the following resource:
+for more information on L-Systems and a collection of examples, please visit the following resource:
 
 - [Paul Bourke's L-System Fractals](http://paulbourke.net/fractals/lsys/)
 
-This resource provides extensive information about L-Systems, along with numerous examples and visualizations to help you better understand their capabilities and potential applications.
+this resource provides extensive information about L-Systems, along with numerous examples and visualizations to help you better understand their capabilities and potential applications
 
 ## Contributions 
 
-Contributions are welcome! If you'd like to contribute, please fork the repository and submit a pull request with your changes. If you have any questions or need assistance, feel free to open an issue or contact the project maintainer.
+contributions are welcome! If you'd like to contribute, please fork the repository and submit a pull request with your changes. If you have any questions or need assistance, feel free to open an issue or contact the project maintainer
 
 
 ## Future enchancements include: 
 
-1. Saving and loading L-system presets
-3. Drawing process animation
-4. User-guided tutorials or examples
-5. Error handling and input validation
-6. Tooltips and help text
-7. Code optimization for performance
+1. saving and loading L-system presets
+3. drawing process animation
+4. user-guided tutorials or examples
+5. error handling and input validation
+6. tooltips and help text
+7. code optimization for performance
 
 
