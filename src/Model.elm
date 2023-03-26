@@ -37,7 +37,6 @@ type alias Symbol =
     , action : Action
     }
 
-
 init : Model
 init =
     { symbolAssignments =
@@ -50,6 +49,7 @@ init =
         , { character = "[", action = Push }
         , { character = "]", action = Pop }
         , { character = "#", action = IncrementLineWidth }
+        , { character = "!", action = DecrementLineWidth }
         , { character = "@", action = DrawDot }
         , { character = "{", action = OpenPolygon }
         , { character = "}", action = ClosePolygon }
