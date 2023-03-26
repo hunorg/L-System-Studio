@@ -7647,7 +7647,7 @@ var $author$project$View$view = function (model) {
 											[
 												$elm$html$Html$Attributes$type_('range'),
 												$elm$html$Html$Attributes$min('1'),
-												$elm$html$Html$Attributes$max('10'),
+												$elm$html$Html$Attributes$max('25'),
 												$elm$html$Html$Attributes$step('1'),
 												$elm$html$Html$Events$onInput(
 												A2(
