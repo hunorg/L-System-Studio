@@ -5291,17 +5291,6 @@ var $elm$browser$Browser$sandbox = function (impl) {
 			view: impl.view
 		});
 };
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
-	});
 var $elm$core$List$append = F2(
 	function (xs, ys) {
 		if (!ys.b) {
@@ -5623,66 +5612,6 @@ var $author$project$Update$update = F2(
 				return _Utils_update(
 					model,
 					{syntaxDisplay: !model.syntaxDisplay});
-			case 'AddSymbolAssignment':
-				var characterString = msg.a;
-				var action = msg.b;
-				var updatedAssignments = function () {
-					var _v1 = A2(
-						$elm$core$List$filter,
-						function (s) {
-							return _Utils_eq(s.character, characterString);
-						},
-						model.symbolAssignments);
-					if (!_v1.b) {
-						return _Utils_ap(
-							model.symbolAssignments,
-							_List_fromArray(
-								[
-									{action: action, character: characterString}
-								]));
-					} else {
-						return A2(
-							$elm$core$List$map,
-							function (s) {
-								return _Utils_eq(s.character, characterString) ? _Utils_update(
-									s,
-									{action: action}) : s;
-							},
-							model.symbolAssignments);
-					}
-				}();
-				return _Utils_update(
-					model,
-					{symbolAssignments: updatedAssignments});
-			case 'AssignSymbol':
-				var updatedAssignments = function () {
-					var _v2 = A2(
-						$elm$core$List$filter,
-						function (s) {
-							return _Utils_eq(s.character, model.selectedSymbol);
-						},
-						model.symbolAssignments);
-					if (!_v2.b) {
-						return _Utils_ap(
-							model.symbolAssignments,
-							_List_fromArray(
-								[
-									{action: model.selectedAction, character: model.selectedSymbol}
-								]));
-					} else {
-						return A2(
-							$elm$core$List$map,
-							function (s) {
-								return _Utils_eq(s.character, model.selectedSymbol) ? _Utils_update(
-									s,
-									{action: model.selectedAction}) : s;
-							},
-							model.symbolAssignments);
-					}
-				}();
-				return _Utils_update(
-					model,
-					{symbolAssignments: updatedAssignments});
 			case 'SelectSymbol':
 				var character = msg.a;
 				return _Utils_update(
@@ -5703,6 +5632,11 @@ var $author$project$Update$update = F2(
 				return _Utils_update(
 					model,
 					{turningAngle: turningAngle});
+			case 'UpdateTurningAngleIncrement':
+				var newTurningAngleIncrement = msg.a;
+				return _Utils_update(
+					model,
+					{turningAngleIncrement: newTurningAngleIncrement});
 			case 'UpdateLineLength':
 				var newLength = msg.a;
 				return _Utils_update(
@@ -5754,9 +5688,9 @@ var $author$project$Update$update = F2(
 					{startingAngle: newStartingAngle});
 			case 'ColorPickerMsg':
 				var colorPickerMsg = msg.a;
-				var _v3 = A3($simonh1000$elm_colorpicker$ColorPicker$update, colorPickerMsg, model.polygonFillColor, model.colorPicker);
-				var newColorPicker = _v3.a;
-				var newColorMaybe = _v3.b;
+				var _v1 = A3($simonh1000$elm_colorpicker$ColorPicker$update, colorPickerMsg, model.polygonFillColor, model.colorPicker);
+				var newColorPicker = _v1.a;
+				var newColorMaybe = _v1.b;
 				return _Utils_update(
 					model,
 					{
@@ -5835,6 +5769,9 @@ var $author$project$Update$UpdateNewRuleInput = function (a) {
 };
 var $author$project$Update$UpdateStartingAngle = function (a) {
 	return {$: 'UpdateStartingAngle', a: a};
+};
+var $author$project$Update$UpdateTurningAngleIncrement = function (a) {
+	return {$: 'UpdateTurningAngleIncrement', a: a};
 };
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm_community$typed_svg$TypedSvg$Types$Paint = function (a) {
@@ -6679,6 +6616,17 @@ var $elm$core$List$drop = F2(
 				}
 			}
 		}
+	});
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
 	});
 var $elm$core$List$head = function (list) {
 	if (list.b) {
@@ -7661,7 +7609,7 @@ var $author$project$View$view = function (model) {
 														A2(
 															$elm$core$Basics$composeR,
 															$elm$core$Maybe$withDefault(0),
-															$author$project$Update$UpdateAngle))),
+															$author$project$Update$UpdateTurningAngleIncrement))),
 													$elm$html$Html$Attributes$value(
 													$elm$core$String$fromFloat(model.turningAngleIncrement))
 												])),
