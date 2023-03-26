@@ -185,7 +185,7 @@ view model =
             , div sectionStyle
                 [ Html.label labelStyle [ text "Turning angle increment " ]
                 , div [ Html.Attributes.style "margin-left" "220px", Html.Attributes.style "margin-top" "-40px" ]
-                    [ input (angleInputStyle ++ [ type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.turningAngleIncrement) ]) []
+                    [ input (angleInputStyle ++ [ type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateTurningAngleIncrement), value (String.fromFloat model.turningAngleIncrement) ]) []
                     , text (String.fromFloat model.turningAngleIncrement ++ "°")
                     ]
                 ]
