@@ -4,6 +4,7 @@ interactive web application built with Elm, designed to help users explore and v
 
 ## Sample output:
 
+![PineTree](https://user-images.githubusercontent.com/114682020/227780945-76676c50-2a21-41e7-b6d3-049483d56efa.png)
 ![Bush](https://user-images.githubusercontent.com/114682020/227063859-eb63cc9b-80a2-461c-8c06-675f9344940b.png)
 ![SquareSierpinski](https://user-images.githubusercontent.com/114682020/227063864-abbdbd48-dd9b-419b-84e4-081dff7829f4.png)
 ![TrianglePaulB](https://user-images.githubusercontent.com/114682020/227063866-009f3656-6f39-4270-8c75-013f2c486c06.png)
