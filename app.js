@@ -4451,6 +4451,7 @@ var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
 var $author$project$Turtle$ClosePolygon = {$: 'ClosePolygon'};
+var $author$project$Turtle$DecrementLineWidth = {$: 'DecrementLineWidth'};
 var $author$project$Turtle$DecrementTurningAngle = {$: 'DecrementTurningAngle'};
 var $author$project$Turtle$DivideLength = {$: 'DivideLength'};
 var $author$project$Turtle$DrawDot = {$: 'DrawDot'};
@@ -4650,6 +4651,7 @@ var $author$project$Model$init = {
 				{action: $author$project$Turtle$Push, character: '['},
 				{action: $author$project$Turtle$Pop, character: ']'},
 				{action: $author$project$Turtle$IncrementLineWidth, character: '#'},
+				{action: $author$project$Turtle$DecrementLineWidth, character: '!'},
 				{action: $author$project$Turtle$DrawDot, character: '@'},
 				{action: $author$project$Turtle$OpenPolygon, character: '{'},
 				{action: $author$project$Turtle$ClosePolygon, character: '}'},
