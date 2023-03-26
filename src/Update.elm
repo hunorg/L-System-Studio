@@ -7,12 +7,12 @@ import ColorPicker
 
 
 type Msg
-    = AddSymbolAssignment String Action
-    | ToggleSyntaxDisplay
+    = ToggleSyntaxDisplay
     | SelectSymbol String
     | SelectAxiom String
     | UpdateNewRuleInput String
     | UpdateAngle Float
+    | UpdateTurningAngleIncrement Float 
     | UpdateLineLength Float
     | UpdateLineLengthScale Float
     | UpdateLineWidthIncrement Float
@@ -22,7 +22,6 @@ type Msg
     | UpdateStartingAngle Float
     | ColorPickerMsg ColorPicker.Msg
     | AddRule
-    | AssignSymbol
     | ApplyAxiom
     | DrawTurtle
 
@@ -33,46 +32,8 @@ update msg model =
         ToggleSyntaxDisplay ->
             { model | syntaxDisplay = not model.syntaxDisplay }
 
-        AddSymbolAssignment characterString action ->
-            let
-                updatedAssignments =
-                    case List.filter (\s -> s.character == characterString) model.symbolAssignments of
-                        [] ->
-                            model.symbolAssignments ++ [ { character = characterString, action = action } ]
-
-                        _ ->
-                            List.map
-                                (\s ->
-                                    if s.character == characterString then
-                                        { s | action = action }
-
-                                    else
-                                        s
-                                )
-                                model.symbolAssignments
-            in
-            { model | symbolAssignments = updatedAssignments }
-
-        AssignSymbol ->
-            let
-                updatedAssignments =
-                    case List.filter (\s -> s.character == model.selectedSymbol) model.symbolAssignments of
-                        [] ->
-                            model.symbolAssignments ++ [ { character = model.selectedSymbol, action = model.selectedAction } ]
-
-                        _ ->
-                            List.map
-                                (\s ->
-                                    if s.character == model.selectedSymbol then
-                                        { s | action = model.selectedAction }
-
-                                    else
-                                        s
-                                )
-                                model.symbolAssignments
-            in
-            { model | symbolAssignments = updatedAssignments }
-
+        
+        
         SelectSymbol character ->
             { model | selectedSymbol = character }
 
@@ -84,6 +45,9 @@ update msg model =
 
         UpdateAngle turningAngle ->
             { model | turningAngle = turningAngle }
+
+        UpdateTurningAngleIncrement newTurningAngleIncrement -> 
+            { model | turningAngleIncrement = newTurningAngleIncrement }
 
         UpdateLineLength newLength ->
             { model | lineLength = newLength }
@@ -132,3 +96,4 @@ update msg model =
 
         DrawTurtle ->
             { model | generatedSequence = generateSequence model.iterations model.axiom model.rules, drawnTurtle = True }
+
