@@ -37,6 +37,7 @@ type alias Symbol =
     , action : Action
     }
 
+
 init : Model
 init =
     { symbolAssignments =
@@ -72,7 +73,7 @@ init =
     , lineWidthIncrement = 0
     , axiom = ""
     , iterations = 0
-    , startingPoint = ( 700, 500 )
+    , startingPoint = ( 500, 500 )
     , startingAngle = 0
     , polygonFillColor = Color.red
     , colorPicker = ColorPicker.empty

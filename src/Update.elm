@@ -96,4 +96,3 @@ update msg model =
 
         DrawTurtle ->
             { model | generatedSequence = generateSequence model.iterations model.axiom model.rules, drawnTurtle = True }
-

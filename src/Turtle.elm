@@ -173,4 +173,3 @@ calculateNewPosition stepSize angle ( x, y ) =
 
 
 
-

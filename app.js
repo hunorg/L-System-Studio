@@ -4638,7 +4638,7 @@ var $author$project$Model$init = {
 	selectedAction: $author$project$Turtle$Move,
 	selectedSymbol: 'F',
 	startingAngle: 0,
-	startingPoint: _Utils_Tuple2(700, 500),
+	startingPoint: _Utils_Tuple2(500, 500),
 	symbolAssignments: _Utils_ap(
 		_List_fromArray(
 			[
@@ -5741,9 +5741,6 @@ var $author$project$Update$update = F2(
 var $author$project$Update$AddRule = {$: 'AddRule'};
 var $author$project$Update$ApplyAxiom = {$: 'ApplyAxiom'};
 var $author$project$Update$DrawTurtle = {$: 'DrawTurtle'};
-var $elm_community$typed_svg$TypedSvg$Types$Px = function (a) {
-	return {$: 'Px', a: a};
-};
 var $author$project$Update$SelectAxiom = function (a) {
 	return {$: 'SelectAxiom', a: a};
 };
@@ -5778,6 +5775,9 @@ var $author$project$Update$UpdateTurningAngleIncrement = function (a) {
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm_community$typed_svg$TypedSvg$Types$Paint = function (a) {
 	return {$: 'Paint', a: a};
+};
+var $elm_community$typed_svg$TypedSvg$Types$Px = function (a) {
+	return {$: 'Px', a: a};
 };
 var $avh4$elm_color$Color$black = A4($avh4$elm_color$Color$RgbaSpace, 0 / 255, 0 / 255, 0 / 255, 1.0);
 var $elm$virtual_dom$VirtualDom$attribute = F2(
@@ -5952,9 +5952,9 @@ var $author$project$View$baseRect = _List_fromArray(
 				$elm_community$typed_svg$TypedSvg$Attributes$y(
 				$elm_community$typed_svg$TypedSvg$Types$Px(0)),
 				$elm_community$typed_svg$TypedSvg$Attributes$width(
-				$elm_community$typed_svg$TypedSvg$Types$Px(1900)),
+				$elm_community$typed_svg$TypedSvg$Types$Px(1000)),
 				$elm_community$typed_svg$TypedSvg$Attributes$height(
-				$elm_community$typed_svg$TypedSvg$Types$Px(1600)),
+				$elm_community$typed_svg$TypedSvg$Types$Px(1000)),
 				$elm_community$typed_svg$TypedSvg$Attributes$fill(
 				$elm_community$typed_svg$TypedSvg$Types$Paint($avh4$elm_color$Color$black)),
 				$elm_community$typed_svg$TypedSvg$Attributes$stroke(
@@ -5966,574 +5966,18 @@ var $author$project$View$baseRect = _List_fromArray(
 		_List_Nil)
 	]);
 var $elm$html$Html$button = _VirtualDom_node('button');
-var $author$project$Update$ColorPickerMsg = function (a) {
-	return {$: 'ColorPickerMsg', a: a};
-};
-var $elm$virtual_dom$VirtualDom$map = _VirtualDom_map;
-var $elm$html$Html$map = $elm$virtual_dom$VirtualDom$map;
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $simonh1000$elm_colorpicker$ColorPicker$markerAttrs = _List_fromArray(
-	[
-		A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
-		A2($elm$html$Html$Attributes$style, 'top', '1px'),
-		A2($elm$html$Html$Attributes$style, 'bottom', '1px'),
-		A2($elm$html$Html$Attributes$style, 'border', '1px solid #ddd'),
-		A2($elm$html$Html$Attributes$style, 'background-color', '#ffffff'),
-		A2($elm$html$Html$Attributes$style, 'width', '6px'),
-		A2($elm$html$Html$Attributes$style, 'pointer-events', 'none')
-	]);
-var $simonh1000$elm_colorpicker$ColorPicker$markerCorrection = 4;
-var $simonh1000$elm_colorpicker$ColorPicker$alphaMarker = function (alpha) {
-	var xVal = $elm$core$String$fromInt(
-		$elm$core$Basics$round((alpha * $simonh1000$elm_colorpicker$ColorPicker$widgetWidth) - $simonh1000$elm_colorpicker$ColorPicker$markerCorrection));
+var $elm_community$typed_svg$TypedSvg$Attributes$class = function (names) {
 	return A2(
-		$elm$html$Html$div,
-		A2(
-			$elm$core$List$cons,
-			A2($elm$html$Html$Attributes$style, 'left', xVal + 'px'),
-			$simonh1000$elm_colorpicker$ColorPicker$markerAttrs),
-		_List_Nil);
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'class',
+		A2($elm$core$String$join, ' ', names));
 };
-var $simonh1000$elm_colorpicker$ColorPicker$NoOp = {$: 'NoOp'};
-var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
-	return {$: 'MayStopPropagation', a: a};
-};
-var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
-var $elm$html$Html$Events$stopPropagationOn = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
-	});
-var $simonh1000$elm_colorpicker$ColorPicker$bubblePreventer = A2(
-	$elm$html$Html$Events$stopPropagationOn,
-	'click',
-	$elm$json$Json$Decode$succeed(
-		_Utils_Tuple2($simonh1000$elm_colorpicker$ColorPicker$NoOp, true)));
-var $simonh1000$elm_colorpicker$ColorPicker$checkedBkgStyles = _List_fromArray(
-	[
-		A2($elm$html$Html$Attributes$style, 'background-size', '12px 12px'),
-		A2($elm$html$Html$Attributes$style, 'background-position', '0 0, 0 6px, 6px -6px, -6px 0px'),
-		A2($elm$html$Html$Attributes$style, 'background-image', 'linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%)')
-	]);
-var $elm$json$Json$Encode$string = _Json_wrap;
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
-		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$string(string));
-	});
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
-var $avh4$elm_color$Color$hsl = F3(
-	function (h, s, l) {
-		return A4($avh4$elm_color$Color$hsla, h, s, l, 1.0);
-	});
-var $simonh1000$elm_colorpicker$ColorPicker$hueMarker = function (lastHue) {
-	var xVal = $elm$core$String$fromInt(
-		$elm$core$Basics$round((lastHue * $simonh1000$elm_colorpicker$ColorPicker$widgetWidth) - $simonh1000$elm_colorpicker$ColorPicker$markerCorrection));
-	return A2(
-		$elm$html$Html$div,
-		A2(
-			$elm$core$List$cons,
-			A2($elm$html$Html$Attributes$style, 'left', xVal + 'px'),
-			$simonh1000$elm_colorpicker$ColorPicker$markerAttrs),
-		_List_Nil);
-};
-var $simonh1000$elm_colorpicker$ColorPicker$HueSlider = {$: 'HueSlider'};
-var $simonh1000$elm_colorpicker$ColorPicker$OnMouseMove = F2(
-	function (a, b) {
-		return {$: 'OnMouseMove', a: a, b: b};
-	});
-var $elm$svg$Svg$Attributes$class = _VirtualDom_attribute('class');
-var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
-var $elm$svg$Svg$defs = $elm$svg$Svg$trustedNode('defs');
-var $elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
-var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
-var $elm$svg$Svg$Attributes$id = _VirtualDom_attribute('id');
-var $elm$svg$Svg$linearGradient = $elm$svg$Svg$trustedNode('linearGradient');
-var $elm$svg$Svg$Attributes$offset = _VirtualDom_attribute('offset');
-var $elm$svg$Svg$rect = $elm$svg$Svg$trustedNode('rect');
-var $elm$svg$Svg$Attributes$display = _VirtualDom_attribute('display');
-var $elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
-var $simonh1000$elm_colorpicker$ColorPicker$sliderStyles = _List_fromArray(
-	[
-		$elm$svg$Svg$Attributes$width(
-		$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetWidth)),
-		$elm$svg$Svg$Attributes$height('100%'),
-		$elm$svg$Svg$Attributes$display('block')
-	]);
-var $elm$svg$Svg$stop = $elm$svg$Svg$trustedNode('stop');
-var $elm$svg$Svg$Attributes$stopColor = _VirtualDom_attribute('stop-color');
-var $elm$svg$Svg$Attributes$stopOpacity = _VirtualDom_attribute('stop-opacity');
-var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
-var $simonh1000$elm_colorpicker$ColorPicker$OnClick = F2(
-	function (a, b) {
-		return {$: 'OnClick', a: a, b: b};
-	});
-var $simonh1000$elm_colorpicker$ColorPicker$OnMouseDown = F2(
-	function (a, b) {
-		return {$: 'OnMouseDown', a: a, b: b};
-	});
-var $simonh1000$elm_colorpicker$ColorPicker$OnMouseUp = {$: 'OnMouseUp'};
-var $simonh1000$elm_colorpicker$ColorPicker$MouseInfo = F3(
-	function (x, y, mousePressed) {
-		return {mousePressed: mousePressed, x: x, y: y};
-	});
-var $elm$json$Json$Decode$field = _Json_decodeField;
-var $elm$json$Json$Decode$int = _Json_decodeInt;
-var $elm$json$Json$Decode$map3 = _Json_map3;
-var $elm$core$Basics$neq = _Utils_notEqual;
-var $simonh1000$elm_colorpicker$ColorPicker$decodeMouseInfo = A4(
-	$elm$json$Json$Decode$map3,
-	$simonh1000$elm_colorpicker$ColorPicker$MouseInfo,
-	A2($elm$json$Json$Decode$field, 'offsetX', $elm$json$Json$Decode$int),
-	A2($elm$json$Json$Decode$field, 'offsetY', $elm$json$Json$Decode$int),
-	A2(
-		$elm$json$Json$Decode$map,
-		$elm$core$Basics$neq(0),
-		A2($elm$json$Json$Decode$field, 'buttons', $elm$json$Json$Decode$int)));
-var $elm$virtual_dom$VirtualDom$Normal = function (a) {
-	return {$: 'Normal', a: a};
-};
-var $elm$html$Html$Events$on = F2(
-	function (event, decoder) {
-		return A2(
-			$elm$virtual_dom$VirtualDom$on,
-			event,
-			$elm$virtual_dom$VirtualDom$Normal(decoder));
-	});
-var $elm$svg$Svg$Events$on = $elm$html$Html$Events$on;
-var $simonh1000$elm_colorpicker$ColorPicker$onClickSvg = function (msgCreator) {
-	return A2(
-		$elm$svg$Svg$Events$on,
-		'click',
-		A2($elm$json$Json$Decode$map, msgCreator, $simonh1000$elm_colorpicker$ColorPicker$decodeMouseInfo));
-};
-var $simonh1000$elm_colorpicker$ColorPicker$onMouseDownSvg = function (msgCreator) {
-	return A2(
-		$elm$svg$Svg$Events$on,
-		'mousedown',
-		A2($elm$json$Json$Decode$map, msgCreator, $simonh1000$elm_colorpicker$ColorPicker$decodeMouseInfo));
-};
-var $simonh1000$elm_colorpicker$ColorPicker$onMouseMoveSvg = function (msgCreator) {
-	return A2(
-		$elm$svg$Svg$Events$on,
-		'mousemove',
-		A2($elm$json$Json$Decode$map, msgCreator, $simonh1000$elm_colorpicker$ColorPicker$decodeMouseInfo));
-};
-var $elm$svg$Svg$Events$onMouseUp = function (msg) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'mouseup',
-		$elm$json$Json$Decode$succeed(msg));
-};
-var $simonh1000$elm_colorpicker$ColorPicker$svgDragAttrs = F3(
-	function (currMouseTgt, thisTgt, onMoveMsg) {
-		var common = _List_fromArray(
-			[
-				$simonh1000$elm_colorpicker$ColorPicker$onMouseDownSvg(
-				$simonh1000$elm_colorpicker$ColorPicker$OnMouseDown(thisTgt)),
-				$elm$svg$Svg$Events$onMouseUp($simonh1000$elm_colorpicker$ColorPicker$OnMouseUp),
-				$simonh1000$elm_colorpicker$ColorPicker$onClickSvg(
-				$simonh1000$elm_colorpicker$ColorPicker$OnClick(thisTgt))
-			]);
-		return _Utils_eq(currMouseTgt, thisTgt) ? A2(
-			$elm$core$List$cons,
-			$simonh1000$elm_colorpicker$ColorPicker$onMouseMoveSvg(onMoveMsg),
-			common) : common;
-	});
-var $elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
-var $elm$svg$Svg$Attributes$x1 = _VirtualDom_attribute('x1');
-var $elm$svg$Svg$Attributes$x2 = _VirtualDom_attribute('x2');
-var $elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
-var $elm$svg$Svg$Attributes$y1 = _VirtualDom_attribute('y1');
-var $elm$svg$Svg$Attributes$y2 = _VirtualDom_attribute('y2');
-var $simonh1000$elm_colorpicker$ColorPicker$huePalette = function (mouseTarget) {
-	var stops = _List_fromArray(
-		[
-			_Utils_Tuple2('0%', '#FF0000'),
-			_Utils_Tuple2('17%', '#FF00FF'),
-			_Utils_Tuple2('33%', '#0000FF'),
-			_Utils_Tuple2('50%', '#00FFFF'),
-			_Utils_Tuple2('66%', '#00FF00'),
-			_Utils_Tuple2('83%', '#FFFF00'),
-			_Utils_Tuple2('100%', '#FF0000')
-		]);
-	var mkStop = function (_v0) {
-		var os = _v0.a;
-		var sc = _v0.b;
-		return A2(
-			$elm$svg$Svg$stop,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$offset(os),
-					$elm$svg$Svg$Attributes$stopColor(sc),
-					$elm$svg$Svg$Attributes$stopOpacity('1')
-				]),
-			_List_Nil);
-	};
-	return A2(
-		$elm$svg$Svg$svg,
-		A2(
-			$elm$core$List$cons,
-			$elm$svg$Svg$Attributes$class('hue-picker'),
-			$simonh1000$elm_colorpicker$ColorPicker$sliderStyles),
-		_List_fromArray(
-			[
-				A2(
-				$elm$svg$Svg$defs,
-				_List_Nil,
-				_List_fromArray(
-					[
-						A2(
-						$elm$svg$Svg$linearGradient,
-						_List_fromArray(
-							[
-								$elm$svg$Svg$Attributes$id('gradient-hsv'),
-								$elm$svg$Svg$Attributes$x1('100%'),
-								$elm$svg$Svg$Attributes$y1('0%'),
-								$elm$svg$Svg$Attributes$x2('0%'),
-								$elm$svg$Svg$Attributes$y2('0%')
-							]),
-						A2($elm$core$List$map, mkStop, stops))
-					])),
-				A2(
-				$elm$svg$Svg$rect,
-				_Utils_ap(
-					_List_fromArray(
-						[
-							$elm$svg$Svg$Attributes$x('0'),
-							$elm$svg$Svg$Attributes$y('0'),
-							$elm$svg$Svg$Attributes$width(
-							$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetWidth)),
-							$elm$svg$Svg$Attributes$height('100%'),
-							$elm$svg$Svg$Attributes$fill('url(#gradient-hsv)')
-						]),
-					A3(
-						$simonh1000$elm_colorpicker$ColorPicker$svgDragAttrs,
-						mouseTarget,
-						$simonh1000$elm_colorpicker$ColorPicker$HueSlider,
-						$simonh1000$elm_colorpicker$ColorPicker$OnMouseMove($simonh1000$elm_colorpicker$ColorPicker$HueSlider))),
-				_List_Nil)
-			]));
-};
-var $simonh1000$elm_colorpicker$ColorPicker$OpacitySlider = function (a) {
-	return {$: 'OpacitySlider', a: a};
-};
-var $simonh1000$elm_colorpicker$ColorPicker$onClickHtml = function (msgCreator) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'click',
-		A2($elm$json$Json$Decode$map, msgCreator, $simonh1000$elm_colorpicker$ColorPicker$decodeMouseInfo));
-};
-var $elm$html$Html$Events$onMouseUp = function (msg) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'mouseup',
-		$elm$json$Json$Decode$succeed(msg));
-};
-var $simonh1000$elm_colorpicker$ColorPicker$htmlDragAttrs = F3(
-	function (currMouseTgt, thisTgt, onMoveMsg) {
-		var common = _List_fromArray(
-			[
-				A2(
-				$elm$html$Html$Events$on,
-				'mousedown',
-				A2(
-					$elm$json$Json$Decode$map,
-					$simonh1000$elm_colorpicker$ColorPicker$OnMouseDown(thisTgt),
-					$simonh1000$elm_colorpicker$ColorPicker$decodeMouseInfo)),
-				$elm$html$Html$Events$onMouseUp($simonh1000$elm_colorpicker$ColorPicker$OnMouseUp),
-				$simonh1000$elm_colorpicker$ColorPicker$onClickHtml(
-				$simonh1000$elm_colorpicker$ColorPicker$OnClick(thisTgt))
-			]);
-		return _Utils_eq(currMouseTgt, thisTgt) ? A2(
-			$elm$core$List$cons,
-			A2(
-				$elm$html$Html$Events$on,
-				'mousemove',
-				A2($elm$json$Json$Decode$map, onMoveMsg, $simonh1000$elm_colorpicker$ColorPicker$decodeMouseInfo)),
-			common) : common;
-	});
-var $simonh1000$elm_colorpicker$ColorPicker$opacityPalette = F2(
-	function (hsla, model) {
-		var mouseTarget = $simonh1000$elm_colorpicker$ColorPicker$OpacitySlider(hsla.hue);
-		var mkCol = function (op) {
-			return $avh4$elm_color$Color$toCssString(
-				A4($avh4$elm_color$Color$hsla, hsla.hue, hsla.saturation, hsla.lightness, op));
-		};
-		var grad = 'linear-gradient(0.25turn, ' + (mkCol(0) + (', ' + (mkCol(1) + ')')));
-		var overlay = _List_fromArray(
-			[
-				A2($elm$html$Html$Attributes$style, 'background', grad),
-				A2($elm$html$Html$Attributes$style, 'height', '100%'),
-				A2($elm$html$Html$Attributes$style, 'width', '100%')
-			]);
-		return A2(
-			$elm$html$Html$div,
-			_Utils_ap(
-				overlay,
-				A3(
-					$simonh1000$elm_colorpicker$ColorPicker$htmlDragAttrs,
-					model.mouseTarget,
-					mouseTarget,
-					$simonh1000$elm_colorpicker$ColorPicker$OnMouseMove(mouseTarget))),
-			_List_Nil);
-	});
-var $simonh1000$elm_colorpicker$ColorPicker$pickerIndicator = function (col) {
-	var adjustment = 4;
-	var _v0 = $avh4$elm_color$Color$toHsla(col);
-	var saturation = _v0.saturation;
-	var lightness = _v0.lightness;
-	var borderColor = (lightness > 0.95) ? '#cccccc' : '#ffffff';
-	var cy_ = $elm$core$String$fromInt(
-		$elm$core$Basics$round(($simonh1000$elm_colorpicker$ColorPicker$widgetHeight - (lightness * $simonh1000$elm_colorpicker$ColorPicker$widgetHeight)) - adjustment));
-	var cx_ = $elm$core$String$fromInt(
-		$elm$core$Basics$round((saturation * $simonh1000$elm_colorpicker$ColorPicker$widgetWidth) - adjustment));
-	return A2(
-		$elm$html$Html$div,
-		_List_fromArray(
-			[
-				A2($elm$html$Html$Attributes$style, 'position', 'absolute'),
-				A2($elm$html$Html$Attributes$style, 'top', cy_ + 'px'),
-				A2($elm$html$Html$Attributes$style, 'left', cx_ + 'px'),
-				A2($elm$html$Html$Attributes$style, 'border-radius', '100%'),
-				A2($elm$html$Html$Attributes$style, 'border', '2px solid ' + borderColor),
-				A2($elm$html$Html$Attributes$style, 'width', '6px'),
-				A2($elm$html$Html$Attributes$style, 'height', '6px'),
-				A2($elm$html$Html$Attributes$style, 'pointer-events', 'none')
-			]),
-		_List_Nil);
-};
-var $simonh1000$elm_colorpicker$ColorPicker$pickerStyles = _List_fromArray(
-	[
-		A2($elm$html$Html$Attributes$style, 'cursor', 'crosshair'),
-		A2($elm$html$Html$Attributes$style, 'position', 'relative')
-	]);
-var $simonh1000$elm_colorpicker$ColorPicker$SatLight = function (a) {
-	return {$: 'SatLight', a: a};
-};
-var $simonh1000$elm_colorpicker$ColorPicker$satLightPalette = F3(
-	function (hue, colCss, mouseTarget) {
-		return A2(
-			$elm$svg$Svg$svg,
-			_List_fromArray(
-				[
-					$elm$svg$Svg$Attributes$width(
-					$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetWidth)),
-					$elm$svg$Svg$Attributes$height(
-					$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetHeight)),
-					$elm$svg$Svg$Attributes$class('main-picker'),
-					$elm$svg$Svg$Attributes$display('block')
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$svg$Svg$defs,
-					_List_Nil,
-					_List_fromArray(
-						[
-							A2(
-							$elm$svg$Svg$linearGradient,
-							_List_fromArray(
-								[
-									$elm$svg$Svg$Attributes$id('pickerSaturation')
-								]),
-							_List_fromArray(
-								[
-									A2(
-									$elm$svg$Svg$stop,
-									_List_fromArray(
-										[
-											$elm$svg$Svg$Attributes$offset('0'),
-											$elm$svg$Svg$Attributes$stopColor('#808080'),
-											$elm$svg$Svg$Attributes$stopOpacity('1')
-										]),
-									_List_Nil),
-									A2(
-									$elm$svg$Svg$stop,
-									_List_fromArray(
-										[
-											$elm$svg$Svg$Attributes$offset('1'),
-											$elm$svg$Svg$Attributes$stopColor('#808080'),
-											$elm$svg$Svg$Attributes$stopOpacity('0')
-										]),
-									_List_Nil)
-								])),
-							A2(
-							$elm$svg$Svg$linearGradient,
-							_List_fromArray(
-								[
-									$elm$svg$Svg$Attributes$id('pickerBrightness'),
-									$elm$svg$Svg$Attributes$x1('0'),
-									$elm$svg$Svg$Attributes$y1('0'),
-									$elm$svg$Svg$Attributes$x2('0'),
-									$elm$svg$Svg$Attributes$y2('1')
-								]),
-							_List_fromArray(
-								[
-									A2(
-									$elm$svg$Svg$stop,
-									_List_fromArray(
-										[
-											$elm$svg$Svg$Attributes$offset('0'),
-											$elm$svg$Svg$Attributes$stopColor('#fff'),
-											$elm$svg$Svg$Attributes$stopOpacity('1')
-										]),
-									_List_Nil),
-									A2(
-									$elm$svg$Svg$stop,
-									_List_fromArray(
-										[
-											$elm$svg$Svg$Attributes$offset('0.499'),
-											$elm$svg$Svg$Attributes$stopColor('#fff'),
-											$elm$svg$Svg$Attributes$stopOpacity('0')
-										]),
-									_List_Nil),
-									A2(
-									$elm$svg$Svg$stop,
-									_List_fromArray(
-										[
-											$elm$svg$Svg$Attributes$offset('0.5'),
-											$elm$svg$Svg$Attributes$stopColor('#000'),
-											$elm$svg$Svg$Attributes$stopOpacity('0')
-										]),
-									_List_Nil),
-									A2(
-									$elm$svg$Svg$stop,
-									_List_fromArray(
-										[
-											$elm$svg$Svg$Attributes$offset('1'),
-											$elm$svg$Svg$Attributes$stopColor('#000'),
-											$elm$svg$Svg$Attributes$stopOpacity('1')
-										]),
-									_List_Nil)
-								]))
-						])),
-					A2(
-					$elm$svg$Svg$rect,
-					_List_fromArray(
-						[
-							$elm$svg$Svg$Attributes$width(
-							$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetWidth)),
-							$elm$svg$Svg$Attributes$height(
-							$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetHeight)),
-							$elm$svg$Svg$Attributes$fill(colCss),
-							$elm$svg$Svg$Attributes$id('picker')
-						]),
-					_List_Nil),
-					A2(
-					$elm$svg$Svg$rect,
-					_List_fromArray(
-						[
-							$elm$svg$Svg$Attributes$width(
-							$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetWidth)),
-							$elm$svg$Svg$Attributes$height(
-							$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetHeight)),
-							$elm$svg$Svg$Attributes$fill('url(#pickerSaturation)')
-						]),
-					_List_Nil),
-					A2(
-					$elm$svg$Svg$rect,
-					_Utils_ap(
-						_List_fromArray(
-							[
-								$elm$svg$Svg$Attributes$width(
-								$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetWidth)),
-								$elm$svg$Svg$Attributes$height(
-								$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetHeight)),
-								$elm$svg$Svg$Attributes$fill('url(#pickerBrightness)')
-							]),
-						A3(
-							$simonh1000$elm_colorpicker$ColorPicker$svgDragAttrs,
-							mouseTarget,
-							$simonh1000$elm_colorpicker$ColorPicker$SatLight(hue),
-							$simonh1000$elm_colorpicker$ColorPicker$OnMouseMove(
-								$simonh1000$elm_colorpicker$ColorPicker$SatLight(hue)))),
-					_List_Nil)
-				]));
-	});
-var $simonh1000$elm_colorpicker$ColorPicker$sliderContainerStyles = function (name) {
-	return _List_fromArray(
-		[
-			A2(
-			$elm$html$Html$Attributes$style,
-			'width',
-			$elm$core$String$fromInt($simonh1000$elm_colorpicker$ColorPicker$widgetWidth) + 'px'),
-			A2($elm$html$Html$Attributes$style, 'height', '12px'),
-			A2($elm$html$Html$Attributes$style, 'marginTop', '8px'),
-			$elm$html$Html$Attributes$class('color-picker-slider ' + name)
-		]);
-};
-var $simonh1000$elm_colorpicker$ColorPicker$view = F2(
-	function (col, _v0) {
-		var model = _v0.a;
-		var hsla = $avh4$elm_color$Color$toHsla(col);
-		var hue = A2($elm$core$Maybe$withDefault, hsla.hue, model.hue);
-		var colCss = $avh4$elm_color$Color$toCssString(
-			A3($avh4$elm_color$Color$hsl, hue, 1, 0.5));
-		return A2(
-			$elm$html$Html$div,
-			_List_fromArray(
-				[
-					A2($elm$html$Html$Attributes$style, 'background-color', 'white'),
-					A2($elm$html$Html$Attributes$style, 'padding', '6px'),
-					A2($elm$html$Html$Attributes$style, 'display', 'inline-block'),
-					A2($elm$html$Html$Attributes$style, 'border-radius', '5px'),
-					A2($elm$html$Html$Attributes$style, 'box-shadow', 'rgba(0, 0, 0, 0.15) 0px 0px 0px 1px, rgba(0, 0, 0, 0.15) 0px 8px 16px'),
-					$elm$html$Html$Attributes$class('color-picker-container'),
-					$simonh1000$elm_colorpicker$ColorPicker$bubblePreventer
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$div,
-					$simonh1000$elm_colorpicker$ColorPicker$pickerStyles,
-					_List_fromArray(
-						[
-							A3($simonh1000$elm_colorpicker$ColorPicker$satLightPalette, hue, colCss, model.mouseTarget),
-							$simonh1000$elm_colorpicker$ColorPicker$pickerIndicator(col)
-						])),
-					A2(
-					$elm$html$Html$div,
-					_Utils_ap(
-						$simonh1000$elm_colorpicker$ColorPicker$pickerStyles,
-						$simonh1000$elm_colorpicker$ColorPicker$sliderContainerStyles('hue')),
-					_List_fromArray(
-						[
-							$simonh1000$elm_colorpicker$ColorPicker$huePalette(model.mouseTarget),
-							$simonh1000$elm_colorpicker$ColorPicker$hueMarker(hue)
-						])),
-					A2(
-					$elm$html$Html$div,
-					_Utils_ap(
-						$simonh1000$elm_colorpicker$ColorPicker$checkedBkgStyles,
-						_Utils_ap(
-							$simonh1000$elm_colorpicker$ColorPicker$pickerStyles,
-							$simonh1000$elm_colorpicker$ColorPicker$sliderContainerStyles('opacity'))),
-					_List_fromArray(
-						[
-							A2($simonh1000$elm_colorpicker$ColorPicker$opacityPalette, hsla, model),
-							$simonh1000$elm_colorpicker$ColorPicker$alphaMarker(hsla.alpha)
-						]))
-				]));
-	});
-var $author$project$View$colorPickerView = F2(
-	function (color, state) {
-		return A2(
-			$elm$html$Html$map,
-			$author$project$Update$ColorPickerMsg,
-			A2($simonh1000$elm_colorpicker$ColorPicker$view, color, state));
-	});
 var $elm$core$Basics$composeR = F3(
 	function (f, g, x) {
 		return g(
 			f(x));
 	});
+var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm_community$typed_svg$TypedSvg$g = $elm_community$typed_svg$TypedSvg$Core$node('g');
 var $elm_community$typed_svg$TypedSvg$Attributes$points = function (pts) {
 	var pointToString = function (_v0) {
@@ -6793,7 +6237,7 @@ var $author$project$LSys$generateTurtle = F5(
 							{
 								filledPolygons: A2(
 									$elm$core$List$cons,
-									_Utils_Tuple2(currentPolygon, turtle.fillColor),
+									_Utils_Tuple2(currentPolygon, model.polygonFillColor),
 									turtle.filledPolygons),
 								polygons: A2($elm$core$List$cons, currentPolygon, updatedPolygons)
 							});
@@ -6845,11 +6289,31 @@ var $author$project$LSys$generateTurtle = F5(
 				$author$project$Turtle$initTurtle(model.startingPoint)),
 			sequence);
 	});
+var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm_community$typed_svg$TypedSvg$Attributes$href = $elm_community$typed_svg$TypedSvg$Core$attribute('href');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
 var $elm$html$Html$Attributes$max = $elm$html$Html$Attributes$stringProperty('max');
 var $elm$html$Html$Attributes$min = $elm$html$Html$Attributes$stringProperty('min');
+var $elm$virtual_dom$VirtualDom$Normal = function (a) {
+	return {$: 'Normal', a: a};
+};
+var $elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
+var $elm$html$Html$Events$on = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$Normal(decoder));
+	});
 var $elm$html$Html$Events$onClick = function (msg) {
 	return A2(
 		$elm$html$Html$Events$on,
@@ -6859,6 +6323,17 @@ var $elm$html$Html$Events$onClick = function (msg) {
 var $elm$html$Html$Events$alwaysStop = function (x) {
 	return _Utils_Tuple2(x, true);
 };
+var $elm$virtual_dom$VirtualDom$MayStopPropagation = function (a) {
+	return {$: 'MayStopPropagation', a: a};
+};
+var $elm$html$Html$Events$stopPropagationOn = F2(
+	function (event, decoder) {
+		return A2(
+			$elm$virtual_dom$VirtualDom$on,
+			event,
+			$elm$virtual_dom$VirtualDom$MayStopPropagation(decoder));
+	});
+var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$at = F2(
 	function (fields, decoder) {
 		return A3($elm$core$List$foldr, $elm$json$Json$Decode$field, decoder, fields);
@@ -6987,6 +6462,7 @@ var $author$project$View$showRule = function (_v0) {
 	var to = _v0.b;
 	return $elm$core$String$fromChar(from) + (' → ' + $elm$core$String$fromList(to));
 };
+var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Update$UpdateStartingPointX = function (a) {
 	return {$: 'UpdateStartingPointX', a: a};
 };
@@ -6994,74 +6470,71 @@ var $author$project$Update$UpdateStartingPointY = function (a) {
 	return {$: 'UpdateStartingPointY', a: a};
 };
 var $elm$html$Html$Attributes$placeholder = $elm$html$Html$Attributes$stringProperty('placeholder');
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$View$startingPointInput = function (_v0) {
 	var x = _v0.a;
 	var y = _v0.b;
-	var startingPointInputStyle = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'border', '1px solid #ced4da'),
-			A2($elm$html$Html$Attributes$style, 'padding', '0.375rem 0.75rem'),
-			A2($elm$html$Html$Attributes$style, 'border-radius', '4px'),
-			A2($elm$html$Html$Attributes$style, 'background-color', 'white'),
-			A2($elm$html$Html$Attributes$style, 'font-size', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'line-height', '1.5'),
-			A2($elm$html$Html$Attributes$style, 'color', '#495057'),
-			A2($elm$html$Html$Attributes$style, 'width', '4rem'),
-			A2($elm$html$Html$Attributes$style, 'margin', '0.5rem')
-		]);
-	var labelStyle = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
-			A2($elm$html$Html$Attributes$style, 'color', '#333'),
-			A2($elm$html$Html$Attributes$style, 'font-size', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'padding', '0.5rem'),
-			A2($elm$html$Html$Attributes$style, 'margin', '0.5rem')
-		]);
 	return A2(
 		$elm$html$Html$div,
-		_List_Nil,
+		_List_fromArray(
+			[
+				A2($elm$html$Html$Attributes$style, 'margin-top', '10px')
+			]),
 		_List_fromArray(
 			[
 				A2(
 				$elm$html$Html$label,
-				labelStyle,
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['labelXY']))
+					]),
 				_List_fromArray(
 					[
 						$elm$html$Html$text('X: ')
 					])),
 				A2(
 				$elm$html$Html$input,
-				_Utils_ap(
-					startingPointInputStyle,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$placeholder('X'),
-							$elm$html$Html$Attributes$value(
-							$elm$core$String$fromFloat(x)),
-							$elm$html$Html$Events$onInput($author$project$Update$UpdateStartingPointX)
-						])),
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['inputStartingPoint'])),
+						$elm$html$Html$Attributes$placeholder('X'),
+						$elm$html$Html$Attributes$value(
+						$elm$core$String$fromFloat(x)),
+						$elm$html$Html$Events$onInput($author$project$Update$UpdateStartingPointX)
+					]),
 				_List_Nil),
 				A2(
 				$elm$html$Html$label,
-				labelStyle,
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['labelXY']))
+					]),
 				_List_fromArray(
 					[
 						$elm$html$Html$text('Y: ')
 					])),
 				A2(
 				$elm$html$Html$input,
-				_Utils_ap(
-					startingPointInputStyle,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$placeholder('Y'),
-							$elm$html$Html$Attributes$value(
-							$elm$core$String$fromFloat(y)),
-							$elm$html$Html$Events$onInput($author$project$Update$UpdateStartingPointY)
-						])),
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['inputStartingPoint'])),
+						$elm$html$Html$Attributes$placeholder('Y'),
+						$elm$html$Html$Attributes$value(
+						$elm$core$String$fromFloat(y)),
+						$elm$html$Html$Events$onInput($author$project$Update$UpdateStartingPointY)
+					]),
 				_List_Nil)
 			]));
 };
@@ -7082,7 +6555,6 @@ var $author$project$View$symbolOptionView = function (symbol) {
 				$elm$html$Html$text(symbol.character)
 			]));
 };
-var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$View$syntaxDisplayView = function (model) {
@@ -7255,117 +6727,46 @@ var $elm_community$typed_svg$TypedSvg$Attributes$viewBox = F4(
 						[minX, minY, vWidth, vHeight]))));
 	});
 var $author$project$View$view = function (model) {
-	var sectionStyle = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'padding', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'margin-bottom', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'border-bottom', '1px solid #ccc')
-		]);
-	var labelStyle = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
-			A2($elm$html$Html$Attributes$style, 'color', '#333'),
-			A2($elm$html$Html$Attributes$style, 'font-size', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'padding', '0.5rem'),
-			A2($elm$html$Html$Attributes$style, 'margin', '0.5rem')
-		]);
-	var inputStyle = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'border', '1px solid #ced4da'),
-			A2($elm$html$Html$Attributes$style, 'padding', '0.375rem 0.75rem'),
-			A2($elm$html$Html$Attributes$style, 'border-radius', '4px'),
-			A2($elm$html$Html$Attributes$style, 'background-color', 'white'),
-			A2($elm$html$Html$Attributes$style, 'font-size', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'line-height', '1.5'),
-			A2($elm$html$Html$Attributes$style, 'color', '#495057'),
-			A2($elm$html$Html$Attributes$style, 'width', '10rem'),
-			A2($elm$html$Html$Attributes$style, 'margin', '0.5rem')
-		]);
-	var dropdownStyle = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'border', '1px solid #dfe0e2'),
-			A2($elm$html$Html$Attributes$style, 'padding', '0.375rem 0.75rem'),
-			A2($elm$html$Html$Attributes$style, 'border-radius', '4px'),
-			A2($elm$html$Html$Attributes$style, 'background-color', 'white'),
-			A2($elm$html$Html$Attributes$style, 'font-size', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'line-height', '1.5'),
-			A2($elm$html$Html$Attributes$style, 'color', '#495057'),
-			A2($elm$html$Html$Attributes$style, 'width', 'auto'),
-			A2($elm$html$Html$Attributes$style, 'margin', '0.5rem'),
-			A2($elm$html$Html$Attributes$style, 'cursor', 'pointer')
-		]);
-	var buttonsStyleSyntax = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'background-color', '#eb5160'),
-			A2($elm$html$Html$Attributes$style, 'border', 'none'),
-			A2($elm$html$Html$Attributes$style, 'color', 'white'),
-			A2($elm$html$Html$Attributes$style, 'padding', '0.5rem 1rem'),
-			A2($elm$html$Html$Attributes$style, 'margin-top', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-			A2($elm$html$Html$Attributes$style, 'border-radius', '4px')
-		]);
-	var buttonStyleDraw = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'background-color', '#eb5160'),
-			A2($elm$html$Html$Attributes$style, 'border', 'none'),
-			A2($elm$html$Html$Attributes$style, 'color', 'white'),
-			A2($elm$html$Html$Attributes$style, 'padding', '0.5rem 1rem'),
-			A2($elm$html$Html$Attributes$style, 'margin-top', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-			A2($elm$html$Html$Attributes$style, 'border-radius', '4px'),
-			A2($elm$html$Html$Attributes$style, 'font-size', '2rem')
-		]);
-	var buttonStyle = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'background-color', '#b7999c'),
-			A2($elm$html$Html$Attributes$style, 'border', 'none'),
-			A2($elm$html$Html$Attributes$style, 'color', 'white'),
-			A2($elm$html$Html$Attributes$style, 'padding', '0.5rem 1rem'),
-			A2($elm$html$Html$Attributes$style, 'margin-top', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-			A2($elm$html$Html$Attributes$style, 'border-radius', '4px')
-		]);
-	var appStyle = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'font-family', '\'Segoe UI\', Tahoma, Geneva, Verdana, sans-serif'),
-			A2($elm$html$Html$Attributes$style, 'font-size', '16px'),
-			A2($elm$html$Html$Attributes$style, 'background-color', '#dfe0e2'),
-			A2($elm$html$Html$Attributes$style, 'padding', '2rem'),
-			A2($elm$html$Html$Attributes$style, 'width', '500px'),
-			A2($elm$html$Html$Attributes$style, 'box-sizing', 'border-box')
-		]);
-	var angleInputStyle = _List_fromArray(
-		[
-			A2($elm$html$Html$Attributes$style, 'border', '1px solid #ced4da'),
-			A2($elm$html$Html$Attributes$style, 'padding', '0.375rem 0.75rem'),
-			A2($elm$html$Html$Attributes$style, 'border-radius', '4px'),
-			A2($elm$html$Html$Attributes$style, 'background-color', 'white'),
-			A2($elm$html$Html$Attributes$style, 'font-size', '1rem'),
-			A2($elm$html$Html$Attributes$style, 'line-height', '1.5'),
-			A2($elm$html$Html$Attributes$style, 'color', '#495057'),
-			A2($elm$html$Html$Attributes$style, 'width', '4rem'),
-			A2($elm$html$Html$Attributes$style, 'margin', '0.5rem')
-		]);
 	return A2(
 		$elm$html$Html$div,
 		_List_fromArray(
 			[
-				A2($elm$html$Html$Attributes$style, 'background-color', 'black'),
-				A2($elm$html$Html$Attributes$style, 'width', '100%'),
-				A2($elm$html$Html$Attributes$style, 'min-height', '100vh')
+				$elm_community$typed_svg$TypedSvg$Attributes$class(
+				_List_fromArray(
+					['main-container']))
 			]),
 		_List_fromArray(
 			[
 				A2(
 				$elm$html$Html$div,
-				appStyle,
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['leftPanel']))
+					]),
 				_List_fromArray(
 					[
 						A2(
 						$elm$html$Html$div,
-						sectionStyle,
 						_List_fromArray(
 							[
+								$elm_community$typed_svg$TypedSvg$Attributes$class(
+								_List_fromArray(
+									['section']))
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$h2,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'margin-top', '-25px')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Info')
+									])),
 								A2(
 								$elm$html$Html$a,
 								_List_fromArray(
@@ -7375,30 +6776,26 @@ var $author$project$View$view = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$text('For more information and examples, please visit Paul Bourke\'s L-System page')
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
+									])),
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
 										A2($elm$html$Html$Attributes$style, 'margin-left', '-28px'),
-										A2($elm$html$Html$Attributes$style, 'margin-top', '-25px')
+										A2($elm$html$Html$Attributes$style, 'margin-top', '20px')
 									]),
 								_List_fromArray(
 									[
 										A2(
 										$elm$html$Html$button,
-										_Utils_ap(
-											buttonsStyleSyntax,
-											_List_fromArray(
-												[
-													$elm$html$Html$Events$onClick($author$project$Update$ToggleSyntaxDisplay)
-												])),
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['buttonSyntax'])),
+												$elm$html$Html$Events$onClick($author$project$Update$ToggleSyntaxDisplay),
+												A2($elm$html$Html$Attributes$style, 'margin-top', '25px')
+											]),
 										_List_fromArray(
 											[
 												$elm$html$Html$text('Syntax')
@@ -7406,7 +6803,12 @@ var $author$project$View$view = function (model) {
 									])),
 								A2(
 								$elm$html$Html$div,
-								sectionStyle,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											['section']))
+									]),
 								_List_fromArray(
 									[
 										$author$project$View$syntaxDisplayView(model)
@@ -7421,42 +6823,55 @@ var $author$project$View$view = function (model) {
 								_List_fromArray(
 									[
 										A2(
+										$elm$html$Html$h2,
+										_List_fromArray(
+											[
+												A2($elm$html$Html$Attributes$style, 'margin-top', '-15px')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('Rules and Axiom')
+											])),
+										A2(
 										$elm$html$Html$select,
-										_Utils_ap(
-											dropdownStyle,
-											_List_fromArray(
-												[
-													$elm$html$Html$Events$onInput($author$project$Update$SelectSymbol)
-												])),
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['dropdown'])),
+												$elm$html$Html$Events$onInput($author$project$Update$SelectSymbol)
+											]),
 										A2($elm$core$List$map, $author$project$View$symbolOptionView, model.symbolAssignments)),
 										A2(
 										$elm$html$Html$input,
-										_Utils_ap(
-											inputStyle,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$type_('text'),
-													$elm$html$Html$Attributes$value(model.newRuleInput),
-													$elm$html$Html$Events$onInput($author$project$Update$UpdateNewRuleInput)
-												])),
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['input'])),
+												$elm$html$Html$Attributes$type_('text'),
+												$elm$html$Html$Attributes$value(model.newRuleInput),
+												$elm$html$Html$Events$onInput($author$project$Update$UpdateNewRuleInput)
+											]),
 										_List_Nil),
 										A2(
 										$elm$html$Html$div,
 										_List_fromArray(
 											[
-												A2($elm$html$Html$Attributes$style, 'margin-left', '283px'),
+												A2($elm$html$Html$Attributes$style, 'margin-left', '286px'),
 												A2($elm$html$Html$Attributes$style, 'margin-top', '-60px')
 											]),
 										_List_fromArray(
 											[
 												A2(
 												$elm$html$Html$button,
-												_Utils_ap(
-													buttonStyle,
-													_List_fromArray(
-														[
-															$elm$html$Html$Events$onClick($author$project$Update$AddRule)
-														])),
+												_List_fromArray(
+													[
+														$elm_community$typed_svg$TypedSvg$Attributes$class(
+														_List_fromArray(
+															['button'])),
+														$elm$html$Html$Events$onClick($author$project$Update$AddRule)
+													]),
 												_List_fromArray(
 													[
 														$elm$html$Html$text('Add Rule')
@@ -7477,13 +6892,7 @@ var $author$project$View$view = function (model) {
 											$elm$core$String$join,
 											', ',
 											A2($elm$core$List$map, $author$project$View$showRule, model.rules)))
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
+									])),
 								A2(
 								$elm$html$Html$div,
 								_List_fromArray(
@@ -7494,22 +6903,24 @@ var $author$project$View$view = function (model) {
 									[
 										A2(
 										$elm$html$Html$input,
-										_Utils_ap(
-											inputStyle,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$type_('text'),
-													$elm$html$Html$Events$onInput($author$project$Update$SelectAxiom)
-												])),
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['input'])),
+												$elm$html$Html$Attributes$type_('text'),
+												$elm$html$Html$Events$onInput($author$project$Update$SelectAxiom)
+											]),
 										_List_Nil),
 										A2(
 										$elm$html$Html$button,
-										_Utils_ap(
-											buttonStyle,
-											_List_fromArray(
-												[
-													$elm$html$Html$Events$onClick($author$project$Update$ApplyAxiom)
-												])),
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['button'])),
+												$elm$html$Html$Events$onClick($author$project$Update$ApplyAxiom)
+											]),
 										_List_fromArray(
 											[
 												$elm$html$Html$text('Apply Axiom')
@@ -7528,12 +6939,32 @@ var $author$project$View$view = function (model) {
 							])),
 						A2(
 						$elm$html$Html$div,
-						sectionStyle,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Attributes$class(
+								_List_fromArray(
+									['section']))
+							]),
 						_List_fromArray(
 							[
 								A2(
+								$elm$html$Html$h2,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'margin-top', '-15px')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Turtle Settings')
+									])),
+								A2(
 								$elm$html$Html$label,
-								labelStyle,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											['labelTurningAngle']))
+									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Turning angle ')
@@ -7542,45 +6973,56 @@ var $author$project$View$view = function (model) {
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										A2($elm$html$Html$Attributes$style, 'margin-left', '220px'),
+										A2($elm$html$Html$Attributes$style, 'margin-left', '235px'),
 										A2($elm$html$Html$Attributes$style, 'margin-top', '-40px')
 									]),
 								_List_fromArray(
 									[
 										A2(
 										$elm$html$Html$input,
-										_Utils_ap(
-											angleInputStyle,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$type_('number'),
-													$elm$html$Html$Attributes$min('-360'),
-													$elm$html$Html$Attributes$max('360'),
-													$elm$html$Html$Attributes$step('1'),
-													$elm$html$Html$Events$onInput(
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['inputAngle'])),
+												$elm$html$Html$Attributes$type_('number'),
+												$elm$html$Html$Attributes$min('-360'),
+												$elm$html$Html$Attributes$max('360'),
+												$elm$html$Html$Attributes$step('1'),
+												$elm$html$Html$Events$onInput(
+												A2(
+													$elm$core$Basics$composeR,
+													$elm$core$String$toFloat,
 													A2(
 														$elm$core$Basics$composeR,
-														$elm$core$String$toFloat,
-														A2(
-															$elm$core$Basics$composeR,
-															$elm$core$Maybe$withDefault(0),
-															$author$project$Update$UpdateAngle))),
-													$elm$html$Html$Attributes$value(
-													$elm$core$String$fromFloat(model.turningAngle))
-												])),
+														$elm$core$Maybe$withDefault(0),
+														$author$project$Update$UpdateAngle))),
+												$elm$html$Html$Attributes$value(
+												$elm$core$String$fromFloat(model.turningAngle))
+											]),
 										_List_Nil),
-										$elm$html$Html$text(
-										$elm$core$String$fromFloat(model.turningAngle) + '°')
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
+										A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['angleValueText']))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(
+												$elm$core$String$fromFloat(model.turningAngle) + '°')
+											]))
+									])),
 								A2(
 								$elm$html$Html$label,
-								labelStyle,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											['labelTurningAngleIncrement']))
+									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Turning angle increment ')
@@ -7589,45 +7031,56 @@ var $author$project$View$view = function (model) {
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										A2($elm$html$Html$Attributes$style, 'margin-left', '220px'),
-										A2($elm$html$Html$Attributes$style, 'margin-top', '-40px')
+										A2($elm$html$Html$Attributes$style, 'margin-left', '235px'),
+										A2($elm$html$Html$Attributes$style, 'margin-top', '-30px')
 									]),
 								_List_fromArray(
 									[
 										A2(
 										$elm$html$Html$input,
-										_Utils_ap(
-											angleInputStyle,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$type_('number'),
-													$elm$html$Html$Attributes$min('-360'),
-													$elm$html$Html$Attributes$max('360'),
-													$elm$html$Html$Attributes$step('1'),
-													$elm$html$Html$Events$onInput(
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['inputAngle'])),
+												$elm$html$Html$Attributes$type_('number'),
+												$elm$html$Html$Attributes$min('-360'),
+												$elm$html$Html$Attributes$max('360'),
+												$elm$html$Html$Attributes$step('1'),
+												$elm$html$Html$Events$onInput(
+												A2(
+													$elm$core$Basics$composeR,
+													$elm$core$String$toFloat,
 													A2(
 														$elm$core$Basics$composeR,
-														$elm$core$String$toFloat,
-														A2(
-															$elm$core$Basics$composeR,
-															$elm$core$Maybe$withDefault(0),
-															$author$project$Update$UpdateTurningAngleIncrement))),
-													$elm$html$Html$Attributes$value(
-													$elm$core$String$fromFloat(model.turningAngleIncrement))
-												])),
+														$elm$core$Maybe$withDefault(0),
+														$author$project$Update$UpdateTurningAngleIncrement))),
+												$elm$html$Html$Attributes$value(
+												$elm$core$String$fromFloat(model.turningAngleIncrement))
+											]),
 										_List_Nil),
-										$elm$html$Html$text(
-										$elm$core$String$fromFloat(model.turningAngleIncrement) + '°')
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
+										A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['angleValueText']))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(
+												$elm$core$String$fromFloat(model.turningAngleIncrement) + '°')
+											]))
+									])),
 								A2(
 								$elm$html$Html$label,
-								labelStyle,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											['label']))
+									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Line length ')
@@ -7645,6 +7098,9 @@ var $author$project$View$view = function (model) {
 										$elm$html$Html$input,
 										_List_fromArray(
 											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['slider'])),
 												$elm$html$Html$Attributes$type_('range'),
 												$elm$html$Html$Attributes$min('1'),
 												$elm$html$Html$Attributes$max('25'),
@@ -7661,18 +7117,28 @@ var $author$project$View$view = function (model) {
 												$elm$core$String$fromFloat(model.lineLength))
 											]),
 										_List_Nil),
-										$elm$html$Html$text(
-										$elm$core$String$fromFloat(model.lineLength))
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
+										A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['sliderValueText']))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(
+												$elm$core$String$fromFloat(model.lineLength))
+											]))
+									])),
 								A2(
 								$elm$html$Html$label,
-								labelStyle,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											['label']))
+									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Line length scale')
@@ -7690,6 +7156,9 @@ var $author$project$View$view = function (model) {
 										$elm$html$Html$input,
 										_List_fromArray(
 											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['slider'])),
 												$elm$html$Html$Attributes$type_('range'),
 												$elm$html$Html$Attributes$min('0.0'),
 												$elm$html$Html$Attributes$max('3'),
@@ -7706,18 +7175,28 @@ var $author$project$View$view = function (model) {
 												$elm$core$String$fromFloat(model.lineLengthScale))
 											]),
 										_List_Nil),
-										$elm$html$Html$text(
-										$elm$core$String$fromFloat(model.lineLengthScale))
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
+										A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['sliderValueText']))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(
+												$elm$core$String$fromFloat(model.lineLengthScale))
+											]))
+									])),
 								A2(
 								$elm$html$Html$label,
-								labelStyle,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											['label']))
+									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Line width increment')
@@ -7735,6 +7214,9 @@ var $author$project$View$view = function (model) {
 										$elm$html$Html$input,
 										_List_fromArray(
 											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['slider'])),
 												$elm$html$Html$Attributes$type_('range'),
 												$elm$html$Html$Attributes$min('0.0'),
 												$elm$html$Html$Attributes$max('3.0'),
@@ -7751,32 +7233,28 @@ var $author$project$View$view = function (model) {
 												$elm$core$String$fromFloat(model.lineWidthIncrement))
 											]),
 										_List_Nil),
-										$elm$html$Html$text(
-										$elm$core$String$fromFloat(model.lineWidthIncrement))
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
+										A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['sliderValueText']))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(
+												$elm$core$String$fromFloat(model.lineWidthIncrement))
+											]))
+									])),
 								A2(
 								$elm$html$Html$label,
-								labelStyle,
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Polygon fill colour')
-									])),
-								A2($author$project$View$colorPickerView, model.polygonFillColor, model.colorPicker)
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
-								A2(
-								$elm$html$Html$label,
-								labelStyle,
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											['label']))
+									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Recursion depth ')
@@ -7794,6 +7272,9 @@ var $author$project$View$view = function (model) {
 										$elm$html$Html$input,
 										_List_fromArray(
 											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['slider'])),
 												$elm$html$Html$Attributes$type_('range'),
 												$elm$html$Html$Attributes$min('0'),
 												$elm$html$Html$Attributes$max('20'),
@@ -7809,18 +7290,29 @@ var $author$project$View$view = function (model) {
 														$author$project$Update$UpdateIterations)))
 											]),
 										_List_Nil),
-										$elm$html$Html$text(
-										$elm$core$String$fromInt(model.iterations))
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
+										A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['sliderValueText']))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(
+												$elm$core$String$fromInt(model.iterations))
+											]))
+									])),
 								A2(
 								$elm$html$Html$label,
-								labelStyle,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											['labelStartingAngle'])),
+										A2($elm$html$Html$Attributes$style, 'margin-top', '35px')
+									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Starting Angle ')
@@ -7829,45 +7321,57 @@ var $author$project$View$view = function (model) {
 								$elm$html$Html$div,
 								_List_fromArray(
 									[
-										A2($elm$html$Html$Attributes$style, 'margin-left', '220px'),
-										A2($elm$html$Html$Attributes$style, 'margin-top', '-40px')
+										A2($elm$html$Html$Attributes$style, 'margin-left', '235px'),
+										A2($elm$html$Html$Attributes$style, 'margin-top', '-20px')
 									]),
 								_List_fromArray(
 									[
 										A2(
 										$elm$html$Html$input,
-										_Utils_ap(
-											angleInputStyle,
-											_List_fromArray(
-												[
-													$elm$html$Html$Attributes$type_('number'),
-													$elm$html$Html$Attributes$min('-360'),
-													$elm$html$Html$Attributes$max('360'),
-													$elm$html$Html$Attributes$step('1'),
-													$elm$html$Html$Events$onInput(
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['inputAngle'])),
+												$elm$html$Html$Attributes$type_('number'),
+												$elm$html$Html$Attributes$min('-360'),
+												$elm$html$Html$Attributes$max('360'),
+												$elm$html$Html$Attributes$step('1'),
+												$elm$html$Html$Events$onInput(
+												A2(
+													$elm$core$Basics$composeR,
+													$elm$core$String$toFloat,
 													A2(
 														$elm$core$Basics$composeR,
-														$elm$core$String$toFloat,
-														A2(
-															$elm$core$Basics$composeR,
-															$elm$core$Maybe$withDefault(0),
-															$author$project$Update$UpdateStartingAngle))),
-													$elm$html$Html$Attributes$value(
-													$elm$core$String$fromFloat(model.startingAngle))
-												])),
+														$elm$core$Maybe$withDefault(0),
+														$author$project$Update$UpdateStartingAngle))),
+												$elm$html$Html$Attributes$value(
+												$elm$core$String$fromFloat(model.startingAngle))
+											]),
 										_List_Nil),
-										$elm$html$Html$text(
-										$elm$core$String$fromFloat(model.startingAngle) + '°')
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
+										A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['angleValueText']))
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text(
+												$elm$core$String$fromFloat(model.startingAngle) + '°')
+											]))
+									])),
 								A2(
 								$elm$html$Html$label,
-								labelStyle,
+								_List_fromArray(
+									[
+										$elm_community$typed_svg$TypedSvg$Attributes$class(
+										_List_fromArray(
+											['labelStartingPoint'])),
+										A2($elm$html$Html$Attributes$style, 'margin-top', '35px')
+									]),
 								_List_fromArray(
 									[
 										$elm$html$Html$text('Starting point ')
@@ -7876,7 +7380,12 @@ var $author$project$View$view = function (model) {
 							])),
 						A2(
 						$elm$html$Html$div,
-						sectionStyle,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Attributes$class(
+								_List_fromArray(
+									['section']))
+							]),
 						_List_fromArray(
 							[
 								A2(
@@ -7890,12 +7399,13 @@ var $author$project$View$view = function (model) {
 									[
 										A2(
 										$elm$html$Html$button,
-										_Utils_ap(
-											buttonStyleDraw,
-											_List_fromArray(
-												[
-													$elm$html$Html$Events$onClick($author$project$Update$DrawTurtle)
-												])),
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$class(
+												_List_fromArray(
+													['buttonDraw'])),
+												$elm$html$Html$Events$onClick($author$project$Update$DrawTurtle)
+											]),
 										_List_fromArray(
 											[
 												$elm$html$Html$text('Draw')
@@ -7904,9 +7414,24 @@ var $author$project$View$view = function (model) {
 							])),
 						A2(
 						$elm$html$Html$div,
-						sectionStyle,
 						_List_fromArray(
 							[
+								$elm_community$typed_svg$TypedSvg$Attributes$class(
+								_List_fromArray(
+									['section']))
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$h2,
+								_List_fromArray(
+									[
+										A2($elm$html$Html$Attributes$style, 'margin-top', '-15px')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Attribution')
+									])),
 								A2(
 								$elm$html$Html$a,
 								_List_fromArray(
@@ -7916,22 +7441,22 @@ var $author$project$View$view = function (model) {
 								_List_fromArray(
 									[
 										$elm$html$Html$text('created by @hunorg')
-									]))
-							])),
-						A2(
-						$elm$html$Html$div,
-						sectionStyle,
-						_List_fromArray(
-							[
+									])),
 								A2(
-								$elm$html$Html$a,
+								$elm$html$Html$div,
+								_List_Nil,
 								_List_fromArray(
 									[
-										$elm_community$typed_svg$TypedSvg$Attributes$href('https://github.com/hunorg/L-System-Studio')
-									]),
-								_List_fromArray(
-									[
-										$elm$html$Html$text('source code')
+										A2(
+										$elm$html$Html$a,
+										_List_fromArray(
+											[
+												$elm_community$typed_svg$TypedSvg$Attributes$href('https://github.com/hunorg/L-System-Studio')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('source code')
+											]))
 									]))
 							]))
 					])),
@@ -7940,36 +7465,45 @@ var $author$project$View$view = function (model) {
 				_List_fromArray(
 					[
 						A2($elm$html$Html$Attributes$style, 'margin-left', '550px'),
-						A2($elm$html$Html$Attributes$style, 'margin-top', '-1650px')
+						A2($elm$html$Html$Attributes$style, 'margin-top', '20px')
 					]),
 				_List_fromArray(
 					[
 						A2(
-						$elm_community$typed_svg$TypedSvg$svg,
+						$elm$html$Html$div,
 						_List_fromArray(
 							[
-								A4($elm_community$typed_svg$TypedSvg$Attributes$viewBox, 0, 0, 1900, 1600),
-								$elm_community$typed_svg$TypedSvg$Attributes$width(
-								$elm_community$typed_svg$TypedSvg$Types$Px(1900)),
-								$elm_community$typed_svg$TypedSvg$Attributes$height(
-								$elm_community$typed_svg$TypedSvg$Types$Px(1600)),
-								A2($elm$html$Html$Attributes$style, 'margin', '1rem')
+								$elm_community$typed_svg$TypedSvg$Attributes$class(
+								_List_fromArray(
+									['svg-wrapper']))
 							]),
-						function () {
-							var generatedTurtle = A5($author$project$LSys$generateTurtle, model, model.generatedSequence, model.symbolAssignments, model.lineLength, model.turningAngle);
-							return _Utils_ap(
-								$author$project$View$baseRect,
-								model.drawnTurtle ? _Utils_ap(
-									$author$project$Turtle$renderTurtleSegments(
-										A5($author$project$LSys$generateTurtle, model, model.generatedSequence, model.symbolAssignments, model.lineLength, model.turningAngle)),
-									_Utils_ap(
-										$author$project$Turtle$renderTurtleDots(
-											A5($author$project$LSys$generateTurtle, model, model.generatedSequence, model.symbolAssignments, model.lineLength, model.turningAngle)),
-										_List_fromArray(
-											[
-												$author$project$Turtle$drawFilledPolygons(generatedTurtle.filledPolygons)
-											]))) : _List_Nil);
-						}())
+						_List_fromArray(
+							[
+								A2(
+								$elm_community$typed_svg$TypedSvg$svg,
+								_List_fromArray(
+									[
+										A4($elm_community$typed_svg$TypedSvg$Attributes$viewBox, 0, 0, 1000, 1000),
+										A2($elm$html$Html$Attributes$style, 'width', '80%'),
+										A2($elm$html$Html$Attributes$style, 'height', '80%'),
+										A2($elm$html$Html$Attributes$style, 'margin', '1rem')
+									]),
+								function () {
+									var generatedTurtle = A5($author$project$LSys$generateTurtle, model, model.generatedSequence, model.symbolAssignments, model.lineLength, model.turningAngle);
+									return _Utils_ap(
+										$author$project$View$baseRect,
+										model.drawnTurtle ? _Utils_ap(
+											$author$project$Turtle$renderTurtleSegments(
+												A5($author$project$LSys$generateTurtle, model, model.generatedSequence, model.symbolAssignments, model.lineLength, model.turningAngle)),
+											_Utils_ap(
+												$author$project$Turtle$renderTurtleDots(
+													A5($author$project$LSys$generateTurtle, model, model.generatedSequence, model.symbolAssignments, model.lineLength, model.turningAngle)),
+												_List_fromArray(
+													[
+														$author$project$Turtle$drawFilledPolygons(generatedTurtle.filledPolygons)
+													]))) : _List_Nil);
+								}())
+							]))
 					]))
 			]));
 };

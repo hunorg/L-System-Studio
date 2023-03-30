@@ -80,7 +80,7 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                         currentPolygon = List.head turtle.polygons |> Maybe.withDefault []
                         updatedPolygons = List.drop 1 turtle.polygons
                     in
-                    { turtle | polygons = (currentPolygon :: updatedPolygons), filledPolygons = (currentPolygon, turtle.fillColor) :: turtle.filledPolygons }
+                    { turtle | polygons = (currentPolygon :: updatedPolygons), filledPolygons = (currentPolygon, model.polygonFillColor) :: turtle.filledPolygons }
 
                 MultiplyLength ->
                     let
@@ -128,6 +128,5 @@ calculateNewPosition stepSize angle ( x, y ) =
             stepSize * sin (degreesToRadians angle)
     in
     ( x + deltaX, y + deltaY )
-
 
 
