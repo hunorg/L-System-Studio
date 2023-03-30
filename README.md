@@ -4,6 +4,8 @@ interactive web application built with Elm, designed to help users explore and v
 
 ## Sample output:
 
+![LSysStudioEx1](https://user-images.githubusercontent.com/114682020/228975664-87dc1171-50ab-4107-9f49-6b2356511182.png)
+
 
 
 ## Symbols
