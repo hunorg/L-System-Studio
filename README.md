@@ -4,10 +4,7 @@ interactive web application built with Elm, designed to help users explore and v
 
 ## Sample output:
 
-![PineTree](https://user-images.githubusercontent.com/114682020/227780945-76676c50-2a21-41e7-b6d3-049483d56efa.png)
-![Bush](https://user-images.githubusercontent.com/114682020/227063859-eb63cc9b-80a2-461c-8c06-675f9344940b.png)
-![SquareSierpinski](https://user-images.githubusercontent.com/114682020/227063864-abbdbd48-dd9b-419b-84e4-081dff7829f4.png)
-![TrianglePaulB](https://user-images.githubusercontent.com/114682020/227063866-009f3656-6f39-4270-8c75-013f2c486c06.png)
+
 
 ## Symbols
 
@@ -41,7 +38,7 @@ These symbols allow users to create a wide range of L-system rules and customize
 
 you can try it out by visiting the live link:
 
-[**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/eda53a47f51a30dc96c289c3a9dca4d55ae0ab46/index.html)
+[**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/e2594761f4d848dcfc45068d5bf9803440ec5948/index.html)
 
 ### Run locally
 
