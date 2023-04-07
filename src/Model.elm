@@ -12,6 +12,7 @@ type alias Model =
     , selectedSymbol : String
     , selectedAction : Action
     , newRuleInput : String
+    , axiomApplied : Bool 
     , turningAngle : Float
     , turningAngleIncrement : Float
     , lineLength : Float
@@ -25,6 +26,8 @@ type alias Model =
     , colorPicker : ColorPicker.State
     , generatedSequence : List Char
     , drawnTurtle : Bool
+    , canvasWidth : Float 
+    , canvasHeight : Float
     }
 
 
@@ -66,6 +69,7 @@ init =
     , selectedSymbol = "F"
     , selectedAction = Move
     , newRuleInput = ""
+    , axiomApplied = False
     , turningAngle = 0
     , turningAngleIncrement = 0
     , lineLength = 1
@@ -73,12 +77,14 @@ init =
     , lineWidthIncrement = 0
     , axiom = ""
     , iterations = 0
-    , startingPoint = ( 500, 500 )
+    , startingPoint = ( 250, 250 )
     , startingAngle = 0
     , polygonFillColor = Color.red
     , colorPicker = ColorPicker.empty
     , generatedSequence = []
     , drawnTurtle = False
+    , canvasWidth = 500
+    , canvasHeight = 500
     }
 
 
