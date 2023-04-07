@@ -24,7 +24,6 @@ startingPointInput ( x, y ) =
         ]
 
 
-
 showRule : ( Char, List Char.Char ) -> String
 showRule ( from, to ) =
     String.fromChar from ++ " → " ++ String.fromList to
@@ -33,63 +32,77 @@ showRule ( from, to ) =
 view : Model -> Html Msg
 view model =
     div [ class [ "flexContainer" ] ]
-        [ div [ class [ "sidebar" ] ]
-            [ div [ class [ "infoSection" ] ]
-                [ h2 [] [ text "Info" ]
-                , Html.a [ href "http://paulbourke.net/fractals/lsys/" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ]
-                , button [ class [ "buttonSyntax" ], onClick ToggleSyntaxDisplay ] [ text "Syntax" ]
-                , syntaxDisplayView model
-                ]
-            , div [ class [ "rulesAndAxiomSection", "rulesAndAxiomGrid"] ]
-                [ h2 [ ] [ text "Rules and Axiom" ]
-                , select [ class [ "dropdown" ], onInput SelectSymbol ] (List.map symbolOptionView model.symbolAssignments)
-                , input [ class [ "input" ], type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
-                , button [ class [ "button"], onClick AddRule ] [ text "Add Rule" ]
-                , input [ class [ "input"], type_ "text", onInput SelectAxiom ] []
-                , div [ ]
-                    [ text "Rules: "
-                    , text <| String.join ", " <| List.map showRule model.rules
+        [ button [ class [ "toggleSidebar" ], onClick ToggleSidebar ] [ text "≡" ]
+        , if model.showSidebar then
+            div [ class [ "sidebar" ] ]
+                [ div [ class [ "infoSection" ] ]
+                    [ h2 [] [ text "Info" ]
+                    , Html.a [ href "http://paulbourke.net/fractals/lsys/" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ]
+                    , button [ class [ "buttonSyntax" ], onClick ToggleSyntaxDisplay ] [ text "Syntax" ]
+                    , syntaxDisplayView model
                     ]
-                , button [ class [ "button"], onClick ApplyAxiom ] [ text "Apply Axiom" ]
-                , div [] 
-                    [ text ("Axiom: " ++ (if model.axiomApplied then model.axiom else "")) ]
+                , div [ class [ "rulesAndAxiomSection", "rulesAndAxiomGrid" ] ]
+                    [ h2 [] [ text "Rules and Axiom" ]
+                    , select [ class [ "dropdown" ], onInput SelectSymbol ] (List.map symbolOptionView model.symbolAssignments)
+                    , input [ class [ "input" ], type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
+                    , button [ class [ "button" ], onClick AddRule ] [ text "Add Rule" ]
+                    , input [ class [ "input" ], type_ "text", onInput SelectAxiom ] []
+                    , div []
+                        [ text "Rules: "
+                        , text <| String.join ", " <| List.map showRule model.rules
+                        ]
+                    , button [ class [ "button" ], onClick ApplyAxiom ] [ text "Apply Axiom" ]
+                    , div []
+                        [ text
+                            ("Axiom: "
+                                ++ (if model.axiomApplied then
+                                        model.axiom
+
+                                    else
+                                        ""
+                                   )
+                            )
+                        ]
+                    ]
+                , div [ class [ "turtleSettingsSection", "turtleGrid" ] ]
+                    [ h2 [] [ text "Turtle Settings" ]
+                    , Html.label [ class [ "label" ] ] [ text "Turning angle " ]
+                    , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.turningAngle) ] []
+                    , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.turningAngle ++ "°") ]
+                    , Html.label [ class [ "label" ] ] [ text "Turning angle increment " ]
+                    , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateTurningAngleIncrement), value (String.fromFloat model.turningAngleIncrement) ] []
+                    , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.turningAngleIncrement ++ "°") ]
+                    , Html.label [ class [ "label" ] ] [ text "Line length " ]
+                    , input [ class [ "slider" ], type_ "range", Html.Attributes.min "1", Html.Attributes.max "25", step "1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLength), value (String.fromFloat model.lineLength) ] []
+                    , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineLength) ]
+                    , Html.label [ class [ "label" ] ] [ text "Line length scale" ]
+                    , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLengthScale), value (String.fromFloat model.lineLengthScale) ] []
+                    , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineLengthScale) ]
+                    , Html.label [ class [ "label" ] ] [ text "Line width increment" ]
+                    , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3.0", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineWidthIncrement), value (String.fromFloat model.lineWidthIncrement) ] []
+                    , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineWidthIncrement) ]
+                    , Html.label [ class [ "label" ] ] [ text "Recursion depth " ]
+                    , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0", Html.Attributes.max "20", value (String.fromInt model.iterations), onInput (String.toInt >> Maybe.withDefault 0 >> UpdateIterations) ] []
+                    , span [ class [ "sliderValueText" ] ] [ text (String.fromInt model.iterations) ]
+                    , Html.label [ class [ "label" ] ] [ text "Starting Angle " ]
+                    , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateStartingAngle), value (String.fromFloat model.startingAngle) ] []
+                    , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.startingAngle ++ "°") ]
+                    , Html.label [ class [ "label" ] ] [ text "Starting point " ]
+                    , startingPointInput model.startingPoint
+                    ]
+                , div [ class [ "drawSection" ] ]
+                    [ button [ class [ "buttonDraw" ], onClick DrawTurtle ] [ text "Draw" ]
+                    ]
+                , div [ class [ "attributionSection" ] ]
+                    [ h2 [] [ text "Attribution" ]
+                    , Html.a [ href "https://github.com/hunorg" ] [ text "created by @hunorg" ]
+                    , Html.a [ href "https://github.com/hunorg/L-System-Studio" ] [ text "source code" ]
+                    ]
                 ]
-            , div [ class [ "turtleSettingsSection", "turtleGrid" ] ]
-                [ h2 [] [ text "Turtle Settings" ]
-                , Html.label [ class [ "label" ] ] [ text "Turning angle " ]
-                , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.turningAngle) ] []
-                , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.turningAngle ++ "°") ]
-                , Html.label [ class [ "label" ] ] [ text "Turning angle increment " ]
-                , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateTurningAngleIncrement), value (String.fromFloat model.turningAngleIncrement) ] []
-                , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.turningAngleIncrement ++ "°") ]
-                , Html.label [ class [ "label" ] ] [ text "Line length " ]
-                , input [ class [ "slider" ], type_ "range", Html.Attributes.min "1", Html.Attributes.max "25", step "1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLength), value (String.fromFloat model.lineLength) ] []
-                , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineLength) ]
-                , Html.label [ class [ "label" ] ] [ text "Line length scale" ]
-                , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLengthScale), value (String.fromFloat model.lineLengthScale) ] []
-                , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineLengthScale) ]
-                , Html.label [ class [ "label" ] ] [ text "Line width increment" ]
-                , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3.0", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineWidthIncrement), value (String.fromFloat model.lineWidthIncrement) ] []
-                , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineWidthIncrement) ]
-                , Html.label [ class [ "label" ] ] [ text "Recursion depth " ]
-                , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0", Html.Attributes.max "20", value (String.fromInt model.iterations), onInput (String.toInt >> Maybe.withDefault 0 >> UpdateIterations) ] []
-                , span [ class [ "sliderValueText" ] ] [ text (String.fromInt model.iterations) ]
-                , Html.label [ class [ "label" ]] [ text "Starting Angle " ]
-                , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateStartingAngle), value (String.fromFloat model.startingAngle) ] []
-                , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.startingAngle ++ "°") ]
-                , Html.label [ class [ "label" ] ] [ text "Starting point " ]
-                , startingPointInput model.startingPoint
-                ]
-            , div [ class [ "drawSection" ] ]
-                [ button [ class [ "buttonDraw" ], onClick DrawTurtle ] [ text "Draw" ]
-                ]
-            , div [ class [ "attributionSection" ] ]
-                [ h2 [] [ text "Attribution" ]
-                , Html.a [ href "https://github.com/hunorg" ] [ text "created by @hunorg" ]
-                , Html.a [ href "https://github.com/hunorg/L-System-Studio" ] [ text "source code" ]
-                ]
-            ]
-        , div [ class [ "canvas" ] ]
+
+          else
+            text ""
+        , div [ class [ "canvas" ], if model.showSidebar then Html.Attributes.style "margin-left" "0rem" else Html.Attributes.style "margin-left" "1rem" ]
             -- Added wrapper div
             [ svg
                 [ viewBox 0 0 model.canvasWidth model.canvasHeight

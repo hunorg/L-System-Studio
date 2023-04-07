@@ -26,6 +26,7 @@ type Msg
     | ApplyAxiom
     | DrawTurtle
     | UpdateCanvasSize Float Float
+    | ToggleSidebar 
     | NoOp
  --   | ResizeSvg Int Int 
 
@@ -105,6 +106,9 @@ update msg model =
             ( { model | canvasWidth = newWidth, canvasHeight = newHeight }
             , Cmd.none
             )
+
+        ToggleSidebar -> 
+            ( { model | showSidebar = not model.showSidebar }, Cmd.none )
 
         NoOp -> 
             (model , Cmd.none)

@@ -5246,6 +5246,7 @@ var $author$project$Model$init = {
 	rules: _List_Nil,
 	selectedAction: $author$project$Turtle$Move,
 	selectedSymbol: 'F',
+	showSidebar: true,
 	startingAngle: 0,
 	startingPoint: _Utils_Tuple2(250, 250),
 	symbolAssignments: _Utils_ap(
@@ -5796,6 +5797,12 @@ var $author$project$Update$update = F2(
 						model,
 						{canvasHeight: newHeight, canvasWidth: newWidth}),
 					$elm$core$Platform$Cmd$none);
+			case 'ToggleSidebar':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{showSidebar: !model.showSidebar}),
+					$elm$core$Platform$Cmd$none);
 			default:
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
@@ -5809,6 +5816,7 @@ var $author$project$Update$SelectAxiom = function (a) {
 var $author$project$Update$SelectSymbol = function (a) {
 	return {$: 'SelectSymbol', a: a};
 };
+var $author$project$Update$ToggleSidebar = {$: 'ToggleSidebar'};
 var $author$project$Update$ToggleSyntaxDisplay = {$: 'ToggleSyntaxDisplay'};
 var $author$project$Update$UpdateAngle = function (a) {
 	return {$: 'UpdateAngle', a: a};
@@ -6604,6 +6612,8 @@ var $author$project$View$startingPointInput = function (_v0) {
 var $elm$html$Html$Attributes$step = function (n) {
 	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
 };
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm_community$typed_svg$TypedSvg$svg = $elm_community$typed_svg$TypedSvg$Core$node('svg');
 var $elm$html$Html$option = _VirtualDom_node('option');
 var $author$project$View$symbolOptionView = function (symbol) {
@@ -6801,6 +6811,19 @@ var $author$project$View$view = function (model) {
 		_List_fromArray(
 			[
 				A2(
+				$elm$html$Html$button,
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['toggleSidebar'])),
+						$elm$html$Html$Events$onClick($author$project$Update$ToggleSidebar)
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('≡')
+					])),
+				model.showSidebar ? A2(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
@@ -7377,14 +7400,15 @@ var $author$project$View$view = function (model) {
 										$elm$html$Html$text('source code')
 									]))
 							]))
-					])),
+					])) : $elm$html$Html$text(''),
 				A2(
 				$elm$html$Html$div,
 				_List_fromArray(
 					[
 						$elm_community$typed_svg$TypedSvg$Attributes$class(
 						_List_fromArray(
-							['canvas']))
+							['canvas'])),
+						model.showSidebar ? A2($elm$html$Html$Attributes$style, 'margin-left', '0rem') : A2($elm$html$Html$Attributes$style, 'margin-left', '1rem')
 					]),
 				_List_fromArray(
 					[

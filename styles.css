@@ -18,7 +18,27 @@ body {
     flex-direction: row;
     height: calc(100vh - 2rem); /* Subtract the top and bottom margin */
     width: 100%;
+    position: relative;
 }
+
+.toggleSidebar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background-color: #eb5160; /* Change the background color */
+    color: #ffffff; /* Change the text color */
+    border: none;
+    outline: none;
+    padding: 0.7rem; /* Increase the padding for a larger button */
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    margin-left: -1rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem; /* Increase the font size for the icon */
+}
+
 
 .sidebar {
     display: grid;
@@ -117,10 +137,14 @@ body {
 
 .turtleGrid {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: minmax(min-content, 1fr) auto auto;
     grid-gap: 1rem;
     align-items: start;
     justify-content: center;
+}
+
+.turtleGrid > .label {
+    min-width: 120px; /* Adjust this value as needed */
 }
 
 .turtleGrid > h2 {
@@ -304,8 +328,9 @@ h2 {
 
 .button {
     background-color: #b7999c;
-    width: fit-content;
     max-height: fit-content;
+    width: fit-content;
+    margin-left: 0.6rem;
 }
 
 .buttonSyntax {
@@ -355,13 +380,14 @@ h2 {
 }
 
 .input {
-    width: 14rem;
+    width: 16rem;
     margin: 0.5rem;
 }
 
 .inputAngle {
     width: 4rem;
-    margin: 0.5rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
 }
 
 
@@ -428,6 +454,7 @@ h2 {
     position: relative;
     display: inline-block;
     width: 10px;
+    margin-top: 0.7rem;
   }
 
   .angleValueText {
@@ -437,6 +464,7 @@ h2 {
     position: relative;
     display: inline-block;
     width: 10px;
+    margin-top: 0.7rem;
   }
 
   .infoSection a, .attributionSection a {
@@ -479,7 +507,13 @@ h2 {
     .label {
       font-size: 0.9rem;
     }
+
+    .toggleSidebar {
+        padding: 0.5rem;
+        font-size: 1rem;
+    }
   }
+
   
   /* Medium devices (tablets, 768px and up) */
   @media (min-width: 576px) and (max-width: 767px) {
@@ -508,13 +542,18 @@ h2 {
     .label {
       font-size: 1rem;
     }
+
+    .toggleSidebar {
+        padding: 0.6rem;
+        font-size: 1.1rem;
+    }
   }
   
 
 /* Large devices (desktops, 992px and up) */
 @media (min-width: 768px) and (max-width: 991px) {
     .sidebar {
-      width: 60%;
+      width: 100%;
       padding: 2rem;
       overflow-x: hidden;
     }
@@ -538,12 +577,17 @@ h2 {
     .label {
       font-size: 1rem;
     }
+
+    .toggleSidebar {
+        padding: 0.7rem;
+        font-size: 1.2rem;
+    }
   }
   
   /* Extra large devices (large desktops, 1200px and up) */
   @media (min-width: 992px) {
     .sidebar {
-      width: 45%;
+      width: 100%;
       padding: 2rem;
       overflow-x: hidden;
     }
@@ -566,5 +610,9 @@ h2 {
   
     .label {
       font-size: 1.125rem;
+    }
+    .toggleSidebar {
+        padding: 0.8rem;
+        font-size: 1.3rem;
     }
   }
