@@ -28,6 +28,7 @@ type alias Model =
     , drawnTurtle : Bool
     , canvasWidth : Float 
     , canvasHeight : Float
+    , showSidebar : Bool
     }
 
 
@@ -85,6 +86,7 @@ init =
     , drawnTurtle = False
     , canvasWidth = 500
     , canvasHeight = 500
+    , showSidebar = True
     }
 
 
