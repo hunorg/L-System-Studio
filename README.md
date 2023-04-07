@@ -4,8 +4,6 @@ interactive web application built with Elm, designed to help users explore and v
 
 ## Sample output:
 
-![LSysStudioEx1](https://user-images.githubusercontent.com/114682020/228975664-87dc1171-50ab-4107-9f49-6b2356511182.png)
-![LSystemGUIex2](https://user-images.githubusercontent.com/114682020/228995780-5b8e6208-a2b9-486c-993d-79a42fe06603.png)
 
 
 
@@ -42,7 +40,7 @@ These symbols allow users to create a wide range of L-system rules and customize
 
 you can try it out by visiting the live link:
 
-[**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/e2594761f4d848dcfc45068d5bf9803440ec5948/index.html)
+[**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/1bfdb9750e8f15b0118a4cf41c2e9a16815f588e/index.html)
 
 ### Run locally
 
