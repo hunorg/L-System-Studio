@@ -4,6 +4,8 @@ interactive web application built with Elm, designed to help users explore and v
 
 ## Sample output:
 
+![algaExLSys](https://user-images.githubusercontent.com/114682020/230611773-50c2787f-5f3a-466b-b469-47531f8a50da.png)
+
 
 
 
