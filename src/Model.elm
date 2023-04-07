@@ -66,17 +66,17 @@ init =
         ]
             ++ emptySymbolAssignments
     , syntaxDisplay = False
-    , rules = []
+    , rules = [('F', ['F', '+', 'G']), ('G', ['F', '-', 'G'])]
     , selectedSymbol = "F"
     , selectedAction = Move
     , newRuleInput = ""
     , axiomApplied = False
-    , turningAngle = 0
+    , turningAngle = 90
     , turningAngleIncrement = 0
     , lineLength = 1
     , lineLengthScale = 0
     , lineWidthIncrement = 0
-    , axiom = ""
+    , axiom = "F"
     , iterations = 0
     , startingPoint = ( 250, 250 )
     , startingAngle = 0

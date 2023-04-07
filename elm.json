@@ -15,6 +15,7 @@
             "elm/svg": "1.0.1",
             "elm-community/list-extra": "8.7.0",
             "elm-community/typed-svg": "7.0.0",
+            "lattyware/elm-fontawesome": "6.0.0",
             "mdgriffith/elm-animator": "1.1.1",
             "simonh1000/elm-colorpicker": "2.0.3"
         },
