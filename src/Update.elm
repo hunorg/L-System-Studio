@@ -4,7 +4,7 @@ import LSys exposing (generateSequence)
 import Model exposing (Model)
 import Turtle exposing (Action(..))
 import ColorPicker
-
+import Html.Events.Extra.Mouse as Mouse
 
 
 type Msg
@@ -18,8 +18,7 @@ type Msg
     | UpdateLineLengthScale Float
     | UpdateLineWidthIncrement Float
     | UpdateIterations Int
-    | UpdateStartingPointX String
-    | UpdateStartingPointY String
+    | DownMsg Mouse.Button ( Float, Float )
     | UpdateStartingAngle Float
     | ColorPickerMsg ColorPicker.Msg
     | AddRule
@@ -66,11 +65,10 @@ update msg model =
         UpdateIterations newIterations ->
            ( { model | iterations = newIterations }, Cmd.none)
 
-        UpdateStartingPointX value ->
-           ( { model | startingPoint = ( Maybe.withDefault 0 (String.toFloat value), Tuple.second model.startingPoint ) }, Cmd.none)
-
-        UpdateStartingPointY value ->
-          (  { model | startingPoint = ( Tuple.first model.startingPoint, Maybe.withDefault 0 (String.toFloat value) ) }, Cmd.none)
+        DownMsg button clientPos ->
+            if button == Mouse.MainButton then 
+               ( { model | startingPoint = (Tuple.first clientPos, Tuple.second clientPos)}, Cmd.none )
+            else (model, Cmd.none) 
 
         UpdateStartingAngle newStartingAngle ->
           (  { model | startingAngle = newStartingAngle }, Cmd.none)
