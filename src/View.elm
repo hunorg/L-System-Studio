@@ -32,6 +32,7 @@ view model =
                         , p []
                             [ Html.a [ href "http://paulbourke.net/fractals/lsys/" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ] ]
                         , img [ src "https://i.ibb.co/F44fjhV/open-book.png", onClick ToggleSyntaxDisplay, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer" ] []
+                        , img [ src "https://i.ibb.co/44JYx09/dices.png", onClick GetRandomPreset, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer", Html.Attributes.style "margin-left" "1rem" ] []
                         , img [ src "https://i.ibb.co/qWqnNVZ/reset.png", onClick Reset, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer", Html.Attributes.style "margin-left" "1rem" ] []
                         , syntaxDisplayView model
                         ]
@@ -41,7 +42,7 @@ view model =
                             [ div [] [ h3 [] [ text "Rules:" ] ]
                             , div [ class [ "rulesContainer" ] ]
                                 [ div []
-                                    [ ul [class ["rulesAndAxiomText"], Html.Attributes.style "cursor" "pointer"]
+                                    [ ul [ class [ "rulesAndAxiomText" ], Html.Attributes.style "cursor" "pointer" ]
                                         (List.map
                                             (\rule -> ruleView rule model)
                                             model.rules
@@ -55,9 +56,11 @@ view model =
                                     ]
                                 ]
                             , select [ class [ "dropdown" ], onInput SelectSymbol ] (List.map symbolOptionView model.symbolAssignments)
+                            , div [] []
                             , input [ class [ "input" ], type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
                             , div [] []
                             , button [ class [ "button" ], onClick AddRule ] [ text "Add Rule" ]
+                            , div [] []
                             , div [] [ h3 [] [ text "Axiom:" ] ]
                             , div [ class [ "rulesAndAxiomText" ] ]
                                 [ text
@@ -68,7 +71,7 @@ view model =
                                         ""
                                     )
                                 ]
-                            , div [] []
+                           
                             , input [ class [ "input" ], type_ "text", onInput SelectAxiom ] []
                             , div [] []
                             , button [ class [ "button" ], onClick ApplyAxiom ] [ text "Apply Axiom" ]
