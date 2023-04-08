@@ -2,8 +2,8 @@ module View exposing (..)
 
 import Color
 import ColorPicker
-import Html exposing (Html, button, div, h2, h3, img, input, option, p, section, select, span, text)
-import Html.Attributes exposing (placeholder, src, step, type_, value)
+import Html exposing (Html, button, div, h2, h3, img, input, li, option, p, section, select, span, text, ul)
+import Html.Attributes exposing (classList, placeholder, src, step, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Html.Events.Extra.Mouse as Mouse
 import LSys exposing (generateTurtle)
@@ -32,14 +32,27 @@ view model =
                         , p []
                             [ Html.a [ href "http://paulbourke.net/fractals/lsys/" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ] ]
                         , img [ src "https://i.ibb.co/F44fjhV/open-book.png", onClick ToggleSyntaxDisplay, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer" ] []
+                        , img [ src "https://i.ibb.co/qWqnNVZ/reset.png", onClick Reset, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer", Html.Attributes.style "margin-left" "1rem" ] []
                         , syntaxDisplayView model
                         ]
                     , section []
                         [ h2 [] [ text "Rules and Axiom" ]
                         , div [ class [ "grid" ] ]
                             [ div [] [ h3 [] [ text "Rules:" ] ]
-                            , div [ class [ "rulesAndAxiomText" ] ]
-                                [ text <| String.join ", " <| List.map showRule model.rules
+                            , div [ class [ "rulesContainer" ] ]
+                                [ div []
+                                    [ ul [class ["rulesAndAxiomText"], Html.Attributes.style "cursor" "pointer"]
+                                        (List.map
+                                            (\rule -> ruleView rule model)
+                                            model.rules
+                                        )
+                                    , case model.selectedRule of
+                                        ( Just _, True ) ->
+                                            img [ class [ "buttonRemoveRule" ], src "https://i.ibb.co/KqQjhGF/delete.png", onClick RemoveSelectedRule ] []
+
+                                        _ ->
+                                            text ""
+                                    ]
                                 ]
                             , select [ class [ "dropdown" ], onInput SelectSymbol ] (List.map symbolOptionView model.symbolAssignments)
                             , input [ class [ "input" ], type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
@@ -132,6 +145,21 @@ view model =
                 ]
             ]
         ]
+
+
+ruleView : ( Char, List Char ) -> Model -> Html Msg
+ruleView rule model =
+    let
+        isSelected =
+            case model.selectedRule of
+                ( Just selectedRule, True ) ->
+                    rule == selectedRule
+
+                _ ->
+                    False
+    in
+    li [ onClick (SelectRule rule), classList [ ( "selectedRule", isSelected ) ] ]
+        [ text <| String.fromChar (Tuple.first rule) ++ " -> " ++ String.fromList (Tuple.second rule) ]
 
 
 

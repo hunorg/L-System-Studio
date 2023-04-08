@@ -5230,7 +5230,7 @@ var $avh4$elm_color$Color$RgbaSpace = F4(
 	});
 var $avh4$elm_color$Color$red = A4($avh4$elm_color$Color$RgbaSpace, 204 / 255, 0 / 255, 0 / 255, 1.0);
 var $author$project$Model$init = {
-	axiom: 'F',
+	axiom: '',
 	axiomApplied: false,
 	canvasHeight: 500,
 	canvasWidth: 500,
@@ -5243,26 +5243,9 @@ var $author$project$Model$init = {
 	lineWidthIncrement: 0,
 	newRuleInput: '',
 	polygonFillColor: $avh4$elm_color$Color$red,
-	rules: _List_fromArray(
-		[
-			_Utils_Tuple2(
-			_Utils_chr('F'),
-			_List_fromArray(
-				[
-					_Utils_chr('F'),
-					_Utils_chr('+'),
-					_Utils_chr('G')
-				])),
-			_Utils_Tuple2(
-			_Utils_chr('G'),
-			_List_fromArray(
-				[
-					_Utils_chr('F'),
-					_Utils_chr('-'),
-					_Utils_chr('G')
-				]))
-		]),
+	rules: _List_Nil,
 	selectedAction: $author$project$Turtle$Move,
+	selectedRule: _Utils_Tuple2($elm$core$Maybe$Nothing, false),
 	selectedSymbol: 'F',
 	showSidebar: true,
 	startingAngle: 0,
@@ -5291,7 +5274,7 @@ var $author$project$Model$init = {
 			]),
 		$author$project$Model$emptySymbolAssignments),
 	syntaxDisplay: false,
-	turningAngle: 90,
+	turningAngle: 0,
 	turningAngleIncrement: 0
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
@@ -5330,6 +5313,17 @@ var $author$project$Main$subscriptions = function (_v0) {
 		});
 };
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$MainButton = {$: 'MainButton'};
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
 var $elm$core$List$append = F2(
 	function (xs, ys) {
 		if (!ys.b) {
@@ -5409,6 +5403,7 @@ var $elm$core$Maybe$map = F2(
 			return $elm$core$Maybe$Nothing;
 		}
 	});
+var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$core$Basics$not = _Basics_not;
 var $elm$core$Tuple$second = function (_v0) {
 	var y = _v0.b;
@@ -5673,6 +5668,35 @@ var $author$project$Update$update = F2(
 						model,
 						{newRuleInput: input}),
 					$elm$core$Platform$Cmd$none);
+			case 'SelectRule':
+				var rule = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							selectedRule: _Utils_Tuple2(
+								$elm$core$Maybe$Just(rule),
+								!model.selectedRule.b)
+						}),
+					$elm$core$Platform$Cmd$none);
+			case 'RemoveSelectedRule':
+				var _v1 = model.selectedRule;
+				if ((_v1.a.$ === 'Just') && _v1.b) {
+					var rule = _v1.a.a;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								rules: A2(
+									$elm$core$List$filter,
+									$elm$core$Basics$neq(rule),
+									model.rules),
+								selectedRule: _Utils_Tuple2($elm$core$Maybe$Nothing, false)
+							}),
+						$elm$core$Platform$Cmd$none);
+				} else {
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				}
 			case 'UpdateAngle':
 				var turningAngle = msg.a;
 				return _Utils_Tuple2(
@@ -5734,9 +5758,9 @@ var $author$project$Update$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'ColorPickerMsg':
 				var colorPickerMsg = msg.a;
-				var _v1 = A3($simonh1000$elm_colorpicker$ColorPicker$update, colorPickerMsg, model.polygonFillColor, model.colorPicker);
-				var newColorPicker = _v1.a;
-				var newColorMaybe = _v1.b;
+				var _v2 = A3($simonh1000$elm_colorpicker$ColorPicker$update, colorPickerMsg, model.polygonFillColor, model.colorPicker);
+				var newColorPicker = _v2.a;
+				var newColorMaybe = _v2.b;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -5803,6 +5827,8 @@ var $author$project$Update$update = F2(
 						model,
 						{showSidebar: !model.showSidebar}),
 					$elm$core$Platform$Cmd$none);
+			case 'Reset':
+				return _Utils_Tuple2($author$project$Model$init, $elm$core$Platform$Cmd$none);
 			default:
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
@@ -5814,6 +5840,8 @@ var $author$project$Update$DownMsg = F2(
 		return {$: 'DownMsg', a: a, b: b};
 	});
 var $author$project$Update$DrawTurtle = {$: 'DrawTurtle'};
+var $author$project$Update$RemoveSelectedRule = {$: 'RemoveSelectedRule'};
+var $author$project$Update$Reset = {$: 'Reset'};
 var $author$project$Update$SelectAxiom = function (a) {
 	return {$: 'SelectAxiom', a: a};
 };
@@ -5994,17 +6022,6 @@ var $elm$core$List$drop = F2(
 				}
 			}
 		}
-	});
-var $elm$core$List$filter = F2(
-	function (isGood, list) {
-		return A3(
-			$elm$core$List$foldr,
-			F2(
-				function (x, xs) {
-					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
-				}),
-			_List_Nil,
-			list);
 	});
 var $elm$core$List$head = function (list) {
 	if (list.b) {
@@ -6574,14 +6591,55 @@ var $author$project$Turtle$renderTurtleSegments = function (turtle) {
 		},
 		turtle.segments);
 };
+var $author$project$Update$SelectRule = function (a) {
+	return {$: 'SelectRule', a: a};
+};
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$html$Html$Attributes$classList = function (classes) {
+	return $elm$html$Html$Attributes$class(
+		A2(
+			$elm$core$String$join,
+			' ',
+			A2(
+				$elm$core$List$map,
+				$elm$core$Tuple$first,
+				A2($elm$core$List$filter, $elm$core$Tuple$second, classes))));
+};
+var $elm$core$String$fromList = _String_fromList;
+var $elm$html$Html$li = _VirtualDom_node('li');
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$View$ruleView = F2(
+	function (rule, model) {
+		var isSelected = function () {
+			var _v0 = model.selectedRule;
+			if ((_v0.a.$ === 'Just') && _v0.b) {
+				var selectedRule = _v0.a.a;
+				return _Utils_eq(rule, selectedRule);
+			} else {
+				return false;
+			}
+		}();
+		return A2(
+			$elm$html$Html$li,
+			_List_fromArray(
+				[
+					$elm$html$Html$Events$onClick(
+					$author$project$Update$SelectRule(rule)),
+					$elm$html$Html$Attributes$classList(
+					_List_fromArray(
+						[
+							_Utils_Tuple2('selectedRule', isSelected)
+						]))
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(
+					$elm$core$String$fromChar(rule.a) + (' -> ' + $elm$core$String$fromList(rule.b)))
+				]));
+	});
 var $elm$html$Html$section = _VirtualDom_node('section');
 var $elm$html$Html$select = _VirtualDom_node('select');
-var $elm$core$String$fromList = _String_fromList;
-var $author$project$View$showRule = function (_v0) {
-	var from = _v0.a;
-	var to = _v0.b;
-	return $elm$core$String$fromChar(from) + (' → ' + $elm$core$String$fromList(to));
-};
 var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
@@ -6596,8 +6654,6 @@ var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm_community$typed_svg$TypedSvg$svg = $elm_community$typed_svg$TypedSvg$Core$node('svg');
 var $elm$html$Html$option = _VirtualDom_node('option');
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$View$symbolOptionView = function (symbol) {
 	return A2(
@@ -6612,7 +6668,6 @@ var $author$project$View$symbolOptionView = function (symbol) {
 			]));
 };
 var $elm$html$Html$b = _VirtualDom_node('b');
-var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$core$String$trim = _String_trim;
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$View$syntaxDisplayView = function (model) {
@@ -6777,6 +6832,17 @@ var $author$project$View$view = function (model) {
 												A2($elm$html$Html$Attributes$style, 'cursor', 'pointer')
 											]),
 										_List_Nil),
+										A2(
+										$elm$html$Html$img,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$src('https://i.ibb.co/qWqnNVZ/reset.png'),
+												$elm$html$Html$Events$onClick($author$project$Update$Reset),
+												A2($elm$html$Html$Attributes$style, 'width', '3.5rem'),
+												A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+												A2($elm$html$Html$Attributes$style, 'margin-left', '1rem')
+											]),
+										_List_Nil),
 										$author$project$View$syntaxDisplayView(model)
 									])),
 								A2(
@@ -6820,15 +6886,49 @@ var $author$project$View$view = function (model) {
 													[
 														$elm_community$typed_svg$TypedSvg$Attributes$class(
 														_List_fromArray(
-															['rulesAndAxiomText']))
+															['rulesContainer']))
 													]),
 												_List_fromArray(
 													[
-														$elm$html$Html$text(
 														A2(
-															$elm$core$String$join,
-															', ',
-															A2($elm$core$List$map, $author$project$View$showRule, model.rules)))
+														$elm$html$Html$div,
+														_List_Nil,
+														_List_fromArray(
+															[
+																A2(
+																$elm$html$Html$ul,
+																_List_fromArray(
+																	[
+																		$elm_community$typed_svg$TypedSvg$Attributes$class(
+																		_List_fromArray(
+																			['rulesAndAxiomText'])),
+																		A2($elm$html$Html$Attributes$style, 'cursor', 'pointer')
+																	]),
+																A2(
+																	$elm$core$List$map,
+																	function (rule) {
+																		return A2($author$project$View$ruleView, rule, model);
+																	},
+																	model.rules)),
+																function () {
+																var _v0 = model.selectedRule;
+																if ((_v0.a.$ === 'Just') && _v0.b) {
+																	return A2(
+																		$elm$html$Html$img,
+																		_List_fromArray(
+																			[
+																				$elm_community$typed_svg$TypedSvg$Attributes$class(
+																				_List_fromArray(
+																					['buttonRemoveRule'])),
+																				$elm$html$Html$Attributes$src('https://i.ibb.co/KqQjhGF/delete.png'),
+																				$elm$html$Html$Events$onClick($author$project$Update$RemoveSelectedRule)
+																			]),
+																		_List_Nil);
+																} else {
+																	return $elm$html$Html$text('');
+																}
+															}()
+															]))
 													])),
 												A2(
 												$elm$html$Html$select,
