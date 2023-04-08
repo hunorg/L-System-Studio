@@ -9,6 +9,7 @@ type alias Model =
     { symbolAssignments : List Symbol
     , syntaxDisplay : Bool
     , rules : List ( Char, List Char )
+    , selectedRule : (Maybe (Char, List Char), Bool)
     , selectedSymbol : String
     , selectedAction : Action
     , newRuleInput : String
@@ -66,17 +67,18 @@ init =
         ]
             ++ emptySymbolAssignments
     , syntaxDisplay = False
-    , rules = [('F', ['F', '+', 'G']), ('G', ['F', '-', 'G'])]
+    , rules = []
+    , selectedRule = (Nothing, False)
     , selectedSymbol = "F"
     , selectedAction = Move
     , newRuleInput = ""
     , axiomApplied = False
-    , turningAngle = 90
+    , turningAngle = 0
     , turningAngleIncrement = 0
     , lineLength = 1
     , lineLengthScale = 0
     , lineWidthIncrement = 0
-    , axiom = "F"
+    , axiom = ""
     , iterations = 0
     , startingPoint = ( 250, 250 )
     , startingAngle = 0

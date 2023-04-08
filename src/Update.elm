@@ -1,7 +1,7 @@
 module Update exposing (Msg(..), update)
 
 import LSys exposing (generateSequence)
-import Model exposing (Model)
+import Model exposing (Model, init)
 import Turtle exposing (Action(..))
 import ColorPicker
 import Html.Events.Extra.Mouse as Mouse
@@ -12,6 +12,8 @@ type Msg
     | SelectSymbol String
     | SelectAxiom String
     | UpdateNewRuleInput String
+    | SelectRule (Char, List Char)
+    | RemoveSelectedRule 
     | UpdateAngle Float
     | UpdateTurningAngleIncrement Float 
     | UpdateLineLength Float
@@ -26,6 +28,7 @@ type Msg
     | DrawTurtle
     | UpdateCanvasSize Float Float
     | ToggleSidebar 
+    | Reset 
     | NoOp
  --   | ResizeSvg Int Int 
 
@@ -46,6 +49,17 @@ update msg model =
 
         UpdateNewRuleInput input ->
            ( { model | newRuleInput = input }, Cmd.none)
+
+        SelectRule rule ->
+           ( { model | selectedRule = (Just rule, not (Tuple.second model.selectedRule)) }, Cmd.none)
+
+        RemoveSelectedRule ->
+            case model.selectedRule of
+                (Just rule, True) ->
+                   ( { model | rules = List.filter ((/=) rule) model.rules, selectedRule = (Nothing, False) }, Cmd.none)
+
+                _->
+                   ( model, Cmd.none)
 
         UpdateAngle turningAngle ->
            ( { model | turningAngle = turningAngle }, Cmd.none)
@@ -107,6 +121,9 @@ update msg model =
 
         ToggleSidebar -> 
             ( { model | showSidebar = not model.showSidebar }, Cmd.none )
+
+        Reset -> 
+            ( init, Cmd.none )
 
         NoOp -> 
             (model , Cmd.none)

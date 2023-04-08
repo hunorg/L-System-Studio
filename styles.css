@@ -84,6 +84,17 @@ section {
     grid-auto-flow: dense;
 }
 
+.rulesContainer {
+    position: relative;
+    margin-top: -0.9rem;
+}
+
+.selectedRule {
+    border: 2px solid #eb5160; /* Change this to the desired color */
+     border-radius: 8px;
+     padding: 0.2rem;;
+}
+
 .grid2 { 
     display: grid;
     grid-template-columns: minmax(auto, 3fr) minmax(auto, 1fr) minmax(auto, 1fr);
@@ -149,10 +160,14 @@ h2 {
     margin-top: -0.05rem;
 }
 
-.buttonSyntax {
-    background-color: #eb5160;
+.buttonRemoveRule {
+    position: absolute;
+    width: 1rem;
+    cursor:pointer;
+    top: 0;
+    right: 0;
+    z-index: 1;
 }
-
 
 .buttonDraw {
     background-color: #eb5160;
