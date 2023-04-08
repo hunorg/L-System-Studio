@@ -86,14 +86,17 @@ section {
 
 .rulesContainer {
     position: relative;
-    margin-top: -0.9rem;
 }
 
-.selectedRule {
-    border: 2px solid #eb5160; /* Change this to the desired color */
-     border-radius: 8px;
-     padding: 0.2rem;;
+.ruleWrapper {
+    display: flex;
+    align-items: center;
 }
+
+.ruleItem {
+    flex: 1;
+}
+
 
 .grid2 { 
     display: grid;
@@ -114,9 +117,19 @@ section {
     min-width: 9rem;
 }
 
+.listItem {
+    font-size: 18px;
+    font-weight: bold;
+}
 
 h2 {
     font-size: 2rem;
+    color: #495057; /* Match the color of labels */
+    font-weight: 600; /* Slightly heavier font weight */
+}
+
+h3 { 
+    font-size: 1.5rem;
     color: #495057; /* Match the color of labels */
     font-weight: 600; /* Slightly heavier font weight */
 }
@@ -160,14 +173,6 @@ h2 {
     margin-top: -0.05rem;
 }
 
-.buttonRemoveRule {
-    position: absolute;
-    width: 1rem;
-    cursor:pointer;
-    top: 0;
-    right: 0;
-    z-index: 1;
-}
 
 .buttonDraw {
     background-color: #eb5160;
