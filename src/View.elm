@@ -4,8 +4,9 @@ import Color
 import ColorPicker
 import Html exposing (Html, button, div, h2, h3, img, input, li, option, p, section, select, span, text, ul)
 import Html.Attributes exposing (classList, placeholder, src, step, type_, value)
-import Html.Events exposing (onClick, onInput)
+import Html.Events exposing (onClick, onInput, onMouseOut, onMouseOver)
 import Html.Events.Extra.Mouse as Mouse
+import Html.Extra exposing (nothing, viewIf)
 import LSys exposing (generateTurtle)
 import Model exposing (Model, Symbol)
 import Turtle exposing (Action(..))
@@ -20,105 +21,142 @@ showRule ( from, to ) =
     String.fromChar from ++ " → " ++ String.fromList to
 
 
+sidebar : Model -> Html Msg
+sidebar model =
+    viewIf model.showSidebar
+        (div [ class [ "sidebar" ] ]
+            [ div [ class [ "sidebarContent" ] ]
+                [ section [ class [ "infoSection" ] ]
+                    [ h2 [] [ text "Info" ]
+                    , p []
+                        [ Html.a [ href "http://paulbourke.net/fractals/lsys/" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ] ]
+                    , img [ src "https://i.ibb.co/F44fjhV/open-book.png", onClick ToggleSyntaxDisplay, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer" ] []
+                    , img [ src "https://i.ibb.co/44JYx09/dices.png", onClick GetRandomPreset, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer", Html.Attributes.style "margin-left" "1rem" ] []
+                    , img [ src "https://i.ibb.co/qWqnNVZ/reset.png", onClick Reset, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer", Html.Attributes.style "margin-left" "1rem" ] []
+                    , syntaxDisplayView model
+                    ]
+                , case model.selectedRule of
+                    ( Just _, True ) ->
+                        let
+                            deleteImage =
+                                img [ src "https://i.ibb.co/KqQjhGF/delete.png", onClick RemoveSelectedRule, Html.Attributes.style "width" "1rem", Html.Attributes.style "margin-left" "0.5rem" ] []
+                        in
+                        section [ class [ "rulesAndAxiomText" ] ]
+                            [ h2 [] [ text "Rules:" ]
+                            , div [ Html.Attributes.style "cursor" "pointer" ]
+                                [ ul []
+                                    (List.map
+                                        (\rule ->
+                                            div [ class [ "ruleWrapper" ] ]
+                                                [ ruleView rule model
+                                                , case model.selectedRule of
+                                                    ( Just hoveredRule, True ) ->
+                                                        if rule == hoveredRule then
+                                                            deleteImage
+
+                                                        else
+                                                            text ""
+
+                                                    _ ->
+                                                        text ""
+                                                ]
+                                        )
+                                        model.rules
+                                    )
+                                ]
+                            , div [ class [ "grid" ] ]
+                                [ select [ class [ "dropdown" ], onInput SelectSymbol ] (List.map symbolOptionView model.symbolAssignments)
+                                , input [ class [ "input" ], type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
+                                , div [] []
+                                , button [ class [ "button" ], onClick AddRule ] [ text "Add Rule" ]
+                                , div [] []
+                                ]
+                            ]
+
+                    _ ->
+                        section [ class [ "rulesText" ] ]
+                            [ h2 [] [ text "Rules:" ]
+                            , div [ Html.Attributes.style "cursor" "pointer" ]
+                                [ ul []
+                                    (List.map
+                                        (\rule -> ruleView rule model)
+                                        model.rules
+                                    )
+                                ]
+                            , div [ class [ "grid" ] ]
+                                [ select [ class [ "dropdown" ], onInput SelectSymbol ] (List.map symbolOptionView model.symbolAssignments)
+                                , input [ class [ "input" ], type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
+                                , div [] []
+                                , button [ class [ "button" ], onClick AddRule ] [ text "Add Rule" ]
+                                , div [] []
+                                ]
+                            ]
+                , section []
+                    [ div []
+                        [ h2 []
+                            [ text "Axiom:" ]
+                        , h3 []
+                            [ text
+                                (if model.axiomApplied then
+                                    model.axiom
+
+                                 else
+                                    ""
+                                )
+                            ]
+                        ]
+                    , div [ class [ "grid" ] ]
+                        [ input [ class [ "input" ], type_ "text", onInput SelectAxiom ] []
+                        , button [ class [ "button" ], onClick ApplyAxiom ] [ text "Apply Axiom" ]
+                        ]
+                    ]
+                , section []
+                    [ h2 [] [ text "Turtle Settings" ]
+                    , div [ class [ "grid2" ] ]
+                        [ Html.label [ class [ "label" ] ] [ text "Turning angle " ]
+                        , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.turningAngle) ] []
+                        , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.turningAngle ++ "°") ]
+                        , Html.label [ class [ "label" ] ] [ text "Turning angle increment " ]
+                        , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateTurningAngleIncrement), value (String.fromFloat model.turningAngleIncrement) ] []
+                        , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.turningAngleIncrement ++ "°") ]
+                        , Html.label [ class [ "label" ] ] [ text "Line length " ]
+                        , input [ class [ "slider" ], type_ "range", Html.Attributes.min "1", Html.Attributes.max "25", step "1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLength), value (String.fromFloat model.lineLength) ] []
+                        , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineLength) ]
+                        , Html.label [ class [ "label" ] ] [ text "Line length scale" ]
+                        , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLengthScale), value (String.fromFloat model.lineLengthScale) ] []
+                        , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineLengthScale) ]
+                        , Html.label [ class [ "label" ] ] [ text "Line width increment" ]
+                        , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3.0", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineWidthIncrement), value (String.fromFloat model.lineWidthIncrement) ] []
+                        , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineWidthIncrement) ]
+                        , Html.label [ class [ "label" ] ] [ text "Recursion depth " ]
+                        , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0", Html.Attributes.max "10", value (String.fromInt model.iterations), onInput (String.toInt >> Maybe.withDefault 0 >> UpdateIterations) ] []
+                        , span [ class [ "sliderValueText" ] ] [ text (String.fromInt model.iterations) ]
+                        , Html.label [ class [ "label" ] ] [ text "Starting Angle " ]
+                        , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateStartingAngle), value (String.fromFloat model.startingAngle) ] []
+                        , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.startingAngle ++ "°") ]
+                        , Html.label [ class [ "label" ] ] [ text "Starting point " ]
+                        , span [ class [ "startingPointValueText" ] ] [ text ((model.startingPoint |> Tuple.first |> String.fromFloat) ++ ", " ++ (model.startingPoint |> Tuple.second |> String.fromFloat)) ]
+                        ]
+                    ]
+                , section [ class [ "drawSection" ] ]
+                    [ button [ class [ "buttonDraw" ], onClick DrawTurtle ] [ text "Draw" ]
+                    ]
+                , section [ class [ "attributionSection" ] ]
+                    [ h2 [] [ text "Attribution" ]
+                    , Html.a [ href "https://github.com/hunorg" ] [ text "created by @hunorg" ]
+                    , div []
+                        [ Html.a [ href "https://github.com/hunorg/L-System-Studio" ] [ text "source code" ] ]
+                    ]
+                ]
+            ]
+        )
+
+
 view : Model -> Html Msg
 view model =
     div [ class [ "flexContainer" ] ]
         [ button [ class [ "toggleSidebar" ], onClick ToggleSidebar ] [ text "≡" ]
-        , if model.showSidebar then
-            div [ class [ "sidebar" ] ]
-                [ div [ class [ "sidebarContent" ] ]
-                    [ section [ class [ "infoSection" ] ]
-                        [ h2 [] [ text "Info" ]
-                        , p []
-                            [ Html.a [ href "http://paulbourke.net/fractals/lsys/" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ] ]
-                        , img [ src "https://i.ibb.co/F44fjhV/open-book.png", onClick ToggleSyntaxDisplay, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer" ] []
-                        , img [ src "https://i.ibb.co/44JYx09/dices.png", onClick GetRandomPreset, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer", Html.Attributes.style "margin-left" "1rem" ] []
-                        , img [ src "https://i.ibb.co/qWqnNVZ/reset.png", onClick Reset, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer", Html.Attributes.style "margin-left" "1rem" ] []
-                        , syntaxDisplayView model
-                        ]
-                    , section []
-                        [ h2 [] [ text "Rules and Axiom" ]
-                        , div [ class [ "grid" ] ]
-                            [ div [] [ h3 [] [ text "Rules:" ] ]
-                            , div [ class [ "rulesContainer" ] ]
-                                [ div []
-                                    [ ul [ class [ "rulesAndAxiomText" ], Html.Attributes.style "cursor" "pointer" ]
-                                        (List.map
-                                            (\rule -> ruleView rule model)
-                                            model.rules
-                                        )
-                                    , case model.selectedRule of
-                                        ( Just _, True ) ->
-                                            img [ class [ "buttonRemoveRule" ], src "https://i.ibb.co/KqQjhGF/delete.png", onClick RemoveSelectedRule ] []
-
-                                        _ ->
-                                            text ""
-                                    ]
-                                ]
-                            , select [ class [ "dropdown" ], onInput SelectSymbol ] (List.map symbolOptionView model.symbolAssignments)
-                            , div [] []
-                            , input [ class [ "input" ], type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
-                            , div [] []
-                            , button [ class [ "button" ], onClick AddRule ] [ text "Add Rule" ]
-                            , div [] []
-                            , div [] [ h3 [] [ text "Axiom:" ] ]
-                            , div [ class [ "rulesAndAxiomText" ] ]
-                                [ text
-                                    (if model.axiomApplied then
-                                        model.axiom
-
-                                     else
-                                        ""
-                                    )
-                                ]
-                           
-                            , input [ class [ "input" ], type_ "text", onInput SelectAxiom ] []
-                            , div [] []
-                            , button [ class [ "button" ], onClick ApplyAxiom ] [ text "Apply Axiom" ]
-                            ]
-                        ]
-                    , section []
-                        [ h2 [] [ text "Turtle Settings" ]
-                        , div [ class [ "grid2" ] ]
-                            [ Html.label [ class [ "label" ] ] [ text "Turning angle " ]
-                            , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.turningAngle) ] []
-                            , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.turningAngle ++ "°") ]
-                            , Html.label [ class [ "label" ] ] [ text "Turning angle increment " ]
-                            , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateTurningAngleIncrement), value (String.fromFloat model.turningAngleIncrement) ] []
-                            , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.turningAngleIncrement ++ "°") ]
-                            , Html.label [ class [ "label" ] ] [ text "Line length " ]
-                            , input [ class [ "slider" ], type_ "range", Html.Attributes.min "1", Html.Attributes.max "25", step "1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLength), value (String.fromFloat model.lineLength) ] []
-                            , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineLength) ]
-                            , Html.label [ class [ "label" ] ] [ text "Line length scale" ]
-                            , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLengthScale), value (String.fromFloat model.lineLengthScale) ] []
-                            , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineLengthScale) ]
-                            , Html.label [ class [ "label" ] ] [ text "Line width increment" ]
-                            , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3.0", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineWidthIncrement), value (String.fromFloat model.lineWidthIncrement) ] []
-                            , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineWidthIncrement) ]
-                            , Html.label [ class [ "label" ] ] [ text "Recursion depth " ]
-                            , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0", Html.Attributes.max "20", value (String.fromInt model.iterations), onInput (String.toInt >> Maybe.withDefault 0 >> UpdateIterations) ] []
-                            , span [ class [ "sliderValueText" ] ] [ text (String.fromInt model.iterations) ]
-                            , Html.label [ class [ "label" ] ] [ text "Starting Angle " ]
-                            , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateStartingAngle), value (String.fromFloat model.startingAngle) ] []
-                            , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.startingAngle ++ "°") ]
-                            , Html.label [ class [ "label" ] ] [ text "Starting point " ]
-                            , span [ class [ "startingPointValueText" ] ] [ text ((model.startingPoint |> Tuple.first |> String.fromFloat) ++ ", " ++ (model.startingPoint |> Tuple.second |> String.fromFloat)) ]
-                            ]
-                        ]
-                    , section [ class [ "drawSection" ] ]
-                        [ button [ class [ "buttonDraw" ], onClick DrawTurtle ] [ text "Draw" ]
-                        ]
-                    , section [ class [ "attributionSection" ] ]
-                        [ h2 [] [ text "Attribution" ]
-                        , Html.a [ href "https://github.com/hunorg" ] [ text "created by @hunorg" ]
-                        , div []
-                            [ Html.a [ href "https://github.com/hunorg/L-System-Studio" ] [ text "source code" ] ]
-                        ]
-                    ]
-                ]
-
-          else
-            text ""
+        , sidebar model
         , div
             [ class [ "canvas" ]
             , if model.showSidebar then
@@ -161,7 +199,12 @@ ruleView rule model =
                 _ ->
                     False
     in
-    li [ onClick (SelectRule rule), classList [ ( "selectedRule", isSelected ) ] ]
+    li
+        [ onClick (SelectRule rule)
+        , onMouseOver (MouseOverRule rule)
+        , onMouseOut (MouseOutRule rule)
+        , classList [ ( "selectedRule", isSelected ) ]
+        ]
         [ text <| String.fromChar (Tuple.first rule) ++ " -> " ++ String.fromList (Tuple.second rule) ]
 
 
@@ -234,4 +277,4 @@ syntaxDisplayView model =
             ]
 
     else
-        text ""
+        nothing

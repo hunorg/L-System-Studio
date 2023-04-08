@@ -16,6 +16,8 @@ type Msg
     | SelectAxiom String
     | UpdateNewRuleInput String
     | SelectRule ( Char, List Char )
+    | MouseOverRule ( Char, List Char )
+    | MouseOutRule ( Char, List Char )
     | RemoveSelectedRule
     | UpdateAngle Float
     | UpdateTurningAngleIncrement Float
@@ -59,6 +61,12 @@ update msg model =
 
         SelectRule rule ->
             ( { model | selectedRule = ( Just rule, not (Tuple.second model.selectedRule) ) }, Cmd.none )
+
+        MouseOverRule rule ->
+            ( { model | selectedRule = ( Just rule, True ) }, Cmd.none )
+
+        MouseOutRule _ ->
+            ( { model | selectedRule = ( Nothing, False ) }, Cmd.none )
 
         RemoveSelectedRule ->
             case model.selectedRule of
