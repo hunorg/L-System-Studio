@@ -1,8 +1,9 @@
-module Model exposing (Model, Symbol, init)
+module Model exposing (Model, Symbol, init, initPreset, Preset)
 
 import Turtle exposing (Action(..))
 import Color
 import ColorPicker
+import Random
 
 
 type alias Model =
@@ -30,6 +31,9 @@ type alias Model =
     , canvasWidth : Float 
     , canvasHeight : Float
     , showSidebar : Bool
+    , selectedPreset : Preset
+    , presets : List Preset
+    , randomGenerator : Random.Generator Int
     }
 
 
@@ -89,6 +93,9 @@ init =
     , canvasWidth = 500
     , canvasHeight = 500
     , showSidebar = True
+    , selectedPreset = plant1
+    , presets = presets
+    , randomGenerator = Random.int 0 (List.length presets - 1)
     }
 
 
@@ -102,3 +109,89 @@ emptySymbolAssignments =
             { character = String.fromChar char, action = NoAction }
     in
     List.map createSymbol lowercaseChars
+
+type alias Preset = 
+    { rules : List ( Char, List Char )
+    , axiomApplied : Bool
+    , turningAngle : Float 
+    , lineLength : Float
+    , axiom : String 
+    , iterations : Int 
+    , startingAngle : Float
+    }
+
+plant1 : Preset
+plant1 = 
+    { rules =  [ ( 'F', [ 'F', 'F' ] )
+        , ( 'x', [ 'F', '-', '[', '[', 'x', ']', '+', 'x', ']', '+', 'F', '[', '+', 'F', 'x', ']', '-', 'x' ] )
+        ]
+    , axiomApplied = True
+    , turningAngle = 22.5
+    , lineLength = 4
+    , axiom = "x"
+    , iterations = 5
+    , startingAngle = -90
+    }
+
+plant2 : Preset
+plant2 = 
+    { rules = [ ( 'F', [ 'F', 'F', '+', '[', '+', 'F', '-', 'F', '-', 'F', ']', '-', '[', '-', 'F', '+', 'F', '+', 'F', ']' ] )
+        ]
+    , axiomApplied = True
+    , turningAngle = 22.5
+    , lineLength = 8
+    , axiom = "F"
+    , iterations = 3
+    , startingAngle = -90
+    }
+
+sqrSierp : Preset
+sqrSierp = 
+    { rules =  [ ( 'x', [ 'x', 'F', '-', 'F', '+', 'F', '-', 'x', 'F', '+', 'F', '+', 'x', 'F', '-', 'F', '+', 'F', '-', 'x' ] )
+        ]
+    , axiomApplied = True
+    , turningAngle = 90
+    , lineLength = 8
+    , axiom = "F+xF+F+xF"
+    , iterations = 3
+    , startingAngle = 0
+    }
+
+crystal : Preset
+crystal = 
+    { rules =  [ ( 'F', [ 'F', 'F', '+', 'F', '+', '+', 'F', '+', 'F' ] )
+        ]
+    , axiomApplied = True
+    , turningAngle = 90
+    , lineLength = 3
+    , axiom = "F+F+F+F"
+    , iterations = 4
+    , startingAngle = 0
+    }
+
+dragonCurve : Preset
+dragonCurve = 
+    { rules =  [ ( 'x', [ 'x', '+', 'y', 'F', '+' ] )
+        , ( 'y', [ '-', 'F', 'x', '-', 'y' ] )
+        ]
+    , axiomApplied = True
+    , turningAngle = 90
+    , lineLength = 8
+    , axiom = "Fx"
+    , iterations = 9
+    , startingAngle = 0
+    }
+
+initPreset : Preset
+initPreset = 
+    { rules =  [] 
+    , axiomApplied = False
+    , turningAngle = 0
+    , lineLength = 0
+    , axiom = ""
+    , iterations = 0
+    , startingAngle = 0
+    }
+
+presets : List Preset
+presets = [plant1, plant2, sqrSierp, crystal, dragonCurve]
