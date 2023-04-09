@@ -1,34 +1,34 @@
-module Model exposing (Model, Symbol, init, initPreset, Preset)
+module Model exposing (Model, Preset, Rule, Symbol, init, initPreset)
 
-import Turtle exposing (Action(..))
 import Color
 import ColorPicker
 import Random
+import Turtle exposing (Action(..))
 
 
 type alias Model =
     { symbolAssignments : List Symbol
     , syntaxDisplay : Bool
-    , rules : List ( Char, List Char )
-    , selectedRule : (Maybe (Char, List Char), Bool)
+    , rules : List Rule
+    , selectedRule : Maybe Rule
     , selectedSymbol : String
     , selectedAction : Action
     , newRuleInput : String
-    , axiomApplied : Bool 
+    , axiomApplied : Bool
     , turningAngle : Float
     , turningAngleIncrement : Float
     , lineLength : Float
     , lineLengthScale : Float
     , lineWidthIncrement : Float
     , axiom : String
-    , iterations : Int
+    , iterations : Float
     , startingPoint : ( Float, Float )
     , startingAngle : Float
     , polygonFillColor : Color.Color
     , colorPicker : ColorPicker.State
     , generatedSequence : List Char
     , drawnTurtle : Bool
-    , canvasWidth : Float 
+    , canvasWidth : Float
     , canvasHeight : Float
     , showSidebar : Bool
     , selectedPreset : Preset
@@ -45,6 +45,10 @@ type alias Symbol =
     { character : String
     , action : Action
     }
+
+
+type alias Rule =
+    ( Char, List Char )
 
 
 init : Model
@@ -72,7 +76,7 @@ init =
             ++ emptySymbolAssignments
     , syntaxDisplay = False
     , rules = []
-    , selectedRule = (Nothing, False)
+    , selectedRule = Nothing
     , selectedSymbol = "F"
     , selectedAction = Move
     , newRuleInput = ""
@@ -110,19 +114,22 @@ emptySymbolAssignments =
     in
     List.map createSymbol lowercaseChars
 
-type alias Preset = 
+
+type alias Preset =
     { rules : List ( Char, List Char )
     , axiomApplied : Bool
-    , turningAngle : Float 
+    , turningAngle : Float
     , lineLength : Float
-    , axiom : String 
-    , iterations : Int 
+    , axiom : String
+    , iterations : Float
     , startingAngle : Float
     }
 
+
 plant1 : Preset
-plant1 = 
-    { rules =  [ ( 'F', [ 'F', 'F' ] )
+plant1 =
+    { rules =
+        [ ( 'F', [ 'F', 'F' ] )
         , ( 'x', [ 'F', '-', '[', '[', 'x', ']', '+', 'x', ']', '+', 'F', '[', '+', 'F', 'x', ']', '-', 'x' ] )
         ]
     , axiomApplied = True
@@ -133,9 +140,11 @@ plant1 =
     , startingAngle = -90
     }
 
+
 plant2 : Preset
-plant2 = 
-    { rules = [ ( 'F', [ 'F', 'F', '+', '[', '+', 'F', '-', 'F', '-', 'F', ']', '-', '[', '-', 'F', '+', 'F', '+', 'F', ']' ] )
+plant2 =
+    { rules =
+        [ ( 'F', [ 'F', 'F', '+', '[', '+', 'F', '-', 'F', '-', 'F', ']', '-', '[', '-', 'F', '+', 'F', '+', 'F', ']' ] )
         ]
     , axiomApplied = True
     , turningAngle = 22.5
@@ -145,9 +154,11 @@ plant2 =
     , startingAngle = -90
     }
 
+
 sqrSierp : Preset
-sqrSierp = 
-    { rules =  [ ( 'x', [ 'x', 'F', '-', 'F', '+', 'F', '-', 'x', 'F', '+', 'F', '+', 'x', 'F', '-', 'F', '+', 'F', '-', 'x' ] )
+sqrSierp =
+    { rules =
+        [ ( 'x', [ 'x', 'F', '-', 'F', '+', 'F', '-', 'x', 'F', '+', 'F', '+', 'x', 'F', '-', 'F', '+', 'F', '-', 'x' ] )
         ]
     , axiomApplied = True
     , turningAngle = 90
@@ -157,9 +168,11 @@ sqrSierp =
     , startingAngle = 0
     }
 
+
 crystal : Preset
-crystal = 
-    { rules =  [ ( 'F', [ 'F', 'F', '+', 'F', '+', '+', 'F', '+', 'F' ] )
+crystal =
+    { rules =
+        [ ( 'F', [ 'F', 'F', '+', 'F', '+', '+', 'F', '+', 'F' ] )
         ]
     , axiomApplied = True
     , turningAngle = 90
@@ -169,9 +182,11 @@ crystal =
     , startingAngle = 0
     }
 
+
 dragonCurve : Preset
-dragonCurve = 
-    { rules =  [ ( 'x', [ 'x', '+', 'y', 'F', '+' ] )
+dragonCurve =
+    { rules =
+        [ ( 'x', [ 'x', '+', 'y', 'F', '+' ] )
         , ( 'y', [ '-', 'F', 'x', '-', 'y' ] )
         ]
     , axiomApplied = True
@@ -182,9 +197,10 @@ dragonCurve =
     , startingAngle = 0
     }
 
+
 initPreset : Preset
-initPreset = 
-    { rules =  [] 
+initPreset =
+    { rules = []
     , axiomApplied = False
     , turningAngle = 0
     , lineLength = 0
@@ -193,5 +209,7 @@ initPreset =
     , startingAngle = 0
     }
 
+
 presets : List Preset
-presets = [plant1, plant2, sqrSierp, crystal, dragonCurve]
+presets =
+    [ plant1, plant2, sqrSierp, crystal, dragonCurve ]

@@ -3,8 +3,8 @@ module View exposing (..)
 import Color
 import ColorPicker
 import Html exposing (Html, button, div, h2, h3, img, input, li, option, p, section, select, span, text, ul)
-import Html.Attributes exposing (classList, placeholder, src, step, type_, value)
-import Html.Events exposing (onClick, onInput, onMouseOut, onMouseOver)
+import Html.Attributes exposing (classList, src, step, type_, value)
+import Html.Events exposing (onClick, onInput)
 import Html.Events.Extra.Mouse as Mouse
 import Html.Extra exposing (nothing, viewIf)
 import LSys exposing (generateTurtle)
@@ -23,8 +23,8 @@ showRule ( from, to ) =
 
 sidebar : Model -> Html Msg
 sidebar model =
-    viewIf model.showSidebar
-        (div [ class [ "sidebar" ] ]
+    viewIf model.showSidebar <|
+        div [ class [ "sidebar" ] ]
             [ div [ class [ "sidebarContent" ] ]
                 [ section [ class [ "infoSection" ] ]
                     [ h2 [] [ text "Info" ]
@@ -35,62 +35,27 @@ sidebar model =
                     , img [ src "https://i.ibb.co/qWqnNVZ/reset.png", onClick Reset, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer", Html.Attributes.style "margin-left" "1rem" ] []
                     , syntaxDisplayView model
                     ]
-                , case model.selectedRule of
-                    ( Just _, True ) ->
-                        let
-                            deleteImage =
-                                img [ src "https://i.ibb.co/KqQjhGF/delete.png", onClick RemoveSelectedRule, Html.Attributes.style "width" "1rem", Html.Attributes.style "margin-left" "0.5rem" ] []
-                        in
-                        section [ class [ "rulesAndAxiomText" ] ]
-                            [ h2 [] [ text "Rules:" ]
-                            , div [ Html.Attributes.style "cursor" "pointer" ]
-                                [ ul []
-                                    (List.map
-                                        (\rule ->
-                                            div [ class [ "ruleWrapper" ] ]
-                                                [ ruleView rule model
-                                                , case model.selectedRule of
-                                                    ( Just hoveredRule, True ) ->
-                                                        if rule == hoveredRule then
-                                                            deleteImage
-
-                                                        else
-                                                            text ""
-
-                                                    _ ->
-                                                        text ""
-                                                ]
-                                        )
-                                        model.rules
-                                    )
-                                ]
-                            , div [ class [ "grid" ] ]
-                                [ select [ class [ "dropdown" ], onInput SelectSymbol ] (List.map symbolOptionView model.symbolAssignments)
-                                , input [ class [ "input" ], type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
-                                , div [] []
-                                , button [ class [ "button" ], onClick AddRule ] [ text "Add Rule" ]
-                                , div [] []
-                                ]
-                            ]
-
-                    _ ->
-                        section [ class [ "rulesText" ] ]
-                            [ h2 [] [ text "Rules:" ]
-                            , div [ Html.Attributes.style "cursor" "pointer" ]
-                                [ ul []
-                                    (List.map
-                                        (\rule -> ruleView rule model)
-                                        model.rules
-                                    )
-                                ]
-                            , div [ class [ "grid" ] ]
-                                [ select [ class [ "dropdown" ], onInput SelectSymbol ] (List.map symbolOptionView model.symbolAssignments)
-                                , input [ class [ "input" ], type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
-                                , div [] []
-                                , button [ class [ "button" ], onClick AddRule ] [ text "Add Rule" ]
-                                , div [] []
-                                ]
-                            ]
+                , section [ class [ "rulesText" ] ]
+                    [ h2 [] [ text "Rules:" ]
+                    , div [ Html.Attributes.style "cursor" "pointer" ]
+                        [ ul []
+                            (List.map
+                                (\rule ->
+                                    li [ class [ "rule" ] ]
+                                        [ ruleView rule model
+                                        ]
+                                )
+                                model.rules
+                            )
+                        ]
+                    , div [ class [ "grid2" ] ]
+                        [ select [ class [ "dropdown" ], onInput SelectSymbol ] (List.map symbolOptionView model.symbolAssignments)
+                        , input [ class [ "input" ], type_ "text", value model.newRuleInput, onInput UpdateNewRuleInput ] []
+                        ]
+                    , div []
+                        [ button [ class [ "button" ], onClick AddRule ] [ text "Add Rule" ]
+                        ]
+                    ]
                 , section []
                     [ div []
                         [ h2 []
@@ -106,37 +71,24 @@ sidebar model =
                             ]
                         ]
                     , div [ class [ "grid" ] ]
-                        [ input [ class [ "input" ], type_ "text", onInput SelectAxiom ] []
+                        [ input [ class [ "input2" ], type_ "text", onInput SelectAxiom ] []
                         , button [ class [ "button" ], onClick ApplyAxiom ] [ text "Apply Axiom" ]
                         ]
                     ]
                 , section []
                     [ h2 [] [ text "Turtle Settings" ]
-                    , div [ class [ "grid2" ] ]
-                        [ Html.label [ class [ "label" ] ] [ text "Turning angle " ]
-                        , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateAngle), value (String.fromFloat model.turningAngle) ] []
-                        , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.turningAngle ++ "°") ]
-                        , Html.label [ class [ "label" ] ] [ text "Turning angle increment " ]
-                        , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateTurningAngleIncrement), value (String.fromFloat model.turningAngleIncrement) ] []
-                        , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.turningAngleIncrement ++ "°") ]
-                        , Html.label [ class [ "label" ] ] [ text "Line length " ]
-                        , input [ class [ "slider" ], type_ "range", Html.Attributes.min "1", Html.Attributes.max "25", step "1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLength), value (String.fromFloat model.lineLength) ] []
-                        , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineLength) ]
-                        , Html.label [ class [ "label" ] ] [ text "Line length scale" ]
-                        , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineLengthScale), value (String.fromFloat model.lineLengthScale) ] []
-                        , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineLengthScale) ]
-                        , Html.label [ class [ "label" ] ] [ text "Line width increment" ]
-                        , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0.0", Html.Attributes.max "3.0", step "0.1", onInput (String.toFloat >> Maybe.withDefault 1 >> UpdateLineWidthIncrement), value (String.fromFloat model.lineWidthIncrement) ] []
-                        , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat model.lineWidthIncrement) ]
-                        , Html.label [ class [ "label" ] ] [ text "Recursion depth " ]
-                        , input [ class [ "slider" ], type_ "range", Html.Attributes.min "0", Html.Attributes.max "10", value (String.fromInt model.iterations), onInput (String.toInt >> Maybe.withDefault 0 >> UpdateIterations) ] []
-                        , span [ class [ "sliderValueText" ] ] [ text (String.fromInt model.iterations) ]
-                        , Html.label [ class [ "label" ] ] [ text "Starting Angle " ]
-                        , input [ class [ "inputAngle" ], type_ "number", Html.Attributes.min "-360", Html.Attributes.max "360", step "1", onInput (String.toFloat >> Maybe.withDefault 0 >> UpdateStartingAngle), value (String.fromFloat model.startingAngle) ] []
-                        , span [ class [ "angleValueText" ] ] [ text (String.fromFloat model.startingAngle ++ "°") ]
-                        , Html.label [ class [ "label" ] ] [ text "Starting point " ]
-                        , span [ class [ "startingPointValueText" ] ] [ text ((model.startingPoint |> Tuple.first |> String.fromFloat) ++ ", " ++ (model.startingPoint |> Tuple.second |> String.fromFloat)) ]
-                        ]
+                    , div [ class [ "grid3" ] ]
+                        (inputAngle "Turning angle" model.turningAngle UpdateAngle
+                            ++ inputAngle "Turning angle increment" model.turningAngleIncrement UpdateTurningAngleIncrement
+                            ++ inputRange "Line length" "1" "25" "1" UpdateLineLength model.lineLength
+                            ++ inputRange " Line length scale" "0.0" "3" "0.1" UpdateLineLengthScale model.lineLengthScale
+                            ++ inputRange "Line width increment" "0.0" "3.0" "0.1" UpdateLineWidthIncrement model.lineWidthIncrement
+                            ++ inputRange "Recursion depth" "0" "10" "1" UpdateIterations model.iterations
+                            ++ inputAngle "Starting Angle" model.startingAngle UpdateStartingAngle
+                            ++ [ Html.label [] [ text "Starting point " ]
+                               , span [ class [ "startingPointValueText" ] ] [ text ((model.startingPoint |> Tuple.first |> String.fromFloat) ++ ", " ++ (model.startingPoint |> Tuple.second |> String.fromFloat)) ]
+                               ]
+                        )
                     ]
                 , section [ class [ "drawSection" ] ]
                     [ button [ class [ "buttonDraw" ], onClick DrawTurtle ] [ text "Draw" ]
@@ -149,7 +101,6 @@ sidebar model =
                     ]
                 ]
             ]
-        )
 
 
 view : Model -> Html Msg
@@ -188,12 +139,45 @@ view model =
         ]
 
 
+inputAngle : String -> Float -> (Float -> Msg) -> List (Html Msg)
+inputAngle label angle msg =
+    [ Html.label [] [ text label ]
+    , input
+        [ class [ "inputAngle" ]
+        , type_ "number"
+        , Html.Attributes.min "-360"
+        , Html.Attributes.max "360"
+        , step "1"
+        , onInput (String.toFloat >> Maybe.withDefault 0 >> msg)
+        , value (String.fromFloat angle)
+        ]
+        []
+    , span [ class [ "angleValueText" ] ] [ text (String.fromFloat angle ++ "°") ]
+    ]
+
+
+inputRange label min max stepSize msg val =
+    [ Html.label [] [ text label ]
+    , input
+        [ class [ "slider" ]
+        , type_ "range"
+        , Html.Attributes.min min
+        , Html.Attributes.max max
+        , step stepSize
+        , onInput (String.toFloat >> Maybe.withDefault 1 >> msg)
+        , value (String.fromFloat val)
+        ]
+        []
+    , span [ class [ "sliderValueText" ] ] [ text (String.fromFloat val) ]
+    ]
+
+
 ruleView : ( Char, List Char ) -> Model -> Html Msg
 ruleView rule model =
     let
         isSelected =
             case model.selectedRule of
-                ( Just selectedRule, True ) ->
+                Just selectedRule ->
                     rule == selectedRule
 
                 _ ->
@@ -201,11 +185,11 @@ ruleView rule model =
     in
     li
         [ onClick (SelectRule rule)
-        , onMouseOver (MouseOverRule rule)
-        , onMouseOut (MouseOutRule rule)
         , classList [ ( "selectedRule", isSelected ) ]
         ]
-        [ text <| String.fromChar (Tuple.first rule) ++ " -> " ++ String.fromList (Tuple.second rule) ]
+        [ text <| String.fromChar (Tuple.first rule) ++ " -> " ++ String.fromList (Tuple.second rule)
+        , img [ src "https://i.ibb.co/KqQjhGF/delete.png", onClick (RemoveRule rule), Html.Attributes.style "width" "1rem", Html.Attributes.style "margin-left" "0.5rem" ] []
+        ]
 
 
 

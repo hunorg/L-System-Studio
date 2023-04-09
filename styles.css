@@ -22,7 +22,7 @@ html {
 .toggleSidebar {
     position: absolute;
     top:3rem;
-    left: 0;
+    left: 1rem;
     transform: translateY(-50%);
     background-color: #eb5160; /* Change the background color */
     color: #ffffff; /* Change the text color */
@@ -39,6 +39,7 @@ html {
 
 
 .sidebar {
+    font-family: sans-serif;
     padding: 1rem;
     height: 100%;
     width: 475px;
@@ -76,7 +77,7 @@ section {
 
 /* rules and axiom section */
 
-.grid {
+.grid2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
@@ -88,17 +89,15 @@ section {
     position: relative;
 }
 
-.ruleWrapper {
-    display: flex;
-    align-items: center;
+.rule {
 }
 
 .ruleItem {
-    flex: 1;
 }
 
 
-.grid2 { 
+.grid3 { 
+    font-family: sans-serif;
     display: grid;
     grid-template-columns: minmax(auto, 3fr) minmax(auto, 1fr) minmax(auto, 1fr);
     grid-gap: 1rem;
@@ -108,7 +107,7 @@ section {
 
 
 /* Typography */
-.label {
+label {
     font-weight: 600;
     color: #495057;
     font-size: 1.125rem;
@@ -116,6 +115,8 @@ section {
     position: relative;
     min-width: 9rem;
 }
+
+
 
 .listItem {
     font-size: 18px;
@@ -132,13 +133,19 @@ h3 {
     font-size: 1.5rem;
     color: #495057; /* Match the color of labels */
     font-weight: 600; /* Slightly heavier font weight */
+    word-break: break-all;
 }
 
-.rulesAndAxiomText { 
+.rulesText { 
    word-break: break-all;
    font-family: sans-serif;
-   padding: 1.3rem;
+   font-weight: bold;
 }
+
+.settingsText { 
+    font-family: sans-serif;
+    padding: 1.3rem;
+ }
 
 .syntaxText { 
     font-family: sans-serif;
@@ -170,7 +177,6 @@ h3 {
     background-color: #eb5160;
     max-height: fit-content;
     width: 100%;
-    margin-top: -0.05rem;
 }
 
 
@@ -203,7 +209,7 @@ h3 {
 }
 
 /* Inputs */
-.input, .inputAngle, .inputStartingPoint {
+.input, .input2, .inputAngle, .inputStartingPoint {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 400;
     border: 1px solid #ced4da;
@@ -217,6 +223,10 @@ h3 {
 }
 
 .input {
+    width: auto;
+}
+
+.input2 { 
     width: 100%;
 }
 
@@ -226,12 +236,12 @@ h3 {
 }
 
 
-.input:hover, .inputAngle:hover {
+.input:hover, .input2:hover, .inputAngle:hover {
     border-color: #adb5bd;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-.input:focus, .inputAngle:focus {
+.input:focus, .inpu2:focus, .inputAngle:focus {
     outline: none;
     border-color: #b7999c;
     box-shadow: 0 2px 6px rgba(183, 153, 156, 0.2);
