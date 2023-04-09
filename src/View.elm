@@ -2,7 +2,7 @@ module View exposing (..)
 
 import Color
 import ColorPicker
-import Html exposing (Html, button, div, h2, h3, img, input, li, option, p, section, select, span, text, ul)
+import Html exposing (Html, button, div, h2, h3, i, img, input, li, option, p, section, select, span, text, ul)
 import Html.Attributes exposing (classList, src, step, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Html.Events.Extra.Mouse as Mouse
@@ -21,18 +21,26 @@ showRule ( from, to ) =
     String.fromChar from ++ " → " ++ String.fromList to
 
 
+icon name msg =
+    i [ class [ "material-icons" ], Html.Attributes.style "cursor" "pointer", onClick msg, Html.Attributes.style "font-size" "46px" ] [ text name ]
+
+
 sidebar : Model -> Html Msg
 sidebar model =
     viewIf model.showSidebar <|
         div [ class [ "sidebar" ] ]
             [ div [ class [ "sidebarContent" ] ]
                 [ section [ class [ "infoSection" ] ]
-                    [ h2 [] [ text "Info" ]
+                    [ h2 [ Html.Attributes.style "margin-top" "3rem" ] [ text "Info" ]
                     , p []
                         [ Html.a [ href "http://paulbourke.net/fractals/lsys/" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ] ]
-                    , img [ src "https://i.ibb.co/F44fjhV/open-book.png", onClick ToggleSyntaxDisplay, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer" ] []
-                    , img [ src "https://i.ibb.co/44JYx09/dices.png", onClick GetRandomPreset, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer", Html.Attributes.style "margin-left" "1rem" ] []
-                    , img [ src "https://i.ibb.co/qWqnNVZ/reset.png", onClick Reset, Html.Attributes.style "width" "3.5rem", Html.Attributes.style "cursor" "pointer", Html.Attributes.style "margin-left" "1rem" ] []
+                    ]
+                , section []
+                    [ div [ class [ "gridIcons" ] ]
+                        [ icon "code" ToggleSyntaxDisplay
+                        , icon "casino" GetRandomPreset
+                        , icon "refresh" Reset
+                        ]
                     , syntaxDisplayView model
                     ]
                 , section [ class [ "rulesText" ] ]
@@ -106,7 +114,14 @@ sidebar model =
 view : Model -> Html Msg
 view model =
     div [ class [ "flexContainer" ] ]
-        [ button [ class [ "toggleSidebar" ], onClick ToggleSidebar ] [ text "≡" ]
+        [ img
+            [ class [ "toggleSidebar" ]
+            , src "https://i.ibb.co/kVTRymN/eye.png"
+            , onClick ToggleSidebar
+            , Html.Attributes.style "width" "3.5rem"
+            , Html.Attributes.style "height" "3.5rem"
+            ]
+            []
         , sidebar model
         , div
             [ class [ "canvas" ]

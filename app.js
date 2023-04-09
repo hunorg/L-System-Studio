@@ -6334,7 +6334,6 @@ var $author$project$Update$DownMsg = F2(
 		return {$: 'DownMsg', a: a, b: b};
 	});
 var $author$project$Update$ToggleSidebar = {$: 'ToggleSidebar'};
-var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$virtual_dom$VirtualDom$attribute = F2(
 	function (key, value) {
 		return A2(
@@ -6659,6 +6658,7 @@ var $author$project$LSys$generateTurtle = F5(
 				$author$project$Turtle$initTurtle(model.startingPoint)),
 			sequence);
 	});
+var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -6999,10 +6999,33 @@ var $author$project$Update$UpdateTurningAngleIncrement = function (a) {
 	return {$: 'UpdateTurningAngleIncrement', a: a};
 };
 var $elm$html$Html$a = _VirtualDom_node('a');
+var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm_community$typed_svg$TypedSvg$Attributes$href = $elm_community$typed_svg$TypedSvg$Core$attribute('href');
-var $elm$html$Html$img = _VirtualDom_node('img');
+var $elm$html$Html$i = _VirtualDom_node('i');
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$View$icon = F2(
+	function (name, msg) {
+		return A2(
+			$elm$html$Html$i,
+			_List_fromArray(
+				[
+					$elm_community$typed_svg$TypedSvg$Attributes$class(
+					_List_fromArray(
+						['material-icons'])),
+					A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+					$elm$html$Html$Events$onClick(msg),
+					A2($elm$html$Html$Attributes$style, 'font-size', '46px')
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(name)
+				]));
+	});
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$core$Basics$composeR = F3(
 	function (f, g, x) {
@@ -7056,8 +7079,6 @@ var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$html$Html$Attributes$step = function (n) {
 	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
 };
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$core$String$toFloat = _String_toFloat;
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
@@ -7185,8 +7206,6 @@ var $elm$html$Html$Attributes$src = function (url) {
 		'src',
 		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $author$project$View$ruleView = F2(
 	function (rule, model) {
 		var isSelected = function () {
@@ -7356,7 +7375,10 @@ var $author$project$View$sidebar = function (model) {
 								[
 									A2(
 									$elm$html$Html$h2,
-									_List_Nil,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'margin-top', '3rem')
+										]),
 									_List_fromArray(
 										[
 											$elm$html$Html$text('Info')
@@ -7376,39 +7398,27 @@ var $author$project$View$sidebar = function (model) {
 												[
 													$elm$html$Html$text('For more information and examples, please visit Paul Bourke\'s L-System page')
 												]))
+										]))
+								])),
+							A2(
+							$elm$html$Html$section,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm_community$typed_svg$TypedSvg$Attributes$class(
+											_List_fromArray(
+												['gridIcons']))
+										]),
+									_List_fromArray(
+										[
+											A2($author$project$View$icon, 'code', $author$project$Update$ToggleSyntaxDisplay),
+											A2($author$project$View$icon, 'casino', $author$project$Update$GetRandomPreset),
+											A2($author$project$View$icon, 'refresh', $author$project$Update$Reset)
 										])),
-									A2(
-									$elm$html$Html$img,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$src('https://i.ibb.co/F44fjhV/open-book.png'),
-											$elm$html$Html$Events$onClick($author$project$Update$ToggleSyntaxDisplay),
-											A2($elm$html$Html$Attributes$style, 'width', '3.5rem'),
-											A2($elm$html$Html$Attributes$style, 'cursor', 'pointer')
-										]),
-									_List_Nil),
-									A2(
-									$elm$html$Html$img,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$src('https://i.ibb.co/44JYx09/dices.png'),
-											$elm$html$Html$Events$onClick($author$project$Update$GetRandomPreset),
-											A2($elm$html$Html$Attributes$style, 'width', '3.5rem'),
-											A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-											A2($elm$html$Html$Attributes$style, 'margin-left', '1rem')
-										]),
-									_List_Nil),
-									A2(
-									$elm$html$Html$img,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$src('https://i.ibb.co/qWqnNVZ/reset.png'),
-											$elm$html$Html$Events$onClick($author$project$Update$Reset),
-											A2($elm$html$Html$Attributes$style, 'width', '3.5rem'),
-											A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-											A2($elm$html$Html$Attributes$style, 'margin-left', '1rem')
-										]),
-									_List_Nil),
 									$author$project$View$syntaxDisplayView(model)
 								])),
 							A2(
@@ -7728,18 +7738,18 @@ var $author$project$View$view = function (model) {
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$button,
+				$elm$html$Html$img,
 				_List_fromArray(
 					[
 						$elm_community$typed_svg$TypedSvg$Attributes$class(
 						_List_fromArray(
 							['toggleSidebar'])),
-						$elm$html$Html$Events$onClick($author$project$Update$ToggleSidebar)
+						$elm$html$Html$Attributes$src('https://i.ibb.co/kVTRymN/eye.png'),
+						$elm$html$Html$Events$onClick($author$project$Update$ToggleSidebar),
+						A2($elm$html$Html$Attributes$style, 'width', '3.5rem'),
+						A2($elm$html$Html$Attributes$style, 'height', '3.5rem')
 					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('≡')
-					])),
+				_List_Nil),
 				$author$project$View$sidebar(model),
 				A2(
 				$elm$html$Html$div,
