@@ -187,8 +187,10 @@ ruleView rule model =
         [ onClick (SelectRule rule)
         , classList [ ( "selectedRule", isSelected ) ]
         ]
-        [ text <| String.fromChar (Tuple.first rule) ++ " -> " ++ String.fromList (Tuple.second rule)
-        , img [ src "https://i.ibb.co/KqQjhGF/delete.png", onClick (RemoveRule rule), Html.Attributes.style "width" "1rem", Html.Attributes.style "margin-left" "0.5rem" ] []
+        [ div [ class [ "ruleItem" ] ]
+            [ text <| String.fromChar (Tuple.first rule) ++ " -> " ++ String.fromList (Tuple.second rule)
+            , img [ src "https://i.ibb.co/KqQjhGF/delete.png", onClick (RemoveRule rule), Html.Attributes.style "width" "1rem", Html.Attributes.style "height" "1rem" ] []
+            ]
         ]
 
 
