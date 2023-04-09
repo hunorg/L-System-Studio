@@ -1,25 +1,26 @@
 module LSys exposing (generateSequence, generateTurtle)
 
+import List.Extra as Extra
 import Model exposing (Model, Symbol)
 import Turtle exposing (..)
-import List.Extra as Extra
+
 
 
 -- Generates an L-system sequence based on the given iterations, axiom, and rules.
 
 
-generateSequence : Int -> String -> List ( Char, List Char ) -> List Char
+generateSequence : Float -> String -> List ( Char, List Char ) -> List Char
 generateSequence iterations axiom rules =
     let
-       expandSymbol symbol =
-            case Extra.find (\(s, _) -> s == symbol) rules of
-                        Just (_, replacement) ->
-                            replacement
+        expandSymbol symbol =
+            case Extra.find (\( s, _ ) -> s == symbol) rules of
+                Just ( _, replacement ) ->
+                    replacement
 
-                        Nothing ->
-                            [symbol]
+                Nothing ->
+                    [ symbol ]
     in
-    List.foldl (\_ seq -> List.concatMap expandSymbol seq) (String.toList axiom) (List.range 1 iterations)
+    List.foldl (\_ seq -> List.concatMap expandSymbol seq) (String.toList axiom) (List.range 1 (round iterations))
 
 
 
@@ -41,17 +42,18 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                     in
                     { turtle | x = newX, y = newY }
 
-
                 TurnLeft ->
-                    if turtle.swapPlusMinus then 
+                    if turtle.swapPlusMinus then
                         turn angle turtle
-                    else 
+
+                    else
                         turn -angle turtle
 
                 TurnRight ->
-                    if turtle.swapPlusMinus then 
+                    if turtle.swapPlusMinus then
                         turn -angle turtle
-                    else 
+
+                    else
                         turn angle turtle
 
                 ReverseDirection ->
@@ -66,7 +68,7 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                 IncrementLineWidth ->
                     { turtle | lineWidth = turtle.lineWidth + model.lineWidthIncrement }
 
-                DecrementLineWidth -> 
+                DecrementLineWidth ->
                     { turtle | lineWidth = turtle.lineWidth - model.lineWidthIncrement }
 
                 DrawDot ->
@@ -77,20 +79,25 @@ generateTurtle model sequence symbolAssignments stepSize angle =
 
                 ClosePolygon ->
                     let
-                        currentPolygon = List.head turtle.polygons |> Maybe.withDefault []
-                        updatedPolygons = List.drop 1 turtle.polygons
+                        currentPolygon =
+                            List.head turtle.polygons |> Maybe.withDefault []
+
+                        updatedPolygons =
+                            List.drop 1 turtle.polygons
                     in
-                    { turtle | polygons = (currentPolygon :: updatedPolygons), filledPolygons = (currentPolygon, model.polygonFillColor) :: turtle.filledPolygons }
+                    { turtle | polygons = currentPolygon :: updatedPolygons, filledPolygons = ( currentPolygon, model.polygonFillColor ) :: turtle.filledPolygons }
 
                 MultiplyLength ->
                     let
-                        newStepSize = model.lineLength * model.lineLengthScale
+                        newStepSize =
+                            model.lineLength * model.lineLengthScale
                     in
                     moveForward newStepSize turtle
 
                 DivideLength ->
                     let
-                        newStepSize = model.lineLength / model.lineLengthScale
+                        newStepSize =
+                            model.lineLength / model.lineLengthScale
                     in
                     moveForward newStepSize turtle
 
@@ -102,7 +109,6 @@ generateTurtle model sequence symbolAssignments stepSize angle =
 
                 DecrementTurningAngle ->
                     { turtle | angle = turtle.angle - model.turningAngleIncrement }
-
 
                 NoAction ->
                     turtle
@@ -128,5 +134,3 @@ calculateNewPosition stepSize angle ( x, y ) =
             stepSize * sin (degreesToRadians angle)
     in
     ( x + deltaX, y + deltaY )
-
-

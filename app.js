@@ -5560,7 +5560,7 @@ var $author$project$Model$init = {
 	rules: _List_Nil,
 	selectedAction: $author$project$Turtle$Move,
 	selectedPreset: $author$project$Model$plant1,
-	selectedRule: _Utils_Tuple2($elm$core$Maybe$Nothing, false),
+	selectedRule: $elm$core$Maybe$Nothing,
 	selectedSymbol: 'F',
 	showSidebar: true,
 	startingAngle: 0,
@@ -5776,6 +5776,7 @@ var $elm_community$list_extra$List$Extra$find = F2(
 			}
 		}
 	});
+var $elm$core$Basics$round = _Basics_round;
 var $elm$core$String$foldr = _String_foldr;
 var $elm$core$String$toList = function (string) {
 	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
@@ -5806,7 +5807,10 @@ var $author$project$LSys$generateSequence = F3(
 					return A2($elm$core$List$concatMap, expandSymbol, seq);
 				}),
 			$elm$core$String$toList(axiom),
-			A2($elm$core$List$range, 1, iterations));
+			A2(
+				$elm$core$List$range,
+				1,
+				$elm$core$Basics$round(iterations)));
 	});
 var $elm$core$List$drop = F2(
 	function (n, list) {
@@ -5857,7 +5861,6 @@ var $elm$core$Maybe$map = F2(
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$core$Basics$not = _Basics_not;
 var $elm$core$Basics$pow = _Basics_pow;
-var $elm$core$Basics$round = _Basics_round;
 var $author$project$Update$roundFloat = F2(
 	function (decimalPlaces, number) {
 		var factor = A2($elm$core$Basics$pow, 10, decimalPlaces);
@@ -6132,48 +6135,22 @@ var $author$project$Update$update = F2(
 					_Utils_update(
 						model,
 						{
-							selectedRule: _Utils_Tuple2(
-								$elm$core$Maybe$Just(rule),
-								!model.selectedRule.b)
+							selectedRule: $elm$core$Maybe$Just(rule)
 						}),
 					$elm$core$Platform$Cmd$none);
-			case 'MouseOverRule':
+			case 'RemoveRule':
 				var rule = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
 						{
-							selectedRule: _Utils_Tuple2(
-								$elm$core$Maybe$Just(rule),
-								true)
+							rules: A2(
+								$elm$core$List$filter,
+								$elm$core$Basics$neq(rule),
+								model.rules),
+							selectedRule: $elm$core$Maybe$Nothing
 						}),
 					$elm$core$Platform$Cmd$none);
-			case 'MouseOutRule':
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							selectedRule: _Utils_Tuple2($elm$core$Maybe$Nothing, false)
-						}),
-					$elm$core$Platform$Cmd$none);
-			case 'RemoveSelectedRule':
-				var _v1 = model.selectedRule;
-				if ((_v1.a.$ === 'Just') && _v1.b) {
-					var rule = _v1.a.a;
-					return _Utils_Tuple2(
-						_Utils_update(
-							model,
-							{
-								rules: A2(
-									$elm$core$List$filter,
-									$elm$core$Basics$neq(rule),
-									model.rules),
-								selectedRule: _Utils_Tuple2($elm$core$Maybe$Nothing, false)
-							}),
-						$elm$core$Platform$Cmd$none);
-				} else {
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
-				}
 			case 'UpdateAngle':
 				var turningAngle = msg.a;
 				return _Utils_Tuple2(
@@ -6235,9 +6212,9 @@ var $author$project$Update$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'ColorPickerMsg':
 				var colorPickerMsg = msg.a;
-				var _v2 = A3($simonh1000$elm_colorpicker$ColorPicker$update, colorPickerMsg, model.polygonFillColor, model.colorPicker);
-				var newColorPicker = _v2.a;
-				var newColorMaybe = _v2.b;
+				var _v1 = A3($simonh1000$elm_colorpicker$ColorPicker$update, colorPickerMsg, model.polygonFillColor, model.colorPicker);
+				var newColorPicker = _v1.a;
+				var newColorMaybe = _v1.b;
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
@@ -6989,7 +6966,6 @@ var $author$project$Update$AddRule = {$: 'AddRule'};
 var $author$project$Update$ApplyAxiom = {$: 'ApplyAxiom'};
 var $author$project$Update$DrawTurtle = {$: 'DrawTurtle'};
 var $author$project$Update$GetRandomPreset = {$: 'GetRandomPreset'};
-var $author$project$Update$RemoveSelectedRule = {$: 'RemoveSelectedRule'};
 var $author$project$Update$Reset = {$: 'Reset'};
 var $author$project$Update$SelectAxiom = function (a) {
 	return {$: 'SelectAxiom', a: a};
@@ -7023,16 +6999,16 @@ var $author$project$Update$UpdateTurningAngleIncrement = function (a) {
 	return {$: 'UpdateTurningAngleIncrement', a: a};
 };
 var $elm$html$Html$a = _VirtualDom_node('a');
-var $elm$core$Basics$composeR = F3(
-	function (f, g, x) {
-		return g(
-			f(x));
-	});
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm_community$typed_svg$TypedSvg$Attributes$href = $elm_community$typed_svg$TypedSvg$Core$attribute('href');
 var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$input = _VirtualDom_node('input');
+var $elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
@@ -7076,12 +7052,117 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
-var $elm$html$Html$p = _VirtualDom_node('p');
-var $author$project$Update$MouseOutRule = function (a) {
-	return {$: 'MouseOutRule', a: a};
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$html$Html$Attributes$step = function (n) {
+	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
 };
-var $author$project$Update$MouseOverRule = function (a) {
-	return {$: 'MouseOverRule', a: a};
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$core$String$toFloat = _String_toFloat;
+var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
+var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
+var $author$project$View$inputAngle = F3(
+	function (label, angle, msg) {
+		return _List_fromArray(
+			[
+				A2(
+				$elm$html$Html$label,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text(label)
+					])),
+				A2(
+				$elm$html$Html$input,
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['inputAngle'])),
+						$elm$html$Html$Attributes$type_('number'),
+						$elm$html$Html$Attributes$min('-360'),
+						$elm$html$Html$Attributes$max('360'),
+						$elm$html$Html$Attributes$step('1'),
+						$elm$html$Html$Events$onInput(
+						A2(
+							$elm$core$Basics$composeR,
+							$elm$core$String$toFloat,
+							A2(
+								$elm$core$Basics$composeR,
+								$elm$core$Maybe$withDefault(0),
+								msg))),
+						$elm$html$Html$Attributes$value(
+						$elm$core$String$fromFloat(angle))
+					]),
+				_List_Nil),
+				A2(
+				$elm$html$Html$span,
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['angleValueText']))
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$String$fromFloat(angle) + '°')
+					]))
+			]);
+	});
+var $author$project$View$inputRange = F6(
+	function (label, min, max, stepSize, msg, val) {
+		return _List_fromArray(
+			[
+				A2(
+				$elm$html$Html$label,
+				_List_Nil,
+				_List_fromArray(
+					[
+						$elm$html$Html$text(label)
+					])),
+				A2(
+				$elm$html$Html$input,
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['slider'])),
+						$elm$html$Html$Attributes$type_('range'),
+						$elm$html$Html$Attributes$min(min),
+						$elm$html$Html$Attributes$max(max),
+						$elm$html$Html$Attributes$step(stepSize),
+						$elm$html$Html$Events$onInput(
+						A2(
+							$elm$core$Basics$composeR,
+							$elm$core$String$toFloat,
+							A2(
+								$elm$core$Basics$composeR,
+								$elm$core$Maybe$withDefault(1),
+								msg))),
+						$elm$html$Html$Attributes$value(
+						$elm$core$String$fromFloat(val))
+					]),
+				_List_Nil),
+				A2(
+				$elm$html$Html$span,
+				_List_fromArray(
+					[
+						$elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['sliderValueText']))
+					]),
+				_List_fromArray(
+					[
+						$elm$html$Html$text(
+						$elm$core$String$fromFloat(val))
+					]))
+			]);
+	});
+var $elm$html$Html$li = _VirtualDom_node('li');
+var $elm$html$Html$p = _VirtualDom_node('p');
+var $author$project$Update$RemoveRule = function (a) {
+	return {$: 'RemoveRule', a: a};
 };
 var $author$project$Update$SelectRule = function (a) {
 	return {$: 'SelectRule', a: a};
@@ -7098,27 +7179,20 @@ var $elm$html$Html$Attributes$classList = function (classes) {
 				A2($elm$core$List$filter, $elm$core$Tuple$second, classes))));
 };
 var $elm$core$String$fromList = _String_fromList;
-var $elm$html$Html$li = _VirtualDom_node('li');
-var $elm$html$Html$Events$onMouseOut = function (msg) {
+var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
-		$elm$html$Html$Events$on,
-		'mouseout',
-		$elm$json$Json$Decode$succeed(msg));
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
 };
-var $elm$html$Html$Events$onMouseOver = function (msg) {
-	return A2(
-		$elm$html$Html$Events$on,
-		'mouseover',
-		$elm$json$Json$Decode$succeed(msg));
-};
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $author$project$View$ruleView = F2(
 	function (rule, model) {
 		var isSelected = function () {
 			var _v0 = model.selectedRule;
-			if ((_v0.a.$ === 'Just') && _v0.b) {
-				var selectedRule = _v0.a.a;
+			if (_v0.$ === 'Just') {
+				var selectedRule = _v0.a;
 				return _Utils_eq(rule, selectedRule);
 			} else {
 				return false;
@@ -7130,10 +7204,6 @@ var $author$project$View$ruleView = F2(
 				[
 					$elm$html$Html$Events$onClick(
 					$author$project$Update$SelectRule(rule)),
-					$elm$html$Html$Events$onMouseOver(
-					$author$project$Update$MouseOverRule(rule)),
-					$elm$html$Html$Events$onMouseOut(
-					$author$project$Update$MouseOutRule(rule)),
 					$elm$html$Html$Attributes$classList(
 					_List_fromArray(
 						[
@@ -7143,25 +7213,23 @@ var $author$project$View$ruleView = F2(
 			_List_fromArray(
 				[
 					$elm$html$Html$text(
-					$elm$core$String$fromChar(rule.a) + (' -> ' + $elm$core$String$fromList(rule.b)))
+					$elm$core$String$fromChar(rule.a) + (' -> ' + $elm$core$String$fromList(rule.b))),
+					A2(
+					$elm$html$Html$img,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$src('https://i.ibb.co/KqQjhGF/delete.png'),
+							$elm$html$Html$Events$onClick(
+							$author$project$Update$RemoveRule(rule)),
+							A2($elm$html$Html$Attributes$style, 'width', '1rem'),
+							A2($elm$html$Html$Attributes$style, 'margin-left', '0.5rem')
+						]),
+					_List_Nil)
 				]));
 	});
 var $elm$html$Html$section = _VirtualDom_node('section');
 var $elm$html$Html$select = _VirtualDom_node('select');
-var $elm$html$Html$span = _VirtualDom_node('span');
-var $elm$html$Html$Attributes$src = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'src',
-		_VirtualDom_noJavaScriptOrHtmlUri(url));
-};
-var $elm$html$Html$Attributes$step = function (n) {
-	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
-};
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$html$Html$option = _VirtualDom_node('option');
-var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $author$project$View$symbolOptionView = function (symbol) {
 	return A2(
 		$elm$html$Html$option,
@@ -7237,8 +7305,6 @@ var $author$project$View$syntaxDisplayView = function (model) {
 						['F -> Move forward by line length drawing a line', 'G -> Move forward by line length drawing a line', 'f -> Move forward by line length without drawing a line', '+ -> Turn left by turning angle', '- -> Turn right by turning angle', '| -> Reverse direction (ie: turn by 180 degrees)', '[ -> Push current drawing state onto stack', '] -> Pop current drawing state from the stack', '# -> Increment the line width by line width increment', '! -> Decrement the line width by line width increment', '@ -> Draw a dot with line width radius', '{ -> Open a polygon', '} -> Close a polygon and fill it with fill colour', '< -> Multiply the line length by the line length scale', '> -> Divide the line length by the line length scale', '& -> Swap the meaning of + and -', '( -> Decrement turning angle by turning angle increment', ') -> Increment turning angle by turning angle increment', 'a to z (except f) -> No action'])))
 			])) : $elm_community$html_extra$Html$Extra$nothing;
 };
-var $elm$core$String$toFloat = _String_toFloat;
-var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
 var $elm_community$html_extra$Html$Extra$viewIf = F2(
 	function (condition, html) {
 		return condition ? html : $elm_community$html_extra$Html$Extra$nothing;
@@ -7334,210 +7400,105 @@ var $author$project$View$sidebar = function (model) {
 									_List_Nil),
 									$author$project$View$syntaxDisplayView(model)
 								])),
-							function () {
-							var _v0 = model.selectedRule;
-							if ((_v0.a.$ === 'Just') && _v0.b) {
-								var deleteImage = A2(
-									$elm$html$Html$img,
+							A2(
+							$elm$html$Html$section,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$class(
+									_List_fromArray(
+										['rulesText']))
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$h2,
+									_List_Nil,
 									_List_fromArray(
 										[
-											$elm$html$Html$Attributes$src('https://i.ibb.co/KqQjhGF/delete.png'),
-											$elm$html$Html$Events$onClick($author$project$Update$RemoveSelectedRule),
-											A2($elm$html$Html$Attributes$style, 'width', '1rem'),
-											A2($elm$html$Html$Attributes$style, 'margin-left', '0.5rem')
+											$elm$html$Html$text('Rules:')
+										])),
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'cursor', 'pointer')
 										]),
-									_List_Nil);
-								return A2(
-									$elm$html$Html$section,
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$ul,
+											_List_Nil,
+											A2(
+												$elm$core$List$map,
+												function (rule) {
+													return A2(
+														$elm$html$Html$li,
+														_List_fromArray(
+															[
+																$elm_community$typed_svg$TypedSvg$Attributes$class(
+																_List_fromArray(
+																	['rule']))
+															]),
+														_List_fromArray(
+															[
+																A2($author$project$View$ruleView, rule, model)
+															]));
+												},
+												model.rules))
+										])),
+									A2(
+									$elm$html$Html$div,
 									_List_fromArray(
 										[
 											$elm_community$typed_svg$TypedSvg$Attributes$class(
 											_List_fromArray(
-												['rulesAndAxiomText']))
+												['grid2']))
 										]),
 									_List_fromArray(
 										[
 											A2(
-											$elm$html$Html$h2,
-											_List_Nil,
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Rules:')
-												])),
-											A2(
-											$elm$html$Html$div,
-											_List_fromArray(
-												[
-													A2($elm$html$Html$Attributes$style, 'cursor', 'pointer')
-												]),
-											_List_fromArray(
-												[
-													A2(
-													$elm$html$Html$ul,
-													_List_Nil,
-													A2(
-														$elm$core$List$map,
-														function (rule) {
-															return A2(
-																$elm$html$Html$div,
-																_List_fromArray(
-																	[
-																		$elm_community$typed_svg$TypedSvg$Attributes$class(
-																		_List_fromArray(
-																			['ruleWrapper']))
-																	]),
-																_List_fromArray(
-																	[
-																		A2($author$project$View$ruleView, rule, model),
-																		function () {
-																		var _v1 = model.selectedRule;
-																		if ((_v1.a.$ === 'Just') && _v1.b) {
-																			var hoveredRule = _v1.a.a;
-																			return _Utils_eq(rule, hoveredRule) ? deleteImage : $elm$html$Html$text('');
-																		} else {
-																			return $elm$html$Html$text('');
-																		}
-																	}()
-																	]));
-														},
-														model.rules))
-												])),
-											A2(
-											$elm$html$Html$div,
+											$elm$html$Html$select,
 											_List_fromArray(
 												[
 													$elm_community$typed_svg$TypedSvg$Attributes$class(
 													_List_fromArray(
-														['grid']))
+														['dropdown'])),
+													$elm$html$Html$Events$onInput($author$project$Update$SelectSymbol)
 												]),
-											_List_fromArray(
-												[
-													A2(
-													$elm$html$Html$select,
-													_List_fromArray(
-														[
-															$elm_community$typed_svg$TypedSvg$Attributes$class(
-															_List_fromArray(
-																['dropdown'])),
-															$elm$html$Html$Events$onInput($author$project$Update$SelectSymbol)
-														]),
-													A2($elm$core$List$map, $author$project$View$symbolOptionView, model.symbolAssignments)),
-													A2(
-													$elm$html$Html$input,
-													_List_fromArray(
-														[
-															$elm_community$typed_svg$TypedSvg$Attributes$class(
-															_List_fromArray(
-																['input'])),
-															$elm$html$Html$Attributes$type_('text'),
-															$elm$html$Html$Attributes$value(model.newRuleInput),
-															$elm$html$Html$Events$onInput($author$project$Update$UpdateNewRuleInput)
-														]),
-													_List_Nil),
-													A2($elm$html$Html$div, _List_Nil, _List_Nil),
-													A2(
-													$elm$html$Html$button,
-													_List_fromArray(
-														[
-															$elm_community$typed_svg$TypedSvg$Attributes$class(
-															_List_fromArray(
-																['button'])),
-															$elm$html$Html$Events$onClick($author$project$Update$AddRule)
-														]),
-													_List_fromArray(
-														[
-															$elm$html$Html$text('Add Rule')
-														])),
-													A2($elm$html$Html$div, _List_Nil, _List_Nil)
-												]))
-										]));
-							} else {
-								return A2(
-									$elm$html$Html$section,
-									_List_fromArray(
-										[
-											$elm_community$typed_svg$TypedSvg$Attributes$class(
-											_List_fromArray(
-												['rulesText']))
-										]),
-									_List_fromArray(
-										[
+											A2($elm$core$List$map, $author$project$View$symbolOptionView, model.symbolAssignments)),
 											A2(
-											$elm$html$Html$h2,
-											_List_Nil,
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Rules:')
-												])),
-											A2(
-											$elm$html$Html$div,
-											_List_fromArray(
-												[
-													A2($elm$html$Html$Attributes$style, 'cursor', 'pointer')
-												]),
-											_List_fromArray(
-												[
-													A2(
-													$elm$html$Html$ul,
-													_List_Nil,
-													A2(
-														$elm$core$List$map,
-														function (rule) {
-															return A2($author$project$View$ruleView, rule, model);
-														},
-														model.rules))
-												])),
-											A2(
-											$elm$html$Html$div,
+											$elm$html$Html$input,
 											_List_fromArray(
 												[
 													$elm_community$typed_svg$TypedSvg$Attributes$class(
 													_List_fromArray(
-														['grid']))
+														['input'])),
+													$elm$html$Html$Attributes$type_('text'),
+													$elm$html$Html$Attributes$value(model.newRuleInput),
+													$elm$html$Html$Events$onInput($author$project$Update$UpdateNewRuleInput)
+												]),
+											_List_Nil)
+										])),
+									A2(
+									$elm$html$Html$div,
+									_List_Nil,
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$button,
+											_List_fromArray(
+												[
+													$elm_community$typed_svg$TypedSvg$Attributes$class(
+													_List_fromArray(
+														['button'])),
+													$elm$html$Html$Events$onClick($author$project$Update$AddRule)
 												]),
 											_List_fromArray(
 												[
-													A2(
-													$elm$html$Html$select,
-													_List_fromArray(
-														[
-															$elm_community$typed_svg$TypedSvg$Attributes$class(
-															_List_fromArray(
-																['dropdown'])),
-															$elm$html$Html$Events$onInput($author$project$Update$SelectSymbol)
-														]),
-													A2($elm$core$List$map, $author$project$View$symbolOptionView, model.symbolAssignments)),
-													A2(
-													$elm$html$Html$input,
-													_List_fromArray(
-														[
-															$elm_community$typed_svg$TypedSvg$Attributes$class(
-															_List_fromArray(
-																['input'])),
-															$elm$html$Html$Attributes$type_('text'),
-															$elm$html$Html$Attributes$value(model.newRuleInput),
-															$elm$html$Html$Events$onInput($author$project$Update$UpdateNewRuleInput)
-														]),
-													_List_Nil),
-													A2($elm$html$Html$div, _List_Nil, _List_Nil),
-													A2(
-													$elm$html$Html$button,
-													_List_fromArray(
-														[
-															$elm_community$typed_svg$TypedSvg$Attributes$class(
-															_List_fromArray(
-																['button'])),
-															$elm$html$Html$Events$onClick($author$project$Update$AddRule)
-														]),
-													_List_fromArray(
-														[
-															$elm$html$Html$text('Add Rule')
-														])),
-													A2($elm$html$Html$div, _List_Nil, _List_Nil)
+													$elm$html$Html$text('Add Rule')
 												]))
-										]));
-							}
-						}(),
+										]))
+								])),
 							A2(
 							$elm$html$Html$section,
 							_List_Nil,
@@ -7580,7 +7541,7 @@ var $author$project$View$sidebar = function (model) {
 												[
 													$elm_community$typed_svg$TypedSvg$Attributes$class(
 													_List_fromArray(
-														['input'])),
+														['input2'])),
 													$elm$html$Html$Attributes$type_('text'),
 													$elm$html$Html$Events$onInput($author$project$Update$SelectAxiom)
 												]),
@@ -7618,371 +7579,45 @@ var $author$project$View$sidebar = function (model) {
 										[
 											$elm_community$typed_svg$TypedSvg$Attributes$class(
 											_List_fromArray(
-												['grid2']))
+												['grid3']))
 										]),
-									_List_fromArray(
-										[
-											A2(
-											$elm$html$Html$label,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['label']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Turning angle ')
-												])),
-											A2(
-											$elm$html$Html$input,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['inputAngle'])),
-													$elm$html$Html$Attributes$type_('number'),
-													$elm$html$Html$Attributes$min('-360'),
-													$elm$html$Html$Attributes$max('360'),
-													$elm$html$Html$Attributes$step('1'),
-													$elm$html$Html$Events$onInput(
-													A2(
-														$elm$core$Basics$composeR,
-														$elm$core$String$toFloat,
-														A2(
-															$elm$core$Basics$composeR,
-															$elm$core$Maybe$withDefault(0),
-															$author$project$Update$UpdateAngle))),
-													$elm$html$Html$Attributes$value(
-													$elm$core$String$fromFloat(model.turningAngle))
-												]),
-											_List_Nil),
-											A2(
-											$elm$html$Html$span,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['angleValueText']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text(
-													$elm$core$String$fromFloat(model.turningAngle) + '°')
-												])),
-											A2(
-											$elm$html$Html$label,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['label']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Turning angle increment ')
-												])),
-											A2(
-											$elm$html$Html$input,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['inputAngle'])),
-													$elm$html$Html$Attributes$type_('number'),
-													$elm$html$Html$Attributes$min('-360'),
-													$elm$html$Html$Attributes$max('360'),
-													$elm$html$Html$Attributes$step('1'),
-													$elm$html$Html$Events$onInput(
-													A2(
-														$elm$core$Basics$composeR,
-														$elm$core$String$toFloat,
-														A2(
-															$elm$core$Basics$composeR,
-															$elm$core$Maybe$withDefault(0),
-															$author$project$Update$UpdateTurningAngleIncrement))),
-													$elm$html$Html$Attributes$value(
-													$elm$core$String$fromFloat(model.turningAngleIncrement))
-												]),
-											_List_Nil),
-											A2(
-											$elm$html$Html$span,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['angleValueText']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text(
-													$elm$core$String$fromFloat(model.turningAngleIncrement) + '°')
-												])),
-											A2(
-											$elm$html$Html$label,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['label']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Line length ')
-												])),
-											A2(
-											$elm$html$Html$input,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['slider'])),
-													$elm$html$Html$Attributes$type_('range'),
-													$elm$html$Html$Attributes$min('1'),
-													$elm$html$Html$Attributes$max('25'),
-													$elm$html$Html$Attributes$step('1'),
-													$elm$html$Html$Events$onInput(
-													A2(
-														$elm$core$Basics$composeR,
-														$elm$core$String$toFloat,
-														A2(
-															$elm$core$Basics$composeR,
-															$elm$core$Maybe$withDefault(1),
-															$author$project$Update$UpdateLineLength))),
-													$elm$html$Html$Attributes$value(
-													$elm$core$String$fromFloat(model.lineLength))
-												]),
-											_List_Nil),
-											A2(
-											$elm$html$Html$span,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['sliderValueText']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text(
-													$elm$core$String$fromFloat(model.lineLength))
-												])),
-											A2(
-											$elm$html$Html$label,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['label']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Line length scale')
-												])),
-											A2(
-											$elm$html$Html$input,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['slider'])),
-													$elm$html$Html$Attributes$type_('range'),
-													$elm$html$Html$Attributes$min('0.0'),
-													$elm$html$Html$Attributes$max('3'),
-													$elm$html$Html$Attributes$step('0.1'),
-													$elm$html$Html$Events$onInput(
-													A2(
-														$elm$core$Basics$composeR,
-														$elm$core$String$toFloat,
-														A2(
-															$elm$core$Basics$composeR,
-															$elm$core$Maybe$withDefault(1),
-															$author$project$Update$UpdateLineLengthScale))),
-													$elm$html$Html$Attributes$value(
-													$elm$core$String$fromFloat(model.lineLengthScale))
-												]),
-											_List_Nil),
-											A2(
-											$elm$html$Html$span,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['sliderValueText']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text(
-													$elm$core$String$fromFloat(model.lineLengthScale))
-												])),
-											A2(
-											$elm$html$Html$label,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['label']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Line width increment')
-												])),
-											A2(
-											$elm$html$Html$input,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['slider'])),
-													$elm$html$Html$Attributes$type_('range'),
-													$elm$html$Html$Attributes$min('0.0'),
-													$elm$html$Html$Attributes$max('3.0'),
-													$elm$html$Html$Attributes$step('0.1'),
-													$elm$html$Html$Events$onInput(
-													A2(
-														$elm$core$Basics$composeR,
-														$elm$core$String$toFloat,
-														A2(
-															$elm$core$Basics$composeR,
-															$elm$core$Maybe$withDefault(1),
-															$author$project$Update$UpdateLineWidthIncrement))),
-													$elm$html$Html$Attributes$value(
-													$elm$core$String$fromFloat(model.lineWidthIncrement))
-												]),
-											_List_Nil),
-											A2(
-											$elm$html$Html$span,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['sliderValueText']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text(
-													$elm$core$String$fromFloat(model.lineWidthIncrement))
-												])),
-											A2(
-											$elm$html$Html$label,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['label']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Recursion depth ')
-												])),
-											A2(
-											$elm$html$Html$input,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['slider'])),
-													$elm$html$Html$Attributes$type_('range'),
-													$elm$html$Html$Attributes$min('0'),
-													$elm$html$Html$Attributes$max('10'),
-													$elm$html$Html$Attributes$value(
-													$elm$core$String$fromInt(model.iterations)),
-													$elm$html$Html$Events$onInput(
-													A2(
-														$elm$core$Basics$composeR,
-														$elm$core$String$toInt,
-														A2(
-															$elm$core$Basics$composeR,
-															$elm$core$Maybe$withDefault(0),
-															$author$project$Update$UpdateIterations)))
-												]),
-											_List_Nil),
-											A2(
-											$elm$html$Html$span,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['sliderValueText']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text(
-													$elm$core$String$fromInt(model.iterations))
-												])),
-											A2(
-											$elm$html$Html$label,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['label']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Starting Angle ')
-												])),
-											A2(
-											$elm$html$Html$input,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['inputAngle'])),
-													$elm$html$Html$Attributes$type_('number'),
-													$elm$html$Html$Attributes$min('-360'),
-													$elm$html$Html$Attributes$max('360'),
-													$elm$html$Html$Attributes$step('1'),
-													$elm$html$Html$Events$onInput(
-													A2(
-														$elm$core$Basics$composeR,
-														$elm$core$String$toFloat,
-														A2(
-															$elm$core$Basics$composeR,
-															$elm$core$Maybe$withDefault(0),
-															$author$project$Update$UpdateStartingAngle))),
-													$elm$html$Html$Attributes$value(
-													$elm$core$String$fromFloat(model.startingAngle))
-												]),
-											_List_Nil),
-											A2(
-											$elm$html$Html$span,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['angleValueText']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text(
-													$elm$core$String$fromFloat(model.startingAngle) + '°')
-												])),
-											A2(
-											$elm$html$Html$label,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['label']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Starting point ')
-												])),
-											A2(
-											$elm$html$Html$span,
-											_List_fromArray(
-												[
-													$elm_community$typed_svg$TypedSvg$Attributes$class(
-													_List_fromArray(
-														['startingPointValueText']))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text(
-													$elm$core$String$fromFloat(model.startingPoint.a) + (', ' + $elm$core$String$fromFloat(model.startingPoint.b)))
-												]))
-										]))
+									_Utils_ap(
+										A3($author$project$View$inputAngle, 'Turning angle', model.turningAngle, $author$project$Update$UpdateAngle),
+										_Utils_ap(
+											A3($author$project$View$inputAngle, 'Turning angle increment', model.turningAngleIncrement, $author$project$Update$UpdateTurningAngleIncrement),
+											_Utils_ap(
+												A6($author$project$View$inputRange, 'Line length', '1', '25', '1', $author$project$Update$UpdateLineLength, model.lineLength),
+												_Utils_ap(
+													A6($author$project$View$inputRange, ' Line length scale', '0.0', '3', '0.1', $author$project$Update$UpdateLineLengthScale, model.lineLengthScale),
+													_Utils_ap(
+														A6($author$project$View$inputRange, 'Line width increment', '0.0', '3.0', '0.1', $author$project$Update$UpdateLineWidthIncrement, model.lineWidthIncrement),
+														_Utils_ap(
+															A6($author$project$View$inputRange, 'Recursion depth', '0', '10', '1', $author$project$Update$UpdateIterations, model.iterations),
+															_Utils_ap(
+																A3($author$project$View$inputAngle, 'Starting Angle', model.startingAngle, $author$project$Update$UpdateStartingAngle),
+																_List_fromArray(
+																	[
+																		A2(
+																		$elm$html$Html$label,
+																		_List_Nil,
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text('Starting point ')
+																			])),
+																		A2(
+																		$elm$html$Html$span,
+																		_List_fromArray(
+																			[
+																				$elm_community$typed_svg$TypedSvg$Attributes$class(
+																				_List_fromArray(
+																					['startingPointValueText']))
+																			]),
+																		_List_fromArray(
+																			[
+																				$elm$html$Html$text(
+																				$elm$core$String$fromFloat(model.startingPoint.a) + (', ' + $elm$core$String$fromFloat(model.startingPoint.b)))
+																			]))
+																	])))))))))
 								])),
 							A2(
 							$elm$html$Html$section,

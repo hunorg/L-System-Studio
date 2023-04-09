@@ -4,7 +4,7 @@ import ColorPicker
 import Html.Events.Extra.Mouse as Mouse
 import LSys exposing (generateSequence)
 import List.Extra
-import Model exposing (Model, Preset, init)
+import Model exposing (Model, Preset, Rule, init)
 import Random
 import Task
 import Turtle exposing (Action(..))
@@ -15,16 +15,14 @@ type Msg
     | SelectSymbol String
     | SelectAxiom String
     | UpdateNewRuleInput String
-    | SelectRule ( Char, List Char )
-    | MouseOverRule ( Char, List Char )
-    | MouseOutRule ( Char, List Char )
-    | RemoveSelectedRule
+    | SelectRule Rule
+    | RemoveRule Rule
     | UpdateAngle Float
     | UpdateTurningAngleIncrement Float
     | UpdateLineLength Float
     | UpdateLineLengthScale Float
     | UpdateLineWidthIncrement Float
-    | UpdateIterations Int
+    | UpdateIterations Float
     | DownMsg Mouse.Button ( Float, Float )
     | UpdateStartingAngle Float
     | ColorPickerMsg ColorPicker.Msg
@@ -60,21 +58,10 @@ update msg model =
             ( { model | newRuleInput = input }, Cmd.none )
 
         SelectRule rule ->
-            ( { model | selectedRule = ( Just rule, not (Tuple.second model.selectedRule) ) }, Cmd.none )
+            ( { model | selectedRule = Just rule }, Cmd.none )
 
-        MouseOverRule rule ->
-            ( { model | selectedRule = ( Just rule, True ) }, Cmd.none )
-
-        MouseOutRule _ ->
-            ( { model | selectedRule = ( Nothing, False ) }, Cmd.none )
-
-        RemoveSelectedRule ->
-            case model.selectedRule of
-                ( Just rule, True ) ->
-                    ( { model | rules = List.filter ((/=) rule) model.rules, selectedRule = ( Nothing, False ) }, Cmd.none )
-
-                _ ->
-                    ( model, Cmd.none )
+        RemoveRule rule ->
+            ( { model | rules = List.filter ((/=) rule) model.rules, selectedRule = Nothing }, Cmd.none )
 
         UpdateAngle turningAngle ->
             ( { model | turningAngle = turningAngle }, Cmd.none )
