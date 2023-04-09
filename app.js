@@ -7212,19 +7212,30 @@ var $author$project$View$ruleView = F2(
 				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text(
-					$elm$core$String$fromChar(rule.a) + (' -> ' + $elm$core$String$fromList(rule.b))),
 					A2(
-					$elm$html$Html$img,
+					$elm$html$Html$div,
 					_List_fromArray(
 						[
-							$elm$html$Html$Attributes$src('https://i.ibb.co/KqQjhGF/delete.png'),
-							$elm$html$Html$Events$onClick(
-							$author$project$Update$RemoveRule(rule)),
-							A2($elm$html$Html$Attributes$style, 'width', '1rem'),
-							A2($elm$html$Html$Attributes$style, 'margin-left', '0.5rem')
+							$elm_community$typed_svg$TypedSvg$Attributes$class(
+							_List_fromArray(
+								['ruleItem']))
 						]),
-					_List_Nil)
+					_List_fromArray(
+						[
+							$elm$html$Html$text(
+							$elm$core$String$fromChar(rule.a) + (' -> ' + $elm$core$String$fromList(rule.b))),
+							A2(
+							$elm$html$Html$img,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$src('https://i.ibb.co/KqQjhGF/delete.png'),
+									$elm$html$Html$Events$onClick(
+									$author$project$Update$RemoveRule(rule)),
+									A2($elm$html$Html$Attributes$style, 'width', '1rem'),
+									A2($elm$html$Html$Attributes$style, 'height', '1rem')
+								]),
+							_List_Nil)
+						]))
 				]));
 	});
 var $elm$html$Html$section = _VirtualDom_node('section');
