@@ -124,6 +124,11 @@ view model =
         , sidebar model
         , div
             [ class [ "canvas" ]
+            , if not model.showSidebar then
+                Html.Attributes.style "margin-left" "1rem"
+
+              else
+                class [ "" ]
             ]
             [ div [ class [ "canvasContent" ] ]
                 [ svg
