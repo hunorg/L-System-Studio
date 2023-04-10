@@ -7759,7 +7759,10 @@ var $author$project$View$view = function (model) {
 					[
 						$elm_community$typed_svg$TypedSvg$Attributes$class(
 						_List_fromArray(
-							['canvas']))
+							['canvas'])),
+						(!model.showSidebar) ? A2($elm$html$Html$Attributes$style, 'margin-left', '1rem') : $elm_community$typed_svg$TypedSvg$Attributes$class(
+						_List_fromArray(
+							['']))
 					]),
 				_List_fromArray(
 					[
