@@ -6282,7 +6282,12 @@ var $author$project$Update$update = F2(
 						{showSidebar: !model.showSidebar}),
 					$elm$core$Platform$Cmd$none);
 			case 'Reset':
-				return _Utils_Tuple2($author$project$Model$init, $elm$core$Platform$Cmd$none);
+				var newModel = $author$project$Model$init;
+				return _Utils_Tuple2(
+					_Utils_update(
+						newModel,
+						{canvasHeight: model.canvasHeight, canvasWidth: model.canvasWidth}),
+					$elm$core$Platform$Cmd$none);
 			case 'GetRandomPreset':
 				return _Utils_Tuple2(
 					model,
