@@ -128,7 +128,26 @@ update msg model =
             ( { model | showSidebar = not model.showSidebar }, Cmd.none )
 
         Reset ->
-            ( init, Cmd.none )
+            ( { model
+                | syntaxDisplay = False
+                , rules = []
+                , selectedRule = Nothing
+                , selectedAction = Move
+                , newRuleInput = ""
+                , axiomApplied = False
+                , turningAngle = 0
+                , turningAngleIncrement = 0
+                , lineLength = 1
+                , lineLengthScale = 0
+                , lineWidthIncrement = 0
+                , axiom = ""
+                , iterations = 0
+                , startingAngle = 0
+                , generatedSequence = []
+                , drawnTurtle = False
+              }
+            , Cmd.none
+            )
 
         GetRandomPreset ->
             ( model, Random.generate SetRandomPreset model.randomGenerator )

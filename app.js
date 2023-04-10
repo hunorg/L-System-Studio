@@ -6282,7 +6282,11 @@ var $author$project$Update$update = F2(
 						{showSidebar: !model.showSidebar}),
 					$elm$core$Platform$Cmd$none);
 			case 'Reset':
-				return _Utils_Tuple2($author$project$Model$init, $elm$core$Platform$Cmd$none);
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{axiom: '', axiomApplied: false, drawnTurtle: false, generatedSequence: _List_Nil, iterations: 0, lineLength: 1, lineLengthScale: 0, lineWidthIncrement: 0, newRuleInput: '', rules: _List_Nil, selectedAction: $author$project$Turtle$Move, selectedRule: $elm$core$Maybe$Nothing, startingAngle: 0, syntaxDisplay: false, turningAngle: 0, turningAngleIncrement: 0}),
+					$elm$core$Platform$Cmd$none);
 			case 'GetRandomPreset':
 				return _Utils_Tuple2(
 					model,
