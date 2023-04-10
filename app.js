@@ -6282,12 +6282,7 @@ var $author$project$Update$update = F2(
 						{showSidebar: !model.showSidebar}),
 					$elm$core$Platform$Cmd$none);
 			case 'Reset':
-				var newModel = $author$project$Model$init;
-				return _Utils_Tuple2(
-					_Utils_update(
-						newModel,
-						{canvasHeight: model.canvasHeight, canvasWidth: model.canvasWidth}),
-					$elm$core$Platform$Cmd$none);
+				return _Utils_Tuple2($author$project$Model$init, $elm$core$Platform$Cmd$none);
 			case 'GetRandomPreset':
 				return _Utils_Tuple2(
 					model,
@@ -6663,7 +6658,7 @@ var $author$project$LSys$generateTurtle = F5(
 				$author$project$Turtle$initTurtle(model.startingPoint)),
 			sequence);
 	});
-var $elm$html$Html$img = _VirtualDom_node('img');
+var $elm$html$Html$i = _VirtualDom_node('i');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -7008,7 +7003,6 @@ var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm_community$typed_svg$TypedSvg$Attributes$href = $elm_community$typed_svg$TypedSvg$Core$attribute('href');
-var $elm$html$Html$i = _VirtualDom_node('i');
 var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
 var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
@@ -7205,6 +7199,7 @@ var $elm$html$Html$Attributes$classList = function (classes) {
 				A2($elm$core$List$filter, $elm$core$Tuple$second, classes))));
 };
 var $elm$core$String$fromList = _String_fromList;
+var $elm$html$Html$img = _VirtualDom_node('img');
 var $elm$html$Html$Attributes$src = function (url) {
 	return A2(
 		$elm$html$Html$Attributes$stringProperty,
@@ -7743,18 +7738,20 @@ var $author$project$View$view = function (model) {
 		_List_fromArray(
 			[
 				A2(
-				$elm$html$Html$img,
+				$elm$html$Html$i,
 				_List_fromArray(
 					[
 						$elm_community$typed_svg$TypedSvg$Attributes$class(
 						_List_fromArray(
-							['toggleSidebar'])),
-						$elm$html$Html$Attributes$src('https://i.ibb.co/kVTRymN/eye.png'),
+							['toggleSidebar', 'material-icons'])),
+						A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
 						$elm$html$Html$Events$onClick($author$project$Update$ToggleSidebar),
-						A2($elm$html$Html$Attributes$style, 'width', '3.5rem'),
-						A2($elm$html$Html$Attributes$style, 'height', '3.5rem')
+						A2($elm$html$Html$Attributes$style, 'font-size', '46px')
 					]),
-				_List_Nil),
+				_List_fromArray(
+					[
+						$elm$html$Html$text('menu')
+					])),
 				$author$project$View$sidebar(model),
 				A2(
 				$elm$html$Html$div,
@@ -7762,8 +7759,7 @@ var $author$project$View$view = function (model) {
 					[
 						$elm_community$typed_svg$TypedSvg$Attributes$class(
 						_List_fromArray(
-							['canvas'])),
-						model.showSidebar ? A2($elm$html$Html$Attributes$style, 'padding-left', '0rem') : A2($elm$html$Html$Attributes$style, 'padding-left', '1rem')
+							['canvas']))
 					]),
 				_List_fromArray(
 					[

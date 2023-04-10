@@ -48,6 +48,7 @@ html {
     height: 100%;
     width: 100%;
     padding: 1rem;
+    padding-left: 0rem;
 }
 
 .canvasContent { 
@@ -111,13 +112,16 @@ section {
 
 .gridIcons { 
     font-family: sans-serif;
-    display: grid;
+    display: flex;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 7rem;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
 }
 
+i:hover {
+    transform: translateY(-2px);
+}
 
 /* Typography */
 label {
@@ -344,3 +348,36 @@ h3 {
     color: #053364;
   }
 
+/* queries */
+
+@media (max-width: 800px) {
+
+    .flexContainer {
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+        overflow-y: auto;
+        display: block;
+    }
+
+    .grid3 { 
+        justify-content: center;
+    }
+
+    .sidebar {
+      width: 100vw;
+      height: auto;
+      overflow-x: hidden;
+    }
+
+    .canvas { 
+        padding-left: 1rem;
+    }
+
+    .toggleSidebar {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        cursor: pointer;
+    }
+}
