@@ -136,3 +136,35 @@
         font-size: 1.3rem;
     }
   }
+
+  /* queries */
+
+/*
+@media (max-width: 800px) {
+
+    .flexContainer {
+        flex-direction: column;
+        width: 100vw;
+        height: 100vh;
+        overflow-y: auto;
+        display: block;
+    }
+
+    .canvas { 
+        padding-left: 1rem;
+    }
+
+    .sidebar {
+      width: 100vw;
+      height: auto;
+      overflow-x: hidden;
+    }
+
+    .toggleSidebar {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        cursor: pointer;
+    }
+}
+*/

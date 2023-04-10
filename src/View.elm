@@ -114,22 +114,16 @@ sidebar model =
 view : Model -> Html Msg
 view model =
     div [ class [ "flexContainer" ] ]
-        [ img
-            [ class [ "toggleSidebar" ]
-            , src "https://i.ibb.co/kVTRymN/eye.png"
+        [ i
+            [ class [ "toggleSidebar", "material-icons" ]
+            , Html.Attributes.style "cursor" "pointer"
             , onClick ToggleSidebar
-            , Html.Attributes.style "width" "3.5rem"
-            , Html.Attributes.style "height" "3.5rem"
+            , Html.Attributes.style "font-size" "46px"
             ]
-            []
+            [ text "menu" ]
         , sidebar model
         , div
             [ class [ "canvas" ]
-            , if model.showSidebar then
-                Html.Attributes.style "padding-left" "0rem"
-
-              else
-                Html.Attributes.style "padding-left" "1rem"
             ]
             [ div [ class [ "canvasContent" ] ]
                 [ svg
