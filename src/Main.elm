@@ -1,4 +1,4 @@
-port module Main exposing (main, subscriptions, updateCanvasSize)
+port module Main exposing (main, subscriptions)
 
 import Browser
 import Json.Decode as Decode exposing (Value)
