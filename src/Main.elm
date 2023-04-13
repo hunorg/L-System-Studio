@@ -4,6 +4,7 @@ import Browser
 import Browser.Events
 import Json.Decode as Decode exposing (Value)
 import Model exposing (Model, init)
+import Time
 import Update exposing (Msg(..), update)
 import View exposing (view)
 
@@ -28,16 +29,34 @@ canvasSizeDecoder =
         (Decode.field "height" Decode.float)
 
 
-subscriptions : Model -> Sub Msg
-subscriptions _ =
-    updateCanvasSize
-        (\value ->
-            case Decode.decodeValue canvasSizeDecoder value of
-                Ok ( width, height ) ->
-                    UpdateCanvasSize width height
+tick : Sub Msg
+tick =
+    Time.every 50 Animate
 
-                Err _ ->
-                    -- Handle the case where the value cannot be decoded
-                    -- (e.g., you could log an error or ignore it)
-                    NoOp
-        )
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    let
+        animationFrameSub =
+            case model.lastAnimationFrameTimestamp of
+                Nothing ->
+                    Sub.none
+
+                Just _ ->
+                    Browser.Events.onAnimationFrame AnimationFrame
+    in
+    Sub.batch
+        [ updateCanvasSize
+            (\value ->
+                case Decode.decodeValue canvasSizeDecoder value of
+                    Ok ( width, height ) ->
+                        UpdateCanvasSize width height
+
+                    Err _ ->
+                        -- Handle the case where the value cannot be decoded
+                        -- (e.g., you could log an error or ignore it)
+                        NoOp
+            )
+        , tick
+        , animationFrameSub -- Add this line
+        ]

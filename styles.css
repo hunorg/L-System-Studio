@@ -20,12 +20,39 @@ html {
 }
 
 
+
 .toggleSidebar {
     position: absolute;
     top: 1rem;
     left: 1rem;
     cursor: pointer;
 }
+/* loading icon */ 
+
+.loadingIcon {
+    animation: spin-pause 4s ease infinite;
+    position: absolute;
+    top: 1rem;
+}
+
+@keyframes spin-pause {
+    0%, 25% {
+        transform: rotate(0deg);
+    }
+    37.5% {
+        transform: rotate(180deg);
+    }
+    50%, 75% {
+        transform: rotate(180deg);
+    }
+    87.5% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 
 
 .sidebar {
@@ -65,6 +92,8 @@ section {
     border-bottom: 1px solid #e9ecef;
     align-items: center;
 }
+
+
 
 /* rules and axiom section */
 
@@ -140,6 +169,8 @@ label {
     font-size: 18px;
     font-weight: bold;
 }
+
+
 
 h2 {
     font-size: 2rem;
@@ -308,7 +339,7 @@ h3 {
     width: 10rem;
     background: #d3d3d3;
     outline: none;
-    opacity: 1;
+    opacity: 0.8;
     -webkit-transition: .2s;
     transition: opacity .2s;
     border-radius: 10px;

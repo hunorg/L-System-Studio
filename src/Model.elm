@@ -4,6 +4,7 @@ import Array exposing (Array)
 import Color
 import ColorPicker
 import Random
+import Time
 import Turtle exposing (Action(..))
 
 
@@ -35,6 +36,11 @@ type alias Model =
     , selectedPreset : Preset
     , presets : List Preset
     , randomGenerator : Random.Generator Int
+    , renderingProgress : Float
+    , animationSpeed : Float
+    , animationStartTime : Maybe Time.Posix
+    , loadingIconVisible : Bool
+    , lastAnimationFrameTimestamp : Maybe Time.Posix
     }
 
 
@@ -91,7 +97,7 @@ init =
     , iterations = 0
     , startingPoint = ( 250, 250 )
     , startingAngle = 0
-    , polygonFillColor = Color.red
+    , polygonFillColor = Color.black
     , colorPicker = ColorPicker.empty
     , generatedSequence = Array.empty
     , drawnTurtle = False
@@ -101,6 +107,11 @@ init =
     , selectedPreset = plant1
     , presets = presets
     , randomGenerator = Random.int 0 (List.length presets - 1)
+    , renderingProgress = 0
+    , animationSpeed = 1
+    , animationStartTime = Nothing
+    , loadingIconVisible = False
+    , lastAnimationFrameTimestamp = Nothing
     }
 
 
@@ -156,6 +167,82 @@ plant2 =
     }
 
 
+rings : Preset
+rings =
+    { rules =
+        [ ( 'F'
+          , [ 'F', 'F', '+', 'F', '+', 'F', '+', 'F', '+', 'F', '+', 'F', '-', 'F' ]
+          )
+        ]
+    , axiomApplied = True
+    , turningAngle = 90
+    , lineLength = 6
+    , axiom = "F+F+F+F"
+    , iterations = 3
+    , startingAngle = 0
+    }
+
+
+kolam : Preset
+kolam =
+    { rules =
+        [ ( 'a'
+          , [ 'F', '+', '+', 'F', 'F', 'F', 'F', '-', '-', 'F', '-', '-', 'F', 'F', 'F', 'F', '+', '+', 'F', '+', '+', 'F', 'F', 'F', 'F', '-', '-', 'F' ]
+          )
+        , ( 'b'
+          , [ 'F', '-', '-', 'F', 'F', 'F', 'F', '+', '+', 'F', '+', '+', 'F', 'F', 'F', 'F', '-', '-', 'F', '-', '-', 'F', 'F', 'F', 'F', '+', '+', 'F' ]
+          )
+        , ( 'c'
+          , [ 'b', 'F', 'a', '-', '-', 'b', 'F', 'a' ]
+          )
+        , ( 'd'
+          , [ 'c', 'F', 'c', '-', '-', 'c', 'F', 'c' ]
+          )
+        ]
+    , axiomApplied = True
+    , turningAngle = 45
+    , lineLength = 7
+    , axiom = "(-d--d)"
+    , iterations = 3
+    , startingAngle = 180
+    }
+
+
+pentaPlex : Preset
+pentaPlex =
+    { rules =
+        [ ( 'F'
+          , [ 'F', '+', '+', 'F', '+', '+', 'F', '|', 'F', '-', 'F', '+', '+', 'F' ]
+          )
+        ]
+    , axiomApplied = True
+    , turningAngle = 36
+    , lineLength = 8
+    , axiom = "F++F++F++F++F"
+    , iterations = 3
+    , startingAngle = 0
+    }
+
+
+kochIslandVar : Preset
+kochIslandVar =
+    { rules =
+        [ ( 'x'
+          , [ 'x', '+', 'y', 'F', '+', '+', 'y', 'F', '-', 'F', 'x', '-', '-', 'F', 'x', 'F', 'x', '-', 'y', 'F', '+', 'x' ]
+          )
+        , ( 'y'
+          , [ '-', 'F', 'x', '+', 'y', 'F', 'y', 'F', '+', '+', 'y', 'F', '+', 'F', 'x', '-', '-', 'F', 'x', '-', 'y', 'F' ]
+          )
+        ]
+    , axiomApplied = True
+    , turningAngle = 45
+    , lineLength = 4
+    , axiom = "x+x+x+x+x+x+x+x"
+    , iterations = 2
+    , startingAngle = 0
+    }
+
+
 sqrSierp : Preset
 sqrSierp =
     { rules =
@@ -184,21 +271,6 @@ crystal =
     }
 
 
-dragonCurve : Preset
-dragonCurve =
-    { rules =
-        [ ( 'x', [ 'x', '+', 'y', 'F', '+' ] )
-        , ( 'y', [ '-', 'F', 'x', '-', 'y' ] )
-        ]
-    , axiomApplied = True
-    , turningAngle = 90
-    , lineLength = 8
-    , axiom = "Fx"
-    , iterations = 9
-    , startingAngle = 0
-    }
-
-
 initPreset : Preset
 initPreset =
     { rules = []
@@ -213,4 +285,4 @@ initPreset =
 
 presets : List Preset
 presets =
-    [ plant1, plant2, sqrSierp, crystal, dragonCurve ]
+    [ plant1, plant2, kochIslandVar, pentaPlex, sqrSierp, crystal, rings, kolam ]

@@ -7,8 +7,6 @@ import TypedSvg.Core exposing (Svg)
 import TypedSvg.Types exposing (Cursor(..), FillRule(..), Length(..), Paint(..), px)
 
 
-
-
 type alias Turtle =
     { x : Float
     , y : Float
@@ -16,8 +14,8 @@ type alias Turtle =
     , stack : List ( ( Float, Float ), Float )
     , segments : List ( ( Float, Float ), ( Float, Float ) )
     , dots : List ( ( Float, Float ), Float )
-    , polygons : List (List (Float, Float))
-    , filledPolygons : List (List (Float, Float), Color.Color)
+    , polygons : List (List ( Float, Float ))
+    , filledPolygons : List ( List ( Float, Float ), Color.Color )
     , fillColor : Color.Color
     , lineWidth : Float
     , swapPlusMinus : Bool
@@ -36,7 +34,7 @@ type Action
     | ReverseDirection
     | Push
     | Pop
-    | IncrementLineWidth 
+    | IncrementLineWidth
     | DecrementLineWidth
     | DrawDot
     | OpenPolygon
@@ -76,8 +74,11 @@ moveForward stepSize turtle =
         ( newX, newY ) =
             calculateNewPosition stepSize turtle.angle ( turtle.x, turtle.y )
 
-        currentPolygon = List.head turtle.polygons |> Maybe.withDefault []
-        updatedPolygons = ( ( newX, newY ) :: currentPolygon ) :: List.drop 1 turtle.polygons
+        currentPolygon =
+            List.head turtle.polygons |> Maybe.withDefault []
+
+        updatedPolygons =
+            (( newX, newY ) :: currentPolygon) :: List.drop 1 turtle.polygons
     in
     { turtle
         | x = newX
@@ -85,7 +86,6 @@ moveForward stepSize turtle =
         , segments = ( ( turtle.x, turtle.y ), ( newX, newY ) ) :: turtle.segments
         , polygons = updatedPolygons
     }
-
 
 
 turn : Float -> Turtle -> Turtle
@@ -115,46 +115,62 @@ pop turtle =
             { turtle | x = x, y = y, angle = angle, stack = rest }
 
 
-renderTurtleSegments : Turtle -> List (Svg msg)
-renderTurtleSegments turtle =
-    List.map
-        (\( ( x1, y1 ), ( x2, y2 ) ) ->
-            line
-                [ TypedSvg.Attributes.x1 (px x1)
-                , TypedSvg.Attributes.y1 (px y1)
-                , TypedSvg.Attributes.x2 (px x2)
-                , TypedSvg.Attributes.y2 (px y2)
-                , stroke <| Paint Color.white
-                , strokeWidth (Px turtle.lineWidth)
-                ]
-                []
+renderTurtleSegments : Float -> Turtle -> List (Svg msg)
+renderTurtleSegments progress turtle =
+    List.indexedMap
+        (\index ( ( x1, y1 ), ( x2, y2 ) ) ->
+            if toFloat index < progress then
+                line
+                    [ TypedSvg.Attributes.x1 (px x1)
+                    , TypedSvg.Attributes.y1 (px y1)
+                    , TypedSvg.Attributes.x2 (px x2)
+                    , TypedSvg.Attributes.y2 (px y2)
+                    , stroke <| Paint Color.white
+                    , strokeWidth (Px turtle.lineWidth)
+                    ]
+                    []
+
+            else
+                TypedSvg.text_ [] []
+         -- Replace with an empty SVG element to keep the same structure
         )
         turtle.segments
 
-renderTurtleDots : Turtle -> List (Svg msg)
-renderTurtleDots turtle =
-    List.map
-        (\( ( x, y ), radius ) ->
-            circle
-                [ TypedSvg.Attributes.cx (px x)
-                , TypedSvg.Attributes.cy (px y)
-                , TypedSvg.Attributes.r (px radius)
-                , fill <| Paint Color.white
-                ]
-                []
+
+renderTurtleDots : Float -> Turtle -> List (Svg msg)
+renderTurtleDots progress turtle =
+    List.indexedMap
+        (\index ( ( x, y ), radius ) ->
+            if toFloat index < progress then
+                circle
+                    [ TypedSvg.Attributes.cx (px x)
+                    , TypedSvg.Attributes.cy (px y)
+                    , TypedSvg.Attributes.r (px radius)
+                    , fill <| Paint Color.white
+                    ]
+                    []
+
+            else
+                TypedSvg.text_ [] []
+         -- Replace with an empty SVG element to keep the same structure
         )
         turtle.dots
 
-drawFilledPolygons : List (List (Float, Float), Color.Color) -> Svg msg
-drawFilledPolygons filledPolygons =
+
+drawFilledPolygons : Float -> List ( List ( Float, Float ), Color.Color ) -> Svg msg
+drawFilledPolygons progress filledPolygons =
     TypedSvg.g []
-        (List.map
-            (\(polygon, fillColor) ->
-                TypedSvg.polygon
-                    [ points (List.map (\(x, y) -> (x, y)) polygon)
-                    , TypedSvg.Attributes.style ("fill:" ++ Color.toCssString fillColor)
-                    ]
-                    []
+        (List.indexedMap
+            (\index ( polygon, fillColor ) ->
+                if toFloat index < progress then
+                    TypedSvg.polygon
+                        [ points (List.map (\( x, y ) -> ( x, y )) polygon)
+                        , TypedSvg.Attributes.style ("fill:" ++ Color.toCssString fillColor)
+                        ]
+                        []
+
+                else
+                    TypedSvg.text_ [] []
             )
             filledPolygons
         )
@@ -170,6 +186,3 @@ calculateNewPosition stepSize angle ( x, y ) =
             stepSize * sin (degreesToRadians angle)
     in
     ( x + deltaX, y + deltaY )
-
-
-

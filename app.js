@@ -5259,6 +5259,11 @@ var $author$project$Turtle$ReverseDirection = {$: 'ReverseDirection'};
 var $author$project$Turtle$SwapPlusMinus = {$: 'SwapPlusMinus'};
 var $author$project$Turtle$TurnLeft = {$: 'TurnLeft'};
 var $author$project$Turtle$TurnRight = {$: 'TurnRight'};
+var $avh4$elm_color$Color$RgbaSpace = F4(
+	function (a, b, c, d) {
+		return {$: 'RgbaSpace', a: a, b: b, c: c, d: d};
+	});
+var $avh4$elm_color$Color$black = A4($avh4$elm_color$Color$RgbaSpace, 0 / 255, 0 / 255, 0 / 255, 1.0);
 var $simonh1000$elm_colorpicker$ColorPicker$State = function (a) {
 	return {$: 'State', a: a};
 };
@@ -5428,11 +5433,11 @@ var $author$project$Model$crystal = {
 	startingAngle: 0,
 	turningAngle: 90
 };
-var $author$project$Model$dragonCurve = {
-	axiom: 'Fx',
+var $author$project$Model$kochIslandVar = {
+	axiom: 'x+x+x+x+x+x+x+x',
 	axiomApplied: true,
-	iterations: 9,
-	lineLength: 8,
+	iterations: 2,
+	lineLength: 4,
 	rules: _List_fromArray(
 		[
 			_Utils_Tuple2(
@@ -5443,7 +5448,24 @@ var $author$project$Model$dragonCurve = {
 					_Utils_chr('+'),
 					_Utils_chr('y'),
 					_Utils_chr('F'),
-					_Utils_chr('+')
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('y'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('x'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('x'),
+					_Utils_chr('F'),
+					_Utils_chr('x'),
+					_Utils_chr('-'),
+					_Utils_chr('y'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('x')
 				])),
 			_Utils_Tuple2(
 			_Utils_chr('y'),
@@ -5452,12 +5474,162 @@ var $author$project$Model$dragonCurve = {
 					_Utils_chr('-'),
 					_Utils_chr('F'),
 					_Utils_chr('x'),
+					_Utils_chr('+'),
+					_Utils_chr('y'),
+					_Utils_chr('F'),
+					_Utils_chr('y'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('y'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('x'),
 					_Utils_chr('-'),
-					_Utils_chr('y')
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('x'),
+					_Utils_chr('-'),
+					_Utils_chr('y'),
+					_Utils_chr('F')
 				]))
 		]),
 	startingAngle: 0,
-	turningAngle: 90
+	turningAngle: 45
+};
+var $author$project$Model$kolam = {
+	axiom: '(-d--d)',
+	axiomApplied: true,
+	iterations: 3,
+	lineLength: 7,
+	rules: _List_fromArray(
+		[
+			_Utils_Tuple2(
+			_Utils_chr('a'),
+			_List_fromArray(
+				[
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('F')
+				])),
+			_Utils_Tuple2(
+			_Utils_chr('b'),
+			_List_fromArray(
+				[
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('F')
+				])),
+			_Utils_Tuple2(
+			_Utils_chr('c'),
+			_List_fromArray(
+				[
+					_Utils_chr('b'),
+					_Utils_chr('F'),
+					_Utils_chr('a'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('b'),
+					_Utils_chr('F'),
+					_Utils_chr('a')
+				])),
+			_Utils_Tuple2(
+			_Utils_chr('d'),
+			_List_fromArray(
+				[
+					_Utils_chr('c'),
+					_Utils_chr('F'),
+					_Utils_chr('c'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('c'),
+					_Utils_chr('F'),
+					_Utils_chr('c')
+				]))
+		]),
+	startingAngle: 180,
+	turningAngle: 45
+};
+var $author$project$Model$pentaPlex = {
+	axiom: 'F++F++F++F++F',
+	axiomApplied: true,
+	iterations: 3,
+	lineLength: 8,
+	rules: _List_fromArray(
+		[
+			_Utils_Tuple2(
+			_Utils_chr('F'),
+			_List_fromArray(
+				[
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('|'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('+'),
+					_Utils_chr('F')
+				]))
+		]),
+	startingAngle: 0,
+	turningAngle: 36
 };
 var $author$project$Model$plant2 = {
 	axiom: 'F',
@@ -5494,6 +5666,36 @@ var $author$project$Model$plant2 = {
 		]),
 	startingAngle: -90,
 	turningAngle: 22.5
+};
+var $author$project$Model$rings = {
+	axiom: 'F+F+F+F',
+	axiomApplied: true,
+	iterations: 3,
+	lineLength: 6,
+	rules: _List_fromArray(
+		[
+			_Utils_Tuple2(
+			_Utils_chr('F'),
+			_List_fromArray(
+				[
+					_Utils_chr('F'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('F')
+				]))
+		]),
+	startingAngle: 0,
+	turningAngle: 90
 };
 var $author$project$Model$sqrSierp = {
 	axiom: 'F+xF+F+xF',
@@ -5532,13 +5734,10 @@ var $author$project$Model$sqrSierp = {
 	turningAngle: 90
 };
 var $author$project$Model$presets = _List_fromArray(
-	[$author$project$Model$plant1, $author$project$Model$plant2, $author$project$Model$sqrSierp, $author$project$Model$crystal, $author$project$Model$dragonCurve]);
-var $avh4$elm_color$Color$RgbaSpace = F4(
-	function (a, b, c, d) {
-		return {$: 'RgbaSpace', a: a, b: b, c: c, d: d};
-	});
-var $avh4$elm_color$Color$red = A4($avh4$elm_color$Color$RgbaSpace, 204 / 255, 0 / 255, 0 / 255, 1.0);
+	[$author$project$Model$plant1, $author$project$Model$plant2, $author$project$Model$kochIslandVar, $author$project$Model$pentaPlex, $author$project$Model$sqrSierp, $author$project$Model$crystal, $author$project$Model$rings, $author$project$Model$kolam]);
 var $author$project$Model$init = {
+	animationSpeed: 1,
+	animationStartTime: $elm$core$Maybe$Nothing,
 	axiom: '',
 	axiomApplied: false,
 	canvasHeight: 500,
@@ -5547,16 +5746,19 @@ var $author$project$Model$init = {
 	drawnTurtle: false,
 	generatedSequence: $elm$core$Array$empty,
 	iterations: 0,
+	lastAnimationFrameTimestamp: $elm$core$Maybe$Nothing,
 	lineLength: 1,
 	lineLengthScale: 0,
 	lineWidthIncrement: 0,
+	loadingIconVisible: false,
 	newRuleInput: '',
-	polygonFillColor: $avh4$elm_color$Color$red,
+	polygonFillColor: $avh4$elm_color$Color$black,
 	presets: $author$project$Model$presets,
 	randomGenerator: A2(
 		$elm$random$Random$int,
 		0,
 		$elm$core$List$length($author$project$Model$presets) - 1),
+	renderingProgress: 0,
 	rules: _List_Nil,
 	selectedAction: $author$project$Turtle$Move,
 	selectedPreset: $author$project$Model$plant1,
@@ -5594,11 +5796,15 @@ var $author$project$Model$init = {
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
+var $author$project$Update$AnimationFrame = function (a) {
+	return {$: 'AnimationFrame', a: a};
+};
 var $author$project$Update$NoOp = {$: 'NoOp'};
 var $author$project$Update$UpdateCanvasSize = F2(
 	function (a, b) {
 		return {$: 'UpdateCanvasSize', a: a, b: b};
 	});
+var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$json$Json$Decode$field = _Json_decodeField;
 var $elm$json$Json$Decode$float = _Json_decodeFloat;
 var $elm$core$Tuple$pair = F2(
@@ -5611,29 +5817,595 @@ var $author$project$Main$canvasSizeDecoder = A3(
 	A2($elm$json$Json$Decode$field, 'width', $elm$json$Json$Decode$float),
 	A2($elm$json$Json$Decode$field, 'height', $elm$json$Json$Decode$float));
 var $elm$json$Json$Decode$decodeValue = _Json_run;
+var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
+var $elm$browser$Browser$AnimationManager$Time = function (a) {
+	return {$: 'Time', a: a};
+};
+var $elm$browser$Browser$AnimationManager$State = F3(
+	function (subs, request, oldTime) {
+		return {oldTime: oldTime, request: request, subs: subs};
+	});
+var $elm$browser$Browser$AnimationManager$init = $elm$core$Task$succeed(
+	A3($elm$browser$Browser$AnimationManager$State, _List_Nil, $elm$core$Maybe$Nothing, 0));
+var $elm$core$Process$kill = _Scheduler_kill;
+var $elm$browser$Browser$AnimationManager$now = _Browser_now(_Utils_Tuple0);
+var $elm$browser$Browser$AnimationManager$rAF = _Browser_rAF(_Utils_Tuple0);
+var $elm$core$Platform$sendToSelf = _Platform_sendToSelf;
+var $elm$core$Process$spawn = _Scheduler_spawn;
+var $elm$browser$Browser$AnimationManager$onEffects = F3(
+	function (router, subs, _v0) {
+		var request = _v0.request;
+		var oldTime = _v0.oldTime;
+		var _v1 = _Utils_Tuple2(request, subs);
+		if (_v1.a.$ === 'Nothing') {
+			if (!_v1.b.b) {
+				var _v2 = _v1.a;
+				return $elm$browser$Browser$AnimationManager$init;
+			} else {
+				var _v4 = _v1.a;
+				return A2(
+					$elm$core$Task$andThen,
+					function (pid) {
+						return A2(
+							$elm$core$Task$andThen,
+							function (time) {
+								return $elm$core$Task$succeed(
+									A3(
+										$elm$browser$Browser$AnimationManager$State,
+										subs,
+										$elm$core$Maybe$Just(pid),
+										time));
+							},
+							$elm$browser$Browser$AnimationManager$now);
+					},
+					$elm$core$Process$spawn(
+						A2(
+							$elm$core$Task$andThen,
+							$elm$core$Platform$sendToSelf(router),
+							$elm$browser$Browser$AnimationManager$rAF)));
+			}
+		} else {
+			if (!_v1.b.b) {
+				var pid = _v1.a.a;
+				return A2(
+					$elm$core$Task$andThen,
+					function (_v3) {
+						return $elm$browser$Browser$AnimationManager$init;
+					},
+					$elm$core$Process$kill(pid));
+			} else {
+				return $elm$core$Task$succeed(
+					A3($elm$browser$Browser$AnimationManager$State, subs, request, oldTime));
+			}
+		}
+	});
+var $elm$time$Time$Posix = function (a) {
+	return {$: 'Posix', a: a};
+};
+var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
+var $elm$browser$Browser$AnimationManager$onSelfMsg = F3(
+	function (router, newTime, _v0) {
+		var subs = _v0.subs;
+		var oldTime = _v0.oldTime;
+		var send = function (sub) {
+			if (sub.$ === 'Time') {
+				var tagger = sub.a;
+				return A2(
+					$elm$core$Platform$sendToApp,
+					router,
+					tagger(
+						$elm$time$Time$millisToPosix(newTime)));
+			} else {
+				var tagger = sub.a;
+				return A2(
+					$elm$core$Platform$sendToApp,
+					router,
+					tagger(newTime - oldTime));
+			}
+		};
+		return A2(
+			$elm$core$Task$andThen,
+			function (pid) {
+				return A2(
+					$elm$core$Task$andThen,
+					function (_v1) {
+						return $elm$core$Task$succeed(
+							A3(
+								$elm$browser$Browser$AnimationManager$State,
+								subs,
+								$elm$core$Maybe$Just(pid),
+								newTime));
+					},
+					$elm$core$Task$sequence(
+						A2($elm$core$List$map, send, subs)));
+			},
+			$elm$core$Process$spawn(
+				A2(
+					$elm$core$Task$andThen,
+					$elm$core$Platform$sendToSelf(router),
+					$elm$browser$Browser$AnimationManager$rAF)));
+	});
+var $elm$browser$Browser$AnimationManager$Delta = function (a) {
+	return {$: 'Delta', a: a};
+};
+var $elm$core$Basics$composeL = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var $elm$browser$Browser$AnimationManager$subMap = F2(
+	function (func, sub) {
+		if (sub.$ === 'Time') {
+			var tagger = sub.a;
+			return $elm$browser$Browser$AnimationManager$Time(
+				A2($elm$core$Basics$composeL, func, tagger));
+		} else {
+			var tagger = sub.a;
+			return $elm$browser$Browser$AnimationManager$Delta(
+				A2($elm$core$Basics$composeL, func, tagger));
+		}
+	});
+_Platform_effectManagers['Browser.AnimationManager'] = _Platform_createManager($elm$browser$Browser$AnimationManager$init, $elm$browser$Browser$AnimationManager$onEffects, $elm$browser$Browser$AnimationManager$onSelfMsg, 0, $elm$browser$Browser$AnimationManager$subMap);
+var $elm$browser$Browser$AnimationManager$subscription = _Platform_leaf('Browser.AnimationManager');
+var $elm$browser$Browser$AnimationManager$onAnimationFrame = function (tagger) {
+	return $elm$browser$Browser$AnimationManager$subscription(
+		$elm$browser$Browser$AnimationManager$Time(tagger));
+};
+var $elm$browser$Browser$Events$onAnimationFrame = $elm$browser$Browser$AnimationManager$onAnimationFrame;
+var $author$project$Update$Animate = function (a) {
+	return {$: 'Animate', a: a};
+};
+var $elm$time$Time$Every = F2(
+	function (a, b) {
+		return {$: 'Every', a: a, b: b};
+	});
+var $elm$time$Time$State = F2(
+	function (taggers, processes) {
+		return {processes: processes, taggers: taggers};
+	});
+var $elm$core$Dict$RBEmpty_elm_builtin = {$: 'RBEmpty_elm_builtin'};
+var $elm$core$Dict$empty = $elm$core$Dict$RBEmpty_elm_builtin;
+var $elm$time$Time$init = $elm$core$Task$succeed(
+	A2($elm$time$Time$State, $elm$core$Dict$empty, $elm$core$Dict$empty));
+var $elm$core$Basics$compare = _Utils_compare;
+var $elm$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			if (dict.$ === 'RBEmpty_elm_builtin') {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
+				switch (_v1.$) {
+					case 'LT':
+						var $temp$targetKey = targetKey,
+							$temp$dict = left;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+					case 'EQ':
+						return $elm$core$Maybe$Just(value);
+					default:
+						var $temp$targetKey = targetKey,
+							$temp$dict = right;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+				}
+			}
+		}
+	});
+var $elm$core$Dict$Black = {$: 'Black'};
+var $elm$core$Dict$RBNode_elm_builtin = F5(
+	function (a, b, c, d, e) {
+		return {$: 'RBNode_elm_builtin', a: a, b: b, c: c, d: d, e: e};
+	});
+var $elm$core$Dict$Red = {$: 'Red'};
+var $elm$core$Dict$balance = F5(
+	function (color, key, value, left, right) {
+		if ((right.$ === 'RBNode_elm_builtin') && (right.a.$ === 'Red')) {
+			var _v1 = right.a;
+			var rK = right.b;
+			var rV = right.c;
+			var rLeft = right.d;
+			var rRight = right.e;
+			if ((left.$ === 'RBNode_elm_builtin') && (left.a.$ === 'Red')) {
+				var _v3 = left.a;
+				var lK = left.b;
+				var lV = left.c;
+				var lLeft = left.d;
+				var lRight = left.e;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Red,
+					key,
+					value,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, lK, lV, lLeft, lRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, rK, rV, rLeft, rRight));
+			} else {
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					color,
+					rK,
+					rV,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, key, value, left, rLeft),
+					rRight);
+			}
+		} else {
+			if ((((left.$ === 'RBNode_elm_builtin') && (left.a.$ === 'Red')) && (left.d.$ === 'RBNode_elm_builtin')) && (left.d.a.$ === 'Red')) {
+				var _v5 = left.a;
+				var lK = left.b;
+				var lV = left.c;
+				var _v6 = left.d;
+				var _v7 = _v6.a;
+				var llK = _v6.b;
+				var llV = _v6.c;
+				var llLeft = _v6.d;
+				var llRight = _v6.e;
+				var lRight = left.e;
+				return A5(
+					$elm$core$Dict$RBNode_elm_builtin,
+					$elm$core$Dict$Red,
+					lK,
+					lV,
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, llK, llV, llLeft, llRight),
+					A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, key, value, lRight, right));
+			} else {
+				return A5($elm$core$Dict$RBNode_elm_builtin, color, key, value, left, right);
+			}
+		}
+	});
+var $elm$core$Dict$insertHelp = F3(
+	function (key, value, dict) {
+		if (dict.$ === 'RBEmpty_elm_builtin') {
+			return A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Red, key, value, $elm$core$Dict$RBEmpty_elm_builtin, $elm$core$Dict$RBEmpty_elm_builtin);
+		} else {
+			var nColor = dict.a;
+			var nKey = dict.b;
+			var nValue = dict.c;
+			var nLeft = dict.d;
+			var nRight = dict.e;
+			var _v1 = A2($elm$core$Basics$compare, key, nKey);
+			switch (_v1.$) {
+				case 'LT':
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						A3($elm$core$Dict$insertHelp, key, value, nLeft),
+						nRight);
+				case 'EQ':
+					return A5($elm$core$Dict$RBNode_elm_builtin, nColor, nKey, value, nLeft, nRight);
+				default:
+					return A5(
+						$elm$core$Dict$balance,
+						nColor,
+						nKey,
+						nValue,
+						nLeft,
+						A3($elm$core$Dict$insertHelp, key, value, nRight));
+			}
+		}
+	});
+var $elm$core$Dict$insert = F3(
+	function (key, value, dict) {
+		var _v0 = A3($elm$core$Dict$insertHelp, key, value, dict);
+		if ((_v0.$ === 'RBNode_elm_builtin') && (_v0.a.$ === 'Red')) {
+			var _v1 = _v0.a;
+			var k = _v0.b;
+			var v = _v0.c;
+			var l = _v0.d;
+			var r = _v0.e;
+			return A5($elm$core$Dict$RBNode_elm_builtin, $elm$core$Dict$Black, k, v, l, r);
+		} else {
+			var x = _v0;
+			return x;
+		}
+	});
+var $elm$time$Time$addMySub = F2(
+	function (_v0, state) {
+		var interval = _v0.a;
+		var tagger = _v0.b;
+		var _v1 = A2($elm$core$Dict$get, interval, state);
+		if (_v1.$ === 'Nothing') {
+			return A3(
+				$elm$core$Dict$insert,
+				interval,
+				_List_fromArray(
+					[tagger]),
+				state);
+		} else {
+			var taggers = _v1.a;
+			return A3(
+				$elm$core$Dict$insert,
+				interval,
+				A2($elm$core$List$cons, tagger, taggers),
+				state);
+		}
+	});
+var $elm$core$Dict$foldl = F3(
+	function (func, acc, dict) {
+		foldl:
+		while (true) {
+			if (dict.$ === 'RBEmpty_elm_builtin') {
+				return acc;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var $temp$func = func,
+					$temp$acc = A3(
+					func,
+					key,
+					value,
+					A3($elm$core$Dict$foldl, func, acc, left)),
+					$temp$dict = right;
+				func = $temp$func;
+				acc = $temp$acc;
+				dict = $temp$dict;
+				continue foldl;
+			}
+		}
+	});
+var $elm$core$Dict$merge = F6(
+	function (leftStep, bothStep, rightStep, leftDict, rightDict, initialResult) {
+		var stepState = F3(
+			function (rKey, rValue, _v0) {
+				stepState:
+				while (true) {
+					var list = _v0.a;
+					var result = _v0.b;
+					if (!list.b) {
+						return _Utils_Tuple2(
+							list,
+							A3(rightStep, rKey, rValue, result));
+					} else {
+						var _v2 = list.a;
+						var lKey = _v2.a;
+						var lValue = _v2.b;
+						var rest = list.b;
+						if (_Utils_cmp(lKey, rKey) < 0) {
+							var $temp$rKey = rKey,
+								$temp$rValue = rValue,
+								$temp$_v0 = _Utils_Tuple2(
+								rest,
+								A3(leftStep, lKey, lValue, result));
+							rKey = $temp$rKey;
+							rValue = $temp$rValue;
+							_v0 = $temp$_v0;
+							continue stepState;
+						} else {
+							if (_Utils_cmp(lKey, rKey) > 0) {
+								return _Utils_Tuple2(
+									list,
+									A3(rightStep, rKey, rValue, result));
+							} else {
+								return _Utils_Tuple2(
+									rest,
+									A4(bothStep, lKey, lValue, rValue, result));
+							}
+						}
+					}
+				}
+			});
+		var _v3 = A3(
+			$elm$core$Dict$foldl,
+			stepState,
+			_Utils_Tuple2(
+				$elm$core$Dict$toList(leftDict),
+				initialResult),
+			rightDict);
+		var leftovers = _v3.a;
+		var intermediateResult = _v3.b;
+		return A3(
+			$elm$core$List$foldl,
+			F2(
+				function (_v4, result) {
+					var k = _v4.a;
+					var v = _v4.b;
+					return A3(leftStep, k, v, result);
+				}),
+			intermediateResult,
+			leftovers);
+	});
+var $elm$time$Time$Name = function (a) {
+	return {$: 'Name', a: a};
+};
+var $elm$time$Time$Offset = function (a) {
+	return {$: 'Offset', a: a};
+};
+var $elm$time$Time$Zone = F2(
+	function (a, b) {
+		return {$: 'Zone', a: a, b: b};
+	});
+var $elm$time$Time$customZone = $elm$time$Time$Zone;
+var $elm$time$Time$setInterval = _Time_setInterval;
+var $elm$time$Time$spawnHelp = F3(
+	function (router, intervals, processes) {
+		if (!intervals.b) {
+			return $elm$core$Task$succeed(processes);
+		} else {
+			var interval = intervals.a;
+			var rest = intervals.b;
+			var spawnTimer = $elm$core$Process$spawn(
+				A2(
+					$elm$time$Time$setInterval,
+					interval,
+					A2($elm$core$Platform$sendToSelf, router, interval)));
+			var spawnRest = function (id) {
+				return A3(
+					$elm$time$Time$spawnHelp,
+					router,
+					rest,
+					A3($elm$core$Dict$insert, interval, id, processes));
+			};
+			return A2($elm$core$Task$andThen, spawnRest, spawnTimer);
+		}
+	});
+var $elm$time$Time$onEffects = F3(
+	function (router, subs, _v0) {
+		var processes = _v0.processes;
+		var rightStep = F3(
+			function (_v6, id, _v7) {
+				var spawns = _v7.a;
+				var existing = _v7.b;
+				var kills = _v7.c;
+				return _Utils_Tuple3(
+					spawns,
+					existing,
+					A2(
+						$elm$core$Task$andThen,
+						function (_v5) {
+							return kills;
+						},
+						$elm$core$Process$kill(id)));
+			});
+		var newTaggers = A3($elm$core$List$foldl, $elm$time$Time$addMySub, $elm$core$Dict$empty, subs);
+		var leftStep = F3(
+			function (interval, taggers, _v4) {
+				var spawns = _v4.a;
+				var existing = _v4.b;
+				var kills = _v4.c;
+				return _Utils_Tuple3(
+					A2($elm$core$List$cons, interval, spawns),
+					existing,
+					kills);
+			});
+		var bothStep = F4(
+			function (interval, taggers, id, _v3) {
+				var spawns = _v3.a;
+				var existing = _v3.b;
+				var kills = _v3.c;
+				return _Utils_Tuple3(
+					spawns,
+					A3($elm$core$Dict$insert, interval, id, existing),
+					kills);
+			});
+		var _v1 = A6(
+			$elm$core$Dict$merge,
+			leftStep,
+			bothStep,
+			rightStep,
+			newTaggers,
+			processes,
+			_Utils_Tuple3(
+				_List_Nil,
+				$elm$core$Dict$empty,
+				$elm$core$Task$succeed(_Utils_Tuple0)));
+		var spawnList = _v1.a;
+		var existingDict = _v1.b;
+		var killTask = _v1.c;
+		return A2(
+			$elm$core$Task$andThen,
+			function (newProcesses) {
+				return $elm$core$Task$succeed(
+					A2($elm$time$Time$State, newTaggers, newProcesses));
+			},
+			A2(
+				$elm$core$Task$andThen,
+				function (_v2) {
+					return A3($elm$time$Time$spawnHelp, router, spawnList, existingDict);
+				},
+				killTask));
+	});
+var $elm$time$Time$now = _Time_now($elm$time$Time$millisToPosix);
+var $elm$time$Time$onSelfMsg = F3(
+	function (router, interval, state) {
+		var _v0 = A2($elm$core$Dict$get, interval, state.taggers);
+		if (_v0.$ === 'Nothing') {
+			return $elm$core$Task$succeed(state);
+		} else {
+			var taggers = _v0.a;
+			var tellTaggers = function (time) {
+				return $elm$core$Task$sequence(
+					A2(
+						$elm$core$List$map,
+						function (tagger) {
+							return A2(
+								$elm$core$Platform$sendToApp,
+								router,
+								tagger(time));
+						},
+						taggers));
+			};
+			return A2(
+				$elm$core$Task$andThen,
+				function (_v1) {
+					return $elm$core$Task$succeed(state);
+				},
+				A2($elm$core$Task$andThen, tellTaggers, $elm$time$Time$now));
+		}
+	});
+var $elm$time$Time$subMap = F2(
+	function (f, _v0) {
+		var interval = _v0.a;
+		var tagger = _v0.b;
+		return A2(
+			$elm$time$Time$Every,
+			interval,
+			A2($elm$core$Basics$composeL, f, tagger));
+	});
+_Platform_effectManagers['Time'] = _Platform_createManager($elm$time$Time$init, $elm$time$Time$onEffects, $elm$time$Time$onSelfMsg, 0, $elm$time$Time$subMap);
+var $elm$time$Time$subscription = _Platform_leaf('Time');
+var $elm$time$Time$every = F2(
+	function (interval, tagger) {
+		return $elm$time$Time$subscription(
+			A2($elm$time$Time$Every, interval, tagger));
+	});
+var $author$project$Main$tick = A2($elm$time$Time$every, 50, $author$project$Update$Animate);
 var $elm$json$Json$Decode$value = _Json_decodeValue;
 var $author$project$Main$updateCanvasSize = _Platform_incomingPort('updateCanvasSize', $elm$json$Json$Decode$value);
-var $author$project$Main$subscriptions = function (_v0) {
-	return $author$project$Main$updateCanvasSize(
-		function (value) {
-			var _v1 = A2($elm$json$Json$Decode$decodeValue, $author$project$Main$canvasSizeDecoder, value);
-			if (_v1.$ === 'Ok') {
-				var _v2 = _v1.a;
-				var width = _v2.a;
-				var height = _v2.b;
-				return A2($author$project$Update$UpdateCanvasSize, width, height);
-			} else {
-				return $author$project$Update$NoOp;
-			}
-		});
+var $author$project$Main$subscriptions = function (model) {
+	var animationFrameSub = function () {
+		var _v2 = model.lastAnimationFrameTimestamp;
+		if (_v2.$ === 'Nothing') {
+			return $elm$core$Platform$Sub$none;
+		} else {
+			return $elm$browser$Browser$Events$onAnimationFrame($author$project$Update$AnimationFrame);
+		}
+	}();
+	return $elm$core$Platform$Sub$batch(
+		_List_fromArray(
+			[
+				$author$project$Main$updateCanvasSize(
+				function (value) {
+					var _v0 = A2($elm$json$Json$Decode$decodeValue, $author$project$Main$canvasSizeDecoder, value);
+					if (_v0.$ === 'Ok') {
+						var _v1 = _v0.a;
+						var width = _v1.a;
+						var height = _v1.b;
+						return A2($author$project$Update$UpdateCanvasSize, width, height);
+					} else {
+						return $author$project$Update$NoOp;
+					}
+				}),
+				$author$project$Main$tick,
+				animationFrameSub
+			]));
+};
+var $author$project$Update$HideLoadingIconAfter = function (a) {
+	return {$: 'HideLoadingIconAfter', a: a};
 };
 var $author$project$Update$LoadRandomPreset = function (a) {
 	return {$: 'LoadRandomPreset', a: a};
 };
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$MainButton = {$: 'MainButton'};
+var $author$project$Update$SetAnimationStartTime = function (a) {
+	return {$: 'SetAnimationStartTime', a: a};
+};
 var $author$project$Update$SetRandomPreset = function (a) {
 	return {$: 'SetRandomPreset', a: a};
 };
+var $elm$core$Basics$always = F2(
+	function (a, _v0) {
+		return a;
+	});
 var $elm$core$List$filter = F2(
 	function (isGood, list) {
 		return A3(
@@ -5645,6 +6417,7 @@ var $elm$core$List$filter = F2(
 			_List_Nil,
 			list);
 	});
+var $elm$core$Basics$ge = _Utils_ge;
 var $elm$random$Random$Generate = function (a) {
 	return {$: 'Generate', a: a};
 };
@@ -5657,22 +6430,6 @@ var $elm$random$Random$initialSeed = function (x) {
 	return $elm$random$Random$next(
 		A2($elm$random$Random$Seed, state2, incr));
 };
-var $elm$time$Time$Name = function (a) {
-	return {$: 'Name', a: a};
-};
-var $elm$time$Time$Offset = function (a) {
-	return {$: 'Offset', a: a};
-};
-var $elm$time$Time$Zone = F2(
-	function (a, b) {
-		return {$: 'Zone', a: a, b: b};
-	});
-var $elm$time$Time$customZone = $elm$time$Time$Zone;
-var $elm$time$Time$Posix = function (a) {
-	return {$: 'Posix', a: a};
-};
-var $elm$time$Time$millisToPosix = $elm$time$Time$Posix;
-var $elm$time$Time$now = _Time_now($elm$time$Time$millisToPosix);
 var $elm$time$Time$posixToMillis = function (_v0) {
 	var millis = _v0.a;
 	return millis;
@@ -5911,6 +6668,10 @@ var $elm_community$list_extra$List$Extra$getAt = F2(
 			A2($elm$core$List$drop, idx, xs));
 	});
 var $author$project$Model$initPreset = {axiom: '', axiomApplied: false, iterations: 0, lineLength: 0, rules: _List_Nil, startingAngle: 0, turningAngle: 0};
+var $elm$core$Array$length = function (_v0) {
+	var len = _v0.a;
+	return len;
+};
 var $elm$core$Maybe$map = F2(
 	function (f, maybe) {
 		if (maybe.$ === 'Just') {
@@ -5920,6 +6681,10 @@ var $elm$core$Maybe$map = F2(
 		} else {
 			return $elm$core$Maybe$Nothing;
 		}
+	});
+var $elm$core$Basics$min = F2(
+	function (x, y) {
+		return (_Utils_cmp(x, y) < 0) ? x : y;
 	});
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$core$Basics$not = _Basics_not;
@@ -5933,6 +6698,7 @@ var $elm$core$Tuple$second = function (_v0) {
 	var y = _v0.b;
 	return y;
 };
+var $elm$core$Process$sleep = _Process_sleep;
 var $elm$core$Tuple$mapFirst = F2(
 	function (func, _v0) {
 		var x = _v0.a;
@@ -5966,10 +6732,6 @@ var $avh4$elm_color$Color$fromHsla = function (_v0) {
 	return A4($avh4$elm_color$Color$hsla, hue, saturation, lightness, alpha);
 };
 var $elm$core$Basics$isNaN = _Basics_isNaN;
-var $elm$core$Basics$min = F2(
-	function (x, y) {
-		return (_Utils_cmp(x, y) < 0) ? x : y;
-	});
 var $avh4$elm_color$Color$toHsla = function (_v0) {
 	var r = _v0.a;
 	var g = _v0.b;
@@ -6034,11 +6796,6 @@ var $simonh1000$elm_colorpicker$ColorPicker$calcSatLight = F3(
 			_Utils_update(
 				hsla,
 				{hue: currHue, lightness: 1 - (y / $simonh1000$elm_colorpicker$ColorPicker$widgetHeight), saturation: x / $simonh1000$elm_colorpicker$ColorPicker$widgetWidth}));
-	});
-var $elm$core$Basics$composeL = F3(
-	function (g, f, x) {
-		return g(
-			f(x));
 	});
 var $elm$core$Maybe$withDefault = F2(
 	function (_default, maybe) {
@@ -6321,15 +7078,6 @@ var $author$project$Update$update = F2(
 							generatedSequence: A3($author$project$LSys$generateSequence, model.iterations, model.axiom, model.rules)
 						}),
 					$elm$core$Platform$Cmd$none);
-			case 'DrawTurtle':
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{
-							drawnTurtle: true,
-							generatedSequence: A3($author$project$LSys$generateSequence, model.iterations, model.axiom, model.rules)
-						}),
-					$elm$core$Platform$Cmd$none);
 			case 'UpdateCanvasSize':
 				var newWidth = msg.a;
 				var newHeight = msg.b;
@@ -6348,7 +7096,7 @@ var $author$project$Update$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{axiom: '', axiomApplied: false, drawnTurtle: false, generatedSequence: $elm$core$Array$empty, iterations: 0, lineLength: 1, lineLengthScale: 0, lineWidthIncrement: 0, newRuleInput: '', rules: _List_Nil, selectedAction: $author$project$Turtle$Move, selectedRule: $elm$core$Maybe$Nothing, startingAngle: 0, syntaxDisplay: false, turningAngle: 0, turningAngleIncrement: 0}),
+						{animationStartTime: $elm$core$Maybe$Nothing, axiom: '', axiomApplied: false, drawnTurtle: false, generatedSequence: $elm$core$Array$empty, iterations: 0, lineLength: 1, lineLengthScale: 0, lineWidthIncrement: 0, newRuleInput: '', renderingProgress: 0, rules: _List_Nil, selectedAction: $author$project$Turtle$Move, selectedRule: $elm$core$Maybe$Nothing, startingAngle: 0, syntaxDisplay: false, turningAngle: 0, turningAngleIncrement: 0}),
 					$elm$core$Platform$Cmd$none);
 			case 'GetRandomPreset':
 				return _Utils_Tuple2(
@@ -6373,10 +7121,12 @@ var $author$project$Update$update = F2(
 				var newModel = _Utils_update(
 					model,
 					{
+						animationStartTime: $elm$core$Maybe$Nothing,
 						axiom: preset.axiom,
 						axiomApplied: preset.axiomApplied,
 						iterations: preset.iterations,
 						lineLength: preset.lineLength,
+						renderingProgress: 0,
 						rules: preset.rules,
 						startingAngle: preset.startingAngle,
 						startingPoint: _Utils_Tuple2(
@@ -6391,7 +7141,115 @@ var $author$project$Update$update = F2(
 							drawnTurtle: true,
 							generatedSequence: A3($author$project$LSys$generateSequence, newModel.iterations, newModel.axiom, newModel.rules)
 						}),
+					A2($elm$core$Task$perform, $author$project$Update$SetAnimationStartTime, $elm$time$Time$now));
+			case 'Animate':
+				var posix = msg.a;
+				var _v2 = model.animationStartTime;
+				if (_v2.$ === 'Nothing') {
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				} else {
+					var startTime = _v2.a;
+					var maxProgress = $elm$core$Array$length(model.generatedSequence);
+					var elapsedTimeMillis = $elm$time$Time$posixToMillis(posix) - $elm$time$Time$posixToMillis(startTime);
+					var newProgress = model.renderingProgress + ((elapsedTimeMillis / 100) * model.animationSpeed);
+					var animationFinished = _Utils_cmp(newProgress, maxProgress) > -1;
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								lastAnimationFrameTimestamp: $elm$core$Maybe$Just(posix),
+								loadingIconVisible: !animationFinished,
+								renderingProgress: A2($elm$core$Basics$min, maxProgress, newProgress)
+							}),
+						$elm$core$Platform$Cmd$none);
+				}
+			case 'SetAnimationStartTime':
+				var time = msg.a;
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{
+							animationStartTime: $elm$core$Maybe$Just(time)
+						}),
 					$elm$core$Platform$Cmd$none);
+			case 'StartAnimation':
+				var newModel = _Utils_update(
+					model,
+					{
+						animationStartTime: $elm$core$Maybe$Nothing,
+						axiom: model.axiom,
+						axiomApplied: model.axiomApplied,
+						iterations: model.iterations,
+						lineLength: model.lineLength,
+						lineLengthScale: model.lineLengthScale,
+						lineWidthIncrement: model.lineWidthIncrement,
+						loadingIconVisible: true,
+						renderingProgress: 0,
+						rules: model.rules,
+						startingAngle: model.startingAngle,
+						startingPoint: _Utils_Tuple2(
+							A2($author$project$Update$roundFloat, 0, model.canvasWidth / 2.3),
+							A2($author$project$Update$roundFloat, 0, model.canvasHeight / 1.5)),
+						turningAngle: model.turningAngle,
+						turningAngleIncrement: model.turningAngleIncrement
+					});
+				var animationTime = ($elm$core$Array$length(model.generatedSequence) / model.animationSpeed) * 1000;
+				return _Utils_Tuple2(
+					_Utils_update(
+						newModel,
+						{
+							drawnTurtle: true,
+							generatedSequence: A3($author$project$LSys$generateSequence, newModel.iterations, newModel.axiom, newModel.rules)
+						}),
+					$elm$core$Platform$Cmd$batch(
+						_List_fromArray(
+							[
+								A2($elm$core$Task$perform, $author$project$Update$SetAnimationStartTime, $elm$time$Time$now),
+								A2(
+								$elm$core$Task$perform,
+								$author$project$Update$HideLoadingIconAfter,
+								A2(
+									$elm$core$Task$map,
+									$elm$core$Basics$always(1),
+									$elm$core$Process$sleep(animationTime)))
+							])));
+			case 'ShowLoadingIcon':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{loadingIconVisible: true}),
+					$elm$core$Platform$Cmd$none);
+			case 'HideLoadingIconAfter':
+				return _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{loadingIconVisible: false}),
+					$elm$core$Platform$Cmd$none);
+			case 'AnimationFrame':
+				var posix = msg.a;
+				var _v3 = model.lastAnimationFrameTimestamp;
+				if (_v3.$ === 'Nothing') {
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								lastAnimationFrameTimestamp: $elm$core$Maybe$Just(posix)
+							}),
+						$elm$core$Platform$Cmd$none);
+				} else {
+					var lastTimestamp = _v3.a;
+					var maxProgress = $elm$core$Array$length(model.generatedSequence);
+					var deltaTime = $elm$time$Time$posixToMillis(posix) - $elm$time$Time$posixToMillis(lastTimestamp);
+					var newProgress = model.renderingProgress + ((deltaTime / 50) * model.animationSpeed);
+					return _Utils_Tuple2(
+						_Utils_update(
+							model,
+							{
+								lastAnimationFrameTimestamp: $elm$core$Maybe$Just(posix),
+								renderingProgress: A2($elm$core$Basics$min, maxProgress, newProgress)
+							}),
+						$elm$core$Platform$Cmd$none);
+				}
 			default:
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 		}
@@ -6443,6 +7301,7 @@ var $elm_community$typed_svg$TypedSvg$polygon = $elm_community$typed_svg$TypedSv
 var $elm_community$typed_svg$TypedSvg$Attributes$style = function (value) {
 	return A2($elm_community$typed_svg$TypedSvg$Core$attribute, 'style', value);
 };
+var $elm_community$typed_svg$TypedSvg$text_ = $elm_community$typed_svg$TypedSvg$Core$node('text');
 var $elm$core$String$concat = function (strings) {
 	return A2($elm$core$String$join, '', strings);
 };
@@ -6475,35 +7334,37 @@ var $avh4$elm_color$Color$toCssString = function (_v0) {
 				')'
 			]));
 };
-var $author$project$Turtle$drawFilledPolygons = function (filledPolygons) {
-	return A2(
-		$elm_community$typed_svg$TypedSvg$g,
-		_List_Nil,
-		A2(
-			$elm$core$List$map,
-			function (_v0) {
-				var polygon = _v0.a;
-				var fillColor = _v0.b;
-				return A2(
-					$elm_community$typed_svg$TypedSvg$polygon,
-					_List_fromArray(
-						[
-							$elm_community$typed_svg$TypedSvg$Attributes$points(
-							A2(
-								$elm$core$List$map,
-								function (_v1) {
-									var x = _v1.a;
-									var y = _v1.b;
-									return _Utils_Tuple2(x, y);
-								},
-								polygon)),
-							$elm_community$typed_svg$TypedSvg$Attributes$style(
-							'fill:' + $avh4$elm_color$Color$toCssString(fillColor))
-						]),
-					_List_Nil);
-			},
-			filledPolygons));
-};
+var $author$project$Turtle$drawFilledPolygons = F2(
+	function (progress, filledPolygons) {
+		return A2(
+			$elm_community$typed_svg$TypedSvg$g,
+			_List_Nil,
+			A2(
+				$elm$core$List$indexedMap,
+				F2(
+					function (index, _v0) {
+						var polygon = _v0.a;
+						var fillColor = _v0.b;
+						return (_Utils_cmp(index, progress) < 0) ? A2(
+							$elm_community$typed_svg$TypedSvg$polygon,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$points(
+									A2(
+										$elm$core$List$map,
+										function (_v1) {
+											var x = _v1.a;
+											var y = _v1.b;
+											return _Utils_Tuple2(x, y);
+										},
+										polygon)),
+									$elm_community$typed_svg$TypedSvg$Attributes$style(
+									'fill:' + $avh4$elm_color$Color$toCssString(fillColor))
+								]),
+							_List_Nil) : A2($elm_community$typed_svg$TypedSvg$text_, _List_Nil, _List_Nil);
+					}),
+				filledPolygons));
+	});
 var $elm$core$Basics$cos = _Basics_cos;
 var $elm$core$Basics$pi = _Basics_pi;
 var $author$project$Turtle$degreesToRadians = function (degrees) {
@@ -6541,7 +7402,6 @@ var $elm$core$Array$foldl = F3(
 			A3($elm$core$Elm$JsArray$foldl, helper, baseCase, tree),
 			tail);
 	});
-var $avh4$elm_color$Color$black = A4($avh4$elm_color$Color$RgbaSpace, 0 / 255, 0 / 255, 0 / 255, 1.0);
 var $author$project$Turtle$initTurtle = function (pos) {
 	return {angle: 0, dots: _List_Nil, fillColor: $avh4$elm_color$Color$black, filledPolygons: _List_Nil, lineWidth: 1, polygons: _List_Nil, segments: _List_Nil, stack: _List_Nil, swapPlusMinus: false, x: pos.a, y: pos.b};
 };
@@ -6783,7 +7643,9 @@ var $author$project$View$iconMenu = function (model) {
 				A2($elm$html$Html$Attributes$style, 'color', '#ffffff'),
 				A2($elm$html$Html$Attributes$style, 'border-radius', '8px'),
 				A2($elm$html$Html$Attributes$style, 'margin-left', '0.5rem'),
-				A2($elm$html$Html$Attributes$style, 'margin-top', '0.5rem')
+				A2($elm$html$Html$Attributes$style, 'margin-top', '0.5rem'),
+				A2($elm$html$Html$Attributes$style, 'z-index', '10'),
+				model.showSidebar ? A2($elm$html$Html$Attributes$style, 'border', '2px solid #ffffff') : A2($elm$html$Html$Attributes$style, 'border', 'none')
 			]),
 		_List_fromArray(
 			[
@@ -6791,6 +7653,26 @@ var $author$project$View$iconMenu = function (model) {
 				model.showSidebar ? 'menu_open' : 'menu')
 			]));
 };
+var $author$project$View$loadingIcon = A2(
+	$elm$html$Html$span,
+	_List_fromArray(
+		[
+			$elm_community$typed_svg$TypedSvg$Attributes$class(
+			_List_fromArray(
+				['loadingIcon', 'material-icons'])),
+			A2($elm$html$Html$Attributes$style, 'font-size', '46px'),
+			A2($elm$html$Html$Attributes$style, 'color', '#eb5160'),
+			A2($elm$html$Html$Attributes$style, 'border-radius', '8px'),
+			A2($elm$html$Html$Attributes$style, 'right', '0'),
+			A2($elm$html$Html$Attributes$style, 'margin-top', '0.5rem'),
+			A2($elm$html$Html$Attributes$style, 'margin-right', '1.5rem'),
+			A2($elm$html$Html$Attributes$style, 'z-index', '10')
+		]),
+	_List_fromArray(
+		[
+			$elm$html$Html$text('hourglass_empty')
+		]));
+var $elm_community$html_extra$Html$Extra$nothing = $elm$html$Html$text('');
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions = {preventDefault: true, stopPropagation: false};
 var $elm$virtual_dom$VirtualDom$Custom = function (a) {
 	return {$: 'Custom', a: a};
@@ -6986,31 +7868,33 @@ var $elm_community$typed_svg$TypedSvg$Attributes$r = function (length) {
 		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(length));
 };
 var $avh4$elm_color$Color$white = A4($avh4$elm_color$Color$RgbaSpace, 255 / 255, 255 / 255, 255 / 255, 1.0);
-var $author$project$Turtle$renderTurtleDots = function (turtle) {
-	return A2(
-		$elm$core$List$map,
-		function (_v0) {
-			var _v1 = _v0.a;
-			var x = _v1.a;
-			var y = _v1.b;
-			var radius = _v0.b;
-			return A2(
-				$elm_community$typed_svg$TypedSvg$circle,
-				_List_fromArray(
-					[
-						$elm_community$typed_svg$TypedSvg$Attributes$cx(
-						$elm_community$typed_svg$TypedSvg$Types$px(x)),
-						$elm_community$typed_svg$TypedSvg$Attributes$cy(
-						$elm_community$typed_svg$TypedSvg$Types$px(y)),
-						$elm_community$typed_svg$TypedSvg$Attributes$r(
-						$elm_community$typed_svg$TypedSvg$Types$px(radius)),
-						$elm_community$typed_svg$TypedSvg$Attributes$fill(
-						$elm_community$typed_svg$TypedSvg$Types$Paint($avh4$elm_color$Color$white))
-					]),
-				_List_Nil);
-		},
-		turtle.dots);
-};
+var $author$project$Turtle$renderTurtleDots = F2(
+	function (progress, turtle) {
+		return A2(
+			$elm$core$List$indexedMap,
+			F2(
+				function (index, _v0) {
+					var _v1 = _v0.a;
+					var x = _v1.a;
+					var y = _v1.b;
+					var radius = _v0.b;
+					return (_Utils_cmp(index, progress) < 0) ? A2(
+						$elm_community$typed_svg$TypedSvg$circle,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Attributes$cx(
+								$elm_community$typed_svg$TypedSvg$Types$px(x)),
+								$elm_community$typed_svg$TypedSvg$Attributes$cy(
+								$elm_community$typed_svg$TypedSvg$Types$px(y)),
+								$elm_community$typed_svg$TypedSvg$Attributes$r(
+								$elm_community$typed_svg$TypedSvg$Types$px(radius)),
+								$elm_community$typed_svg$TypedSvg$Attributes$fill(
+								$elm_community$typed_svg$TypedSvg$Types$Paint($avh4$elm_color$Color$white))
+							]),
+						_List_Nil) : A2($elm_community$typed_svg$TypedSvg$text_, _List_Nil, _List_Nil);
+				}),
+			turtle.dots);
+	});
 var $elm_community$typed_svg$TypedSvg$line = $elm_community$typed_svg$TypedSvg$Core$node('line');
 var $elm_community$typed_svg$TypedSvg$Attributes$stroke = A2(
 	$elm$core$Basics$composeL,
@@ -7046,40 +7930,41 @@ var $elm_community$typed_svg$TypedSvg$Attributes$y2 = function (position) {
 		'y2',
 		$elm_community$typed_svg$TypedSvg$TypesToStrings$lengthToString(position));
 };
-var $author$project$Turtle$renderTurtleSegments = function (turtle) {
-	return A2(
-		$elm$core$List$map,
-		function (_v0) {
-			var _v1 = _v0.a;
-			var x1 = _v1.a;
-			var y1 = _v1.b;
-			var _v2 = _v0.b;
-			var x2 = _v2.a;
-			var y2 = _v2.b;
-			return A2(
-				$elm_community$typed_svg$TypedSvg$line,
-				_List_fromArray(
-					[
-						$elm_community$typed_svg$TypedSvg$Attributes$x1(
-						$elm_community$typed_svg$TypedSvg$Types$px(x1)),
-						$elm_community$typed_svg$TypedSvg$Attributes$y1(
-						$elm_community$typed_svg$TypedSvg$Types$px(y1)),
-						$elm_community$typed_svg$TypedSvg$Attributes$x2(
-						$elm_community$typed_svg$TypedSvg$Types$px(x2)),
-						$elm_community$typed_svg$TypedSvg$Attributes$y2(
-						$elm_community$typed_svg$TypedSvg$Types$px(y2)),
-						$elm_community$typed_svg$TypedSvg$Attributes$stroke(
-						$elm_community$typed_svg$TypedSvg$Types$Paint($avh4$elm_color$Color$white)),
-						$elm_community$typed_svg$TypedSvg$Attributes$strokeWidth(
-						$elm_community$typed_svg$TypedSvg$Types$Px(turtle.lineWidth))
-					]),
-				_List_Nil);
-		},
-		turtle.segments);
-};
+var $author$project$Turtle$renderTurtleSegments = F2(
+	function (progress, turtle) {
+		return A2(
+			$elm$core$List$indexedMap,
+			F2(
+				function (index, _v0) {
+					var _v1 = _v0.a;
+					var x1 = _v1.a;
+					var y1 = _v1.b;
+					var _v2 = _v0.b;
+					var x2 = _v2.a;
+					var y2 = _v2.b;
+					return (_Utils_cmp(index, progress) < 0) ? A2(
+						$elm_community$typed_svg$TypedSvg$line,
+						_List_fromArray(
+							[
+								$elm_community$typed_svg$TypedSvg$Attributes$x1(
+								$elm_community$typed_svg$TypedSvg$Types$px(x1)),
+								$elm_community$typed_svg$TypedSvg$Attributes$y1(
+								$elm_community$typed_svg$TypedSvg$Types$px(y1)),
+								$elm_community$typed_svg$TypedSvg$Attributes$x2(
+								$elm_community$typed_svg$TypedSvg$Types$px(x2)),
+								$elm_community$typed_svg$TypedSvg$Attributes$y2(
+								$elm_community$typed_svg$TypedSvg$Types$px(y2)),
+								$elm_community$typed_svg$TypedSvg$Attributes$stroke(
+								$elm_community$typed_svg$TypedSvg$Types$Paint($avh4$elm_color$Color$white)),
+								$elm_community$typed_svg$TypedSvg$Attributes$strokeWidth(
+								$elm_community$typed_svg$TypedSvg$Types$Px(turtle.lineWidth))
+							]),
+						_List_Nil) : A2($elm_community$typed_svg$TypedSvg$text_, _List_Nil, _List_Nil);
+				}),
+			turtle.segments);
+	});
 var $author$project$Update$AddRule = {$: 'AddRule'};
 var $author$project$Update$ApplyAxiom = {$: 'ApplyAxiom'};
-var $author$project$Update$DrawTurtle = {$: 'DrawTurtle'};
 var $author$project$Update$GetRandomPreset = {$: 'GetRandomPreset'};
 var $author$project$Update$Reset = {$: 'Reset'};
 var $author$project$Update$SelectAxiom = function (a) {
@@ -7088,6 +7973,7 @@ var $author$project$Update$SelectAxiom = function (a) {
 var $author$project$Update$SelectSymbol = function (a) {
 	return {$: 'SelectSymbol', a: a};
 };
+var $author$project$Update$StartAnimation = {$: 'StartAnimation'};
 var $author$project$Update$ToggleSyntaxDisplay = {$: 'ToggleSyntaxDisplay'};
 var $author$project$Update$UpdateAngle = function (a) {
 	return {$: 'UpdateAngle', a: a};
@@ -7115,6 +8001,7 @@ var $author$project$Update$UpdateTurningAngleIncrement = function (a) {
 };
 var $elm$html$Html$a = _VirtualDom_node('a');
 var $elm$html$Html$button = _VirtualDom_node('button');
+var $elm$html$Html$h1 = _VirtualDom_node('h1');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm_community$typed_svg$TypedSvg$Attributes$href = $elm_community$typed_svg$TypedSvg$Core$attribute('href');
@@ -7384,7 +8271,6 @@ var $author$project$View$symbolOptionView = function (symbol) {
 			]));
 };
 var $elm$html$Html$b = _VirtualDom_node('b');
-var $elm_community$html_extra$Html$Extra$nothing = $elm$html$Html$text('');
 var $elm$core$String$trim = _String_trim;
 var $elm$html$Html$ul = _VirtualDom_node('ul');
 var $author$project$View$syntaxDisplayView = function (model) {
@@ -7476,6 +8362,25 @@ var $author$project$View$sidebar = function (model) {
 						[
 							A2(
 							$elm$html$Html$section,
+							_List_Nil,
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$h1,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'margin-top', '4.5rem'),
+											A2($elm$html$Html$Attributes$style, 'font-size', '2.5rem'),
+											A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
+											A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('L-System Studio')
+										]))
+								])),
+							A2(
+							$elm$html$Html$section,
 							_List_fromArray(
 								[
 									$elm_community$typed_svg$TypedSvg$Attributes$class(
@@ -7486,17 +8391,17 @@ var $author$project$View$sidebar = function (model) {
 								[
 									A2(
 									$elm$html$Html$h2,
+									_List_Nil,
 									_List_fromArray(
 										[
-											A2($elm$html$Html$Attributes$style, 'margin-top', '3rem')
-										]),
-									_List_fromArray(
-										[
-											$elm$html$Html$text('Info')
+											$elm$html$Html$text('Info:')
 										])),
 									A2(
 									$elm$html$Html$p,
-									_List_Nil,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'width', '100%')
+										]),
 									_List_fromArray(
 										[
 											A2(
@@ -7703,7 +8608,7 @@ var $author$project$View$sidebar = function (model) {
 									_List_Nil,
 									_List_fromArray(
 										[
-											$elm$html$Html$text('Turtle Settings')
+											$elm$html$Html$text('Turtle Settings:')
 										])),
 									A2(
 									$elm$html$Html$div,
@@ -7724,7 +8629,7 @@ var $author$project$View$sidebar = function (model) {
 													_Utils_ap(
 														A6($author$project$View$inputRange, 'Line width increment', '0.0', '3.0', '0.1', $author$project$Update$UpdateLineWidthIncrement, model.lineWidthIncrement),
 														_Utils_ap(
-															A6($author$project$View$inputRange, 'Recursion depth', '0', '10', '1', $author$project$Update$UpdateIterations, model.iterations),
+															A6($author$project$View$inputRange, 'Recursion depth', '0', '6', '1', $author$project$Update$UpdateIterations, model.iterations),
 															_Utils_ap(
 																A3($author$project$View$inputAngle, 'Starting Angle', model.startingAngle, $author$project$Update$UpdateStartingAngle),
 																_List_fromArray(
@@ -7768,7 +8673,7 @@ var $author$project$View$sidebar = function (model) {
 											$elm_community$typed_svg$TypedSvg$Attributes$class(
 											_List_fromArray(
 												['buttonDraw'])),
-											$elm$html$Html$Events$onClick($author$project$Update$DrawTurtle)
+											$elm$html$Html$Events$onClick($author$project$Update$StartAnimation)
 										]),
 									_List_fromArray(
 										[
@@ -7787,24 +8692,39 @@ var $author$project$View$sidebar = function (model) {
 								[
 									A2(
 									$elm$html$Html$h2,
-									_List_Nil,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+										]),
 									_List_fromArray(
 										[
 											$elm$html$Html$text('Attribution')
 										])),
 									A2(
-									$elm$html$Html$a,
+									$elm$html$Html$div,
 									_List_fromArray(
 										[
-											$elm_community$typed_svg$TypedSvg$Attributes$href('https://github.com/hunorg')
+											A2($elm$html$Html$Attributes$style, 'text-align', 'center')
 										]),
 									_List_fromArray(
 										[
-											$elm$html$Html$text('created by @hunorg')
+											A2(
+											$elm$html$Html$a,
+											_List_fromArray(
+												[
+													$elm_community$typed_svg$TypedSvg$Attributes$href('https://github.com/hunorg')
+												]),
+											_List_fromArray(
+												[
+													$elm$html$Html$text('created by @hunorg')
+												]))
 										])),
 									A2(
 									$elm$html$Html$div,
-									_List_Nil,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+										]),
 									_List_fromArray(
 										[
 											A2(
@@ -7822,6 +8742,215 @@ var $author$project$View$sidebar = function (model) {
 						]))
 				])));
 };
+var $elm$core$Elm$JsArray$appendN = _JsArray_appendN;
+var $elm$core$Elm$JsArray$slice = _JsArray_slice;
+var $elm$core$Array$appendHelpBuilder = F2(
+	function (tail, builder) {
+		var tailLen = $elm$core$Elm$JsArray$length(tail);
+		var notAppended = ($elm$core$Array$branchFactor - $elm$core$Elm$JsArray$length(builder.tail)) - tailLen;
+		var appended = A3($elm$core$Elm$JsArray$appendN, $elm$core$Array$branchFactor, builder.tail, tail);
+		return (notAppended < 0) ? {
+			nodeList: A2(
+				$elm$core$List$cons,
+				$elm$core$Array$Leaf(appended),
+				builder.nodeList),
+			nodeListSize: builder.nodeListSize + 1,
+			tail: A3($elm$core$Elm$JsArray$slice, notAppended, tailLen, tail)
+		} : ((!notAppended) ? {
+			nodeList: A2(
+				$elm$core$List$cons,
+				$elm$core$Array$Leaf(appended),
+				builder.nodeList),
+			nodeListSize: builder.nodeListSize + 1,
+			tail: $elm$core$Elm$JsArray$empty
+		} : {nodeList: builder.nodeList, nodeListSize: builder.nodeListSize, tail: appended});
+	});
+var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
+var $elm$core$Array$tailIndex = function (len) {
+	return (len >>> 5) << 5;
+};
+var $elm$core$Array$sliceLeft = F2(
+	function (from, array) {
+		var len = array.a;
+		var tree = array.c;
+		var tail = array.d;
+		if (!from) {
+			return array;
+		} else {
+			if (_Utils_cmp(
+				from,
+				$elm$core$Array$tailIndex(len)) > -1) {
+				return A4(
+					$elm$core$Array$Array_elm_builtin,
+					len - from,
+					$elm$core$Array$shiftStep,
+					$elm$core$Elm$JsArray$empty,
+					A3(
+						$elm$core$Elm$JsArray$slice,
+						from - $elm$core$Array$tailIndex(len),
+						$elm$core$Elm$JsArray$length(tail),
+						tail));
+			} else {
+				var skipNodes = (from / $elm$core$Array$branchFactor) | 0;
+				var helper = F2(
+					function (node, acc) {
+						if (node.$ === 'SubTree') {
+							var subTree = node.a;
+							return A3($elm$core$Elm$JsArray$foldr, helper, acc, subTree);
+						} else {
+							var leaf = node.a;
+							return A2($elm$core$List$cons, leaf, acc);
+						}
+					});
+				var leafNodes = A3(
+					$elm$core$Elm$JsArray$foldr,
+					helper,
+					_List_fromArray(
+						[tail]),
+					tree);
+				var nodesToInsert = A2($elm$core$List$drop, skipNodes, leafNodes);
+				if (!nodesToInsert.b) {
+					return $elm$core$Array$empty;
+				} else {
+					var head = nodesToInsert.a;
+					var rest = nodesToInsert.b;
+					var firstSlice = from - (skipNodes * $elm$core$Array$branchFactor);
+					var initialBuilder = {
+						nodeList: _List_Nil,
+						nodeListSize: 0,
+						tail: A3(
+							$elm$core$Elm$JsArray$slice,
+							firstSlice,
+							$elm$core$Elm$JsArray$length(head),
+							head)
+					};
+					return A2(
+						$elm$core$Array$builderToArray,
+						true,
+						A3($elm$core$List$foldl, $elm$core$Array$appendHelpBuilder, initialBuilder, rest));
+				}
+			}
+		}
+	});
+var $elm$core$Array$bitMask = 4294967295 >>> (32 - $elm$core$Array$shiftStep);
+var $elm$core$Elm$JsArray$unsafeGet = _JsArray_unsafeGet;
+var $elm$core$Array$fetchNewTail = F4(
+	function (shift, end, treeEnd, tree) {
+		fetchNewTail:
+		while (true) {
+			var pos = $elm$core$Array$bitMask & (treeEnd >>> shift);
+			var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, pos, tree);
+			if (_v0.$ === 'SubTree') {
+				var sub = _v0.a;
+				var $temp$shift = shift - $elm$core$Array$shiftStep,
+					$temp$end = end,
+					$temp$treeEnd = treeEnd,
+					$temp$tree = sub;
+				shift = $temp$shift;
+				end = $temp$end;
+				treeEnd = $temp$treeEnd;
+				tree = $temp$tree;
+				continue fetchNewTail;
+			} else {
+				var values = _v0.a;
+				return A3($elm$core$Elm$JsArray$slice, 0, $elm$core$Array$bitMask & end, values);
+			}
+		}
+	});
+var $elm$core$Array$hoistTree = F3(
+	function (oldShift, newShift, tree) {
+		hoistTree:
+		while (true) {
+			if ((_Utils_cmp(oldShift, newShift) < 1) || (!$elm$core$Elm$JsArray$length(tree))) {
+				return tree;
+			} else {
+				var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, 0, tree);
+				if (_v0.$ === 'SubTree') {
+					var sub = _v0.a;
+					var $temp$oldShift = oldShift - $elm$core$Array$shiftStep,
+						$temp$newShift = newShift,
+						$temp$tree = sub;
+					oldShift = $temp$oldShift;
+					newShift = $temp$newShift;
+					tree = $temp$tree;
+					continue hoistTree;
+				} else {
+					return tree;
+				}
+			}
+		}
+	});
+var $elm$core$Elm$JsArray$unsafeSet = _JsArray_unsafeSet;
+var $elm$core$Array$sliceTree = F3(
+	function (shift, endIdx, tree) {
+		var lastPos = $elm$core$Array$bitMask & (endIdx >>> shift);
+		var _v0 = A2($elm$core$Elm$JsArray$unsafeGet, lastPos, tree);
+		if (_v0.$ === 'SubTree') {
+			var sub = _v0.a;
+			var newSub = A3($elm$core$Array$sliceTree, shift - $elm$core$Array$shiftStep, endIdx, sub);
+			return (!$elm$core$Elm$JsArray$length(newSub)) ? A3($elm$core$Elm$JsArray$slice, 0, lastPos, tree) : A3(
+				$elm$core$Elm$JsArray$unsafeSet,
+				lastPos,
+				$elm$core$Array$SubTree(newSub),
+				A3($elm$core$Elm$JsArray$slice, 0, lastPos + 1, tree));
+		} else {
+			return A3($elm$core$Elm$JsArray$slice, 0, lastPos, tree);
+		}
+	});
+var $elm$core$Array$sliceRight = F2(
+	function (end, array) {
+		var len = array.a;
+		var startShift = array.b;
+		var tree = array.c;
+		var tail = array.d;
+		if (_Utils_eq(end, len)) {
+			return array;
+		} else {
+			if (_Utils_cmp(
+				end,
+				$elm$core$Array$tailIndex(len)) > -1) {
+				return A4(
+					$elm$core$Array$Array_elm_builtin,
+					end,
+					startShift,
+					tree,
+					A3($elm$core$Elm$JsArray$slice, 0, $elm$core$Array$bitMask & end, tail));
+			} else {
+				var endIdx = $elm$core$Array$tailIndex(end);
+				var depth = $elm$core$Basics$floor(
+					A2(
+						$elm$core$Basics$logBase,
+						$elm$core$Array$branchFactor,
+						A2($elm$core$Basics$max, 1, endIdx - 1)));
+				var newShift = A2($elm$core$Basics$max, 5, depth * $elm$core$Array$shiftStep);
+				return A4(
+					$elm$core$Array$Array_elm_builtin,
+					end,
+					newShift,
+					A3(
+						$elm$core$Array$hoistTree,
+						startShift,
+						newShift,
+						A3($elm$core$Array$sliceTree, startShift, endIdx, tree)),
+					A4($elm$core$Array$fetchNewTail, startShift, end, endIdx, tree));
+			}
+		}
+	});
+var $elm$core$Array$translateIndex = F2(
+	function (index, _v0) {
+		var len = _v0.a;
+		var posIndex = (index < 0) ? (len + index) : index;
+		return (posIndex < 0) ? 0 : ((_Utils_cmp(posIndex, len) > 0) ? len : posIndex);
+	});
+var $elm$core$Array$slice = F3(
+	function (from, to, array) {
+		var correctTo = A2($elm$core$Array$translateIndex, to, array);
+		var correctFrom = A2($elm$core$Array$translateIndex, from, array);
+		return (_Utils_cmp(correctFrom, correctTo) > 0) ? $elm$core$Array$empty : A2(
+			$elm$core$Array$sliceLeft,
+			correctFrom,
+			A2($elm$core$Array$sliceRight, correctTo, array));
+	});
 var $elm_community$typed_svg$TypedSvg$svg = $elm_community$typed_svg$TypedSvg$Core$node('svg');
 var $elm_community$typed_svg$TypedSvg$Attributes$viewBox = F4(
 	function (minX, minY, vWidth, vHeight) {
@@ -7849,6 +8978,7 @@ var $author$project$View$view = function (model) {
 		_List_fromArray(
 			[
 				$author$project$View$iconMenu(model),
+				model.loadingIconVisible ? $author$project$View$loadingIcon : $elm_community$html_extra$Html$Extra$nothing,
 				$author$project$View$sidebar(model),
 				A2(
 				$elm$html$Html$div,
@@ -7881,20 +9011,28 @@ var $author$project$View$view = function (model) {
 										$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onDown(
 										function (event) {
 											return A2($author$project$Update$DownMsg, event.button, event.offsetPos);
-										})
+										}),
+										A2($elm$html$Html$Attributes$style, 'cursor', 'pointer')
 									]),
 								function () {
-									var generatedTurtle = A5($author$project$LSys$generateTurtle, model, model.generatedSequence, model.symbolAssignments, model.lineLength, model.turningAngle);
-									return model.drawnTurtle ? _Utils_ap(
-										$author$project$Turtle$renderTurtleSegments(
-											A5($author$project$LSys$generateTurtle, model, model.generatedSequence, model.symbolAssignments, model.lineLength, model.turningAngle)),
+									var progress = A2(
+										$elm$core$Basics$min,
+										model.renderingProgress,
+										$elm$core$Array$length(model.generatedSequence));
+									var progressSequence = A3(
+										$elm$core$Array$slice,
+										0,
+										$elm$core$Basics$round(progress),
+										model.generatedSequence);
+									var progressTurtle = A5($author$project$LSys$generateTurtle, model, progressSequence, model.symbolAssignments, model.lineLength, model.turningAngle);
+									return _Utils_ap(
+										A2($author$project$Turtle$renderTurtleSegments, progress, progressTurtle),
 										_Utils_ap(
-											$author$project$Turtle$renderTurtleDots(
-												A5($author$project$LSys$generateTurtle, model, model.generatedSequence, model.symbolAssignments, model.lineLength, model.turningAngle)),
 											_List_fromArray(
 												[
-													$author$project$Turtle$drawFilledPolygons(generatedTurtle.filledPolygons)
-												]))) : _List_Nil;
+													A2($author$project$Turtle$drawFilledPolygons, progress, progressTurtle.filledPolygons)
+												]),
+											A2($author$project$Turtle$renderTurtleDots, progress, progressTurtle)));
 								}())
 							]))
 					]))
