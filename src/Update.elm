@@ -6,8 +6,10 @@ import Html.Events.Extra.Mouse as Mouse
 import LSys exposing (generateSequence)
 import List.Extra
 import Model exposing (Model, Preset, Rule)
+import Process
 import Random
 import Task
+import Time
 import Turtle exposing (Action(..))
 
 
@@ -29,13 +31,18 @@ type Msg
     | ColorPickerMsg ColorPicker.Msg
     | AddRule
     | ApplyAxiom
-    | DrawTurtle
     | UpdateCanvasSize Float Float
     | ToggleSidebar
     | Reset
     | GetRandomPreset
     | SetRandomPreset Int
     | LoadRandomPreset Preset
+    | Animate Time.Posix
+    | SetAnimationStartTime Time.Posix
+    | StartAnimation
+    | ShowLoadingIcon
+    | HideLoadingIconAfter Float
+    | AnimationFrame Time.Posix
     | NoOp
 
 
@@ -117,9 +124,6 @@ update msg model =
         ApplyAxiom ->
             ( { model | generatedSequence = generateSequence model.iterations model.axiom model.rules, axiomApplied = True }, Cmd.none )
 
-        DrawTurtle ->
-            ( { model | generatedSequence = generateSequence model.iterations model.axiom model.rules, drawnTurtle = True }, Cmd.none )
-
         UpdateCanvasSize newWidth newHeight ->
             ( { model | canvasWidth = newWidth, canvasHeight = newHeight }
             , Cmd.none
@@ -146,6 +150,8 @@ update msg model =
                 , startingAngle = 0
                 , generatedSequence = Array.empty
                 , drawnTurtle = False
+                , renderingProgress = 0
+                , animationStartTime = Nothing
               }
             , Cmd.none
             )
@@ -174,11 +180,99 @@ update msg model =
                         , iterations = preset.iterations
                         , startingAngle = preset.startingAngle
                         , startingPoint = ( roundFloat 0 (model.canvasWidth / 2.3), roundFloat 0 (model.canvasHeight / 1.5) )
+                        , renderingProgress = 0
+                        , animationStartTime = Nothing
                     }
             in
             ( { newModel | generatedSequence = generateSequence newModel.iterations newModel.axiom newModel.rules, drawnTurtle = True }
-            , Cmd.none
+            , Task.perform SetAnimationStartTime Time.now
             )
+
+        Animate posix ->
+            case model.animationStartTime of
+                Nothing ->
+                    ( model, Cmd.none )
+
+                Just startTime ->
+                    let
+                        elapsedTimeMillis =
+                            Time.posixToMillis posix - Time.posixToMillis startTime
+
+                        maxProgress =
+                            Array.length model.generatedSequence
+
+                        newProgress =
+                            model.renderingProgress + (toFloat elapsedTimeMillis / 100 * model.animationSpeed)
+
+                        animationFinished =
+                            newProgress >= toFloat maxProgress
+                    in
+                    ( { model
+                        | renderingProgress = min (toFloat maxProgress) newProgress
+                        , loadingIconVisible = not animationFinished
+                        , lastAnimationFrameTimestamp = Just posix
+                      }
+                    , Cmd.none
+                    )
+
+        SetAnimationStartTime time ->
+            ( { model | animationStartTime = Just time }, Cmd.none )
+
+        StartAnimation ->
+            let
+                animationTime =
+                    toFloat (Array.length model.generatedSequence) / model.animationSpeed * 1000
+
+                newModel =
+                    { model
+                        | rules = model.rules
+                        , axiom = model.axiom
+                        , axiomApplied = model.axiomApplied
+                        , turningAngleIncrement = model.turningAngleIncrement
+                        , turningAngle = model.turningAngle
+                        , lineLength = model.lineLength
+                        , lineLengthScale = model.lineLengthScale
+                        , lineWidthIncrement = model.lineWidthIncrement
+                        , iterations = model.iterations
+                        , startingAngle = model.startingAngle
+                        , startingPoint = ( roundFloat 0 (model.canvasWidth / 2.3), roundFloat 0 (model.canvasHeight / 1.5) )
+                        , renderingProgress = 0
+                        , animationStartTime = Nothing
+                        , loadingIconVisible = True -- Add this line to show the loading icon
+                    }
+            in
+            ( { newModel | generatedSequence = generateSequence newModel.iterations newModel.axiom newModel.rules, drawnTurtle = True }
+            , Cmd.batch [ Task.perform SetAnimationStartTime Time.now, Task.perform HideLoadingIconAfter (Process.sleep animationTime |> Task.map (always 1)) ]
+            )
+
+        ShowLoadingIcon ->
+            ( { model | loadingIconVisible = True }, Cmd.none )
+
+        HideLoadingIconAfter _ ->
+            ( { model | loadingIconVisible = False }, Cmd.none )
+
+        AnimationFrame posix ->
+            case model.lastAnimationFrameTimestamp of
+                Nothing ->
+                    ( { model | lastAnimationFrameTimestamp = Just posix }, Cmd.none )
+
+                Just lastTimestamp ->
+                    let
+                        deltaTime =
+                            Time.posixToMillis posix - Time.posixToMillis lastTimestamp
+
+                        newProgress =
+                            model.renderingProgress + (toFloat deltaTime / 50 * model.animationSpeed)
+
+                        maxProgress =
+                            Array.length model.generatedSequence
+                    in
+                    ( { model
+                        | renderingProgress = min (toFloat maxProgress) newProgress
+                        , lastAnimationFrameTimestamp = Just posix
+                      }
+                    , Cmd.none
+                    )
 
         NoOp ->
             ( model, Cmd.none )

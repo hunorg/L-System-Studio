@@ -1,8 +1,9 @@
 module View exposing (..)
 
+import Array
 import Color
 import ColorPicker
-import Html exposing (Html, button, div, h2, h3, i, img, input, li, option, p, section, select, span, text, ul)
+import Html exposing (Html, button, div, h1, h2, h3, i, img, input, li, option, p, section, select, span, text, ul)
 import Html.Attributes exposing (classList, src, step, type_, value)
 import Html.Events exposing (onClick, onInput)
 import Html.Events.Extra.Mouse as Mouse
@@ -42,6 +43,12 @@ iconMenu model =
         , Html.Attributes.style "border-radius" "8px"
         , Html.Attributes.style "margin-left" "0.5rem"
         , Html.Attributes.style "margin-top" "0.5rem"
+        , Html.Attributes.style "z-index" "10"
+        , if model.showSidebar then
+            Html.Attributes.style "border" "2px solid #ffffff"
+
+          else
+            Html.Attributes.style "border" "none"
         ]
         [ text
             (if model.showSidebar then
@@ -53,14 +60,38 @@ iconMenu model =
         ]
 
 
+loadingIcon : Html msg
+loadingIcon =
+    span
+        [ class [ "loadingIcon", "material-icons" ]
+        , Html.Attributes.style "font-size" "46px"
+        , Html.Attributes.style "color" "#eb5160"
+        , Html.Attributes.style "border-radius" "8px"
+        , Html.Attributes.style "right" "0"
+        , Html.Attributes.style "margin-top" "0.5rem"
+        , Html.Attributes.style "margin-right" "1.5rem"
+        , Html.Attributes.style "z-index" "10"
+        ]
+        [ text "hourglass_empty" ]
+
+
 sidebar : Model -> Html Msg
 sidebar model =
     viewIf model.showSidebar <|
         div [ class [ "sidebar" ] ]
             [ div [ class [ "sidebarContent" ] ]
-                [ section [ class [ "infoSection" ] ]
-                    [ h2 [ Html.Attributes.style "margin-top" "3rem" ] [ text "Info" ]
-                    , p []
+                [ section []
+                    [ h1
+                        [ Html.Attributes.style "margin-top" "4.5rem"
+                        , Html.Attributes.style "font-size" "2.5rem"
+                        , Html.Attributes.style "font-weight" "bold"
+                        , Html.Attributes.style "text-align" "center"
+                        ]
+                        [ text "L-System Studio" ]
+                    ]
+                , section [ class [ "infoSection" ] ]
+                    [ h2 [] [ text "Info:" ]
+                    , p [ Html.Attributes.style "width" "100%" ]
                         [ Html.a [ href "http://paulbourke.net/fractals/lsys/" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ] ]
                     ]
                 , section []
@@ -112,14 +143,14 @@ sidebar model =
                         ]
                     ]
                 , section []
-                    [ h2 [] [ text "Turtle Settings" ]
+                    [ h2 [] [ text "Turtle Settings:" ]
                     , div [ class [ "grid3" ] ]
                         (inputAngle "Turning angle" model.turningAngle UpdateAngle
                             ++ inputAngle "Turning angle increment" model.turningAngleIncrement UpdateTurningAngleIncrement
                             ++ inputRange "Line length" "1" "25" "1" UpdateLineLength model.lineLength
                             ++ inputRange " Line length scale" "0.0" "3" "0.1" UpdateLineLengthScale model.lineLengthScale
                             ++ inputRange "Line width increment" "0.0" "3.0" "0.1" UpdateLineWidthIncrement model.lineWidthIncrement
-                            ++ inputRange "Recursion depth" "0" "10" "1" UpdateIterations model.iterations
+                            ++ inputRange "Recursion depth" "0" "6" "1" UpdateIterations model.iterations
                             ++ inputAngle "Starting Angle" model.startingAngle UpdateStartingAngle
                             ++ [ Html.label [] [ text "Starting point " ]
                                , span [ class [ "startingPointValueText" ] ] [ text ((model.startingPoint |> Tuple.first |> String.fromFloat) ++ ", " ++ (model.startingPoint |> Tuple.second |> String.fromFloat)) ]
@@ -127,12 +158,13 @@ sidebar model =
                         )
                     ]
                 , section [ class [ "drawSection" ] ]
-                    [ button [ class [ "buttonDraw" ], onClick DrawTurtle ] [ text "Draw" ]
+                    [ button [ class [ "buttonDraw" ], onClick StartAnimation ] [ text "Draw" ]
                     ]
                 , section [ class [ "attributionSection" ] ]
-                    [ h2 [] [ text "Attribution" ]
-                    , Html.a [ href "https://github.com/hunorg" ] [ text "created by @hunorg" ]
-                    , div []
+                    [ h2 [ Html.Attributes.style "text-align" "center" ] [ text "Attribution" ]
+                    , div [ Html.Attributes.style "text-align" "center" ]
+                        [ Html.a [ href "https://github.com/hunorg" ] [ text "created by @hunorg" ] ]
+                    , div [ Html.Attributes.style "text-align" "center" ]
                         [ Html.a [ href "https://github.com/hunorg/L-System-Studio" ] [ text "source code" ] ]
                     ]
                 ]
@@ -143,6 +175,11 @@ view : Model -> Html Msg
 view model =
     div [ class [ "flexContainer" ] ]
         [ iconMenu model
+        , if model.loadingIconVisible then
+            loadingIcon
+
+          else
+            nothing
         , sidebar model
         , div
             [ class [ "canvas" ]
@@ -156,20 +193,22 @@ view model =
                 [ svg
                     [ viewBox 0 0 model.canvasWidth model.canvasHeight
                     , Mouse.onDown (\event -> DownMsg event.button event.offsetPos)
+                    , Html.Attributes.style "cursor" "pointer"
                     ]
                   <|
                     let
-                        generatedTurtle =
-                            generateTurtle model model.generatedSequence model.symbolAssignments model.lineLength model.turningAngle
-                    in
-                    if model.drawnTurtle then
-                        (Turtle.renderTurtleSegments <| generateTurtle model model.generatedSequence model.symbolAssignments model.lineLength model.turningAngle)
-                            ++ (Turtle.renderTurtleDots <| generateTurtle model model.generatedSequence model.symbolAssignments model.lineLength model.turningAngle)
-                            ++ [ Turtle.drawFilledPolygons generatedTurtle.filledPolygons ]
-                        -- Add filled polygons
+                        progress =
+                            Basics.min model.renderingProgress (toFloat (Array.length model.generatedSequence))
 
-                    else
-                        []
+                        progressSequence =
+                            Array.slice 0 (round progress) model.generatedSequence
+
+                        progressTurtle =
+                            generateTurtle model progressSequence model.symbolAssignments model.lineLength model.turningAngle
+                    in
+                    Turtle.renderTurtleSegments progress progressTurtle
+                        ++ [ Turtle.drawFilledPolygons progress progressTurtle.filledPolygons ]
+                        ++ Turtle.renderTurtleDots progress progressTurtle
                 ]
             ]
         ]
