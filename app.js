@@ -6400,7 +6400,6 @@ var $author$project$Update$DownMsg = F2(
 	function (a, b) {
 		return {$: 'DownMsg', a: a, b: b};
 	});
-var $author$project$Update$ToggleSidebar = {$: 'ToggleSidebar'};
 var $elm$virtual_dom$VirtualDom$attribute = F2(
 	function (key, value) {
 		return A2(
@@ -6746,7 +6745,7 @@ var $author$project$LSys$generateTurtle = F5(
 				$author$project$Turtle$initTurtle(model.startingPoint)),
 			sequence);
 	});
-var $elm$html$Html$i = _VirtualDom_node('i');
+var $author$project$Update$ToggleSidebar = {$: 'ToggleSidebar'};
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -6763,6 +6762,34 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		$elm$html$Html$Events$on,
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
+};
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$View$iconMenu = function (model) {
+	return A2(
+		$elm$html$Html$span,
+		_List_fromArray(
+			[
+				$elm_community$typed_svg$TypedSvg$Attributes$class(
+				_List_fromArray(
+					['toggleSidebar', 'material-icons'])),
+				A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+				$elm$html$Html$Events$onClick($author$project$Update$ToggleSidebar),
+				A2($elm$html$Html$Attributes$style, 'font-size', '46px'),
+				A2($elm$html$Html$Attributes$style, 'background-color', '#eb5160'),
+				A2($elm$html$Html$Attributes$style, 'color', '#ffffff'),
+				A2($elm$html$Html$Attributes$style, 'border-radius', '8px'),
+				A2($elm$html$Html$Attributes$style, 'margin-left', '0.5rem'),
+				A2($elm$html$Html$Attributes$style, 'margin-top', '0.5rem')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text(
+				model.showSidebar ? 'menu_open' : 'menu')
+			]));
 };
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions = {preventDefault: true, stopPropagation: false};
 var $elm$virtual_dom$VirtualDom$Custom = function (a) {
@@ -7091,10 +7118,7 @@ var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm_community$typed_svg$TypedSvg$Attributes$href = $elm_community$typed_svg$TypedSvg$Core$attribute('href');
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$html$Html$i = _VirtualDom_node('i');
 var $author$project$View$icon = F2(
 	function (name, msg) {
 		return A2(
@@ -7162,7 +7186,6 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
-var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$html$Html$Attributes$step = function (n) {
 	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
 };
@@ -7825,27 +7848,7 @@ var $author$project$View$view = function (model) {
 			]),
 		_List_fromArray(
 			[
-				A2(
-				$elm$html$Html$i,
-				_List_fromArray(
-					[
-						$elm_community$typed_svg$TypedSvg$Attributes$class(
-						_List_fromArray(
-							['toggleSidebar', 'material-icons'])),
-						A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-						$elm$html$Html$Events$onClick($author$project$Update$ToggleSidebar),
-						A2($elm$html$Html$Attributes$style, 'font-size', '46px'),
-						A2($elm$html$Html$Attributes$style, 'background-color', '#eb5160'),
-						A2($elm$html$Html$Attributes$style, 'color', '#ffffff'),
-						A2($elm$html$Html$Attributes$style, 'border-radius', '8px'),
-						A2($elm$html$Html$Attributes$style, 'margin-left', '0.5rem'),
-						A2($elm$html$Html$Attributes$style, 'margin-top', '0.5rem'),
-						A2($elm$html$Html$Attributes$style, 'opacity', '1')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('menu')
-					])),
+				$author$project$View$iconMenu(model),
 				$author$project$View$sidebar(model),
 				A2(
 				$elm$html$Html$div,

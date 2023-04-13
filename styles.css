@@ -19,6 +19,7 @@ html {
     /* position: relative; */
 }
 
+
 .toggleSidebar {
     position: absolute;
     top: 1rem;
@@ -363,6 +364,7 @@ h3 {
     .grid3 { 
         justify-content: center;
     }
+    
 
     .sidebar {
       width: 100vw;

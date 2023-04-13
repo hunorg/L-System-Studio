@@ -22,7 +22,35 @@ showRule ( from, to ) =
 
 
 icon name msg =
-    i [ class [ "material-icons" ], Html.Attributes.style "cursor" "pointer", onClick msg, Html.Attributes.style "font-size" "46px" ] [ text name ]
+    i
+        [ class [ "material-icons" ]
+        , Html.Attributes.style "cursor" "pointer"
+        , onClick msg
+        , Html.Attributes.style "font-size" "46px"
+        ]
+        [ text name ]
+
+
+iconMenu model =
+    span
+        [ class [ "toggleSidebar", "material-icons" ]
+        , Html.Attributes.style "cursor" "pointer"
+        , onClick ToggleSidebar
+        , Html.Attributes.style "font-size" "46px"
+        , Html.Attributes.style "background-color" "#eb5160"
+        , Html.Attributes.style "color" "#ffffff"
+        , Html.Attributes.style "border-radius" "8px"
+        , Html.Attributes.style "margin-left" "0.5rem"
+        , Html.Attributes.style "margin-top" "0.5rem"
+        ]
+        [ text
+            (if model.showSidebar then
+                "menu_open"
+
+             else
+                "menu"
+            )
+        ]
 
 
 sidebar : Model -> Html Msg
@@ -114,19 +142,7 @@ sidebar model =
 view : Model -> Html Msg
 view model =
     div [ class [ "flexContainer" ] ]
-        [ i
-            [ class [ "toggleSidebar", "material-icons" ]
-            , Html.Attributes.style "cursor" "pointer"
-            , onClick ToggleSidebar
-            , Html.Attributes.style "font-size" "46px"
-            , Html.Attributes.style "background-color" "#eb5160"
-            , Html.Attributes.style "color" "#ffffff"
-            , Html.Attributes.style "border-radius" "8px"
-            , Html.Attributes.style "margin-left" "0.5rem"
-            , Html.Attributes.style "margin-top" "0.5rem"
-            , Html.Attributes.style "opacity" "1"
-            ]
-            [ text "menu" ]
+        [ iconMenu model
         , sidebar model
         , div
             [ class [ "canvas" ]
