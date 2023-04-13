@@ -5545,7 +5545,7 @@ var $author$project$Model$init = {
 	canvasWidth: 500,
 	colorPicker: $simonh1000$elm_colorpicker$ColorPicker$empty,
 	drawnTurtle: false,
-	generatedSequence: _List_Nil,
+	generatedSequence: $elm$core$Array$empty,
 	iterations: 0,
 	lineLength: 1,
 	lineLengthScale: 0,
@@ -5750,11 +5750,6 @@ var $elm$core$List$append = F2(
 var $elm$core$List$concat = function (lists) {
 	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
 };
-var $elm$core$List$concatMap = F2(
-	function (f, list) {
-		return $elm$core$List$concat(
-			A2($elm$core$List$map, f, list));
-	});
 var $elm_community$list_extra$List$Extra$find = F2(
 	function (predicate, list) {
 		find:
@@ -5776,6 +5771,66 @@ var $elm_community$list_extra$List$Extra$find = F2(
 			}
 		}
 	});
+var $elm$core$Array$fromListHelp = F3(
+	function (list, nodeList, nodeListSize) {
+		fromListHelp:
+		while (true) {
+			var _v0 = A2($elm$core$Elm$JsArray$initializeFromList, $elm$core$Array$branchFactor, list);
+			var jsArray = _v0.a;
+			var remainingItems = _v0.b;
+			if (_Utils_cmp(
+				$elm$core$Elm$JsArray$length(jsArray),
+				$elm$core$Array$branchFactor) < 0) {
+				return A2(
+					$elm$core$Array$builderToArray,
+					true,
+					{nodeList: nodeList, nodeListSize: nodeListSize, tail: jsArray});
+			} else {
+				var $temp$list = remainingItems,
+					$temp$nodeList = A2(
+					$elm$core$List$cons,
+					$elm$core$Array$Leaf(jsArray),
+					nodeList),
+					$temp$nodeListSize = nodeListSize + 1;
+				list = $temp$list;
+				nodeList = $temp$nodeList;
+				nodeListSize = $temp$nodeListSize;
+				continue fromListHelp;
+			}
+		}
+	});
+var $elm$core$Array$fromList = function (list) {
+	if (!list.b) {
+		return $elm$core$Array$empty;
+	} else {
+		return A3($elm$core$Array$fromListHelp, list, _List_Nil, 0);
+	}
+};
+var $elm$core$Elm$JsArray$map = _JsArray_map;
+var $elm$core$Array$map = F2(
+	function (func, _v0) {
+		var len = _v0.a;
+		var startShift = _v0.b;
+		var tree = _v0.c;
+		var tail = _v0.d;
+		var helper = function (node) {
+			if (node.$ === 'SubTree') {
+				var subTree = node.a;
+				return $elm$core$Array$SubTree(
+					A2($elm$core$Elm$JsArray$map, helper, subTree));
+			} else {
+				var values = node.a;
+				return $elm$core$Array$Leaf(
+					A2($elm$core$Elm$JsArray$map, func, values));
+			}
+		};
+		return A4(
+			$elm$core$Array$Array_elm_builtin,
+			len,
+			startShift,
+			A2($elm$core$Elm$JsArray$map, helper, tree),
+			A2($elm$core$Elm$JsArray$map, func, tail));
+	});
 var $elm$core$Basics$round = _Basics_round;
 var $elm$core$String$foldr = _String_foldr;
 var $elm$core$String$toList = function (string) {
@@ -5794,19 +5849,27 @@ var $author$project$LSys$generateSequence = F3(
 			if (_v1.$ === 'Just') {
 				var _v3 = _v1.a;
 				var replacement = _v3.b;
-				return replacement;
+				return $elm$core$Array$fromList(replacement);
 			} else {
-				return _List_fromArray(
-					[symbol]);
+				return $elm$core$Array$fromList(
+					_List_fromArray(
+						[symbol]));
 			}
 		};
 		return A3(
 			$elm$core$List$foldl,
 			F2(
 				function (_v0, seq) {
-					return A2($elm$core$List$concatMap, expandSymbol, seq);
+					return $elm$core$Array$fromList(
+						$elm$core$List$concat(
+							A2(
+								$elm$core$List$map,
+								$elm$core$Array$toList,
+								$elm$core$Array$toList(
+									A2($elm$core$Array$map, expandSymbol, seq)))));
 				}),
-			$elm$core$String$toList(axiom),
+			$elm$core$Array$fromList(
+				$elm$core$String$toList(axiom)),
 			A2(
 				$elm$core$List$range,
 				1,
@@ -6285,7 +6348,7 @@ var $author$project$Update$update = F2(
 				return _Utils_Tuple2(
 					_Utils_update(
 						model,
-						{axiom: '', axiomApplied: false, drawnTurtle: false, generatedSequence: _List_Nil, iterations: 0, lineLength: 1, lineLengthScale: 0, lineWidthIncrement: 0, newRuleInput: '', rules: _List_Nil, selectedAction: $author$project$Turtle$Move, selectedRule: $elm$core$Maybe$Nothing, startingAngle: 0, syntaxDisplay: false, turningAngle: 0, turningAngleIncrement: 0}),
+						{axiom: '', axiomApplied: false, drawnTurtle: false, generatedSequence: $elm$core$Array$empty, iterations: 0, lineLength: 1, lineLengthScale: 0, lineWidthIncrement: 0, newRuleInput: '', rules: _List_Nil, selectedAction: $author$project$Turtle$Move, selectedRule: $elm$core$Maybe$Nothing, startingAngle: 0, syntaxDisplay: false, turningAngle: 0, turningAngleIncrement: 0}),
 					$elm$core$Platform$Cmd$none);
 			case 'GetRandomPreset':
 				return _Utils_Tuple2(
@@ -6337,7 +6400,6 @@ var $author$project$Update$DownMsg = F2(
 	function (a, b) {
 		return {$: 'DownMsg', a: a, b: b};
 	});
-var $author$project$Update$ToggleSidebar = {$: 'ToggleSidebar'};
 var $elm$virtual_dom$VirtualDom$attribute = F2(
 	function (key, value) {
 		return A2(
@@ -6457,6 +6519,27 @@ var $author$project$LSys$calculateNewPosition = F3(
 		var deltaX = stepSize * $elm$core$Basics$cos(
 			$author$project$Turtle$degreesToRadians(angle));
 		return _Utils_Tuple2(x + deltaX, y + deltaY);
+	});
+var $elm$core$Elm$JsArray$foldl = _JsArray_foldl;
+var $elm$core$Array$foldl = F3(
+	function (func, baseCase, _v0) {
+		var tree = _v0.c;
+		var tail = _v0.d;
+		var helper = F2(
+			function (node, acc) {
+				if (node.$ === 'SubTree') {
+					var subTree = node.a;
+					return A3($elm$core$Elm$JsArray$foldl, helper, acc, subTree);
+				} else {
+					var values = node.a;
+					return A3($elm$core$Elm$JsArray$foldl, func, acc, values);
+				}
+			});
+		return A3(
+			$elm$core$Elm$JsArray$foldl,
+			func,
+			A3($elm$core$Elm$JsArray$foldl, helper, baseCase, tree),
+			tail);
 	});
 var $avh4$elm_color$Color$black = A4($avh4$elm_color$Color$RgbaSpace, 0 / 255, 0 / 255, 0 / 255, 1.0);
 var $author$project$Turtle$initTurtle = function (pos) {
@@ -6654,7 +6737,7 @@ var $author$project$LSys$generateTurtle = F5(
 				}
 			});
 		return A3(
-			$elm$core$List$foldl,
+			$elm$core$Array$foldl,
 			applySymbol,
 			A2(
 				$author$project$Turtle$turn,
@@ -6662,7 +6745,7 @@ var $author$project$LSys$generateTurtle = F5(
 				$author$project$Turtle$initTurtle(model.startingPoint)),
 			sequence);
 	});
-var $elm$html$Html$i = _VirtualDom_node('i');
+var $author$project$Update$ToggleSidebar = {$: 'ToggleSidebar'};
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 'Normal', a: a};
 };
@@ -6679,6 +6762,34 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		$elm$html$Html$Events$on,
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
+};
+var $elm$html$Html$span = _VirtualDom_node('span');
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$View$iconMenu = function (model) {
+	return A2(
+		$elm$html$Html$span,
+		_List_fromArray(
+			[
+				$elm_community$typed_svg$TypedSvg$Attributes$class(
+				_List_fromArray(
+					['toggleSidebar', 'material-icons'])),
+				A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
+				$elm$html$Html$Events$onClick($author$project$Update$ToggleSidebar),
+				A2($elm$html$Html$Attributes$style, 'font-size', '46px'),
+				A2($elm$html$Html$Attributes$style, 'background-color', '#eb5160'),
+				A2($elm$html$Html$Attributes$style, 'color', '#ffffff'),
+				A2($elm$html$Html$Attributes$style, 'border-radius', '8px'),
+				A2($elm$html$Html$Attributes$style, 'margin-left', '0.5rem'),
+				A2($elm$html$Html$Attributes$style, 'margin-top', '0.5rem')
+			]),
+		_List_fromArray(
+			[
+				$elm$html$Html$text(
+				model.showSidebar ? 'menu_open' : 'menu')
+			]));
 };
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions = {preventDefault: true, stopPropagation: false};
 var $elm$virtual_dom$VirtualDom$Custom = function (a) {
@@ -7007,10 +7118,7 @@ var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$html$Html$h2 = _VirtualDom_node('h2');
 var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm_community$typed_svg$TypedSvg$Attributes$href = $elm_community$typed_svg$TypedSvg$Core$attribute('href');
-var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
-var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $elm$html$Html$i = _VirtualDom_node('i');
 var $author$project$View$icon = F2(
 	function (name, msg) {
 		return A2(
@@ -7078,7 +7186,6 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
-var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$html$Html$Attributes$step = function (n) {
 	return A2($elm$html$Html$Attributes$stringProperty, 'step', n);
 };
@@ -7741,21 +7848,7 @@ var $author$project$View$view = function (model) {
 			]),
 		_List_fromArray(
 			[
-				A2(
-				$elm$html$Html$i,
-				_List_fromArray(
-					[
-						$elm_community$typed_svg$TypedSvg$Attributes$class(
-						_List_fromArray(
-							['toggleSidebar', 'material-icons'])),
-						A2($elm$html$Html$Attributes$style, 'cursor', 'pointer'),
-						$elm$html$Html$Events$onClick($author$project$Update$ToggleSidebar),
-						A2($elm$html$Html$Attributes$style, 'font-size', '46px')
-					]),
-				_List_fromArray(
-					[
-						$elm$html$Html$text('menu')
-					])),
+				$author$project$View$iconMenu(model),
 				$author$project$View$sidebar(model),
 				A2(
 				$elm$html$Html$div,

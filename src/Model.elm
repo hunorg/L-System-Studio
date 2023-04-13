@@ -1,5 +1,6 @@
 module Model exposing (Model, Preset, Rule, Symbol, init, initPreset)
 
+import Array exposing (Array)
 import Color
 import ColorPicker
 import Random
@@ -26,7 +27,7 @@ type alias Model =
     , startingAngle : Float
     , polygonFillColor : Color.Color
     , colorPicker : ColorPicker.State
-    , generatedSequence : List Char
+    , generatedSequence : Array Char
     , drawnTurtle : Bool
     , canvasWidth : Float
     , canvasHeight : Float
@@ -92,7 +93,7 @@ init =
     , startingAngle = 0
     , polygonFillColor = Color.red
     , colorPicker = ColorPicker.empty
-    , generatedSequence = []
+    , generatedSequence = Array.empty
     , drawnTurtle = False
     , canvasWidth = 500
     , canvasHeight = 500
