@@ -307,7 +307,7 @@ h3 {
     width: 10rem;
     background: #d3d3d3;
     outline: none;
-    opacity: 0.7;
+    opacity: 1;
     -webkit-transition: .2s;
     transition: opacity .2s;
     border-radius: 10px;

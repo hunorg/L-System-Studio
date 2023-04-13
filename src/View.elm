@@ -119,6 +119,12 @@ view model =
             , Html.Attributes.style "cursor" "pointer"
             , onClick ToggleSidebar
             , Html.Attributes.style "font-size" "46px"
+            , Html.Attributes.style "background-color" "#eb5160"
+            , Html.Attributes.style "color" "#ffffff"
+            , Html.Attributes.style "border-radius" "8px"
+            , Html.Attributes.style "margin-left" "0.5rem"
+            , Html.Attributes.style "margin-top" "0.5rem"
+            , Html.Attributes.style "opacity" "1"
             ]
             [ text "menu" ]
         , sidebar model

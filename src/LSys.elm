@@ -1,5 +1,6 @@
 module LSys exposing (generateSequence, generateTurtle)
 
+import Array exposing (Array)
 import List.Extra as Extra
 import Model exposing (Model, Symbol)
 import Turtle exposing (..)
@@ -9,25 +10,28 @@ import Turtle exposing (..)
 -- Generates an L-system sequence based on the given iterations, axiom, and rules.
 
 
-generateSequence : Float -> String -> List ( Char, List Char ) -> List Char
+generateSequence : Float -> String -> List ( Char, List Char ) -> Array Char
 generateSequence iterations axiom rules =
     let
         expandSymbol symbol =
             case Extra.find (\( s, _ ) -> s == symbol) rules of
                 Just ( _, replacement ) ->
-                    replacement
+                    Array.fromList replacement
 
                 Nothing ->
-                    [ symbol ]
+                    Array.fromList [ symbol ]
     in
-    List.foldl (\_ seq -> List.concatMap expandSymbol seq) (String.toList axiom) (List.range 1 (round iterations))
+    List.foldl
+        (\_ seq -> Array.map expandSymbol seq |> Array.toList |> List.map Array.toList |> List.concat |> Array.fromList)
+        (String.toList axiom |> Array.fromList)
+        (List.range 1 (round iterations))
 
 
 
 -- Generates a turtle graphics object based on the given model, sequence, symbolAssignments, stepSize, and angle.
 
 
-generateTurtle : Model -> List Char -> List Symbol -> Float -> Float -> Turtle
+generateTurtle : Model -> Array Char -> List Symbol -> Float -> Float -> Turtle
 generateTurtle model sequence symbolAssignments stepSize angle =
     let
         applyAction turtle action =
@@ -121,7 +125,7 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                 symbolAssignment :: _ ->
                     applyAction turtle symbolAssignment.action
     in
-    List.foldl applySymbol (Turtle.initTurtle model.startingPoint |> Turtle.turn model.startingAngle) sequence
+    Array.foldl applySymbol (Turtle.initTurtle model.startingPoint |> Turtle.turn model.startingAngle) sequence
 
 
 calculateNewPosition : Float -> Float -> ( Float, Float ) -> ( Float, Float )

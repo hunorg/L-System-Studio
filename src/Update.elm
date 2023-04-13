@@ -1,10 +1,11 @@
 module Update exposing (Msg(..), update)
 
+import Array
 import ColorPicker
 import Html.Events.Extra.Mouse as Mouse
 import LSys exposing (generateSequence)
 import List.Extra
-import Model exposing (Model, Preset, Rule, init)
+import Model exposing (Model, Preset, Rule)
 import Random
 import Task
 import Turtle exposing (Action(..))
@@ -143,7 +144,7 @@ update msg model =
                 , axiom = ""
                 , iterations = 0
                 , startingAngle = 0
-                , generatedSequence = []
+                , generatedSequence = Array.empty
                 , drawnTurtle = False
               }
             , Cmd.none

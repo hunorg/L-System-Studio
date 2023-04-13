@@ -1,6 +1,7 @@
 port module Main exposing (main, subscriptions)
 
 import Browser
+import Browser.Events
 import Json.Decode as Decode exposing (Value)
 import Model exposing (Model, init)
 import Update exposing (Msg(..), update)
