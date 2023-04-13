@@ -3,7 +3,7 @@
 interactive web application built with Elm, designed to help users explore and visualize L-systems
 
 ## Sample output:
-![LSysEx2](https://user-images.githubusercontent.com/114682020/230969379-50960557-f6b8-4aa4-a8e1-65a80c0d422a.png)
+
 
 
 
@@ -43,7 +43,7 @@ These symbols allow users to create a wide range of L-system rules and customize
 
 you can try it out by visiting the live link:
 
-[**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/bd2538c8fb269cd5c8e0882f62af8b13cf2222f6/index.html)
+[**L-System Studio Live**](https://rawcdn.githack.com/hunorg/L-System-Studio/8ace441431e27edc6ad3d1ee82ebacbefcccf0de/index.html)
 
 ### Run locally
 
