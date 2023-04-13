@@ -3,6 +3,8 @@
 interactive web application built with Elm, designed to help users explore and visualize L-systems
 
 ## Sample output:
+![LSysEx3](https://user-images.githubusercontent.com/114682020/231900970-e5e6373a-00b6-492e-9bcd-ca92678d5e55.png)
+![LSysEx4](https://user-images.githubusercontent.com/114682020/231900995-36ad027b-1c02-4da8-b2f4-c606a53ff545.png)
 
 
 
@@ -76,11 +78,6 @@ contributions are welcome! If you'd like to contribute, please fork the reposito
 
 ## Future enchancements include: 
 
-1. saving and loading L-system presets
-3. drawing process animation
-4. user-guided tutorials or examples
-5. error handling and input validation
-6. tooltips and help text
-7. code optimization for performance
+1. code optimization for performance and deeper recursion
 
 
