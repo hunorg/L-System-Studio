@@ -6358,7 +6358,7 @@ var $elm$time$Time$every = F2(
 		return $elm$time$Time$subscription(
 			A2($elm$time$Time$Every, interval, tagger));
 	});
-var $author$project$Main$tick = A2($elm$time$Time$every, 50, $author$project$Update$Animate);
+var $author$project$Main$tick = A2($elm$time$Time$every, 10, $author$project$Update$Animate);
 var $elm$json$Json$Decode$value = _Json_decodeValue;
 var $author$project$Main$updateCanvasSize = _Platform_incomingPort('updateCanvasSize', $elm$json$Json$Decode$value);
 var $author$project$Main$subscriptions = function (model) {
@@ -7240,7 +7240,7 @@ var $author$project$Update$update = F2(
 					var lastTimestamp = _v3.a;
 					var maxProgress = $elm$core$Array$length(model.generatedSequence);
 					var deltaTime = $elm$time$Time$posixToMillis(posix) - $elm$time$Time$posixToMillis(lastTimestamp);
-					var newProgress = model.renderingProgress + ((deltaTime / 50) * model.animationSpeed);
+					var newProgress = model.renderingProgress + ((deltaTime / 1) * model.animationSpeed);
 					return _Utils_Tuple2(
 						_Utils_update(
 							model,
@@ -7665,7 +7665,7 @@ var $author$project$View$loadingIcon = A2(
 			A2($elm$html$Html$Attributes$style, 'border-radius', '8px'),
 			A2($elm$html$Html$Attributes$style, 'right', '0'),
 			A2($elm$html$Html$Attributes$style, 'margin-top', '0.5rem'),
-			A2($elm$html$Html$Attributes$style, 'margin-right', '1.5rem'),
+			A2($elm$html$Html$Attributes$style, 'margin-right', '1rem'),
 			A2($elm$html$Html$Attributes$style, 'z-index', '10')
 		]),
 	_List_fromArray(

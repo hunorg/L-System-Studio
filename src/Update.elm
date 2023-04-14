@@ -262,7 +262,7 @@ update msg model =
                             Time.posixToMillis posix - Time.posixToMillis lastTimestamp
 
                         newProgress =
-                            model.renderingProgress + (toFloat deltaTime / 50 * model.animationSpeed)
+                            model.renderingProgress + (toFloat deltaTime / 1 * model.animationSpeed)
 
                         maxProgress =
                             Array.length model.generatedSequence

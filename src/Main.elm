@@ -31,7 +31,7 @@ canvasSizeDecoder =
 
 tick : Sub Msg
 tick =
-    Time.every 50 Animate
+    Time.every 10 Animate
 
 
 subscriptions : Model -> Sub Msg
