@@ -78,5 +78,6 @@ contributions are welcome! If you'd like to contribute, please fork the reposito
 ## Future enchancements include: 
 
 1. code optimization for performance and deeper recursion
+2. adding more presets
 
 
