@@ -69,7 +69,7 @@ loadingIcon =
         , Html.Attributes.style "border-radius" "8px"
         , Html.Attributes.style "right" "0"
         , Html.Attributes.style "margin-top" "0.5rem"
-        , Html.Attributes.style "margin-right" "1.5rem"
+        , Html.Attributes.style "margin-right" "1rem"
         , Html.Attributes.style "z-index" "10"
         ]
         [ text "hourglass_empty" ]
