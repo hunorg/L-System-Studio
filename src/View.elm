@@ -83,7 +83,7 @@ sidebar model =
                 [ section []
                     [ h1
                         [ Html.Attributes.style "margin-top" "4.5rem"
-                        , Html.Attributes.style "font-size" "2.5rem"
+                        , Html.Attributes.style "font-size" "2.0rem"
                         , Html.Attributes.style "font-weight" "bold"
                         , Html.Attributes.style "text-align" "center"
                         ]
@@ -92,7 +92,7 @@ sidebar model =
                 , section [ class [ "infoSection" ] ]
                     [ h2 [] [ text "Info:" ]
                     , p [ Html.Attributes.style "width" "100%" ]
-                        [ Html.a [ href "http://paulbourke.net/fractals/lsys/" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ] ]
+                        [ Html.a [ href "http://paulbourke.net/fractals/lsys/", Html.Attributes.style "font-size" "1.2rem" ] [ text "For more information and examples, please visit Paul Bourke's L-System page" ] ]
                     ]
                 , section []
                     [ div [ class [ "gridIcons" ] ]
@@ -163,9 +163,9 @@ sidebar model =
                 , section [ class [ "attributionSection" ] ]
                     [ h2 [ Html.Attributes.style "text-align" "center" ] [ text "Attribution" ]
                     , div [ Html.Attributes.style "text-align" "center" ]
-                        [ Html.a [ href "https://github.com/hunorg" ] [ text "created by @hunorg" ] ]
+                        [ Html.a [ href "https://github.com/hunorg", Html.Attributes.style "font-size" "1.2rem" ] [ text "created by @hunorg" ] ]
                     , div [ Html.Attributes.style "text-align" "center" ]
-                        [ Html.a [ href "https://github.com/hunorg/L-System-Studio" ] [ text "source code" ] ]
+                        [ Html.a [ href "https://github.com/hunorg/L-System-Studio", Html.Attributes.style "font-size" "1.2rem" ] [ text "source code" ] ]
                     ]
                 ]
             ]

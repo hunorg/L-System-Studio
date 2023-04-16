@@ -8370,7 +8370,7 @@ var $author$project$View$sidebar = function (model) {
 									_List_fromArray(
 										[
 											A2($elm$html$Html$Attributes$style, 'margin-top', '4.5rem'),
-											A2($elm$html$Html$Attributes$style, 'font-size', '2.5rem'),
+											A2($elm$html$Html$Attributes$style, 'font-size', '2.0rem'),
 											A2($elm$html$Html$Attributes$style, 'font-weight', 'bold'),
 											A2($elm$html$Html$Attributes$style, 'text-align', 'center')
 										]),
@@ -8408,7 +8408,8 @@ var $author$project$View$sidebar = function (model) {
 											$elm$html$Html$a,
 											_List_fromArray(
 												[
-													$elm_community$typed_svg$TypedSvg$Attributes$href('http://paulbourke.net/fractals/lsys/')
+													$elm_community$typed_svg$TypedSvg$Attributes$href('http://paulbourke.net/fractals/lsys/'),
+													A2($elm$html$Html$Attributes$style, 'font-size', '1.2rem')
 												]),
 											_List_fromArray(
 												[
@@ -8712,7 +8713,8 @@ var $author$project$View$sidebar = function (model) {
 											$elm$html$Html$a,
 											_List_fromArray(
 												[
-													$elm_community$typed_svg$TypedSvg$Attributes$href('https://github.com/hunorg')
+													$elm_community$typed_svg$TypedSvg$Attributes$href('https://github.com/hunorg'),
+													A2($elm$html$Html$Attributes$style, 'font-size', '1.2rem')
 												]),
 											_List_fromArray(
 												[
@@ -8731,7 +8733,8 @@ var $author$project$View$sidebar = function (model) {
 											$elm$html$Html$a,
 											_List_fromArray(
 												[
-													$elm_community$typed_svg$TypedSvg$Attributes$href('https://github.com/hunorg/L-System-Studio')
+													$elm_community$typed_svg$TypedSvg$Attributes$href('https://github.com/hunorg/L-System-Studio'),
+													A2($elm$html$Html$Attributes$style, 'font-size', '1.2rem')
 												]),
 											_List_fromArray(
 												[
