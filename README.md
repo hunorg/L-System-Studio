@@ -3,7 +3,8 @@
 interactive web application built with Elm, designed to help users explore and visualize L-systems
 
 ## Sample output:
-![LSysEx4](https://user-images.githubusercontent.com/114682020/231900995-36ad027b-1c02-4da8-b2f4-c606a53ff545.png)
+![lsys](https://user-images.githubusercontent.com/114682020/232567973-7ba1184d-b3d0-4994-b0b6-f21ae005fed1.png)
+
 
 
 
