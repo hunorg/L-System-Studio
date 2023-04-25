@@ -153,7 +153,7 @@ update msg model =
                 , renderingProgress = 0
                 , animationStartTime = Nothing
               }
-            , Cmd.none
+            , Task.perform HideLoadingIconAfter (Process.sleep 1 |> Task.map (always 1))
             )
 
         GetRandomPreset ->
