@@ -7097,7 +7097,13 @@ var $author$project$Update$update = F2(
 					_Utils_update(
 						model,
 						{animationStartTime: $elm$core$Maybe$Nothing, axiom: '', axiomApplied: false, drawnTurtle: false, generatedSequence: $elm$core$Array$empty, iterations: 0, lineLength: 1, lineLengthScale: 0, lineWidthIncrement: 0, newRuleInput: '', renderingProgress: 0, rules: _List_Nil, selectedAction: $author$project$Turtle$Move, selectedRule: $elm$core$Maybe$Nothing, startingAngle: 0, syntaxDisplay: false, turningAngle: 0, turningAngleIncrement: 0}),
-					$elm$core$Platform$Cmd$none);
+					A2(
+						$elm$core$Task$perform,
+						$author$project$Update$HideLoadingIconAfter,
+						A2(
+							$elm$core$Task$map,
+							$elm$core$Basics$always(1),
+							$elm$core$Process$sleep(1))));
 			case 'GetRandomPreset':
 				return _Utils_Tuple2(
 					model,
