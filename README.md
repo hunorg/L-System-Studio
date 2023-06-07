@@ -5,6 +5,9 @@ interactive web application built with Elm, designed to help users explore and v
 ## Sample output:
 ![lsys](https://user-images.githubusercontent.com/114682020/232567973-7ba1184d-b3d0-4994-b0b6-f21ae005fed1.png)
 
+![LSEx1](https://github.com/hunorg/L-System-Studio/assets/114682020/1a501e6a-a117-4677-b1bf-5b097b959def)
+
+
 
 
 
