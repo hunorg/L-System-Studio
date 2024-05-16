@@ -8746,6 +8746,26 @@ var $author$project$View$sidebar = function (model) {
 												[
 													$elm$html$Html$text('source code')
 												]))
+										])),
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											A2($elm$html$Html$Attributes$style, 'text-align', 'center')
+										]),
+									_List_fromArray(
+										[
+											A2(
+											$elm$html$Html$a,
+											_List_fromArray(
+												[
+													$elm_community$typed_svg$TypedSvg$Attributes$href('https://paypal.me/hunorg?country.x=RO&locale.x=en_US'),
+													A2($elm$html$Html$Attributes$style, 'font-size', '1.2rem')
+												]),
+											_List_fromArray(
+												[
+													$elm$html$Html$text('support')
+												]))
 										]))
 								]))
 						]))

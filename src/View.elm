@@ -166,6 +166,8 @@ sidebar model =
                         [ Html.a [ href "https://github.com/hunorg", Html.Attributes.style "font-size" "1.2rem" ] [ text "created by @hunorg" ] ]
                     , div [ Html.Attributes.style "text-align" "center" ]
                         [ Html.a [ href "https://github.com/hunorg/L-System-Studio", Html.Attributes.style "font-size" "1.2rem" ] [ text "source code" ] ]
+                    , div [ Html.Attributes.style "text-align" "center" ]
+                        [ Html.a [ href "https://paypal.me/hunorg?country.x=RO&locale.x=en_US", Html.Attributes.style "font-size" "1.2rem" ] [ text "support" ] ]
                     ]
                 ]
             ]
