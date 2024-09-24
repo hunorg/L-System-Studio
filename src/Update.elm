@@ -5,9 +5,11 @@ import ColorPicker
 import Html.Events.Extra.Mouse as Mouse
 import LSys exposing (generateSequence)
 import List.Extra
-import Model exposing (Model, Preset, Rule)
+import Model exposing (Model, Rule, Symbol)
+import Presets exposing (Preset, initPreset)
 import Process
 import Random
+import Select
 import Task
 import Time
 import Turtle exposing (Action(..))
@@ -15,19 +17,18 @@ import Turtle exposing (Action(..))
 
 type Msg
     = ToggleSyntaxDisplay
-    | SelectSymbol String
-    | SelectAxiom String
+    | UpdateAxiomInput String
     | UpdateNewRuleInput String
     | SelectRule Rule
     | RemoveRule Rule
-    | UpdateAngle Float
-    | UpdateTurningAngleIncrement Float
+    | UpdateTurningAngle String
+    | UpdateTurningAngleIncrement String
     | UpdateLineLength Float
     | UpdateLineLengthScale Float
     | UpdateLineWidthIncrement Float
-    | UpdateIterations Float
+    | UpdateRecursionDepth Float
     | DownMsg Mouse.Button ( Float, Float )
-    | UpdateStartingAngle Float
+    | UpdateStartingAngle String
     | ColorPickerMsg ColorPicker.Msg
     | AddRule
     | ApplyAxiom
@@ -43,6 +44,7 @@ type Msg
     | ShowLoadingIcon
     | HideLoadingIconAfter Float
     | AnimationFrame Time.Posix
+    | SelectSymbol (Select.Msg Symbol)
     | NoOp
 
 
@@ -56,10 +58,7 @@ update msg model =
         ToggleSyntaxDisplay ->
             ( { model | syntaxDisplay = not model.syntaxDisplay }, Cmd.none )
 
-        SelectSymbol character ->
-            ( { model | selectedSymbol = character }, Cmd.none )
-
-        SelectAxiom newAxiom ->
+        UpdateAxiomInput newAxiom ->
             ( { model | axiom = newAxiom }, Cmd.none )
 
         UpdateNewRuleInput input ->
@@ -71,11 +70,11 @@ update msg model =
         RemoveRule rule ->
             ( { model | rules = List.filter ((/=) rule) model.rules, selectedRule = Nothing }, Cmd.none )
 
-        UpdateAngle turningAngle ->
-            ( { model | turningAngle = turningAngle }, Cmd.none )
+        UpdateTurningAngle turningAngle ->
+            ( { model | turningAngle = turningAngle |> String.toFloat |> Maybe.withDefault 0 }, Cmd.none )
 
         UpdateTurningAngleIncrement newTurningAngleIncrement ->
-            ( { model | turningAngleIncrement = newTurningAngleIncrement }, Cmd.none )
+            ( { model | turningAngleIncrement = newTurningAngleIncrement |> String.toFloat |> Maybe.withDefault 0 }, Cmd.none )
 
         UpdateLineLength newLength ->
             ( { model | lineLength = newLength }, Cmd.none )
@@ -86,8 +85,8 @@ update msg model =
         UpdateLineWidthIncrement newIncrementSize ->
             ( { model | lineWidthIncrement = newIncrementSize }, Cmd.none )
 
-        UpdateIterations newIterations ->
-            ( { model | iterations = newIterations }, Cmd.none )
+        UpdateRecursionDepth newRecursionDepth ->
+            ( { model | recursionDepth = newRecursionDepth }, Cmd.none )
 
         DownMsg button clientPos ->
             if button == Mouse.MainButton then
@@ -97,7 +96,7 @@ update msg model =
                 ( model, Cmd.none )
 
         UpdateStartingAngle newStartingAngle ->
-            ( { model | startingAngle = newStartingAngle }, Cmd.none )
+            ( { model | startingAngle = newStartingAngle |> String.toFloat |> Maybe.withDefault 0 }, Cmd.none )
 
         ColorPickerMsg colorPickerMsg ->
             let
@@ -119,10 +118,10 @@ update msg model =
                 newModel =
                     { model | rules = model.rules ++ [ newRule ], newRuleInput = "" }
             in
-            ( { newModel | generatedSequence = generateSequence newModel.iterations newModel.axiom newModel.rules }, Cmd.none )
+            ( { newModel | generatedSequence = generateSequence newModel.recursionDepth newModel.axiom newModel.rules }, Cmd.none )
 
         ApplyAxiom ->
-            ( { model | generatedSequence = generateSequence model.iterations model.axiom model.rules, axiomApplied = True }, Cmd.none )
+            ( { model | generatedSequence = generateSequence model.recursionDepth model.axiom model.rules, axiomApplied = True }, Cmd.none )
 
         UpdateCanvasSize newWidth newHeight ->
             ( { model | canvasWidth = newWidth, canvasHeight = newHeight }
@@ -146,7 +145,7 @@ update msg model =
                 , lineLengthScale = 0
                 , lineWidthIncrement = 0
                 , axiom = ""
-                , iterations = 0
+                , recursionDepth = 0
                 , startingAngle = 0
                 , generatedSequence = Array.empty
                 , drawnTurtle = False
@@ -162,7 +161,7 @@ update msg model =
         SetRandomPreset index ->
             let
                 newSelectedPreset =
-                    List.Extra.getAt index model.presets |> Maybe.withDefault Model.initPreset
+                    List.Extra.getAt index model.presets |> Maybe.withDefault initPreset
             in
             ( { model | selectedPreset = newSelectedPreset }
             , Task.perform LoadRandomPreset (Task.succeed newSelectedPreset)
@@ -177,14 +176,14 @@ update msg model =
                         , turningAngle = preset.turningAngle
                         , lineLength = preset.lineLength
                         , axiom = preset.axiom
-                        , iterations = preset.iterations
+                        , recursionDepth = preset.iterations
                         , startingAngle = preset.startingAngle
                         , startingPoint = ( roundFloat 0 (model.canvasWidth / 2.3), roundFloat 0 (model.canvasHeight / 1.5) )
                         , renderingProgress = 0
                         , animationStartTime = Nothing
                     }
             in
-            ( { newModel | generatedSequence = generateSequence newModel.iterations newModel.axiom newModel.rules, drawnTurtle = True }
+            ( { newModel | generatedSequence = generateSequence newModel.recursionDepth newModel.axiom newModel.rules, drawnTurtle = True }
             , Task.perform SetAnimationStartTime Time.now
             )
 
@@ -233,7 +232,7 @@ update msg model =
                         , lineLength = model.lineLength
                         , lineLengthScale = model.lineLengthScale
                         , lineWidthIncrement = model.lineWidthIncrement
-                        , iterations = model.iterations
+                        , recursionDepth = model.recursionDepth
                         , startingAngle = model.startingAngle
                         , startingPoint = ( roundFloat 0 (model.canvasWidth / 2.3), roundFloat 0 (model.canvasHeight / 1.5) )
                         , renderingProgress = 0
@@ -241,7 +240,7 @@ update msg model =
                         , loadingIconVisible = True -- Add this line to show the loading icon
                     }
             in
-            ( { newModel | generatedSequence = generateSequence newModel.iterations newModel.axiom newModel.rules, drawnTurtle = True }
+            ( { newModel | generatedSequence = generateSequence newModel.recursionDepth newModel.axiom newModel.rules, drawnTurtle = True }
             , Cmd.batch [ Task.perform SetAnimationStartTime Time.now, Task.perform HideLoadingIconAfter (Process.sleep animationTime |> Task.map (always 1)) ]
             )
 
@@ -272,6 +271,22 @@ update msg model =
                         , lastAnimationFrameTimestamp = Just posix
                       }
                     , Cmd.none
+                    )
+
+        SelectSymbol subMsg ->
+            Select.update SelectSymbol subMsg model.selectSymbol
+                |> Tuple.mapFirst
+                    (\select ->
+                        { model
+                            | selectSymbol = select
+                            , selectedSymbol =
+                                case select |> Select.toValue of
+                                    Just symbol ->
+                                        symbol.character
+
+                                    Nothing ->
+                                        ""
+                        }
                     )
 
         NoOp ->

@@ -31,34 +31,41 @@ generateSequence iterations axiom rules =
 -- Generates a turtle graphics object based on the given model, sequence, symbolAssignments, stepSize, and angle.
 
 
-generateTurtle : Model -> Array Char -> List Symbol -> Float -> Float -> Turtle
-generateTurtle model sequence symbolAssignments stepSize angle =
+generateTurtle :
+    { state : Model
+    , sequence : Array Char
+    , symbolAssignments : List Symbol
+    , stepSize : Float
+    , angle : Float
+    }
+    -> Turtle
+generateTurtle cfg =
     let
         applyAction turtle action =
             case action of
                 Move ->
-                    moveForward stepSize turtle
+                    moveForward cfg.stepSize turtle
 
                 MoveWithoutDrawing ->
                     let
                         ( newX, newY ) =
-                            calculateNewPosition stepSize turtle.angle ( turtle.x, turtle.y )
+                            calculateNewPosition cfg.stepSize turtle.angle ( turtle.x, turtle.y )
                     in
                     { turtle | x = newX, y = newY }
 
                 TurnLeft ->
                     if turtle.swapPlusMinus then
-                        turn angle turtle
+                        turn cfg.angle turtle
 
                     else
-                        turn -angle turtle
+                        turn -cfg.angle turtle
 
                 TurnRight ->
                     if turtle.swapPlusMinus then
-                        turn -angle turtle
+                        turn -cfg.angle turtle
 
                     else
-                        turn angle turtle
+                        turn cfg.angle turtle
 
                 ReverseDirection ->
                     turn -180 turtle
@@ -70,10 +77,10 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                     pop turtle
 
                 IncrementLineWidth ->
-                    { turtle | lineWidth = turtle.lineWidth + model.lineWidthIncrement }
+                    { turtle | lineWidth = turtle.lineWidth + cfg.state.lineWidthIncrement }
 
                 DecrementLineWidth ->
-                    { turtle | lineWidth = turtle.lineWidth - model.lineWidthIncrement }
+                    { turtle | lineWidth = turtle.lineWidth - cfg.state.lineWidthIncrement }
 
                 DrawDot ->
                     { turtle | dots = ( ( turtle.x, turtle.y ), turtle.lineWidth ) :: turtle.dots }
@@ -89,19 +96,19 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                         updatedPolygons =
                             List.drop 1 turtle.polygons
                     in
-                    { turtle | polygons = currentPolygon :: updatedPolygons, filledPolygons = ( currentPolygon, model.polygonFillColor ) :: turtle.filledPolygons }
+                    { turtle | polygons = currentPolygon :: updatedPolygons, filledPolygons = ( currentPolygon, cfg.state.polygonFillColor ) :: turtle.filledPolygons }
 
                 MultiplyLength ->
                     let
                         newStepSize =
-                            model.lineLength * model.lineLengthScale
+                            cfg.state.lineLength * cfg.state.lineLengthScale
                     in
                     moveForward newStepSize turtle
 
                 DivideLength ->
                     let
                         newStepSize =
-                            model.lineLength / model.lineLengthScale
+                            cfg.state.lineLength / cfg.state.lineLengthScale
                     in
                     moveForward newStepSize turtle
 
@@ -109,23 +116,25 @@ generateTurtle model sequence symbolAssignments stepSize angle =
                     { turtle | swapPlusMinus = not turtle.swapPlusMinus }
 
                 IncrementTurningAngle ->
-                    { turtle | angle = turtle.angle + model.turningAngleIncrement }
+                    { turtle | angle = turtle.angle + cfg.state.turningAngleIncrement }
 
                 DecrementTurningAngle ->
-                    { turtle | angle = turtle.angle - model.turningAngleIncrement }
+                    { turtle | angle = turtle.angle - cfg.state.turningAngleIncrement }
 
                 NoAction ->
                     turtle
 
         applySymbol symbol turtle =
-            case List.filter (\s -> s.character == String.fromChar symbol) symbolAssignments of
+            case List.filter (\s -> s.character == String.fromChar symbol) cfg.symbolAssignments of
                 [] ->
                     turtle
 
                 symbolAssignment :: _ ->
                     applyAction turtle symbolAssignment.action
     in
-    Array.foldl applySymbol (Turtle.initTurtle model.startingPoint |> Turtle.turn model.startingAngle) sequence
+    Array.foldl applySymbol
+        (Turtle.initTurtle cfg.state.startingPoint |> Turtle.turn cfg.state.startingAngle)
+        cfg.sequence
 
 
 calculateNewPosition : Float -> Float -> ( Float, Float ) -> ( Float, Float )

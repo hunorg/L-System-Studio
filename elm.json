@@ -21,7 +21,9 @@
             "elm-community/typed-svg": "7.0.0",
             "lattyware/elm-fontawesome": "6.0.0",
             "mdgriffith/elm-animator": "1.1.1",
+            "mdgriffith/elm-ui": "1.1.8",
             "mpizenberg/elm-pointer-events": "4.0.2",
+            "nunntom/elm-ui-select": "4.0.0",
             "rtfeldman/elm-css": "18.0.0",
             "simonh1000/elm-colorpicker": "2.0.3"
         },

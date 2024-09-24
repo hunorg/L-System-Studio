@@ -1,0 +1,17 @@
+{
+  "name": "l-system-studio",
+  "version": "1.0.0",
+  "description": "interactive web application built with Elm, designed to help users explore and visualize L-systems",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hunorg/L-System-Studio.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hunorg/L-System-Studio/issues"
+  },
+  "homepage": "https://github.com/hunorg/L-System-Studio#readme"
+}

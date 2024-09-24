@@ -115,18 +115,22 @@ pop turtle =
             { turtle | x = x, y = y, angle = angle, stack = rest }
 
 
-renderTurtleSegments : Float -> Turtle -> List (Svg msg)
-renderTurtleSegments progress turtle =
+renderTurtleSegments :
+    { progress : Float
+    , turtle : Turtle
+    }
+    -> List (Svg msg)
+renderTurtleSegments cfg =
     List.indexedMap
         (\index ( ( x1, y1 ), ( x2, y2 ) ) ->
-            if toFloat index < progress then
+            if toFloat index < cfg.progress then
                 line
                     [ TypedSvg.Attributes.x1 (px x1)
                     , TypedSvg.Attributes.y1 (px y1)
                     , TypedSvg.Attributes.x2 (px x2)
                     , TypedSvg.Attributes.y2 (px y2)
                     , stroke <| Paint Color.white
-                    , strokeWidth (Px turtle.lineWidth)
+                    , strokeWidth (Px cfg.turtle.lineWidth)
                     ]
                     []
 
@@ -134,7 +138,7 @@ renderTurtleSegments progress turtle =
                 TypedSvg.text_ [] []
          -- Replace with an empty SVG element to keep the same structure
         )
-        turtle.segments
+        cfg.turtle.segments
 
 
 renderTurtleDots : Float -> Turtle -> List (Svg msg)

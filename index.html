@@ -1,56 +1,56 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
+    <head>
+        <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <link href="https://unpkg.com/sanitize.css" rel="stylesheet"/>
-  <link rel="stylesheet" type="text/css" href="./styles.css">
-  <link rel="stylesheet"type ="text/css" href="./normalize.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+            }
+        </style>
+        <meta charset="UTF-8" />
+        <title>LSystem Studio</title>
+        <script type="text/javascript" src="app.js"></script>
+    </head>
 
-    <style>
-        body {
-          margin: 0;
-          padding: 0;
-        }
-        
-      </style>
-  <meta charset="UTF-8">
-  <title>LSystem Studio</title>
-  <script type="text/javascript" src="app.js"></script>
-</head>
+    <body>
+        <div id="app"></div>
+        <script>
+            var app = Elm.Main.init({
+                node: document.getElementById("app"),
+            });
 
-<body>
-    <div id="app"></div>
-    <script>
-      var app = Elm.Main.init({
-        node: document.getElementById("app"),
-      });
-    
-      var canvas = document.querySelector(".canvasContent");
-      var lastWidth = 0;
-      var lastHeight = 0;
-    
-      function checkCanvasSize() {
-        var canvasRect = canvas.getBoundingClientRect();
-        var canvasHeight = canvasRect.height;
-        var canvasWidth = canvasRect.width;
-    
-        if (canvasWidth !== lastWidth || canvasHeight !== lastHeight) {
-          console.log("Canvas size:", { width: canvasWidth, height: canvasHeight });
-          app.ports.updateCanvasSize.send({ width: canvasWidth, height: canvasHeight });
-          lastWidth = canvasWidth;
-          lastHeight = canvasHeight;
-        }
-    
-        requestAnimationFrame(checkCanvasSize);
-      }
-    
-      checkCanvasSize();
-    </script>
-    
-    
-    
-</body>
+            var canvas = document.querySelector(".canvasContent");
+            var lastWidth = 0;
+            var lastHeight = 0;
 
+            function checkCanvasSize() {
+                var canvasRect = canvas.getBoundingClientRect();
+                var canvasHeight = canvasRect.height;
+                var canvasWidth = canvasRect.width;
+
+                if (canvasWidth !== lastWidth || canvasHeight !== lastHeight) {
+                    console.log("Canvas size:", {
+                        width: canvasWidth,
+                        height: canvasHeight,
+                    });
+                    app.ports.updateCanvasSize.send({
+                        width: canvasWidth,
+                        height: canvasHeight,
+                    });
+                    lastWidth = canvasWidth;
+                    lastHeight = canvasHeight;
+                }
+
+                requestAnimationFrame(checkCanvasSize);
+            }
+
+            checkCanvasSize();
+        </script>
+    </body>
 </html>
