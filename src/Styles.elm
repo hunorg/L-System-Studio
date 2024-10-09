@@ -50,35 +50,39 @@ btnAttrs =
     , Font.size 18
     , Font.color black
     , Border.rounded 5
-    ]
-
-
-sliderAttrs : List (Attribute msg)
-sliderAttrs =
-    [ Element.width (px 250)
-    , Background.color lightGray
-    , Border.rounded 5
-    , Border.width 2
-    , Border.color midGray
+    , width fill
+    , Font.center
     ]
 
 
 
 {-
+
    sliderAttrs : List (Attribute msg)
    sliderAttrs =
-       [ Element.height (Element.px 30)
-       , Element.behindContent
-           (Element.el
-               [ Element.width Element.fill
-               , Element.height (Element.px 2)
-               , Element.centerY
-               , Background.color blue
-               ]
-               Element.none
-           )
+       [ Element.width (px 250)
+       , Background.color lightGray
+       , Border.rounded 5
+       , Border.width 2
+       , Border.color midGray
        ]
 -}
+
+
+sliderAttrs : List (Attribute msg)
+sliderAttrs =
+    [ Element.height (Element.px 26)
+    , Element.behindContent
+        (Element.el
+            [ Element.width Element.fill
+            , Element.height (Element.px 8)
+            , Element.centerY
+            , Background.color midGray
+            , Border.rounded 4
+            ]
+            Element.none
+        )
+    ]
 
 
 inputAttrs : List (Attribute msg)
@@ -90,7 +94,6 @@ inputAttrs =
     , Font.size 18
     , Font.color black
     , Border.rounded 5
-    , Element.width (px 200)
     ]
 
 
@@ -101,6 +104,6 @@ selectAttrs =
     , Border.color midGray
     , Background.color lightGray
     , Border.rounded 5
-    , Element.width (px 80)
     , Font.color black
+    , width fill
     ]

@@ -55,10 +55,8 @@ subscriptions model =
                         UpdateCanvasSize width height
 
                     Err _ ->
-                        -- Handle the case where the value cannot be decoded
-                        -- (e.g., you could log an error or ignore it)
                         NoOp
             )
         , tick
-        , animationFrameSub -- Add this line
+        , animationFrameSub
         ]

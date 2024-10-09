@@ -2,12 +2,9 @@ module LSys exposing (generateSequence, generateTurtle)
 
 import Array exposing (Array)
 import List.Extra as Extra
-import Model exposing (Model, Symbol)
+import Model exposing (Model)
+import SymbolAssignments exposing (Symbol)
 import Turtle exposing (..)
-
-
-
--- Generates an L-system sequence based on the given iterations, axiom, and rules.
 
 
 generateSequence : Float -> String -> List ( Char, List Char ) -> Array Char
@@ -25,10 +22,6 @@ generateSequence iterations axiom rules =
         (\_ seq -> Array.map expandSymbol seq |> Array.toList |> List.map Array.toList |> List.concat |> Array.fromList)
         (String.toList axiom |> Array.fromList)
         (List.range 1 (round iterations))
-
-
-
--- Generates a turtle graphics object based on the given model, sequence, symbolAssignments, stepSize, and angle.
 
 
 generateTurtle :

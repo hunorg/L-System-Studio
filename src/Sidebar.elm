@@ -7,9 +7,11 @@ import Element.Border as Border
 import Element.Events as Events
 import Element.Font as Font
 import Element.Input as Input
-import Model exposing (Model, Rule, Symbol)
+import Model exposing (Model)
 import Select
 import Styles exposing (..)
+import Svg.Attributes exposing (offset)
+import SymbolAssignments exposing (Rule)
 import Update exposing (Msg(..))
 
 
@@ -18,17 +20,15 @@ sidebar state =
     let
         info : Element Msg
         info =
-            let
-                link =
-                    Element.link [ Font.color blue ]
-                        { label = text "For more information and examples, please visit Paul Bourke's L-System page"
+            column
+                [ paddingXY 0 6, spacing 8 ]
+                [ el [ Font.bold ] (text "Info:")
+                , paragraph []
+                    [ Element.link [ Font.color blue ]
+                        { label = text "For more information and examples, please visit Paul Bourke's L-System page."
                         , url = "http://paulbourke.net/fractals/lsys/"
                         }
-            in
-            column
-                [ paddingXY 0 6, width (px 250) ]
-                [ el [ Font.bold ] (text "Info:")
-                , link
+                    ]
                 ]
 
         actionBtnsWithSyntax : Element Msg
@@ -50,10 +50,15 @@ sidebar state =
                                                 _ ->
                                                     ( "", "" )
                                     in
-                                    row []
-                                        [ el [ Font.bold ] (text symbol)
+                                    row [ padding 4, Font.size 16 ]
+                                        [ el [ Font.bold ]
+                                            (text symbol)
                                         , text " -> "
-                                        , text rule
+                                        , paragraph []
+                                            [ el
+                                                []
+                                                (text rule)
+                                            ]
                                         ]
                                 )
                                 [ "F -> Move forward by line length drawing a line"
@@ -77,9 +82,9 @@ sidebar state =
                                 , "a to z (except f) -> No action"
                                 ]
                     in
-                    column []
+                    column [ padding 8 ]
                         [ el [ Font.bold ] (text "Syntax")
-                        , column [ Font.size 12 ]
+                        , column [ Font.size 12, padding 4 ]
                             symbolAssignments
                         ]
 
@@ -91,13 +96,16 @@ sidebar state =
                         , label = text "syntax"
                         }
 
-                randomPresetBtn : Element Msg
-                randomPresetBtn =
-                    Input.button
-                        btnAttrs
-                        { onPress = Just GetRandomPreset
-                        , label = text "example"
-                        }
+                presetSelect : Element Msg
+                presetSelect =
+                    Select.view
+                        |> Select.toElement selectAttrs
+                            { select = Select.setItems state.presets state.selectedPreset
+                            , onChange = SelectPreset
+                            , itemToString = .name
+                            , label = Input.labelAbove [ Font.size 16 ] <| Element.text "select example:"
+                            , placeholder = Nothing
+                            }
 
                 resetBtn : Element Msg
                 resetBtn =
@@ -107,10 +115,10 @@ sidebar state =
                         , label = text "reset"
                         }
             in
-            column []
-                [ row [ spacing 10, alignTop ]
+            column [ spacing 10, width fill ]
+                [ presetSelect
+                , row [ spacing 10, width fill ]
                     [ syntaxBtn
-                    , randomPresetBtn
                     , resetBtn
                     ]
                 , if state.syntaxDisplay then
@@ -126,7 +134,7 @@ sidebar state =
                 ruleView : Rule -> Element Msg
                 ruleView rule =
                     let
-                        isSelected =
+                        isRuleSelected =
                             case state.selectedRule of
                                 Just selectedRule ->
                                     rule == selectedRule
@@ -136,13 +144,24 @@ sidebar state =
                     in
                     el
                         [ Events.onClick (SelectRule rule)
-                        , spacing 10
+                        , spacing 8
+                        , pointer
                         ]
-                        (row [ alignRight ]
-                            [ text <| String.fromChar (Tuple.first rule) ++ " -> " ++ String.fromList (Tuple.second rule)
+                        (row [ alignRight, spacing 8 ]
+                            [ paragraph []
+                                [ text <| String.fromChar (Tuple.first rule) ++ " -> " ++ String.fromList (Tuple.second rule)
+                                ]
+                            , if isRuleSelected then
+                                el []
+                                    (Input.button
+                                        btnAttrs
+                                        { onPress = Just (RemoveRule rule)
+                                        , label = text "X"
+                                        }
+                                    )
 
-                            -- Replace this with your icon component if available
-                            -- , el [ onClick (RemoveRule rule) ] (text "cancel")
+                              else
+                                Element.none
                             ]
                         )
 
@@ -153,8 +172,8 @@ sidebar state =
                             { select = Select.setItems state.symbolAssignments state.selectSymbol
                             , onChange = SelectSymbol
                             , itemToString = .character
-                            , label = Input.labelAbove [] Element.none
-                            , placeholder = Just (Input.placeholder [] (Element.text "Select a symbol"))
+                            , label = Input.labelAbove [ Font.size 16 ] <| Element.text "character:"
+                            , placeholder = Nothing
                             }
 
                 ruleInput : Element Msg
@@ -164,7 +183,7 @@ sidebar state =
                         { onChange = UpdateNewRuleInput
                         , text = state.newRuleInput
                         , placeholder = Nothing
-                        , label = Input.labelAbove [] Element.none
+                        , label = Input.labelAbove [ Font.size 16 ] <| Element.text "geom. interpretation:"
                         }
 
                 addRuleBtn : Element Msg
@@ -172,10 +191,10 @@ sidebar state =
                     Input.button
                         btnAttrs
                         { onPress = Just AddRule
-                        , label = text "Add Rule"
+                        , label = text "add rule"
                         }
             in
-            column [ paddingXY 0 6, spacing 10 ]
+            column [ paddingXY 0 6, spacing 8 ]
                 [ el [ Font.bold ] (text "Rules:")
                 , column [] (List.map ruleView state.rules)
                 , row [ spacing 8 ]
@@ -213,7 +232,7 @@ sidebar state =
 
         attribution : Element Msg
         attribution =
-            column []
+            column [ spacing 4 ]
                 [ el [ Font.bold ] (text "Attribution")
                 , Element.link [ Font.color blue ]
                     { label = text "created by @hunorg"
@@ -237,7 +256,7 @@ sidebar state =
             , Border.width 2
             , Border.color midGray
             , Background.color white
-            , Element.width (px 350)
+            , Element.width (px 300)
             ]
             [ el [ Font.bold, Font.size 24 ] (text "L-System Studio")
             , info
@@ -250,7 +269,7 @@ sidebar state =
             ]
 
     else
-        none
+        Element.none
 
 
 turtleSettings : Model -> Element Msg
@@ -263,7 +282,7 @@ turtleSettings state =
                 { onChange = UpdateStartingAngle
                 , text = state.startingAngle |> toString
                 , placeholder = Nothing
-                , label = Input.labelAbove [] (Element.text "Starting Angle")
+                , label = Input.labelAbove [ Font.size 16 ] (Element.text "starting angle")
                 }
 
         turningAngle : Element Msg
@@ -273,7 +292,7 @@ turtleSettings state =
                 { onChange = UpdateTurningAngle
                 , text = state.turningAngle |> toString
                 , placeholder = Nothing
-                , label = Input.labelAbove [] (Element.text "Turning Angle")
+                , label = Input.labelAbove [ Font.size 16 ] (Element.text "turning angle")
                 }
 
         turningAngleIncrement : Element Msg
@@ -283,7 +302,7 @@ turtleSettings state =
                 { onChange = UpdateTurningAngleIncrement
                 , text = state.turningAngle |> toString
                 , placeholder = Nothing
-                , label = Input.labelAbove [] (Element.text "Turning Angle")
+                , label = Input.labelAbove [ Font.size 16 ] (Element.text "turning angle increment")
                 }
 
         lineLength : Element Msg
@@ -291,7 +310,7 @@ turtleSettings state =
             Input.slider
                 sliderAttrs
                 { onChange = UpdateLineLength
-                , label = Input.labelAbove [] (Element.text ("Line Length: " ++ (state.lineLength |> String.fromFloat)))
+                , label = Input.labelAbove [ Font.size 16 ] (Element.text ("line length: " ++ (state.lineLength |> String.fromFloat)))
                 , min = 1
                 , max = 25
                 , step = Nothing
@@ -304,7 +323,7 @@ turtleSettings state =
             Input.slider
                 sliderAttrs
                 { onChange = Update.UpdateLineLengthScale
-                , label = Input.labelAbove [] (Element.text ("Line Length Scale: " ++ (state.lineLengthScale |> String.fromFloat)))
+                , label = Input.labelAbove [ Font.size 16 ] (Element.text ("line length scale: " ++ (state.lineLengthScale |> String.fromFloat)))
                 , min = 0
                 , max = 3
                 , step = Nothing
@@ -317,7 +336,7 @@ turtleSettings state =
             Input.slider
                 sliderAttrs
                 { onChange = Update.UpdateLineWidthIncrement
-                , label = Input.labelAbove [] (Element.text ("Line Width Increment: " ++ (state.lineWidthIncrement |> String.fromFloat)))
+                , label = Input.labelAbove [ Font.size 16 ] (Element.text ("line width increment: " ++ (state.lineWidthIncrement |> String.fromFloat)))
                 , min = 0
                 , max = 3
                 , step = Nothing
@@ -330,7 +349,7 @@ turtleSettings state =
             Input.slider
                 sliderAttrs
                 { onChange = Update.UpdateRecursionDepth
-                , label = Input.labelAbove [] (Element.text ("Recursion Depth: " ++ (state.recursionDepth |> String.fromFloat)))
+                , label = Input.labelAbove [ Font.size 16 ] (Element.text ("recursion depth: " ++ (state.recursionDepth |> String.fromFloat)))
                 , min = 0
                 , max = 6
                 , step = Nothing
@@ -341,7 +360,7 @@ turtleSettings state =
         startingPoint : Element Msg
         startingPoint =
             Element.text
-                ("Starting point: "
+                ("starting point: "
                     ++ (state.startingPoint |> Tuple.first |> String.fromFloat)
                     ++ ", "
                     ++ (state.startingPoint |> Tuple.second |> String.fromFloat)

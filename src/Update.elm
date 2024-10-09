@@ -4,12 +4,11 @@ import Array
 import ColorPicker
 import Html.Events.Extra.Mouse as Mouse
 import LSys exposing (generateSequence)
-import List.Extra
-import Model exposing (Model, Rule, Symbol)
-import Presets exposing (Preset, initPreset)
+import Model exposing (Model)
+import Presets exposing (Preset)
 import Process
-import Random
 import Select
+import SymbolAssignments exposing (Rule, Symbol, allSymbolAssignments)
 import Task
 import Time
 import Turtle exposing (Action(..))
@@ -27,7 +26,7 @@ type Msg
     | UpdateLineLengthScale Float
     | UpdateLineWidthIncrement Float
     | UpdateRecursionDepth Float
-    | DownMsg Mouse.Button ( Float, Float )
+    | UpdateStartingPoint Mouse.Button ( Float, Float )
     | UpdateStartingAngle String
     | ColorPickerMsg ColorPicker.Msg
     | AddRule
@@ -35,9 +34,7 @@ type Msg
     | UpdateCanvasSize Float Float
     | ToggleSidebar
     | Reset
-    | GetRandomPreset
-    | SetRandomPreset Int
-    | LoadRandomPreset Preset
+    | LoadPreset Preset
     | Animate Time.Posix
     | SetAnimationStartTime Time.Posix
     | StartAnimation
@@ -45,6 +42,7 @@ type Msg
     | HideLoadingIconAfter Float
     | AnimationFrame Time.Posix
     | SelectSymbol (Select.Msg Symbol)
+    | SelectPreset (Select.Msg Preset)
     | NoOp
 
 
@@ -53,59 +51,59 @@ type Msg
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+update msg state =
     case msg of
         ToggleSyntaxDisplay ->
-            ( { model | syntaxDisplay = not model.syntaxDisplay }, Cmd.none )
+            ( { state | syntaxDisplay = not state.syntaxDisplay }, Cmd.none )
 
         UpdateAxiomInput newAxiom ->
-            ( { model | axiom = newAxiom }, Cmd.none )
+            ( { state | axiom = newAxiom }, Cmd.none )
 
         UpdateNewRuleInput input ->
-            ( { model | newRuleInput = input }, Cmd.none )
+            ( { state | newRuleInput = input }, Cmd.none )
 
         SelectRule rule ->
-            ( { model | selectedRule = Just rule }, Cmd.none )
+            ( { state | selectedRule = Just rule }, Cmd.none )
 
         RemoveRule rule ->
-            ( { model | rules = List.filter ((/=) rule) model.rules, selectedRule = Nothing }, Cmd.none )
+            ( { state | rules = List.filter ((/=) rule) state.rules, selectedRule = Nothing }, Cmd.none )
 
         UpdateTurningAngle turningAngle ->
-            ( { model | turningAngle = turningAngle |> String.toFloat |> Maybe.withDefault 0 }, Cmd.none )
+            ( { state | turningAngle = turningAngle |> String.toFloat |> Maybe.withDefault 0 }, Cmd.none )
 
         UpdateTurningAngleIncrement newTurningAngleIncrement ->
-            ( { model | turningAngleIncrement = newTurningAngleIncrement |> String.toFloat |> Maybe.withDefault 0 }, Cmd.none )
+            ( { state | turningAngleIncrement = newTurningAngleIncrement |> String.toFloat |> Maybe.withDefault 0 }, Cmd.none )
 
         UpdateLineLength newLength ->
-            ( { model | lineLength = newLength }, Cmd.none )
+            ( { state | lineLength = roundFloat 2 newLength }, Cmd.none )
 
         UpdateLineLengthScale newLengthScale ->
-            ( { model | lineLengthScale = newLengthScale }, Cmd.none )
+            ( { state | lineLengthScale = roundFloat 2 newLengthScale }, Cmd.none )
 
         UpdateLineWidthIncrement newIncrementSize ->
-            ( { model | lineWidthIncrement = newIncrementSize }, Cmd.none )
+            ( { state | lineWidthIncrement = roundFloat 2 newIncrementSize }, Cmd.none )
 
         UpdateRecursionDepth newRecursionDepth ->
-            ( { model | recursionDepth = newRecursionDepth }, Cmd.none )
+            ( { state | recursionDepth = roundFloat 0 newRecursionDepth }, Cmd.none )
 
-        DownMsg button clientPos ->
+        UpdateStartingPoint button clientPos ->
             if button == Mouse.MainButton then
-                ( { model | startingPoint = ( Tuple.first clientPos, Tuple.second clientPos ) }, Cmd.none )
+                ( { state | startingPoint = ( Tuple.first clientPos, Tuple.second clientPos ) }, Cmd.none )
 
             else
-                ( model, Cmd.none )
+                ( state, Cmd.none )
 
         UpdateStartingAngle newStartingAngle ->
-            ( { model | startingAngle = newStartingAngle |> String.toFloat |> Maybe.withDefault 0 }, Cmd.none )
+            ( { state | startingAngle = newStartingAngle |> String.toFloat |> Maybe.withDefault 0 }, Cmd.none )
 
         ColorPickerMsg colorPickerMsg ->
             let
                 ( newColorPicker, newColorMaybe ) =
-                    ColorPicker.update colorPickerMsg model.polygonFillColor model.colorPicker
+                    ColorPicker.update colorPickerMsg state.polygonFillColor state.colorPicker
             in
-            ( { model
+            ( { state
                 | colorPicker = newColorPicker
-                , polygonFillColor = Maybe.withDefault model.polygonFillColor newColorMaybe
+                , polygonFillColor = Maybe.withDefault state.polygonFillColor newColorMaybe
               }
             , Cmd.none
             )
@@ -113,26 +111,26 @@ update msg model =
         AddRule ->
             let
                 newRule =
-                    ( String.uncons model.selectedSymbol |> Maybe.map Tuple.first |> Maybe.withDefault ' ', String.toList model.newRuleInput )
+                    ( String.uncons state.selectedSymbol |> Maybe.map Tuple.first |> Maybe.withDefault ' ', String.toList state.newRuleInput )
 
-                newModel =
-                    { model | rules = model.rules ++ [ newRule ], newRuleInput = "" }
+                newState =
+                    { state | rules = state.rules ++ [ newRule ], newRuleInput = "" }
             in
-            ( { newModel | generatedSequence = generateSequence newModel.recursionDepth newModel.axiom newModel.rules }, Cmd.none )
+            ( { newState | generatedSequence = generateSequence newState.recursionDepth newState.axiom newState.rules }, Cmd.none )
 
         ApplyAxiom ->
-            ( { model | generatedSequence = generateSequence model.recursionDepth model.axiom model.rules, axiomApplied = True }, Cmd.none )
+            ( { state | generatedSequence = generateSequence state.recursionDepth state.axiom state.rules, axiomApplied = True }, Cmd.none )
 
         UpdateCanvasSize newWidth newHeight ->
-            ( { model | canvasWidth = newWidth, canvasHeight = newHeight }
+            ( { state | canvasWidth = newWidth, canvasHeight = newHeight }
             , Cmd.none
             )
 
         ToggleSidebar ->
-            ( { model | showSidebar = not model.showSidebar }, Cmd.none )
+            ( { state | showSidebar = not state.showSidebar }, Cmd.none )
 
         Reset ->
-            ( { model
+            ( { state
                 | syntaxDisplay = False
                 , rules = []
                 , selectedRule = Nothing
@@ -151,26 +149,16 @@ update msg model =
                 , drawnTurtle = False
                 , renderingProgress = 0
                 , animationStartTime = Nothing
+                , selectedPreset = Select.init "preset-select" |> Select.setItems Presets.presets
+                , selectSymbol = Select.init "symbol-select" |> Select.setItems allSymbolAssignments
               }
             , Task.perform HideLoadingIconAfter (Process.sleep 1 |> Task.map (always 1))
             )
 
-        GetRandomPreset ->
-            ( model, Random.generate SetRandomPreset model.randomGenerator )
-
-        SetRandomPreset index ->
+        LoadPreset preset ->
             let
-                newSelectedPreset =
-                    List.Extra.getAt index model.presets |> Maybe.withDefault initPreset
-            in
-            ( { model | selectedPreset = newSelectedPreset }
-            , Task.perform LoadRandomPreset (Task.succeed newSelectedPreset)
-            )
-
-        LoadRandomPreset preset ->
-            let
-                newModel =
-                    { model
+                newState =
+                    { state
                         | rules = preset.rules
                         , axiomApplied = preset.axiomApplied
                         , turningAngle = preset.turningAngle
@@ -178,19 +166,19 @@ update msg model =
                         , axiom = preset.axiom
                         , recursionDepth = preset.iterations
                         , startingAngle = preset.startingAngle
-                        , startingPoint = ( roundFloat 0 (model.canvasWidth / 2.3), roundFloat 0 (model.canvasHeight / 1.5) )
+                        , startingPoint = ( roundFloat 0 (state.canvasWidth / 2.3), roundFloat 0 (state.canvasHeight / 1.5) )
                         , renderingProgress = 0
                         , animationStartTime = Nothing
                     }
             in
-            ( { newModel | generatedSequence = generateSequence newModel.recursionDepth newModel.axiom newModel.rules, drawnTurtle = True }
+            ( { newState | generatedSequence = generateSequence newState.recursionDepth newState.axiom newState.rules, drawnTurtle = True }
             , Task.perform SetAnimationStartTime Time.now
             )
 
         Animate posix ->
-            case model.animationStartTime of
+            case state.animationStartTime of
                 Nothing ->
-                    ( model, Cmd.none )
+                    ( state, Cmd.none )
 
                 Just startTime ->
                     let
@@ -198,15 +186,15 @@ update msg model =
                             Time.posixToMillis posix - Time.posixToMillis startTime
 
                         maxProgress =
-                            Array.length model.generatedSequence
+                            Array.length state.generatedSequence
 
                         newProgress =
-                            model.renderingProgress + (toFloat elapsedTimeMillis / 100 * model.animationSpeed)
+                            state.renderingProgress + (toFloat elapsedTimeMillis / 100 * state.animationSpeed)
 
                         animationFinished =
                             newProgress >= toFloat maxProgress
                     in
-                    ( { model
+                    ( { state
                         | renderingProgress = min (toFloat maxProgress) newProgress
                         , loadingIconVisible = not animationFinished
                         , lastAnimationFrameTimestamp = Just posix
@@ -215,45 +203,45 @@ update msg model =
                     )
 
         SetAnimationStartTime time ->
-            ( { model | animationStartTime = Just time }, Cmd.none )
+            ( { state | animationStartTime = Just time }, Cmd.none )
 
         StartAnimation ->
             let
                 animationTime =
-                    toFloat (Array.length model.generatedSequence) / model.animationSpeed * 1000
+                    toFloat (Array.length state.generatedSequence) / state.animationSpeed * 1000
 
-                newModel =
-                    { model
-                        | rules = model.rules
-                        , axiom = model.axiom
-                        , axiomApplied = model.axiomApplied
-                        , turningAngleIncrement = model.turningAngleIncrement
-                        , turningAngle = model.turningAngle
-                        , lineLength = model.lineLength
-                        , lineLengthScale = model.lineLengthScale
-                        , lineWidthIncrement = model.lineWidthIncrement
-                        , recursionDepth = model.recursionDepth
-                        , startingAngle = model.startingAngle
-                        , startingPoint = ( roundFloat 0 (model.canvasWidth / 2.3), roundFloat 0 (model.canvasHeight / 1.5) )
+                newState =
+                    { state
+                        | rules = state.rules
+                        , axiom = state.axiom
+                        , axiomApplied = state.axiomApplied
+                        , turningAngleIncrement = state.turningAngleIncrement
+                        , turningAngle = state.turningAngle
+                        , lineLength = state.lineLength
+                        , lineLengthScale = state.lineLengthScale
+                        , lineWidthIncrement = state.lineWidthIncrement
+                        , recursionDepth = state.recursionDepth
+                        , startingAngle = state.startingAngle
+                        , startingPoint = ( roundFloat 0 (state.canvasWidth / 2.3), roundFloat 0 (state.canvasHeight / 1.5) )
                         , renderingProgress = 0
                         , animationStartTime = Nothing
-                        , loadingIconVisible = True -- Add this line to show the loading icon
+                        , loadingIconVisible = True
                     }
             in
-            ( { newModel | generatedSequence = generateSequence newModel.recursionDepth newModel.axiom newModel.rules, drawnTurtle = True }
+            ( { newState | generatedSequence = generateSequence newState.recursionDepth newState.axiom newState.rules, drawnTurtle = True }
             , Cmd.batch [ Task.perform SetAnimationStartTime Time.now, Task.perform HideLoadingIconAfter (Process.sleep animationTime |> Task.map (always 1)) ]
             )
 
         ShowLoadingIcon ->
-            ( { model | loadingIconVisible = True }, Cmd.none )
+            ( { state | loadingIconVisible = True }, Cmd.none )
 
         HideLoadingIconAfter _ ->
-            ( { model | loadingIconVisible = False }, Cmd.none )
+            ( { state | loadingIconVisible = False }, Cmd.none )
 
         AnimationFrame posix ->
-            case model.lastAnimationFrameTimestamp of
+            case state.lastAnimationFrameTimestamp of
                 Nothing ->
-                    ( { model | lastAnimationFrameTimestamp = Just posix }, Cmd.none )
+                    ( { state | lastAnimationFrameTimestamp = Just posix }, Cmd.none )
 
                 Just lastTimestamp ->
                     let
@@ -261,12 +249,12 @@ update msg model =
                             Time.posixToMillis posix - Time.posixToMillis lastTimestamp
 
                         newProgress =
-                            model.renderingProgress + (toFloat deltaTime / 1 * model.animationSpeed)
+                            state.renderingProgress + (toFloat deltaTime / 1 * state.animationSpeed)
 
                         maxProgress =
-                            Array.length model.generatedSequence
+                            Array.length state.generatedSequence
                     in
-                    ( { model
+                    ( { state
                         | renderingProgress = min (toFloat maxProgress) newProgress
                         , lastAnimationFrameTimestamp = Just posix
                       }
@@ -274,10 +262,10 @@ update msg model =
                     )
 
         SelectSymbol subMsg ->
-            Select.update SelectSymbol subMsg model.selectSymbol
+            Select.update SelectSymbol subMsg state.selectSymbol
                 |> Tuple.mapFirst
                     (\select ->
-                        { model
+                        { state
                             | selectSymbol = select
                             , selectedSymbol =
                                 case select |> Select.toValue of
@@ -289,8 +277,63 @@ update msg model =
                         }
                     )
 
+        SelectPreset subMsg ->
+            let
+                ( updatedSelect, cmd ) =
+                    Select.update SelectPreset subMsg state.selectedPreset
+
+                updatedState =
+                    { state | selectedPreset = updatedSelect }
+
+                maybePreset =
+                    Select.toValue updatedState.selectedPreset
+
+                currentPreset =
+                    Select.toValue state.selectedPreset
+
+                createFinalState preset =
+                    let
+                        updatedModelWithPreset =
+                            { updatedState
+                                | rules = preset.rules
+                                , axiomApplied = preset.axiomApplied
+                                , turningAngle = preset.turningAngle
+                                , lineLength = preset.lineLength
+                                , axiom = preset.axiom
+                                , recursionDepth = preset.iterations
+                                , startingAngle = preset.startingAngle
+                                , startingPoint = ( roundFloat 0 (state.canvasWidth / 2.3), roundFloat 0 (state.canvasHeight / 1.5) )
+                                , renderingProgress = 0
+                                , animationStartTime = Nothing
+                            }
+
+                        finalState =
+                            { updatedModelWithPreset
+                                | generatedSequence = generateSequence updatedModelWithPreset.recursionDepth updatedModelWithPreset.axiom updatedModelWithPreset.rules
+                                , drawnTurtle = True
+                            }
+                    in
+                    ( finalState, Task.perform SetAnimationStartTime Time.now )
+
+                ( newState, task ) =
+                    case ( maybePreset, currentPreset ) of
+                        ( Just preset, Just existingPreset ) ->
+                            if existingPreset == preset then
+                                ( updatedState, Cmd.none )
+
+                            else
+                                createFinalState preset
+
+                        ( Just preset, Nothing ) ->
+                            createFinalState preset
+
+                        _ ->
+                            ( updatedState, Cmd.none )
+            in
+            ( newState, Cmd.batch [ cmd, task ] )
+
         NoOp ->
-            ( model, Cmd.none )
+            ( state, Cmd.none )
 
 
 roundFloat : Int -> Float -> Float

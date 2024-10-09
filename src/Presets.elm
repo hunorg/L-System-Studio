@@ -1,12 +1,11 @@
 module Presets exposing (..)
 
-import Color
-import ColorPicker
 import Turtle exposing (Action(..))
 
 
 type alias Preset =
-    { rules : List ( Char, List Char )
+    { name : String
+    , rules : List ( Char, List Char )
     , axiomApplied : Bool
     , turningAngle : Float
     , lineLength : Float
@@ -18,7 +17,8 @@ type alias Preset =
 
 plant1 : Preset
 plant1 =
-    { rules =
+    { name = "plant1"
+    , rules =
         [ ( 'F', [ 'F', 'F' ] )
         , ( 'x', [ 'F', '-', '[', '[', 'x', ']', '+', 'x', ']', '+', 'F', '[', '+', 'F', 'x', ']', '-', 'x' ] )
         ]
@@ -33,7 +33,8 @@ plant1 =
 
 plant2 : Preset
 plant2 =
-    { rules =
+    { name = "plant2"
+    , rules =
         [ ( 'F', [ 'F', 'F', '+', '[', '+', 'F', '-', 'F', '-', 'F', ']', '-', '[', '-', 'F', '+', 'F', '+', 'F', ']' ] )
         ]
     , axiomApplied = True
@@ -47,7 +48,8 @@ plant2 =
 
 rings : Preset
 rings =
-    { rules =
+    { name = "rings"
+    , rules =
         [ ( 'F'
           , [ 'F', 'F', '+', 'F', '+', 'F', '+', 'F', '+', 'F', '+', 'F', '-', 'F' ]
           )
@@ -63,7 +65,8 @@ rings =
 
 kolam : Preset
 kolam =
-    { rules =
+    { name = "kolam"
+    , rules =
         [ ( 'a'
           , [ 'F', '+', '+', 'F', 'F', 'F', 'F', '-', '-', 'F', '-', '-', 'F', 'F', 'F', 'F', '+', '+', 'F', '+', '+', 'F', 'F', 'F', 'F', '-', '-', 'F' ]
           )
@@ -88,7 +91,8 @@ kolam =
 
 pentaPlex : Preset
 pentaPlex =
-    { rules =
+    { name = "pentaPlex"
+    , rules =
         [ ( 'F'
           , [ 'F', '+', '+', 'F', '+', '+', 'F', '|', 'F', '-', 'F', '+', '+', 'F' ]
           )
@@ -104,7 +108,8 @@ pentaPlex =
 
 kochIslandVar : Preset
 kochIslandVar =
-    { rules =
+    { name = "kochIslandVar"
+    , rules =
         [ ( 'x'
           , [ 'x', '+', 'y', 'F', '+', '+', 'y', 'F', '-', 'F', 'x', '-', '-', 'F', 'x', 'F', 'x', '-', 'y', 'F', '+', 'x' ]
           )
@@ -123,7 +128,8 @@ kochIslandVar =
 
 sqrSierp : Preset
 sqrSierp =
-    { rules =
+    { name = "sqrSierp"
+    , rules =
         [ ( 'x', [ 'x', 'F', '-', 'F', '+', 'F', '-', 'x', 'F', '+', 'F', '+', 'x', 'F', '-', 'F', '+', 'F', '-', 'x' ] )
         ]
     , axiomApplied = True
@@ -137,7 +143,8 @@ sqrSierp =
 
 crystal : Preset
 crystal =
-    { rules =
+    { name = "crystal"
+    , rules =
         [ ( 'F', [ 'F', 'F', '+', 'F', '+', '+', 'F', '+', 'F' ] )
         ]
     , axiomApplied = True
@@ -151,7 +158,8 @@ crystal =
 
 initPreset : Preset
 initPreset =
-    { rules = []
+    { name = "initPreset"
+    , rules = []
     , axiomApplied = False
     , turningAngle = 0
     , lineLength = 0

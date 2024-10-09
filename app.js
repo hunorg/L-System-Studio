@@ -5264,7 +5264,7 @@ var $elm$core$String$cons = _String_cons;
 var $elm$core$String$fromChar = function (_char) {
 	return A2($elm$core$String$cons, _char, '');
 };
-var $author$project$Model$emptySymbolAssignments = function () {
+var $author$project$SymbolAssignments$emptySymbolAssignments = function () {
 	var lowercaseChars = _List_fromArray(
 		[
 			_Utils_chr('a'),
@@ -5301,7 +5301,7 @@ var $author$project$Model$emptySymbolAssignments = function () {
 	};
 	return A2($elm$core$List$map, createSymbol, lowercaseChars);
 }();
-var $author$project$Model$allSymbolAssignments = _Utils_ap(
+var $author$project$SymbolAssignments$allSymbolAssignments = _Utils_ap(
 	_List_fromArray(
 		[
 			{action: $author$project$Turtle$Move, character: 'F'},
@@ -5323,7 +5323,7 @@ var $author$project$Model$allSymbolAssignments = _Utils_ap(
 			{action: $author$project$Turtle$DecrementTurningAngle, character: '('},
 			{action: $author$project$Turtle$IncrementTurningAngle, character: ')'}
 		]),
-	$author$project$Model$emptySymbolAssignments);
+	$author$project$SymbolAssignments$emptySymbolAssignments);
 var $avh4$elm_color$Color$RgbaSpace = F4(
 	function (a, b, c, d) {
 		return {$: 'RgbaSpace', a: a, b: b, c: c, d: d};
@@ -5398,52 +5398,12 @@ var $elm$random$Random$int = F2(
 				}
 			});
 	});
-var $author$project$Presets$plant1 = {
-	axiom: 'x',
-	axiomApplied: true,
-	iterations: 5,
-	lineLength: 4,
-	rules: _List_fromArray(
-		[
-			_Utils_Tuple2(
-			_Utils_chr('F'),
-			_List_fromArray(
-				[
-					_Utils_chr('F'),
-					_Utils_chr('F')
-				])),
-			_Utils_Tuple2(
-			_Utils_chr('x'),
-			_List_fromArray(
-				[
-					_Utils_chr('F'),
-					_Utils_chr('-'),
-					_Utils_chr('['),
-					_Utils_chr('['),
-					_Utils_chr('x'),
-					_Utils_chr(']'),
-					_Utils_chr('+'),
-					_Utils_chr('x'),
-					_Utils_chr(']'),
-					_Utils_chr('+'),
-					_Utils_chr('F'),
-					_Utils_chr('['),
-					_Utils_chr('+'),
-					_Utils_chr('F'),
-					_Utils_chr('x'),
-					_Utils_chr(']'),
-					_Utils_chr('-'),
-					_Utils_chr('x')
-				]))
-		]),
-	startingAngle: -90,
-	turningAngle: 22.5
-};
 var $author$project$Presets$crystal = {
 	axiom: 'F+F+F+F',
 	axiomApplied: true,
 	iterations: 4,
 	lineLength: 3,
+	name: 'crystal',
 	rules: _List_fromArray(
 		[
 			_Utils_Tuple2(
@@ -5469,6 +5429,7 @@ var $author$project$Presets$kochIslandVar = {
 	axiomApplied: true,
 	iterations: 2,
 	lineLength: 4,
+	name: 'kochIslandVar',
 	rules: _List_fromArray(
 		[
 			_Utils_Tuple2(
@@ -5534,6 +5495,7 @@ var $author$project$Presets$kolam = {
 	axiomApplied: true,
 	iterations: 3,
 	lineLength: 7,
+	name: 'kolam',
 	rules: _List_fromArray(
 		[
 			_Utils_Tuple2(
@@ -5637,6 +5599,7 @@ var $author$project$Presets$pentaPlex = {
 	axiomApplied: true,
 	iterations: 3,
 	lineLength: 8,
+	name: 'pentaPlex',
 	rules: _List_fromArray(
 		[
 			_Utils_Tuple2(
@@ -5662,11 +5625,54 @@ var $author$project$Presets$pentaPlex = {
 	startingAngle: 0,
 	turningAngle: 36
 };
+var $author$project$Presets$plant1 = {
+	axiom: 'x',
+	axiomApplied: true,
+	iterations: 5,
+	lineLength: 4,
+	name: 'plant1',
+	rules: _List_fromArray(
+		[
+			_Utils_Tuple2(
+			_Utils_chr('F'),
+			_List_fromArray(
+				[
+					_Utils_chr('F'),
+					_Utils_chr('F')
+				])),
+			_Utils_Tuple2(
+			_Utils_chr('x'),
+			_List_fromArray(
+				[
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('['),
+					_Utils_chr('['),
+					_Utils_chr('x'),
+					_Utils_chr(']'),
+					_Utils_chr('+'),
+					_Utils_chr('x'),
+					_Utils_chr(']'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('['),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('x'),
+					_Utils_chr(']'),
+					_Utils_chr('-'),
+					_Utils_chr('x')
+				]))
+		]),
+	startingAngle: -90,
+	turningAngle: 22.5
+};
 var $author$project$Presets$plant2 = {
 	axiom: 'F',
 	axiomApplied: true,
 	iterations: 3,
 	lineLength: 8,
+	name: 'plant2',
 	rules: _List_fromArray(
 		[
 			_Utils_Tuple2(
@@ -5703,6 +5709,7 @@ var $author$project$Presets$rings = {
 	axiomApplied: true,
 	iterations: 3,
 	lineLength: 6,
+	name: 'rings',
 	rules: _List_fromArray(
 		[
 			_Utils_Tuple2(
@@ -5733,6 +5740,7 @@ var $author$project$Presets$sqrSierp = {
 	axiomApplied: true,
 	iterations: 3,
 	lineLength: 8,
+	name: 'sqrSierp',
 	rules: _List_fromArray(
 		[
 			_Utils_Tuple2(
@@ -5805,16 +5813,19 @@ var $author$project$Model$init = {
 	rules: _List_Nil,
 	selectSymbol: A2(
 		$nunntom$elm_ui_select$Select$setItems,
-		$author$project$Model$allSymbolAssignments,
+		$author$project$SymbolAssignments$allSymbolAssignments,
 		$nunntom$elm_ui_select$Select$init('symbol-select')),
 	selectedAction: $author$project$Turtle$Move,
-	selectedPreset: $author$project$Presets$plant1,
+	selectedPreset: A2(
+		$nunntom$elm_ui_select$Select$setItems,
+		$author$project$Presets$presets,
+		$nunntom$elm_ui_select$Select$init('preset-select')),
 	selectedRule: $elm$core$Maybe$Nothing,
 	selectedSymbol: 'F',
 	showSidebar: true,
 	startingAngle: 0,
 	startingPoint: _Utils_Tuple2(250, 250),
-	symbolAssignments: $author$project$Model$allSymbolAssignments,
+	symbolAssignments: $author$project$SymbolAssignments$allSymbolAssignments,
 	syntaxDisplay: false,
 	turningAngle: 0,
 	turningAngleIncrement: 0
@@ -6417,18 +6428,15 @@ var $author$project$Main$subscriptions = function (model) {
 var $author$project$Update$HideLoadingIconAfter = function (a) {
 	return {$: 'HideLoadingIconAfter', a: a};
 };
-var $author$project$Update$LoadRandomPreset = function (a) {
-	return {$: 'LoadRandomPreset', a: a};
-};
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$MainButton = {$: 'MainButton'};
+var $author$project$Update$SelectPreset = function (a) {
+	return {$: 'SelectPreset', a: a};
+};
 var $author$project$Update$SelectSymbol = function (a) {
 	return {$: 'SelectSymbol', a: a};
 };
 var $author$project$Update$SetAnimationStartTime = function (a) {
 	return {$: 'SetAnimationStartTime', a: a};
-};
-var $author$project$Update$SetRandomPreset = function (a) {
-	return {$: 'SetRandomPreset', a: a};
 };
 var $elm$core$Basics$always = F2(
 	function (a, _v0) {
@@ -6446,84 +6454,6 @@ var $elm$core$List$filter = F2(
 			list);
 	});
 var $elm$core$Basics$ge = _Utils_ge;
-var $elm$random$Random$Generate = function (a) {
-	return {$: 'Generate', a: a};
-};
-var $elm$random$Random$initialSeed = function (x) {
-	var _v0 = $elm$random$Random$next(
-		A2($elm$random$Random$Seed, 0, 1013904223));
-	var state1 = _v0.a;
-	var incr = _v0.b;
-	var state2 = (state1 + x) >>> 0;
-	return $elm$random$Random$next(
-		A2($elm$random$Random$Seed, state2, incr));
-};
-var $elm$time$Time$posixToMillis = function (_v0) {
-	var millis = _v0.a;
-	return millis;
-};
-var $elm$random$Random$init = A2(
-	$elm$core$Task$andThen,
-	function (time) {
-		return $elm$core$Task$succeed(
-			$elm$random$Random$initialSeed(
-				$elm$time$Time$posixToMillis(time)));
-	},
-	$elm$time$Time$now);
-var $elm$random$Random$step = F2(
-	function (_v0, seed) {
-		var generator = _v0.a;
-		return generator(seed);
-	});
-var $elm$random$Random$onEffects = F3(
-	function (router, commands, seed) {
-		if (!commands.b) {
-			return $elm$core$Task$succeed(seed);
-		} else {
-			var generator = commands.a.a;
-			var rest = commands.b;
-			var _v1 = A2($elm$random$Random$step, generator, seed);
-			var value = _v1.a;
-			var newSeed = _v1.b;
-			return A2(
-				$elm$core$Task$andThen,
-				function (_v2) {
-					return A3($elm$random$Random$onEffects, router, rest, newSeed);
-				},
-				A2($elm$core$Platform$sendToApp, router, value));
-		}
-	});
-var $elm$random$Random$onSelfMsg = F3(
-	function (_v0, _v1, seed) {
-		return $elm$core$Task$succeed(seed);
-	});
-var $elm$random$Random$map = F2(
-	function (func, _v0) {
-		var genA = _v0.a;
-		return $elm$random$Random$Generator(
-			function (seed0) {
-				var _v1 = genA(seed0);
-				var a = _v1.a;
-				var seed1 = _v1.b;
-				return _Utils_Tuple2(
-					func(a),
-					seed1);
-			});
-	});
-var $elm$random$Random$cmdMap = F2(
-	function (func, _v0) {
-		var generator = _v0.a;
-		return $elm$random$Random$Generate(
-			A2($elm$random$Random$map, func, generator));
-	});
-_Platform_effectManagers['Random'] = _Platform_createManager($elm$random$Random$init, $elm$random$Random$onEffects, $elm$random$Random$onSelfMsg, $elm$random$Random$cmdMap);
-var $elm$random$Random$command = _Platform_leaf('Random');
-var $elm$random$Random$generate = F2(
-	function (tagger, generator) {
-		return $elm$random$Random$command(
-			$elm$random$Random$Generate(
-				A2($elm$random$Random$map, tagger, generator)));
-	});
 var $elm$core$List$append = F2(
 	function (xs, ys) {
 		if (!ys.b) {
@@ -6660,42 +6590,6 @@ var $author$project$LSys$generateSequence = F3(
 				1,
 				$elm$core$Basics$round(iterations)));
 	});
-var $elm$core$List$drop = F2(
-	function (n, list) {
-		drop:
-		while (true) {
-			if (n <= 0) {
-				return list;
-			} else {
-				if (!list.b) {
-					return list;
-				} else {
-					var x = list.a;
-					var xs = list.b;
-					var $temp$n = n - 1,
-						$temp$list = xs;
-					n = $temp$n;
-					list = $temp$list;
-					continue drop;
-				}
-			}
-		}
-	});
-var $elm$core$List$head = function (list) {
-	if (list.b) {
-		var x = list.a;
-		var xs = list.b;
-		return $elm$core$Maybe$Just(x);
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
-var $elm_community$list_extra$List$Extra$getAt = F2(
-	function (idx, xs) {
-		return (idx < 0) ? $elm$core$Maybe$Nothing : $elm$core$List$head(
-			A2($elm$core$List$drop, idx, xs));
-	});
-var $author$project$Presets$initPreset = {axiom: '', axiomApplied: false, iterations: 0, lineLength: 0, rules: _List_Nil, startingAngle: 0, turningAngle: 0};
 var $elm$core$Array$length = function (_v0) {
 	var len = _v0.a;
 	return len;
@@ -6724,6 +6618,10 @@ var $elm$core$Basics$min = F2(
 	});
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $elm$core$Basics$not = _Basics_not;
+var $elm$time$Time$posixToMillis = function (_v0) {
+	var millis = _v0.a;
+	return millis;
+};
 var $elm$core$Basics$pow = _Basics_pow;
 var $author$project$Update$roundFloat = F2(
 	function (decimalPlaces, number) {
@@ -7395,6 +7293,36 @@ var $elm$core$Maybe$andThen = F2(
 			return $elm$core$Maybe$Nothing;
 		}
 	});
+var $elm$core$List$drop = F2(
+	function (n, list) {
+		drop:
+		while (true) {
+			if (n <= 0) {
+				return list;
+			} else {
+				if (!list.b) {
+					return list;
+				} else {
+					var x = list.a;
+					var xs = list.b;
+					var $temp$n = n - 1,
+						$temp$list = xs;
+					n = $temp$n;
+					list = $temp$list;
+					continue drop;
+				}
+			}
+		}
+	});
+var $elm$core$List$head = function (list) {
+	if (list.b) {
+		var x = list.a;
+		var xs = list.b;
+		return $elm$core$Maybe$Just(x);
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
 var $nunntom$elm_ui_select$Internal$Update$getAt = F2(
 	function (idx, xs) {
 		return (idx < 0) ? $elm$core$Maybe$Nothing : $elm$core$List$head(
@@ -8031,33 +7959,33 @@ var $nunntom$elm_ui_select$Select$update = F3(
 				select));
 	});
 var $author$project$Update$update = F2(
-	function (msg, model) {
+	function (msg, state) {
 		switch (msg.$) {
 			case 'ToggleSyntaxDisplay':
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
-						{syntaxDisplay: !model.syntaxDisplay}),
+						state,
+						{syntaxDisplay: !state.syntaxDisplay}),
 					$elm$core$Platform$Cmd$none);
 			case 'UpdateAxiomInput':
 				var newAxiom = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{axiom: newAxiom}),
 					$elm$core$Platform$Cmd$none);
 			case 'UpdateNewRuleInput':
 				var input = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{newRuleInput: input}),
 					$elm$core$Platform$Cmd$none);
 			case 'SelectRule':
 				var rule = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{
 							selectedRule: $elm$core$Maybe$Just(rule)
 						}),
@@ -8066,12 +7994,12 @@ var $author$project$Update$update = F2(
 				var rule = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{
 							rules: A2(
 								$elm$core$List$filter,
 								$elm$core$Basics$neq(rule),
-								model.rules),
+								state.rules),
 							selectedRule: $elm$core$Maybe$Nothing
 						}),
 					$elm$core$Platform$Cmd$none);
@@ -8079,7 +8007,7 @@ var $author$project$Update$update = F2(
 				var turningAngle = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{
 							turningAngle: A2(
 								$elm$core$Maybe$withDefault,
@@ -8091,7 +8019,7 @@ var $author$project$Update$update = F2(
 				var newTurningAngleIncrement = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{
 							turningAngleIncrement: A2(
 								$elm$core$Maybe$withDefault,
@@ -8103,45 +8031,53 @@ var $author$project$Update$update = F2(
 				var newLength = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
-						{lineLength: newLength}),
+						state,
+						{
+							lineLength: A2($author$project$Update$roundFloat, 2, newLength)
+						}),
 					$elm$core$Platform$Cmd$none);
 			case 'UpdateLineLengthScale':
 				var newLengthScale = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
-						{lineLengthScale: newLengthScale}),
+						state,
+						{
+							lineLengthScale: A2($author$project$Update$roundFloat, 2, newLengthScale)
+						}),
 					$elm$core$Platform$Cmd$none);
 			case 'UpdateLineWidthIncrement':
 				var newIncrementSize = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
-						{lineWidthIncrement: newIncrementSize}),
+						state,
+						{
+							lineWidthIncrement: A2($author$project$Update$roundFloat, 2, newIncrementSize)
+						}),
 					$elm$core$Platform$Cmd$none);
 			case 'UpdateRecursionDepth':
 				var newRecursionDepth = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
-						{recursionDepth: newRecursionDepth}),
+						state,
+						{
+							recursionDepth: A2($author$project$Update$roundFloat, 0, newRecursionDepth)
+						}),
 					$elm$core$Platform$Cmd$none);
-			case 'DownMsg':
+			case 'UpdateStartingPoint':
 				var button = msg.a;
 				var clientPos = msg.b;
 				return _Utils_eq(button, $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$MainButton) ? _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{
 							startingPoint: _Utils_Tuple2(clientPos.a, clientPos.b)
 						}),
-					$elm$core$Platform$Cmd$none) : _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					$elm$core$Platform$Cmd$none) : _Utils_Tuple2(state, $elm$core$Platform$Cmd$none);
 			case 'UpdateStartingAngle':
 				var newStartingAngle = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{
 							startingAngle: A2(
 								$elm$core$Maybe$withDefault,
@@ -8151,15 +8087,15 @@ var $author$project$Update$update = F2(
 					$elm$core$Platform$Cmd$none);
 			case 'ColorPickerMsg':
 				var colorPickerMsg = msg.a;
-				var _v1 = A3($simonh1000$elm_colorpicker$ColorPicker$update, colorPickerMsg, model.polygonFillColor, model.colorPicker);
+				var _v1 = A3($simonh1000$elm_colorpicker$ColorPicker$update, colorPickerMsg, state.polygonFillColor, state.colorPicker);
 				var newColorPicker = _v1.a;
 				var newColorMaybe = _v1.b;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{
 							colorPicker: newColorPicker,
-							polygonFillColor: A2($elm$core$Maybe$withDefault, model.polygonFillColor, newColorMaybe)
+							polygonFillColor: A2($elm$core$Maybe$withDefault, state.polygonFillColor, newColorMaybe)
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 'AddRule':
@@ -8170,31 +8106,31 @@ var $author$project$Update$update = F2(
 						A2(
 							$elm$core$Maybe$map,
 							$elm$core$Tuple$first,
-							$elm$core$String$uncons(model.selectedSymbol))),
-					$elm$core$String$toList(model.newRuleInput));
-				var newModel = _Utils_update(
-					model,
+							$elm$core$String$uncons(state.selectedSymbol))),
+					$elm$core$String$toList(state.newRuleInput));
+				var newState = _Utils_update(
+					state,
 					{
 						newRuleInput: '',
 						rules: _Utils_ap(
-							model.rules,
+							state.rules,
 							_List_fromArray(
 								[newRule]))
 					});
 				return _Utils_Tuple2(
 					_Utils_update(
-						newModel,
+						newState,
 						{
-							generatedSequence: A3($author$project$LSys$generateSequence, newModel.recursionDepth, newModel.axiom, newModel.rules)
+							generatedSequence: A3($author$project$LSys$generateSequence, newState.recursionDepth, newState.axiom, newState.rules)
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 'ApplyAxiom':
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{
 							axiomApplied: true,
-							generatedSequence: A3($author$project$LSys$generateSequence, model.recursionDepth, model.axiom, model.rules)
+							generatedSequence: A3($author$project$LSys$generateSequence, state.recursionDepth, state.axiom, state.rules)
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 'UpdateCanvasSize':
@@ -8202,20 +8138,47 @@ var $author$project$Update$update = F2(
 				var newHeight = msg.b;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{canvasHeight: newHeight, canvasWidth: newWidth}),
 					$elm$core$Platform$Cmd$none);
 			case 'ToggleSidebar':
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
-						{showSidebar: !model.showSidebar}),
+						state,
+						{showSidebar: !state.showSidebar}),
 					$elm$core$Platform$Cmd$none);
 			case 'Reset':
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
-						{animationStartTime: $elm$core$Maybe$Nothing, axiom: '', axiomApplied: false, drawnTurtle: false, generatedSequence: $elm$core$Array$empty, lineLength: 1, lineLengthScale: 0, lineWidthIncrement: 0, newRuleInput: '', recursionDepth: 0, renderingProgress: 0, rules: _List_Nil, selectedAction: $author$project$Turtle$Move, selectedRule: $elm$core$Maybe$Nothing, startingAngle: 0, syntaxDisplay: false, turningAngle: 0, turningAngleIncrement: 0}),
+						state,
+						{
+							animationStartTime: $elm$core$Maybe$Nothing,
+							axiom: '',
+							axiomApplied: false,
+							drawnTurtle: false,
+							generatedSequence: $elm$core$Array$empty,
+							lineLength: 1,
+							lineLengthScale: 0,
+							lineWidthIncrement: 0,
+							newRuleInput: '',
+							recursionDepth: 0,
+							renderingProgress: 0,
+							rules: _List_Nil,
+							selectSymbol: A2(
+								$nunntom$elm_ui_select$Select$setItems,
+								$author$project$SymbolAssignments$allSymbolAssignments,
+								$nunntom$elm_ui_select$Select$init('symbol-select')),
+							selectedAction: $author$project$Turtle$Move,
+							selectedPreset: A2(
+								$nunntom$elm_ui_select$Select$setItems,
+								$author$project$Presets$presets,
+								$nunntom$elm_ui_select$Select$init('preset-select')),
+							selectedRule: $elm$core$Maybe$Nothing,
+							startingAngle: 0,
+							syntaxDisplay: false,
+							turningAngle: 0,
+							turningAngleIncrement: 0
+						}),
 					A2(
 						$elm$core$Task$perform,
 						$author$project$Update$HideLoadingIconAfter,
@@ -8223,28 +8186,10 @@ var $author$project$Update$update = F2(
 							$elm$core$Task$map,
 							$elm$core$Basics$always(1),
 							$elm$core$Process$sleep(1))));
-			case 'GetRandomPreset':
-				return _Utils_Tuple2(
-					model,
-					A2($elm$random$Random$generate, $author$project$Update$SetRandomPreset, model.randomGenerator));
-			case 'SetRandomPreset':
-				var index = msg.a;
-				var newSelectedPreset = A2(
-					$elm$core$Maybe$withDefault,
-					$author$project$Presets$initPreset,
-					A2($elm_community$list_extra$List$Extra$getAt, index, model.presets));
-				return _Utils_Tuple2(
-					_Utils_update(
-						model,
-						{selectedPreset: newSelectedPreset}),
-					A2(
-						$elm$core$Task$perform,
-						$author$project$Update$LoadRandomPreset,
-						$elm$core$Task$succeed(newSelectedPreset)));
-			case 'LoadRandomPreset':
+			case 'LoadPreset':
 				var preset = msg.a;
-				var newModel = _Utils_update(
-					model,
+				var newState = _Utils_update(
+					state,
 					{
 						animationStartTime: $elm$core$Maybe$Nothing,
 						axiom: preset.axiom,
@@ -8255,32 +8200,32 @@ var $author$project$Update$update = F2(
 						rules: preset.rules,
 						startingAngle: preset.startingAngle,
 						startingPoint: _Utils_Tuple2(
-							A2($author$project$Update$roundFloat, 0, model.canvasWidth / 2.3),
-							A2($author$project$Update$roundFloat, 0, model.canvasHeight / 1.5)),
+							A2($author$project$Update$roundFloat, 0, state.canvasWidth / 2.3),
+							A2($author$project$Update$roundFloat, 0, state.canvasHeight / 1.5)),
 						turningAngle: preset.turningAngle
 					});
 				return _Utils_Tuple2(
 					_Utils_update(
-						newModel,
+						newState,
 						{
 							drawnTurtle: true,
-							generatedSequence: A3($author$project$LSys$generateSequence, newModel.recursionDepth, newModel.axiom, newModel.rules)
+							generatedSequence: A3($author$project$LSys$generateSequence, newState.recursionDepth, newState.axiom, newState.rules)
 						}),
 					A2($elm$core$Task$perform, $author$project$Update$SetAnimationStartTime, $elm$time$Time$now));
 			case 'Animate':
 				var posix = msg.a;
-				var _v2 = model.animationStartTime;
+				var _v2 = state.animationStartTime;
 				if (_v2.$ === 'Nothing') {
-					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+					return _Utils_Tuple2(state, $elm$core$Platform$Cmd$none);
 				} else {
 					var startTime = _v2.a;
-					var maxProgress = $elm$core$Array$length(model.generatedSequence);
+					var maxProgress = $elm$core$Array$length(state.generatedSequence);
 					var elapsedTimeMillis = $elm$time$Time$posixToMillis(posix) - $elm$time$Time$posixToMillis(startTime);
-					var newProgress = model.renderingProgress + ((elapsedTimeMillis / 100) * model.animationSpeed);
+					var newProgress = state.renderingProgress + ((elapsedTimeMillis / 100) * state.animationSpeed);
 					var animationFinished = _Utils_cmp(newProgress, maxProgress) > -1;
 					return _Utils_Tuple2(
 						_Utils_update(
-							model,
+							state,
 							{
 								lastAnimationFrameTimestamp: $elm$core$Maybe$Just(posix),
 								loadingIconVisible: !animationFinished,
@@ -8292,39 +8237,39 @@ var $author$project$Update$update = F2(
 				var time = msg.a;
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{
 							animationStartTime: $elm$core$Maybe$Just(time)
 						}),
 					$elm$core$Platform$Cmd$none);
 			case 'StartAnimation':
-				var newModel = _Utils_update(
-					model,
+				var newState = _Utils_update(
+					state,
 					{
 						animationStartTime: $elm$core$Maybe$Nothing,
-						axiom: model.axiom,
-						axiomApplied: model.axiomApplied,
-						lineLength: model.lineLength,
-						lineLengthScale: model.lineLengthScale,
-						lineWidthIncrement: model.lineWidthIncrement,
+						axiom: state.axiom,
+						axiomApplied: state.axiomApplied,
+						lineLength: state.lineLength,
+						lineLengthScale: state.lineLengthScale,
+						lineWidthIncrement: state.lineWidthIncrement,
 						loadingIconVisible: true,
-						recursionDepth: model.recursionDepth,
+						recursionDepth: state.recursionDepth,
 						renderingProgress: 0,
-						rules: model.rules,
-						startingAngle: model.startingAngle,
+						rules: state.rules,
+						startingAngle: state.startingAngle,
 						startingPoint: _Utils_Tuple2(
-							A2($author$project$Update$roundFloat, 0, model.canvasWidth / 2.3),
-							A2($author$project$Update$roundFloat, 0, model.canvasHeight / 1.5)),
-						turningAngle: model.turningAngle,
-						turningAngleIncrement: model.turningAngleIncrement
+							A2($author$project$Update$roundFloat, 0, state.canvasWidth / 2.3),
+							A2($author$project$Update$roundFloat, 0, state.canvasHeight / 1.5)),
+						turningAngle: state.turningAngle,
+						turningAngleIncrement: state.turningAngleIncrement
 					});
-				var animationTime = ($elm$core$Array$length(model.generatedSequence) / model.animationSpeed) * 1000;
+				var animationTime = ($elm$core$Array$length(state.generatedSequence) / state.animationSpeed) * 1000;
 				return _Utils_Tuple2(
 					_Utils_update(
-						newModel,
+						newState,
 						{
 							drawnTurtle: true,
-							generatedSequence: A3($author$project$LSys$generateSequence, newModel.recursionDepth, newModel.axiom, newModel.rules)
+							generatedSequence: A3($author$project$LSys$generateSequence, newState.recursionDepth, newState.axiom, newState.rules)
 						}),
 					$elm$core$Platform$Cmd$batch(
 						_List_fromArray(
@@ -8341,34 +8286,34 @@ var $author$project$Update$update = F2(
 			case 'ShowLoadingIcon':
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{loadingIconVisible: true}),
 					$elm$core$Platform$Cmd$none);
 			case 'HideLoadingIconAfter':
 				return _Utils_Tuple2(
 					_Utils_update(
-						model,
+						state,
 						{loadingIconVisible: false}),
 					$elm$core$Platform$Cmd$none);
 			case 'AnimationFrame':
 				var posix = msg.a;
-				var _v3 = model.lastAnimationFrameTimestamp;
+				var _v3 = state.lastAnimationFrameTimestamp;
 				if (_v3.$ === 'Nothing') {
 					return _Utils_Tuple2(
 						_Utils_update(
-							model,
+							state,
 							{
 								lastAnimationFrameTimestamp: $elm$core$Maybe$Just(posix)
 							}),
 						$elm$core$Platform$Cmd$none);
 				} else {
 					var lastTimestamp = _v3.a;
-					var maxProgress = $elm$core$Array$length(model.generatedSequence);
+					var maxProgress = $elm$core$Array$length(state.generatedSequence);
 					var deltaTime = $elm$time$Time$posixToMillis(posix) - $elm$time$Time$posixToMillis(lastTimestamp);
-					var newProgress = model.renderingProgress + ((deltaTime / 1) * model.animationSpeed);
+					var newProgress = state.renderingProgress + ((deltaTime / 1) * state.animationSpeed);
 					return _Utils_Tuple2(
 						_Utils_update(
-							model,
+							state,
 							{
 								lastAnimationFrameTimestamp: $elm$core$Maybe$Just(posix),
 								renderingProgress: A2($elm$core$Basics$min, maxProgress, newProgress)
@@ -8381,7 +8326,7 @@ var $author$project$Update$update = F2(
 					$elm$core$Tuple$mapFirst,
 					function (select) {
 						return _Utils_update(
-							model,
+							state,
 							{
 								selectSymbol: select,
 								selectedSymbol: function () {
@@ -8395,33 +8340,244 @@ var $author$project$Update$update = F2(
 								}()
 							});
 					},
-					A3($nunntom$elm_ui_select$Select$update, $author$project$Update$SelectSymbol, subMsg, model.selectSymbol));
+					A3($nunntom$elm_ui_select$Select$update, $author$project$Update$SelectSymbol, subMsg, state.selectSymbol));
+			case 'SelectPreset':
+				var subMsg = msg.a;
+				var currentPreset = $nunntom$elm_ui_select$Select$toValue(state.selectedPreset);
+				var _v5 = A3($nunntom$elm_ui_select$Select$update, $author$project$Update$SelectPreset, subMsg, state.selectedPreset);
+				var updatedSelect = _v5.a;
+				var cmd = _v5.b;
+				var updatedState = _Utils_update(
+					state,
+					{selectedPreset: updatedSelect});
+				var createFinalState = function (preset) {
+					var updatedModelWithPreset = _Utils_update(
+						updatedState,
+						{
+							animationStartTime: $elm$core$Maybe$Nothing,
+							axiom: preset.axiom,
+							axiomApplied: preset.axiomApplied,
+							lineLength: preset.lineLength,
+							recursionDepth: preset.iterations,
+							renderingProgress: 0,
+							rules: preset.rules,
+							startingAngle: preset.startingAngle,
+							startingPoint: _Utils_Tuple2(
+								A2($author$project$Update$roundFloat, 0, state.canvasWidth / 2.3),
+								A2($author$project$Update$roundFloat, 0, state.canvasHeight / 1.5)),
+							turningAngle: preset.turningAngle
+						});
+					var finalState = _Utils_update(
+						updatedModelWithPreset,
+						{
+							drawnTurtle: true,
+							generatedSequence: A3($author$project$LSys$generateSequence, updatedModelWithPreset.recursionDepth, updatedModelWithPreset.axiom, updatedModelWithPreset.rules)
+						});
+					return _Utils_Tuple2(
+						finalState,
+						A2($elm$core$Task$perform, $author$project$Update$SetAnimationStartTime, $elm$time$Time$now));
+				};
+				var maybePreset = $nunntom$elm_ui_select$Select$toValue(updatedState.selectedPreset);
+				var _v6 = function () {
+					var _v7 = _Utils_Tuple2(maybePreset, currentPreset);
+					if (_v7.a.$ === 'Just') {
+						if (_v7.b.$ === 'Just') {
+							var preset = _v7.a.a;
+							var existingPreset = _v7.b.a;
+							return _Utils_eq(existingPreset, preset) ? _Utils_Tuple2(updatedState, $elm$core$Platform$Cmd$none) : createFinalState(preset);
+						} else {
+							var preset = _v7.a.a;
+							var _v8 = _v7.b;
+							return createFinalState(preset);
+						}
+					} else {
+						return _Utils_Tuple2(updatedState, $elm$core$Platform$Cmd$none);
+					}
+				}();
+				var newState = _v6.a;
+				var task = _v6.b;
+				return _Utils_Tuple2(
+					newState,
+					$elm$core$Platform$Cmd$batch(
+						_List_fromArray(
+							[cmd, task])));
 			default:
-				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				return _Utils_Tuple2(state, $elm$core$Platform$Cmd$none);
 		}
 	});
-var $author$project$Update$DownMsg = F2(
+var $author$project$Update$UpdateStartingPoint = F2(
 	function (a, b) {
-		return {$: 'DownMsg', a: a, b: b};
+		return {$: 'UpdateStartingPoint', a: a, b: b};
 	});
-var $elm$json$Json$Encode$string = _Json_wrap;
-var $elm$html$Html$Attributes$stringProperty = F2(
-	function (key, string) {
+var $mdgriffith$elm_ui$Internal$Model$Rgba = F4(
+	function (a, b, c, d) {
+		return {$: 'Rgba', a: a, b: b, c: c, d: d};
+	});
+var $mdgriffith$elm_ui$Element$rgb = F3(
+	function (r, g, b) {
+		return A4($mdgriffith$elm_ui$Internal$Model$Rgba, r, g, b, 1);
+	});
+var $author$project$Styles$black = A3($mdgriffith$elm_ui$Element$rgb, 0, 0, 0);
+var $mdgriffith$elm_ui$Internal$Model$Colored = F3(
+	function (a, b, c) {
+		return {$: 'Colored', a: a, b: b, c: c};
+	});
+var $mdgriffith$elm_ui$Internal$Model$StyleClass = F2(
+	function (a, b) {
+		return {$: 'StyleClass', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Flag$Flag = function (a) {
+	return {$: 'Flag', a: a};
+};
+var $mdgriffith$elm_ui$Internal$Flag$Second = function (a) {
+	return {$: 'Second', a: a};
+};
+var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
+var $mdgriffith$elm_ui$Internal$Flag$flag = function (i) {
+	return (i > 31) ? $mdgriffith$elm_ui$Internal$Flag$Second(1 << (i - 32)) : $mdgriffith$elm_ui$Internal$Flag$Flag(1 << i);
+};
+var $mdgriffith$elm_ui$Internal$Flag$bgColor = $mdgriffith$elm_ui$Internal$Flag$flag(8);
+var $mdgriffith$elm_ui$Internal$Model$floatClass = function (x) {
+	return $elm$core$String$fromInt(
+		$elm$core$Basics$round(x * 255));
+};
+var $mdgriffith$elm_ui$Internal$Model$formatColorClass = function (_v0) {
+	var red = _v0.a;
+	var green = _v0.b;
+	var blue = _v0.c;
+	var alpha = _v0.d;
+	return $mdgriffith$elm_ui$Internal$Model$floatClass(red) + ('-' + ($mdgriffith$elm_ui$Internal$Model$floatClass(green) + ('-' + ($mdgriffith$elm_ui$Internal$Model$floatClass(blue) + ('-' + $mdgriffith$elm_ui$Internal$Model$floatClass(alpha))))));
+};
+var $mdgriffith$elm_ui$Element$Background$color = function (clr) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$bgColor,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Colored,
+			'bg-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(clr),
+			'background-color',
+			clr));
+};
+var $mdgriffith$elm_ui$Internal$Flag$borderColor = $mdgriffith$elm_ui$Internal$Flag$flag(28);
+var $mdgriffith$elm_ui$Element$Border$color = function (clr) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$borderColor,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Colored,
+			'bc-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(clr),
+			'border-color',
+			clr));
+};
+var $elm$virtual_dom$VirtualDom$nodeNS = F2(
+	function (namespace, tag) {
 		return A2(
-			_VirtualDom_property,
-			key,
-			$elm$json$Json$Encode$string(string));
+			_VirtualDom_nodeNS,
+			namespace,
+			_VirtualDom_noScript(tag));
 	});
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm_community$typed_svg$TypedSvg$Core$node = $elm$virtual_dom$VirtualDom$nodeNS('http://www.w3.org/2000/svg');
+var $elm_community$typed_svg$TypedSvg$g = $elm_community$typed_svg$TypedSvg$Core$node('g');
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm_community$typed_svg$TypedSvg$Core$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $elm$core$String$fromFloat = _String_fromNumber;
+var $elm_community$typed_svg$TypedSvg$Attributes$points = function (pts) {
+	var pointToString = function (_v0) {
+		var xx = _v0.a;
+		var yy = _v0.b;
+		return $elm$core$String$fromFloat(xx) + (', ' + $elm$core$String$fromFloat(yy));
+	};
+	return A2(
+		$elm_community$typed_svg$TypedSvg$Core$attribute,
+		'points',
+		A2(
+			$elm$core$String$join,
+			' ',
+			A2($elm$core$List$map, pointToString, pts)));
+};
+var $elm_community$typed_svg$TypedSvg$polygon = $elm_community$typed_svg$TypedSvg$Core$node('polygon');
+var $elm_community$typed_svg$TypedSvg$Attributes$style = function (value) {
+	return A2($elm_community$typed_svg$TypedSvg$Core$attribute, 'style', value);
+};
+var $elm_community$typed_svg$TypedSvg$text_ = $elm_community$typed_svg$TypedSvg$Core$node('text');
+var $elm$core$String$concat = function (strings) {
+	return A2($elm$core$String$join, '', strings);
+};
+var $avh4$elm_color$Color$toCssString = function (_v0) {
+	var r = _v0.a;
+	var g = _v0.b;
+	var b = _v0.c;
+	var a = _v0.d;
+	var roundTo = function (x) {
+		return $elm$core$Basics$round(x * 1000) / 1000;
+	};
+	var pct = function (x) {
+		return $elm$core$Basics$round(x * 10000) / 100;
+	};
+	return $elm$core$String$concat(
+		_List_fromArray(
+			[
+				'rgba(',
+				$elm$core$String$fromFloat(
+				pct(r)),
+				'%,',
+				$elm$core$String$fromFloat(
+				pct(g)),
+				'%,',
+				$elm$core$String$fromFloat(
+				pct(b)),
+				'%,',
+				$elm$core$String$fromFloat(
+				roundTo(a)),
+				')'
+			]));
+};
+var $author$project$Turtle$drawFilledPolygons = F2(
+	function (progress, filledPolygons) {
+		return A2(
+			$elm_community$typed_svg$TypedSvg$g,
+			_List_Nil,
+			A2(
+				$elm$core$List$indexedMap,
+				F2(
+					function (index, _v0) {
+						var polygon = _v0.a;
+						var fillColor = _v0.b;
+						return (_Utils_cmp(index, progress) < 0) ? A2(
+							$elm_community$typed_svg$TypedSvg$polygon,
+							_List_fromArray(
+								[
+									$elm_community$typed_svg$TypedSvg$Attributes$points(
+									A2(
+										$elm$core$List$map,
+										function (_v1) {
+											var x = _v1.a;
+											var y = _v1.b;
+											return _Utils_Tuple2(x, y);
+										},
+										polygon)),
+									$elm_community$typed_svg$TypedSvg$Attributes$style(
+									'fill:' + $avh4$elm_color$Color$toCssString(fillColor))
+								]),
+							_List_Nil) : A2($elm_community$typed_svg$TypedSvg$text_, _List_Nil, _List_Nil);
+					}),
+				filledPolygons));
+	});
 var $mdgriffith$elm_ui$Internal$Model$Unkeyed = function (a) {
 	return {$: 'Unkeyed', a: a};
 };
-var $mdgriffith$elm_ui$Internal$Model$AsColumn = {$: 'AsColumn'};
-var $mdgriffith$elm_ui$Internal$Model$asColumn = $mdgriffith$elm_ui$Internal$Model$AsColumn;
-var $mdgriffith$elm_ui$Internal$Style$classes = {above: 'a', active: 'atv', alignBottom: 'ab', alignCenterX: 'cx', alignCenterY: 'cy', alignContainerBottom: 'acb', alignContainerCenterX: 'accx', alignContainerCenterY: 'accy', alignContainerRight: 'acr', alignLeft: 'al', alignRight: 'ar', alignTop: 'at', alignedHorizontally: 'ah', alignedVertically: 'av', any: 's', behind: 'bh', below: 'b', bold: 'w7', borderDashed: 'bd', borderDotted: 'bdt', borderNone: 'bn', borderSolid: 'bs', capturePointerEvents: 'cpe', clip: 'cp', clipX: 'cpx', clipY: 'cpy', column: 'c', container: 'ctr', contentBottom: 'cb', contentCenterX: 'ccx', contentCenterY: 'ccy', contentLeft: 'cl', contentRight: 'cr', contentTop: 'ct', cursorPointer: 'cptr', cursorText: 'ctxt', focus: 'fcs', focusedWithin: 'focus-within', fullSize: 'fs', grid: 'g', hasBehind: 'hbh', heightContent: 'hc', heightExact: 'he', heightFill: 'hf', heightFillPortion: 'hfp', hover: 'hv', imageContainer: 'ic', inFront: 'fr', inputLabel: 'lbl', inputMultiline: 'iml', inputMultilineFiller: 'imlf', inputMultilineParent: 'imlp', inputMultilineWrapper: 'implw', inputText: 'it', italic: 'i', link: 'lnk', nearby: 'nb', noTextSelection: 'notxt', onLeft: 'ol', onRight: 'or', opaque: 'oq', overflowHidden: 'oh', page: 'pg', paragraph: 'p', passPointerEvents: 'ppe', root: 'ui', row: 'r', scrollbars: 'sb', scrollbarsX: 'sbx', scrollbarsY: 'sby', seButton: 'sbt', single: 'e', sizeByCapital: 'cap', spaceEvenly: 'sev', strike: 'sk', text: 't', textCenter: 'tc', textExtraBold: 'w8', textExtraLight: 'w2', textHeavy: 'w9', textJustify: 'tj', textJustifyAll: 'tja', textLeft: 'tl', textLight: 'w3', textMedium: 'w5', textNormalWeight: 'w4', textRight: 'tr', textSemiBold: 'w6', textThin: 'w1', textUnitalicized: 'tun', transition: 'ts', transparent: 'clr', underline: 'u', widthContent: 'wc', widthExact: 'we', widthFill: 'wf', widthFillPortion: 'wfp', wrapped: 'wrp'};
+var $mdgriffith$elm_ui$Internal$Model$AsEl = {$: 'AsEl'};
+var $mdgriffith$elm_ui$Internal$Model$asEl = $mdgriffith$elm_ui$Internal$Model$AsEl;
 var $mdgriffith$elm_ui$Internal$Model$Generic = {$: 'Generic'};
 var $mdgriffith$elm_ui$Internal$Model$div = $mdgriffith$elm_ui$Internal$Model$Generic;
 var $mdgriffith$elm_ui$Internal$Model$NoNearbyChildren = {$: 'NoNearbyChildren'};
+var $mdgriffith$elm_ui$Internal$Style$classes = {above: 'a', active: 'atv', alignBottom: 'ab', alignCenterX: 'cx', alignCenterY: 'cy', alignContainerBottom: 'acb', alignContainerCenterX: 'accx', alignContainerCenterY: 'accy', alignContainerRight: 'acr', alignLeft: 'al', alignRight: 'ar', alignTop: 'at', alignedHorizontally: 'ah', alignedVertically: 'av', any: 's', behind: 'bh', below: 'b', bold: 'w7', borderDashed: 'bd', borderDotted: 'bdt', borderNone: 'bn', borderSolid: 'bs', capturePointerEvents: 'cpe', clip: 'cp', clipX: 'cpx', clipY: 'cpy', column: 'c', container: 'ctr', contentBottom: 'cb', contentCenterX: 'ccx', contentCenterY: 'ccy', contentLeft: 'cl', contentRight: 'cr', contentTop: 'ct', cursorPointer: 'cptr', cursorText: 'ctxt', focus: 'fcs', focusedWithin: 'focus-within', fullSize: 'fs', grid: 'g', hasBehind: 'hbh', heightContent: 'hc', heightExact: 'he', heightFill: 'hf', heightFillPortion: 'hfp', hover: 'hv', imageContainer: 'ic', inFront: 'fr', inputLabel: 'lbl', inputMultiline: 'iml', inputMultilineFiller: 'imlf', inputMultilineParent: 'imlp', inputMultilineWrapper: 'implw', inputText: 'it', italic: 'i', link: 'lnk', nearby: 'nb', noTextSelection: 'notxt', onLeft: 'ol', onRight: 'or', opaque: 'oq', overflowHidden: 'oh', page: 'pg', paragraph: 'p', passPointerEvents: 'ppe', root: 'ui', row: 'r', scrollbars: 'sb', scrollbarsX: 'sbx', scrollbarsY: 'sby', seButton: 'sbt', single: 'e', sizeByCapital: 'cap', spaceEvenly: 'sev', strike: 'sk', text: 't', textCenter: 'tc', textExtraBold: 'w8', textExtraLight: 'w2', textHeavy: 'w9', textJustify: 'tj', textJustifyAll: 'tja', textLeft: 'tl', textLight: 'w3', textMedium: 'w5', textNormalWeight: 'w4', textRight: 'tr', textSemiBold: 'w6', textThin: 'w1', textUnitalicized: 'tun', transition: 'ts', transparent: 'clr', underline: 'u', widthContent: 'wc', widthExact: 'we', widthFill: 'wf', widthFillPortion: 'wfp', wrapped: 'wrp'};
 var $mdgriffith$elm_ui$Internal$Model$columnClass = $mdgriffith$elm_ui$Internal$Style$classes.any + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.column);
 var $mdgriffith$elm_ui$Internal$Model$gridClass = $mdgriffith$elm_ui$Internal$Style$classes.any + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.grid);
 var $mdgriffith$elm_ui$Internal$Model$pageClass = $mdgriffith$elm_ui$Internal$Style$classes.any + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.page);
@@ -8518,24 +8674,21 @@ var $mdgriffith$elm_ui$Internal$Model$addKeyedChildren = F3(
 							inFront)));
 		}
 	});
-var $mdgriffith$elm_ui$Internal$Model$AsEl = {$: 'AsEl'};
-var $mdgriffith$elm_ui$Internal$Model$asEl = $mdgriffith$elm_ui$Internal$Model$AsEl;
 var $mdgriffith$elm_ui$Internal$Model$AsParagraph = {$: 'AsParagraph'};
 var $mdgriffith$elm_ui$Internal$Model$asParagraph = $mdgriffith$elm_ui$Internal$Model$AsParagraph;
-var $mdgriffith$elm_ui$Internal$Flag$Flag = function (a) {
-	return {$: 'Flag', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Flag$Second = function (a) {
-	return {$: 'Second', a: a};
-};
-var $elm$core$Bitwise$shiftLeftBy = _Bitwise_shiftLeftBy;
-var $mdgriffith$elm_ui$Internal$Flag$flag = function (i) {
-	return (i > 31) ? $mdgriffith$elm_ui$Internal$Flag$Second(1 << (i - 32)) : $mdgriffith$elm_ui$Internal$Flag$Flag(1 << i);
-};
 var $mdgriffith$elm_ui$Internal$Flag$alignBottom = $mdgriffith$elm_ui$Internal$Flag$flag(41);
 var $mdgriffith$elm_ui$Internal$Flag$alignRight = $mdgriffith$elm_ui$Internal$Flag$flag(40);
 var $mdgriffith$elm_ui$Internal$Flag$centerX = $mdgriffith$elm_ui$Internal$Flag$flag(42);
 var $mdgriffith$elm_ui$Internal$Flag$centerY = $mdgriffith$elm_ui$Internal$Flag$flag(43);
+var $elm$json$Json$Encode$string = _Json_wrap;
+var $elm$html$Html$Attributes$stringProperty = F2(
+	function (key, string) {
+		return A2(
+			_VirtualDom_property,
+			key,
+			$elm$json$Json$Encode$string(string));
+	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$core$Set$Set_elm_builtin = function (a) {
 	return {$: 'Set_elm_builtin', a: a};
@@ -8560,10 +8713,6 @@ var $mdgriffith$elm_ui$Internal$Model$lengthClassName = function (x) {
 			var len = x.b;
 			return 'max' + ($elm$core$String$fromInt(max) + $mdgriffith$elm_ui$Internal$Model$lengthClassName(len));
 	}
-};
-var $mdgriffith$elm_ui$Internal$Model$floatClass = function (x) {
-	return $elm$core$String$fromInt(
-		$elm$core$Basics$round(x * 255));
 };
 var $mdgriffith$elm_ui$Internal$Model$transformClass = function (transform) {
 	switch (transform.$) {
@@ -8743,7 +8892,6 @@ var $elm$core$List$filterMap = F2(
 			_List_Nil,
 			xs);
 	});
-var $elm$core$String$fromFloat = _String_fromNumber;
 var $mdgriffith$elm_ui$Internal$Model$formatColor = function (_v0) {
 	var red = _v0.a;
 	var green = _v0.b;
@@ -10740,9 +10888,6 @@ var $mdgriffith$elm_ui$Internal$Style$sliderReset = '\ninput[type=range] {\n  -w
 var $mdgriffith$elm_ui$Internal$Style$thumbReset = '\ninput[type=range]::-webkit-slider-thumb {\n    -webkit-appearance: none;\n    opacity: 0.5;\n    width: 80px;\n    height: 80px;\n    background-color: black;\n    border:none;\n    border-radius: 5px;\n}\ninput[type=range]::-moz-range-thumb {\n    opacity: 0.5;\n    width: 80px;\n    height: 80px;\n    background-color: black;\n    border:none;\n    border-radius: 5px;\n}\ninput[type=range]::-ms-thumb {\n    opacity: 0.5;\n    width: 80px;\n    height: 80px;\n    background-color: black;\n    border:none;\n    border-radius: 5px;\n}\ninput[type=range][orient=vertical]{\n    writing-mode: bt-lr; /* IE */\n    -webkit-appearance: slider-vertical;  /* WebKit */\n}\n';
 var $mdgriffith$elm_ui$Internal$Style$trackReset = '\ninput[type=range]::-moz-range-track {\n    background: transparent;\n    cursor: pointer;\n}\ninput[type=range]::-ms-track {\n    background: transparent;\n    cursor: pointer;\n}\ninput[type=range]::-webkit-slider-runnable-track {\n    background: transparent;\n    cursor: pointer;\n}\n';
 var $mdgriffith$elm_ui$Internal$Style$overrides = '@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {' + ($mdgriffith$elm_ui$Internal$Style$dot($mdgriffith$elm_ui$Internal$Style$classes.any) + ($mdgriffith$elm_ui$Internal$Style$dot($mdgriffith$elm_ui$Internal$Style$classes.row) + (' > ' + ($mdgriffith$elm_ui$Internal$Style$dot($mdgriffith$elm_ui$Internal$Style$classes.any) + (' { flex-basis: auto !important; } ' + ($mdgriffith$elm_ui$Internal$Style$dot($mdgriffith$elm_ui$Internal$Style$classes.any) + ($mdgriffith$elm_ui$Internal$Style$dot($mdgriffith$elm_ui$Internal$Style$classes.row) + (' > ' + ($mdgriffith$elm_ui$Internal$Style$dot($mdgriffith$elm_ui$Internal$Style$classes.any) + ($mdgriffith$elm_ui$Internal$Style$dot($mdgriffith$elm_ui$Internal$Style$classes.container) + (' { flex-basis: auto !important; }}' + ($mdgriffith$elm_ui$Internal$Style$inputTextReset + ($mdgriffith$elm_ui$Internal$Style$sliderReset + ($mdgriffith$elm_ui$Internal$Style$trackReset + ($mdgriffith$elm_ui$Internal$Style$thumbReset + $mdgriffith$elm_ui$Internal$Style$explainer)))))))))))))));
-var $elm$core$String$concat = function (strings) {
-	return A2($elm$core$String$join, '', strings);
-};
 var $mdgriffith$elm_ui$Internal$Style$Intermediate = function (a) {
 	return {$: 'Intermediate', a: a};
 };
@@ -12574,13 +12719,6 @@ var $mdgriffith$elm_ui$Internal$Model$alignYName = function (align) {
 			return $mdgriffith$elm_ui$Internal$Style$classes.alignedVertically + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.alignCenterY);
 	}
 };
-var $elm$virtual_dom$VirtualDom$attribute = F2(
-	function (key, value) {
-		return A2(
-			_VirtualDom_attribute,
-			_VirtualDom_noOnOrFormAction(key),
-			_VirtualDom_noJavaScriptOrHtmlUri(value));
-	});
 var $mdgriffith$elm_ui$Internal$Model$FullTransform = F4(
 	function (a, b, c, d) {
 		return {$: 'FullTransform', a: a, b: b, c: c, d: d};
@@ -13805,126 +13943,33 @@ var $mdgriffith$elm_ui$Internal$Model$Height = function (a) {
 	return {$: 'Height', a: a};
 };
 var $mdgriffith$elm_ui$Element$height = $mdgriffith$elm_ui$Internal$Model$Height;
-var $mdgriffith$elm_ui$Internal$Model$Attr = function (a) {
-	return {$: 'Attr', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Model$htmlClass = function (cls) {
-	return $mdgriffith$elm_ui$Internal$Model$Attr(
-		$elm$html$Html$Attributes$class(cls));
-};
 var $mdgriffith$elm_ui$Internal$Model$Content = {$: 'Content'};
 var $mdgriffith$elm_ui$Element$shrink = $mdgriffith$elm_ui$Internal$Model$Content;
 var $mdgriffith$elm_ui$Internal$Model$Width = function (a) {
 	return {$: 'Width', a: a};
 };
 var $mdgriffith$elm_ui$Element$width = $mdgriffith$elm_ui$Internal$Model$Width;
-var $mdgriffith$elm_ui$Element$column = F2(
-	function (attrs, children) {
+var $mdgriffith$elm_ui$Element$el = F2(
+	function (attrs, child) {
 		return A4(
 			$mdgriffith$elm_ui$Internal$Model$element,
-			$mdgriffith$elm_ui$Internal$Model$asColumn,
+			$mdgriffith$elm_ui$Internal$Model$asEl,
 			$mdgriffith$elm_ui$Internal$Model$div,
 			A2(
 				$elm$core$List$cons,
-				$mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.contentTop + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.contentLeft)),
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
 				A2(
 					$elm$core$List$cons,
 					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
-					A2(
-						$elm$core$List$cons,
-						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
-						attrs))),
-			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
+					attrs)),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(
+				_List_fromArray(
+					[child])));
 	});
-var $elm$virtual_dom$VirtualDom$nodeNS = F2(
-	function (namespace, tag) {
-		return A2(
-			_VirtualDom_nodeNS,
-			namespace,
-			_VirtualDom_noScript(tag));
-	});
-var $elm_community$typed_svg$TypedSvg$Core$node = $elm$virtual_dom$VirtualDom$nodeNS('http://www.w3.org/2000/svg');
-var $elm_community$typed_svg$TypedSvg$g = $elm_community$typed_svg$TypedSvg$Core$node('g');
-var $elm_community$typed_svg$TypedSvg$Core$attribute = $elm$virtual_dom$VirtualDom$attribute;
-var $elm_community$typed_svg$TypedSvg$Attributes$points = function (pts) {
-	var pointToString = function (_v0) {
-		var xx = _v0.a;
-		var yy = _v0.b;
-		return $elm$core$String$fromFloat(xx) + (', ' + $elm$core$String$fromFloat(yy));
-	};
-	return A2(
-		$elm_community$typed_svg$TypedSvg$Core$attribute,
-		'points',
-		A2(
-			$elm$core$String$join,
-			' ',
-			A2($elm$core$List$map, pointToString, pts)));
+var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
+	return {$: 'Fill', a: a};
 };
-var $elm_community$typed_svg$TypedSvg$polygon = $elm_community$typed_svg$TypedSvg$Core$node('polygon');
-var $elm_community$typed_svg$TypedSvg$Attributes$style = function (value) {
-	return A2($elm_community$typed_svg$TypedSvg$Core$attribute, 'style', value);
-};
-var $elm_community$typed_svg$TypedSvg$text_ = $elm_community$typed_svg$TypedSvg$Core$node('text');
-var $avh4$elm_color$Color$toCssString = function (_v0) {
-	var r = _v0.a;
-	var g = _v0.b;
-	var b = _v0.c;
-	var a = _v0.d;
-	var roundTo = function (x) {
-		return $elm$core$Basics$round(x * 1000) / 1000;
-	};
-	var pct = function (x) {
-		return $elm$core$Basics$round(x * 10000) / 100;
-	};
-	return $elm$core$String$concat(
-		_List_fromArray(
-			[
-				'rgba(',
-				$elm$core$String$fromFloat(
-				pct(r)),
-				'%,',
-				$elm$core$String$fromFloat(
-				pct(g)),
-				'%,',
-				$elm$core$String$fromFloat(
-				pct(b)),
-				'%,',
-				$elm$core$String$fromFloat(
-				roundTo(a)),
-				')'
-			]));
-};
-var $author$project$Turtle$drawFilledPolygons = F2(
-	function (progress, filledPolygons) {
-		return A2(
-			$elm_community$typed_svg$TypedSvg$g,
-			_List_Nil,
-			A2(
-				$elm$core$List$indexedMap,
-				F2(
-					function (index, _v0) {
-						var polygon = _v0.a;
-						var fillColor = _v0.b;
-						return (_Utils_cmp(index, progress) < 0) ? A2(
-							$elm_community$typed_svg$TypedSvg$polygon,
-							_List_fromArray(
-								[
-									$elm_community$typed_svg$TypedSvg$Attributes$points(
-									A2(
-										$elm$core$List$map,
-										function (_v1) {
-											var x = _v1.a;
-											var y = _v1.b;
-											return _Utils_Tuple2(x, y);
-										},
-										polygon)),
-									$elm_community$typed_svg$TypedSvg$Attributes$style(
-									'fill:' + $avh4$elm_color$Color$toCssString(fillColor))
-								]),
-							_List_Nil) : A2($elm_community$typed_svg$TypedSvg$text_, _List_Nil, _List_Nil);
-					}),
-				filledPolygons));
-	});
+var $mdgriffith$elm_ui$Element$fill = $mdgriffith$elm_ui$Internal$Model$Fill(1);
 var $elm$core$Basics$cos = _Basics_cos;
 var $elm$core$Basics$pi = _Basics_pi;
 var $author$project$Turtle$degreesToRadians = function (degrees) {
@@ -14164,6 +14209,16 @@ var $author$project$LSys$generateTurtle = function (cfg) {
 			$author$project$Turtle$initTurtle(cfg.state.startingPoint)),
 		cfg.sequence);
 };
+var $mdgriffith$elm_ui$Internal$Model$unstyled = A2($elm$core$Basics$composeL, $mdgriffith$elm_ui$Internal$Model$Unstyled, $elm$core$Basics$always);
+var $mdgriffith$elm_ui$Element$html = $mdgriffith$elm_ui$Internal$Model$unstyled;
+var $mdgriffith$elm_ui$Internal$Model$Attr = function (a) {
+	return {$: 'Attr', a: a};
+};
+var $mdgriffith$elm_ui$Element$htmlAttribute = $mdgriffith$elm_ui$Internal$Model$Attr;
+var $mdgriffith$elm_ui$Internal$Model$htmlClass = function (cls) {
+	return $mdgriffith$elm_ui$Internal$Model$Attr(
+		$elm$html$Html$Attributes$class(cls));
+};
 var $mdgriffith$elm_ui$Internal$Model$OnlyDynamic = F2(
 	function (a, b) {
 		return {$: 'OnlyDynamic', a: a, b: b};
@@ -14174,10 +14229,6 @@ var $mdgriffith$elm_ui$Internal$Model$StaticRootAndDynamic = F2(
 	});
 var $mdgriffith$elm_ui$Internal$Model$AllowHover = {$: 'AllowHover'};
 var $mdgriffith$elm_ui$Internal$Model$Layout = {$: 'Layout'};
-var $mdgriffith$elm_ui$Internal$Model$Rgba = F4(
-	function (a, b, c, d) {
-		return {$: 'Rgba', a: a, b: b, c: c, d: d};
-	});
 var $mdgriffith$elm_ui$Internal$Model$focusDefaultStyle = {
 	backgroundColor: $elm$core$Maybe$Nothing,
 	borderColor: $elm$core$Maybe$Nothing,
@@ -14312,10 +14363,6 @@ var $mdgriffith$elm_ui$Internal$Model$renderRoot = F3(
 					_List_fromArray(
 						[child]))));
 	});
-var $mdgriffith$elm_ui$Internal$Model$Colored = F3(
-	function (a, b, c) {
-		return {$: 'Colored', a: a, b: b, c: c};
-	});
 var $mdgriffith$elm_ui$Internal$Model$FontFamily = F2(
 	function (a, b) {
 		return {$: 'FontFamily', a: a, b: b};
@@ -14324,24 +14371,12 @@ var $mdgriffith$elm_ui$Internal$Model$FontSize = function (a) {
 	return {$: 'FontSize', a: a};
 };
 var $mdgriffith$elm_ui$Internal$Model$SansSerif = {$: 'SansSerif'};
-var $mdgriffith$elm_ui$Internal$Model$StyleClass = F2(
-	function (a, b) {
-		return {$: 'StyleClass', a: a, b: b};
-	});
 var $mdgriffith$elm_ui$Internal$Model$Typeface = function (a) {
 	return {$: 'Typeface', a: a};
 };
-var $mdgriffith$elm_ui$Internal$Flag$bgColor = $mdgriffith$elm_ui$Internal$Flag$flag(8);
 var $mdgriffith$elm_ui$Internal$Flag$fontColor = $mdgriffith$elm_ui$Internal$Flag$flag(14);
 var $mdgriffith$elm_ui$Internal$Flag$fontFamily = $mdgriffith$elm_ui$Internal$Flag$flag(5);
 var $mdgriffith$elm_ui$Internal$Flag$fontSize = $mdgriffith$elm_ui$Internal$Flag$flag(4);
-var $mdgriffith$elm_ui$Internal$Model$formatColorClass = function (_v0) {
-	var red = _v0.a;
-	var green = _v0.b;
-	var blue = _v0.c;
-	var alpha = _v0.d;
-	return $mdgriffith$elm_ui$Internal$Model$floatClass(red) + ('-' + ($mdgriffith$elm_ui$Internal$Model$floatClass(green) + ('-' + ($mdgriffith$elm_ui$Internal$Model$floatClass(blue) + ('-' + $mdgriffith$elm_ui$Internal$Model$floatClass(alpha))))));
-};
 var $elm$core$String$words = _String_words;
 var $mdgriffith$elm_ui$Internal$Model$renderFontClassName = F2(
 	function (font, current) {
@@ -14440,6 +14475,7 @@ var $mdgriffith$elm_ui$Element$layoutWith = F3(
 	});
 var $mdgriffith$elm_ui$Element$layout = $mdgriffith$elm_ui$Element$layoutWith(
 	{options: _List_Nil});
+var $author$project$Styles$midGray = A3($mdgriffith$elm_ui$Element$rgb, 0.53, 0.53, 0.53);
 var $mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$defaultOptions = {preventDefault: true, stopPropagation: false};
 var $elm$virtual_dom$VirtualDom$Custom = function (a) {
 	return {$: 'Custom', a: a};
@@ -14563,6 +14599,12 @@ var $mdgriffith$elm_ui$Element$padding = function (x) {
 			f,
 			f));
 };
+var $mdgriffith$elm_ui$Internal$Model$Class = F2(
+	function (a, b) {
+		return {$: 'Class', a: a, b: b};
+	});
+var $mdgriffith$elm_ui$Internal$Flag$cursor = $mdgriffith$elm_ui$Internal$Flag$flag(21);
+var $mdgriffith$elm_ui$Element$pointer = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$cursor, $mdgriffith$elm_ui$Internal$Style$classes.cursorPointer);
 var $elm_community$typed_svg$TypedSvg$Types$Paint = function (a) {
 	return {$: 'Paint', a: a};
 };
@@ -14748,8 +14790,41 @@ var $author$project$Turtle$renderTurtleSegments = function (cfg) {
 			}),
 		cfg.turtle.segments);
 };
+var $mdgriffith$elm_ui$Internal$Flag$borderRound = $mdgriffith$elm_ui$Internal$Flag$flag(17);
+var $mdgriffith$elm_ui$Element$Border$rounded = function (radius) {
+	return A2(
+		$mdgriffith$elm_ui$Internal$Model$StyleClass,
+		$mdgriffith$elm_ui$Internal$Flag$borderRound,
+		A3(
+			$mdgriffith$elm_ui$Internal$Model$Single,
+			'br-' + $elm$core$String$fromInt(radius),
+			'border-radius',
+			$elm$core$String$fromInt(radius) + 'px'));
+};
+var $mdgriffith$elm_ui$Internal$Model$AsRow = {$: 'AsRow'};
+var $mdgriffith$elm_ui$Internal$Model$asRow = $mdgriffith$elm_ui$Internal$Model$AsRow;
+var $mdgriffith$elm_ui$Element$row = F2(
+	function (attrs, children) {
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asRow,
+			$mdgriffith$elm_ui$Internal$Model$div,
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.contentLeft + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.contentCenterY)),
+				A2(
+					$elm$core$List$cons,
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
+					A2(
+						$elm$core$List$cons,
+						$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
+						attrs))),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
+	});
 var $author$project$Update$AddRule = {$: 'AddRule'};
-var $author$project$Update$GetRandomPreset = {$: 'GetRandomPreset'};
+var $author$project$Update$RemoveRule = function (a) {
+	return {$: 'RemoveRule', a: a};
+};
 var $author$project$Update$Reset = {$: 'Reset'};
 var $author$project$Update$SelectRule = function (a) {
 	return {$: 'SelectRule', a: a};
@@ -14767,44 +14842,11 @@ var $mdgriffith$elm_ui$Internal$Model$AlignX = function (a) {
 };
 var $mdgriffith$elm_ui$Internal$Model$Right = {$: 'Right'};
 var $mdgriffith$elm_ui$Element$alignRight = $mdgriffith$elm_ui$Internal$Model$AlignX($mdgriffith$elm_ui$Internal$Model$Right);
-var $mdgriffith$elm_ui$Internal$Model$AlignY = function (a) {
-	return {$: 'AlignY', a: a};
-};
-var $mdgriffith$elm_ui$Internal$Model$Top = {$: 'Top'};
-var $mdgriffith$elm_ui$Element$alignTop = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$Top);
-var $mdgriffith$elm_ui$Element$rgb = F3(
-	function (r, g, b) {
-		return A4($mdgriffith$elm_ui$Internal$Model$Rgba, r, g, b, 1);
-	});
 var $author$project$Styles$blue = A3($mdgriffith$elm_ui$Element$rgb, 0, 0, 1);
-var $mdgriffith$elm_ui$Internal$Model$Class = F2(
-	function (a, b) {
-		return {$: 'Class', a: a, b: b};
-	});
 var $mdgriffith$elm_ui$Internal$Flag$fontWeight = $mdgriffith$elm_ui$Internal$Flag$flag(13);
 var $mdgriffith$elm_ui$Element$Font$bold = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontWeight, $mdgriffith$elm_ui$Internal$Style$classes.bold);
-var $author$project$Styles$black = A3($mdgriffith$elm_ui$Element$rgb, 0, 0, 0);
-var $mdgriffith$elm_ui$Element$Background$color = function (clr) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$bgColor,
-		A3(
-			$mdgriffith$elm_ui$Internal$Model$Colored,
-			'bg-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(clr),
-			'background-color',
-			clr));
-};
-var $mdgriffith$elm_ui$Internal$Flag$borderColor = $mdgriffith$elm_ui$Internal$Flag$flag(28);
-var $mdgriffith$elm_ui$Element$Border$color = function (clr) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$borderColor,
-		A3(
-			$mdgriffith$elm_ui$Internal$Model$Colored,
-			'bc-' + $mdgriffith$elm_ui$Internal$Model$formatColorClass(clr),
-			'border-color',
-			clr));
-};
+var $mdgriffith$elm_ui$Internal$Flag$fontAlignment = $mdgriffith$elm_ui$Internal$Flag$flag(12);
+var $mdgriffith$elm_ui$Element$Font$center = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$fontAlignment, $mdgriffith$elm_ui$Internal$Style$classes.textCenter);
 var $mdgriffith$elm_ui$Element$Font$color = function (fontColor) {
 	return A2(
 		$mdgriffith$elm_ui$Internal$Model$StyleClass,
@@ -14816,7 +14858,6 @@ var $mdgriffith$elm_ui$Element$Font$color = function (fontColor) {
 			fontColor));
 };
 var $author$project$Styles$lightGray = A3($mdgriffith$elm_ui$Element$rgb, 0.8, 0.8, 0.8);
-var $author$project$Styles$midGray = A3($mdgriffith$elm_ui$Element$rgb, 0.53, 0.53, 0.53);
 var $mdgriffith$elm_ui$Element$paddingXY = F2(
 	function (x, y) {
 		if (_Utils_eq(x, y)) {
@@ -14846,17 +14887,6 @@ var $mdgriffith$elm_ui$Element$paddingXY = F2(
 					xFloat));
 		}
 	});
-var $mdgriffith$elm_ui$Internal$Flag$borderRound = $mdgriffith$elm_ui$Internal$Flag$flag(17);
-var $mdgriffith$elm_ui$Element$Border$rounded = function (radius) {
-	return A2(
-		$mdgriffith$elm_ui$Internal$Model$StyleClass,
-		$mdgriffith$elm_ui$Internal$Flag$borderRound,
-		A3(
-			$mdgriffith$elm_ui$Internal$Model$Single,
-			'br-' + $elm$core$String$fromInt(radius),
-			'border-radius',
-			$elm$core$String$fromInt(radius) + 'px'));
-};
 var $mdgriffith$elm_ui$Element$Font$size = function (i) {
 	return A2(
 		$mdgriffith$elm_ui$Internal$Model$StyleClass,
@@ -14887,7 +14917,9 @@ var $author$project$Styles$btnAttrs = _List_fromArray(
 		$mdgriffith$elm_ui$Element$Background$color($author$project$Styles$lightGray),
 		$mdgriffith$elm_ui$Element$Font$size(18),
 		$mdgriffith$elm_ui$Element$Font$color($author$project$Styles$black),
-		$mdgriffith$elm_ui$Element$Border$rounded(5)
+		$mdgriffith$elm_ui$Element$Border$rounded(5),
+		$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+		$mdgriffith$elm_ui$Element$Font$center
 	]);
 var $mdgriffith$elm_ui$Internal$Model$Button = {$: 'Button'};
 var $mdgriffith$elm_ui$Internal$Model$Describe = function (a) {
@@ -14971,8 +15003,6 @@ var $mdgriffith$elm_ui$Element$Input$onKeyLookup = function (lookup) {
 				},
 				isKey)));
 };
-var $mdgriffith$elm_ui$Internal$Flag$cursor = $mdgriffith$elm_ui$Internal$Flag$flag(21);
-var $mdgriffith$elm_ui$Element$pointer = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$cursor, $mdgriffith$elm_ui$Internal$Style$classes.cursorPointer);
 var $mdgriffith$elm_ui$Element$Input$space = ' ';
 var $elm$html$Html$Attributes$tabindex = function (n) {
 	return A2(
@@ -15035,28 +15065,27 @@ var $mdgriffith$elm_ui$Element$Input$button = F2(
 				_List_fromArray(
 					[label])));
 	});
-var $mdgriffith$elm_ui$Element$el = F2(
-	function (attrs, child) {
+var $mdgriffith$elm_ui$Internal$Model$AsColumn = {$: 'AsColumn'};
+var $mdgriffith$elm_ui$Internal$Model$asColumn = $mdgriffith$elm_ui$Internal$Model$AsColumn;
+var $mdgriffith$elm_ui$Element$column = F2(
+	function (attrs, children) {
 		return A4(
 			$mdgriffith$elm_ui$Internal$Model$element,
-			$mdgriffith$elm_ui$Internal$Model$asEl,
+			$mdgriffith$elm_ui$Internal$Model$asColumn,
 			$mdgriffith$elm_ui$Internal$Model$div,
 			A2(
 				$elm$core$List$cons,
-				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
+				$mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.contentTop + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.contentLeft)),
 				A2(
 					$elm$core$List$cons,
 					$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
-					attrs)),
-			$mdgriffith$elm_ui$Internal$Model$Unkeyed(
-				_List_fromArray(
-					[child])));
+					A2(
+						$elm$core$List$cons,
+						$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
+						attrs))),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
 	});
 var $elm$core$String$fromList = _String_fromList;
-var $mdgriffith$elm_ui$Internal$Model$Px = function (a) {
-	return {$: 'Px', a: a};
-};
-var $mdgriffith$elm_ui$Element$px = $mdgriffith$elm_ui$Internal$Model$Px;
 var $author$project$Styles$inputAttrs = _List_fromArray(
 	[
 		A2($mdgriffith$elm_ui$Element$paddingXY, 16, 8),
@@ -15065,9 +15094,7 @@ var $author$project$Styles$inputAttrs = _List_fromArray(
 		$mdgriffith$elm_ui$Element$Background$color($author$project$Styles$lightGray),
 		$mdgriffith$elm_ui$Element$Font$size(18),
 		$mdgriffith$elm_ui$Element$Font$color($author$project$Styles$black),
-		$mdgriffith$elm_ui$Element$Border$rounded(5),
-		$mdgriffith$elm_ui$Element$width(
-		$mdgriffith$elm_ui$Element$px(200))
+		$mdgriffith$elm_ui$Element$Border$rounded(5)
 	]);
 var $mdgriffith$elm_ui$Element$Input$Above = {$: 'Above'};
 var $mdgriffith$elm_ui$Element$Input$Label = F3(
@@ -15114,42 +15141,7 @@ var $mdgriffith$elm_ui$Element$link = F2(
 	});
 var $mdgriffith$elm_ui$Internal$Model$Empty = {$: 'Empty'};
 var $mdgriffith$elm_ui$Element$none = $mdgriffith$elm_ui$Internal$Model$Empty;
-var $mdgriffith$elm_ui$Element$Input$Placeholder = F2(
-	function (a, b) {
-		return {$: 'Placeholder', a: a, b: b};
-	});
-var $mdgriffith$elm_ui$Element$Input$placeholder = $mdgriffith$elm_ui$Element$Input$Placeholder;
-var $mdgriffith$elm_ui$Internal$Model$AsRow = {$: 'AsRow'};
-var $mdgriffith$elm_ui$Internal$Model$asRow = $mdgriffith$elm_ui$Internal$Model$AsRow;
-var $mdgriffith$elm_ui$Element$row = F2(
-	function (attrs, children) {
-		return A4(
-			$mdgriffith$elm_ui$Internal$Model$element,
-			$mdgriffith$elm_ui$Internal$Model$asRow,
-			$mdgriffith$elm_ui$Internal$Model$div,
-			A2(
-				$elm$core$List$cons,
-				$mdgriffith$elm_ui$Internal$Model$htmlClass($mdgriffith$elm_ui$Internal$Style$classes.contentLeft + (' ' + $mdgriffith$elm_ui$Internal$Style$classes.contentCenterY)),
-				A2(
-					$elm$core$List$cons,
-					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$shrink),
-					A2(
-						$elm$core$List$cons,
-						$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$shrink),
-						attrs))),
-			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
-	});
-var $author$project$Styles$selectAttrs = _List_fromArray(
-	[
-		A2($mdgriffith$elm_ui$Element$paddingXY, 16, 8),
-		$mdgriffith$elm_ui$Element$Border$width(2),
-		$mdgriffith$elm_ui$Element$Border$color($author$project$Styles$midGray),
-		$mdgriffith$elm_ui$Element$Background$color($author$project$Styles$lightGray),
-		$mdgriffith$elm_ui$Element$Border$rounded(5),
-		$mdgriffith$elm_ui$Element$width(
-		$mdgriffith$elm_ui$Element$px(80)),
-		$mdgriffith$elm_ui$Element$Font$color($author$project$Styles$black)
-	]);
+var $mdgriffith$elm_ui$Internal$Model$Paragraph = {$: 'Paragraph'};
 var $mdgriffith$elm_ui$Internal$Model$SpacingStyle = F3(
 	function (a, b, c) {
 		return {$: 'SpacingStyle', a: a, b: b, c: c};
@@ -15169,6 +15161,38 @@ var $mdgriffith$elm_ui$Element$spacing = function (x) {
 			x,
 			x));
 };
+var $mdgriffith$elm_ui$Element$paragraph = F2(
+	function (attrs, children) {
+		return A4(
+			$mdgriffith$elm_ui$Internal$Model$element,
+			$mdgriffith$elm_ui$Internal$Model$asParagraph,
+			$mdgriffith$elm_ui$Internal$Model$div,
+			A2(
+				$elm$core$List$cons,
+				$mdgriffith$elm_ui$Internal$Model$Describe($mdgriffith$elm_ui$Internal$Model$Paragraph),
+				A2(
+					$elm$core$List$cons,
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+					A2(
+						$elm$core$List$cons,
+						$mdgriffith$elm_ui$Element$spacing(5),
+						attrs))),
+			$mdgriffith$elm_ui$Internal$Model$Unkeyed(children));
+	});
+var $mdgriffith$elm_ui$Internal$Model$Px = function (a) {
+	return {$: 'Px', a: a};
+};
+var $mdgriffith$elm_ui$Element$px = $mdgriffith$elm_ui$Internal$Model$Px;
+var $author$project$Styles$selectAttrs = _List_fromArray(
+	[
+		A2($mdgriffith$elm_ui$Element$paddingXY, 16, 8),
+		$mdgriffith$elm_ui$Element$Border$width(2),
+		$mdgriffith$elm_ui$Element$Border$color($author$project$Styles$midGray),
+		$mdgriffith$elm_ui$Element$Background$color($author$project$Styles$lightGray),
+		$mdgriffith$elm_ui$Element$Border$rounded(5),
+		$mdgriffith$elm_ui$Element$Font$color($author$project$Styles$black),
+		$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+	]);
 var $mdgriffith$elm_ui$Internal$Model$Text = function (a) {
 	return {$: 'Text', a: a};
 };
@@ -15321,10 +15345,6 @@ var $mdgriffith$elm_ui$Internal$Flag$overflow = $mdgriffith$elm_ui$Internal$Flag
 var $mdgriffith$elm_ui$Element$clip = A2($mdgriffith$elm_ui$Internal$Model$Class, $mdgriffith$elm_ui$Internal$Flag$overflow, $mdgriffith$elm_ui$Internal$Style$classes.clip);
 var $mdgriffith$elm_ui$Element$Input$darkGrey = A3($mdgriffith$elm_ui$Element$rgb, 186 / 255, 189 / 255, 182 / 255);
 var $mdgriffith$elm_ui$Element$Input$defaultTextPadding = A2($mdgriffith$elm_ui$Element$paddingXY, 12, 12);
-var $mdgriffith$elm_ui$Internal$Model$Fill = function (a) {
-	return {$: 'Fill', a: a};
-};
-var $mdgriffith$elm_ui$Element$fill = $mdgriffith$elm_ui$Internal$Model$Fill(1);
 var $mdgriffith$elm_ui$Element$Input$white = A3($mdgriffith$elm_ui$Element$rgb, 1, 1, 1);
 var $mdgriffith$elm_ui$Element$Input$defaultTextBoxStyle = _List_fromArray(
 	[
@@ -15474,7 +15494,6 @@ var $mdgriffith$elm_ui$Element$paddingEach = function (_v0) {
 				left));
 	}
 };
-var $mdgriffith$elm_ui$Element$htmlAttribute = $mdgriffith$elm_ui$Internal$Model$Attr;
 var $mdgriffith$elm_ui$Element$Input$isFill = function (len) {
 	isFill:
 	while (true) {
@@ -15793,7 +15812,6 @@ var $elm$html$Html$span = _VirtualDom_node('span');
 var $elm$html$Html$Attributes$spellcheck = $elm$html$Html$Attributes$boolProperty('spellcheck');
 var $mdgriffith$elm_ui$Element$Input$spellcheck = A2($elm$core$Basics$composeL, $mdgriffith$elm_ui$Internal$Model$Attr, $elm$html$Html$Attributes$spellcheck);
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');
-var $mdgriffith$elm_ui$Internal$Model$unstyled = A2($elm$core$Basics$composeL, $mdgriffith$elm_ui$Internal$Model$Unstyled, $elm$core$Basics$always);
 var $elm$html$Html$Attributes$value = $elm$html$Html$Attributes$stringProperty('value');
 var $mdgriffith$elm_ui$Element$Input$value = A2($elm$core$Basics$composeL, $mdgriffith$elm_ui$Internal$Model$Attr, $elm$html$Html$Attributes$value);
 var $mdgriffith$elm_ui$Element$Input$textHelper = F3(
@@ -16158,7 +16176,6 @@ var $nunntom$elm_ui_select$Internal$View$ElmUi$defaultOptionElement = F3(
 			$mdgriffith$elm_ui$Element$text(
 				toString(a)));
 	});
-var $mdgriffith$elm_ui$Element$html = $mdgriffith$elm_ui$Internal$Model$unstyled;
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $nunntom$elm_ui_select$Internal$Msg$InputClicked = {$: 'InputClicked'};
 var $nunntom$elm_ui_select$Internal$Msg$InputLostFocus = F2(
@@ -17056,6 +17073,9 @@ var $elm$html$Html$Attributes$step = function (n) {
 var $elm$core$Basics$abs = function (n) {
 	return (n < 0) ? (-n) : n;
 };
+var $mdgriffith$elm_ui$Internal$Model$AlignY = function (a) {
+	return {$: 'AlignY', a: a};
+};
 var $mdgriffith$elm_ui$Internal$Model$CenterY = {$: 'CenterY'};
 var $mdgriffith$elm_ui$Element$centerY = $mdgriffith$elm_ui$Internal$Model$AlignY($mdgriffith$elm_ui$Internal$Model$CenterY);
 var $mdgriffith$elm_ui$Element$fillPortion = $mdgriffith$elm_ui$Internal$Model$Fill;
@@ -17457,12 +17477,21 @@ var $mdgriffith$elm_ui$Element$Input$slider = F2(
 	});
 var $author$project$Styles$sliderAttrs = _List_fromArray(
 	[
-		$mdgriffith$elm_ui$Element$width(
-		$mdgriffith$elm_ui$Element$px(250)),
-		$mdgriffith$elm_ui$Element$Background$color($author$project$Styles$lightGray),
-		$mdgriffith$elm_ui$Element$Border$rounded(5),
-		$mdgriffith$elm_ui$Element$Border$width(2),
-		$mdgriffith$elm_ui$Element$Border$color($author$project$Styles$midGray)
+		$mdgriffith$elm_ui$Element$height(
+		$mdgriffith$elm_ui$Element$px(26)),
+		$mdgriffith$elm_ui$Element$behindContent(
+		A2(
+			$mdgriffith$elm_ui$Element$el,
+			_List_fromArray(
+				[
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+					$mdgriffith$elm_ui$Element$height(
+					$mdgriffith$elm_ui$Element$px(8)),
+					$mdgriffith$elm_ui$Element$centerY,
+					$mdgriffith$elm_ui$Element$Background$color($author$project$Styles$midGray),
+					$mdgriffith$elm_ui$Element$Border$rounded(4)
+				]),
+			$mdgriffith$elm_ui$Element$none))
 	]);
 var $elm$core$Debug$toString = _Debug_toString;
 var $author$project$Sidebar$turtleSettings = function (state) {
@@ -17472,8 +17501,11 @@ var $author$project$Sidebar$turtleSettings = function (state) {
 		{
 			label: A2(
 				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text('Turning Angle')),
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(16)
+					]),
+				$mdgriffith$elm_ui$Element$text('turning angle increment')),
 			onChange: $author$project$Update$UpdateTurningAngleIncrement,
 			placeholder: $elm$core$Maybe$Nothing,
 			text: $elm$core$Debug$toString(state.turningAngle)
@@ -17484,22 +17516,28 @@ var $author$project$Sidebar$turtleSettings = function (state) {
 		{
 			label: A2(
 				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text('Turning Angle')),
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(16)
+					]),
+				$mdgriffith$elm_ui$Element$text('turning angle')),
 			onChange: $author$project$Update$UpdateTurningAngle,
 			placeholder: $elm$core$Maybe$Nothing,
 			text: $elm$core$Debug$toString(state.turningAngle)
 		});
 	var startingPoint = $mdgriffith$elm_ui$Element$text(
-		'Starting point: ' + ($elm$core$String$fromFloat(state.startingPoint.a) + (', ' + $elm$core$String$fromFloat(state.startingPoint.b))));
+		'starting point: ' + ($elm$core$String$fromFloat(state.startingPoint.a) + (', ' + $elm$core$String$fromFloat(state.startingPoint.b))));
 	var startingAngle = A2(
 		$mdgriffith$elm_ui$Element$Input$text,
 		$author$project$Styles$inputAttrs,
 		{
 			label: A2(
 				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
-				$mdgriffith$elm_ui$Element$text('Starting Angle')),
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(16)
+					]),
+				$mdgriffith$elm_ui$Element$text('starting angle')),
 			onChange: $author$project$Update$UpdateStartingAngle,
 			placeholder: $elm$core$Maybe$Nothing,
 			text: $elm$core$Debug$toString(state.startingAngle)
@@ -17510,9 +17548,12 @@ var $author$project$Sidebar$turtleSettings = function (state) {
 		{
 			label: A2(
 				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(16)
+					]),
 				$mdgriffith$elm_ui$Element$text(
-					'Recursion Depth: ' + $elm$core$String$fromFloat(state.recursionDepth))),
+					'recursion depth: ' + $elm$core$String$fromFloat(state.recursionDepth))),
 			max: 6,
 			min: 0,
 			onChange: $author$project$Update$UpdateRecursionDepth,
@@ -17526,9 +17567,12 @@ var $author$project$Sidebar$turtleSettings = function (state) {
 		{
 			label: A2(
 				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(16)
+					]),
 				$mdgriffith$elm_ui$Element$text(
-					'Line Width Increment: ' + $elm$core$String$fromFloat(state.lineWidthIncrement))),
+					'line width increment: ' + $elm$core$String$fromFloat(state.lineWidthIncrement))),
 			max: 3,
 			min: 0,
 			onChange: $author$project$Update$UpdateLineWidthIncrement,
@@ -17542,9 +17586,12 @@ var $author$project$Sidebar$turtleSettings = function (state) {
 		{
 			label: A2(
 				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(16)
+					]),
 				$mdgriffith$elm_ui$Element$text(
-					'Line Length Scale: ' + $elm$core$String$fromFloat(state.lineLengthScale))),
+					'line length scale: ' + $elm$core$String$fromFloat(state.lineLengthScale))),
 			max: 3,
 			min: 0,
 			onChange: $author$project$Update$UpdateLineLengthScale,
@@ -17558,9 +17605,12 @@ var $author$project$Sidebar$turtleSettings = function (state) {
 		{
 			label: A2(
 				$mdgriffith$elm_ui$Element$Input$labelAbove,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$Font$size(16)
+					]),
 				$mdgriffith$elm_ui$Element$text(
-					'Line Length: ' + $elm$core$String$fromFloat(state.lineLength))),
+					'line length: ' + $elm$core$String$fromFloat(state.lineLength))),
 			max: 25,
 			min: 1,
 			onChange: $author$project$Update$UpdateLineLength,
@@ -17656,18 +17706,20 @@ var $author$project$Sidebar$sidebar = function (state) {
 				itemToString: function ($) {
 					return $.character;
 				},
-				label: A2($mdgriffith$elm_ui$Element$Input$labelAbove, _List_Nil, $mdgriffith$elm_ui$Element$none),
+				label: A2(
+					$mdgriffith$elm_ui$Element$Input$labelAbove,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Font$size(16)
+						]),
+					$mdgriffith$elm_ui$Element$text('character:')),
 				onChange: $author$project$Update$SelectSymbol,
-				placeholder: $elm$core$Maybe$Just(
-					A2(
-						$mdgriffith$elm_ui$Element$Input$placeholder,
-						_List_Nil,
-						$mdgriffith$elm_ui$Element$text('Select a symbol'))),
+				placeholder: $elm$core$Maybe$Nothing,
 				select: A2($nunntom$elm_ui_select$Select$setItems, state.symbolAssignments, state.selectSymbol)
 			},
 			$nunntom$elm_ui_select$Select$view);
 		var ruleView = function (rule) {
-			var isSelected = function () {
+			var isRuleSelected = function () {
 				var _v3 = state.selectedRule;
 				if (_v3.$ === 'Just') {
 					var selectedRule = _v3.a;
@@ -17682,27 +17734,50 @@ var $author$project$Sidebar$sidebar = function (state) {
 					[
 						$mdgriffith$elm_ui$Element$Events$onClick(
 						$author$project$Update$SelectRule(rule)),
-						$mdgriffith$elm_ui$Element$spacing(10)
+						$mdgriffith$elm_ui$Element$spacing(8),
+						$mdgriffith$elm_ui$Element$pointer
 					]),
 				A2(
 					$mdgriffith$elm_ui$Element$row,
 					_List_fromArray(
-						[$mdgriffith$elm_ui$Element$alignRight]),
+						[
+							$mdgriffith$elm_ui$Element$alignRight,
+							$mdgriffith$elm_ui$Element$spacing(8)
+						]),
 					_List_fromArray(
 						[
-							$mdgriffith$elm_ui$Element$text(
-							$elm$core$String$fromChar(rule.a) + (' -> ' + $elm$core$String$fromList(rule.b)))
+							A2(
+							$mdgriffith$elm_ui$Element$paragraph,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$mdgriffith$elm_ui$Element$text(
+									$elm$core$String$fromChar(rule.a) + (' -> ' + $elm$core$String$fromList(rule.b)))
+								])),
+							isRuleSelected ? A2(
+							$mdgriffith$elm_ui$Element$el,
+							_List_Nil,
+							A2(
+								$mdgriffith$elm_ui$Element$Input$button,
+								$author$project$Styles$btnAttrs,
+								{
+									label: $mdgriffith$elm_ui$Element$text('X'),
+									onPress: $elm$core$Maybe$Just(
+										$author$project$Update$RemoveRule(rule))
+								})) : $mdgriffith$elm_ui$Element$none
 						])));
 		};
-		var theRules = A2(
-			$mdgriffith$elm_ui$Element$column,
-			_List_Nil,
-			A2($elm$core$List$map, ruleView, state.rules));
 		var ruleInput = A2(
 			$mdgriffith$elm_ui$Element$Input$text,
 			$author$project$Styles$inputAttrs,
 			{
-				label: A2($mdgriffith$elm_ui$Element$Input$labelAbove, _List_Nil, $mdgriffith$elm_ui$Element$none),
+				label: A2(
+					$mdgriffith$elm_ui$Element$Input$labelAbove,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Font$size(16)
+						]),
+					$mdgriffith$elm_ui$Element$text('geom. interpretation:')),
 				onChange: $author$project$Update$UpdateNewRuleInput,
 				placeholder: $elm$core$Maybe$Nothing,
 				text: state.newRuleInput
@@ -17711,7 +17786,7 @@ var $author$project$Sidebar$sidebar = function (state) {
 			$mdgriffith$elm_ui$Element$Input$button,
 			$author$project$Styles$btnAttrs,
 			{
-				label: $mdgriffith$elm_ui$Element$text('Add Rule'),
+				label: $mdgriffith$elm_ui$Element$text('add rule'),
 				onPress: $elm$core$Maybe$Just($author$project$Update$AddRule)
 			});
 		return A2(
@@ -17719,7 +17794,7 @@ var $author$project$Sidebar$sidebar = function (state) {
 			_List_fromArray(
 				[
 					A2($mdgriffith$elm_ui$Element$paddingXY, 0, 6),
-					$mdgriffith$elm_ui$Element$spacing(10)
+					$mdgriffith$elm_ui$Element$spacing(8)
 				]),
 			_List_fromArray(
 				[
@@ -17728,7 +17803,10 @@ var $author$project$Sidebar$sidebar = function (state) {
 					_List_fromArray(
 						[$mdgriffith$elm_ui$Element$Font$bold]),
 					$mdgriffith$elm_ui$Element$text('Rules:')),
-					theRules,
+					A2(
+					$mdgriffith$elm_ui$Element$column,
+					_List_Nil,
+					A2($elm$core$List$map, ruleView, state.rules)),
 					A2(
 					$mdgriffith$elm_ui$Element$row,
 					_List_fromArray(
@@ -17740,35 +17818,37 @@ var $author$project$Sidebar$sidebar = function (state) {
 					addRuleBtn
 				]));
 	}();
-	var info = function () {
-		var link = A2(
-			$mdgriffith$elm_ui$Element$link,
-			_List_fromArray(
-				[
-					$mdgriffith$elm_ui$Element$Font$color($author$project$Styles$blue)
-				]),
-			{
-				label: $mdgriffith$elm_ui$Element$text('For more information and examples, please visit Paul Bourke\'s L-System page'),
-				url: 'http://paulbourke.net/fractals/lsys/'
-			});
-		return A2(
-			$mdgriffith$elm_ui$Element$column,
-			_List_fromArray(
-				[
-					A2($mdgriffith$elm_ui$Element$paddingXY, 0, 6),
-					$mdgriffith$elm_ui$Element$width(
-					$mdgriffith$elm_ui$Element$px(250))
-				]),
-			_List_fromArray(
-				[
-					A2(
-					$mdgriffith$elm_ui$Element$el,
-					_List_fromArray(
-						[$mdgriffith$elm_ui$Element$Font$bold]),
-					$mdgriffith$elm_ui$Element$text('Info:')),
-					link
-				]));
-	}();
+	var info = A2(
+		$mdgriffith$elm_ui$Element$column,
+		_List_fromArray(
+			[
+				A2($mdgriffith$elm_ui$Element$paddingXY, 0, 6),
+				$mdgriffith$elm_ui$Element$spacing(8)
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$mdgriffith$elm_ui$Element$el,
+				_List_fromArray(
+					[$mdgriffith$elm_ui$Element$Font$bold]),
+				$mdgriffith$elm_ui$Element$text('Info:')),
+				A2(
+				$mdgriffith$elm_ui$Element$paragraph,
+				_List_Nil,
+				_List_fromArray(
+					[
+						A2(
+						$mdgriffith$elm_ui$Element$link,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$Font$color($author$project$Styles$blue)
+							]),
+						{
+							label: $mdgriffith$elm_ui$Element$text('For more information and examples, please visit Paul Bourke\'s L-System page.'),
+							url: 'http://paulbourke.net/fractals/lsys/'
+						})
+					]))
+			]));
 	var drawBtn = A2(
 		$mdgriffith$elm_ui$Element$Input$button,
 		$author$project$Styles$btnAttrs,
@@ -17801,7 +17881,10 @@ var $author$project$Sidebar$sidebar = function (state) {
 	}();
 	var attribution = A2(
 		$mdgriffith$elm_ui$Element$column,
-		_List_Nil,
+		_List_fromArray(
+			[
+				$mdgriffith$elm_ui$Element$spacing(4)
+			]),
 		_List_fromArray(
 			[
 				A2(
@@ -17867,7 +17950,11 @@ var $author$project$Sidebar$sidebar = function (state) {
 					var rule = _v0.b;
 					return A2(
 						$mdgriffith$elm_ui$Element$row,
-						_List_Nil,
+						_List_fromArray(
+							[
+								$mdgriffith$elm_ui$Element$padding(4),
+								$mdgriffith$elm_ui$Element$Font$size(16)
+							]),
 						_List_fromArray(
 							[
 								A2(
@@ -17876,14 +17963,26 @@ var $author$project$Sidebar$sidebar = function (state) {
 									[$mdgriffith$elm_ui$Element$Font$bold]),
 								$mdgriffith$elm_ui$Element$text(symbol)),
 								$mdgriffith$elm_ui$Element$text(' -> '),
-								$mdgriffith$elm_ui$Element$text(rule)
+								A2(
+								$mdgriffith$elm_ui$Element$paragraph,
+								_List_Nil,
+								_List_fromArray(
+									[
+										A2(
+										$mdgriffith$elm_ui$Element$el,
+										_List_Nil,
+										$mdgriffith$elm_ui$Element$text(rule))
+									]))
 							]));
 				},
 				_List_fromArray(
 					['F -> Move forward by line length drawing a line', 'G -> Move forward by line length drawing a line', 'f -> Move forward by line length without drawing a line', '+ -> Turn left by turning angle', '- -> Turn right by turning angle', '| -> Reverse direction (ie: turn by 180 degrees)', '[ -> Push current drawing state onto stack', '] -> Pop current drawing state from the stack', '# -> Increment the line width by line width increment', '! -> Decrement the line width by line width increment', '@ -> Draw a dot with line width radius', '{ -> Open a polygon', '} -> Close a polygon and fill it with fill colour', '< -> Multiply the line length by the line length scale', '> -> Divide the line length by the line length scale', '& -> Swap the meaning of + and -', '( -> Decrement turning angle by turning angle increment', ') -> Increment turning angle by turning angle increment', 'a to z (except f) -> No action']));
 			return A2(
 				$mdgriffith$elm_ui$Element$column,
-				_List_Nil,
+				_List_fromArray(
+					[
+						$mdgriffith$elm_ui$Element$padding(8)
+					]),
 				_List_fromArray(
 					[
 						A2(
@@ -17895,7 +17994,8 @@ var $author$project$Sidebar$sidebar = function (state) {
 						$mdgriffith$elm_ui$Element$column,
 						_List_fromArray(
 							[
-								$mdgriffith$elm_ui$Element$Font$size(12)
+								$mdgriffith$elm_ui$Element$Font$size(12),
+								$mdgriffith$elm_ui$Element$padding(4)
 							]),
 						symbolAssignments)
 					]));
@@ -17907,27 +18007,44 @@ var $author$project$Sidebar$sidebar = function (state) {
 				label: $mdgriffith$elm_ui$Element$text('reset'),
 				onPress: $elm$core$Maybe$Just($author$project$Update$Reset)
 			});
-		var randomPresetBtn = A2(
-			$mdgriffith$elm_ui$Element$Input$button,
-			$author$project$Styles$btnAttrs,
+		var presetSelect = A3(
+			$nunntom$elm_ui_select$Select$toElement,
+			$author$project$Styles$selectAttrs,
 			{
-				label: $mdgriffith$elm_ui$Element$text('example'),
-				onPress: $elm$core$Maybe$Just($author$project$Update$GetRandomPreset)
-			});
+				itemToString: function ($) {
+					return $.name;
+				},
+				label: A2(
+					$mdgriffith$elm_ui$Element$Input$labelAbove,
+					_List_fromArray(
+						[
+							$mdgriffith$elm_ui$Element$Font$size(16)
+						]),
+					$mdgriffith$elm_ui$Element$text('select example:')),
+				onChange: $author$project$Update$SelectPreset,
+				placeholder: $elm$core$Maybe$Nothing,
+				select: A2($nunntom$elm_ui_select$Select$setItems, state.presets, state.selectedPreset)
+			},
+			$nunntom$elm_ui_select$Select$view);
 		return A2(
 			$mdgriffith$elm_ui$Element$column,
-			_List_Nil,
 			_List_fromArray(
 				[
+					$mdgriffith$elm_ui$Element$spacing(10),
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
+				]),
+			_List_fromArray(
+				[
+					presetSelect,
 					A2(
 					$mdgriffith$elm_ui$Element$row,
 					_List_fromArray(
 						[
 							$mdgriffith$elm_ui$Element$spacing(10),
-							$mdgriffith$elm_ui$Element$alignTop
+							$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill)
 						]),
 					_List_fromArray(
-						[syntaxBtn, randomPresetBtn, resetBtn])),
+						[syntaxBtn, resetBtn])),
 					state.syntaxDisplay ? syntax : $mdgriffith$elm_ui$Element$none
 				]));
 	}();
@@ -17942,7 +18059,7 @@ var $author$project$Sidebar$sidebar = function (state) {
 				$mdgriffith$elm_ui$Element$Border$color($author$project$Styles$midGray),
 				$mdgriffith$elm_ui$Element$Background$color($author$project$Styles$white),
 				$mdgriffith$elm_ui$Element$width(
-				$mdgriffith$elm_ui$Element$px(350))
+				$mdgriffith$elm_ui$Element$px(300))
 			]),
 		_List_fromArray(
 			[
@@ -18188,23 +18305,29 @@ var $elm_community$typed_svg$TypedSvg$Attributes$viewBox = F4(
 	});
 var $author$project$View$view = function (state) {
 	var canvas = A2(
-		$elm$html$Html$div,
+		$mdgriffith$elm_ui$Element$el,
 		_List_fromArray(
 			[
-				$elm$html$Html$Attributes$class('canvasContent bg-black')
+				$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+				$mdgriffith$elm_ui$Element$height($mdgriffith$elm_ui$Element$fill),
+				$mdgriffith$elm_ui$Element$Background$color($author$project$Styles$black),
+				$mdgriffith$elm_ui$Element$Border$rounded(5),
+				$mdgriffith$elm_ui$Element$padding(10),
+				$mdgriffith$elm_ui$Element$Border$width(2),
+				$mdgriffith$elm_ui$Element$Border$color($author$project$Styles$midGray),
+				$mdgriffith$elm_ui$Element$pointer,
+				$mdgriffith$elm_ui$Element$htmlAttribute(
+				$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onDown(
+					function (event) {
+						return A2($author$project$Update$UpdateStartingPoint, event.button, event.offsetPos);
+					}))
 			]),
-		_List_fromArray(
-			[
-				A2(
+		$mdgriffith$elm_ui$Element$html(
+			A2(
 				$elm_community$typed_svg$TypedSvg$svg,
 				_List_fromArray(
 					[
-						A4($elm_community$typed_svg$TypedSvg$Attributes$viewBox, 0, 0, state.canvasWidth, state.canvasHeight),
-						$mpizenberg$elm_pointer_events$Html$Events$Extra$Mouse$onDown(
-						function (event) {
-							return A2($author$project$Update$DownMsg, event.button, event.offsetPos);
-						}),
-						A2($elm$html$Html$Attributes$style, 'cursor', 'pointer')
+						A4($elm_community$typed_svg$TypedSvg$Attributes$viewBox, 0, 0, state.canvasWidth, state.canvasHeight)
 					]),
 				function () {
 					var progress = A2(
@@ -18227,20 +18350,22 @@ var $author$project$View$view = function (state) {
 									A2($author$project$Turtle$drawFilledPolygons, progress, turtle.filledPolygons)
 								]),
 							A2($author$project$Turtle$renderTurtleDots, progress, turtle)));
-				}())
-			]));
+				}())));
 	return A2(
 		$mdgriffith$elm_ui$Element$layout,
 		_List_Nil,
 		A2(
-			$mdgriffith$elm_ui$Element$column,
+			$mdgriffith$elm_ui$Element$row,
 			_List_fromArray(
 				[
-					$mdgriffith$elm_ui$Element$padding(10)
+					$mdgriffith$elm_ui$Element$padding(10),
+					$mdgriffith$elm_ui$Element$width($mdgriffith$elm_ui$Element$fill),
+					$mdgriffith$elm_ui$Element$spacing(10)
 				]),
 			_List_fromArray(
 				[
-					$author$project$Sidebar$sidebar(state)
+					$author$project$Sidebar$sidebar(state),
+					canvas
 				])));
 };
 var $author$project$Main$main = $elm$browser$Browser$element(
