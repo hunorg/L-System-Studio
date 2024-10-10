@@ -156,6 +156,53 @@ crystal =
     }
 
 
+hilbert : Preset
+hilbert =
+    { name = "hilbert"
+    , rules =
+        [ ( 'X', [ '-', 'Y', 'F', '+', 'X', 'F', 'X', '+', 'F', 'Y', '-' ] )
+        , ( 'Y', [ '+', 'X', 'F', '-', 'Y', 'F', 'Y', '-', 'F', 'X', '+' ] )
+        ]
+    , axiomApplied = True
+    , turningAngle = 90
+    , lineLength = 4
+    , axiom = "X"
+    , iterations = 5
+    , startingAngle = -90
+    }
+
+
+krishnaAnklets : Preset
+krishnaAnklets =
+    { name = "krishna anklets"
+    , rules =
+        [ ( 'X', [ 'X', 'F', 'X', '-', '-', 'X', 'F', 'X' ] )
+        ]
+    , axiomApplied = True
+    , turningAngle = 45
+    , lineLength = 4
+    , axiom = "-X--X"
+    , iterations = 5
+    , startingAngle = -90
+    }
+
+
+mangoLeaf : Preset
+mangoLeaf =
+    { name = "mango leaf"
+    , rules =
+        [ ( 'X', [ '{', 'F', '-', 'F', '}', '{', 'F', '-', 'F', '}', '-', '-', '[', '-', '-', 'X', ']', '{', 'F', '-', 'F', '}', '{', 'F', '-', 'F', '}', '-', '-', '{', 'F', '-', 'F', '}', '{', 'F', '-', 'F', '}', '-' ] )
+        , ( 'Y', [ 'f', '-', 'F', '+', 'X', '+', 'F', '-', 'f', 'Y' ] )
+        ]
+    , axiomApplied = True
+    , turningAngle = 60
+    , lineLength = 4
+    , axiom = "Y---Y"
+    , iterations = 5
+    , startingAngle = -90
+    }
+
+
 initPreset : Preset
 initPreset =
     { name = "initPreset"
@@ -179,4 +226,7 @@ presets =
     , crystal
     , rings
     , kolam
+    , hilbert
+    , krishnaAnklets
+    , mangoLeaf
     ]

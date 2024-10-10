@@ -5424,6 +5424,50 @@ var $author$project$Presets$crystal = {
 	startingAngle: 0,
 	turningAngle: 90
 };
+var $author$project$Presets$hilbert = {
+	axiom: 'X',
+	axiomApplied: true,
+	iterations: 5,
+	lineLength: 4,
+	name: 'hilbert',
+	rules: _List_fromArray(
+		[
+			_Utils_Tuple2(
+			_Utils_chr('X'),
+			_List_fromArray(
+				[
+					_Utils_chr('-'),
+					_Utils_chr('Y'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('X'),
+					_Utils_chr('F'),
+					_Utils_chr('X'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('Y'),
+					_Utils_chr('-')
+				])),
+			_Utils_Tuple2(
+			_Utils_chr('Y'),
+			_List_fromArray(
+				[
+					_Utils_chr('+'),
+					_Utils_chr('X'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('Y'),
+					_Utils_chr('F'),
+					_Utils_chr('Y'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('X'),
+					_Utils_chr('+')
+				]))
+		]),
+	startingAngle: -90,
+	turningAngle: 90
+};
 var $author$project$Presets$kochIslandVar = {
 	axiom: 'x+x+x+x+x+x+x+x',
 	axiomApplied: true,
@@ -5593,6 +5637,103 @@ var $author$project$Presets$kolam = {
 		]),
 	startingAngle: 180,
 	turningAngle: 45
+};
+var $author$project$Presets$krishnaAnklets = {
+	axiom: '-X--X',
+	axiomApplied: true,
+	iterations: 5,
+	lineLength: 4,
+	name: 'krishna anklets',
+	rules: _List_fromArray(
+		[
+			_Utils_Tuple2(
+			_Utils_chr('X'),
+			_List_fromArray(
+				[
+					_Utils_chr('X'),
+					_Utils_chr('F'),
+					_Utils_chr('X'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('X'),
+					_Utils_chr('F'),
+					_Utils_chr('X')
+				]))
+		]),
+	startingAngle: -90,
+	turningAngle: 45
+};
+var $author$project$Presets$mangoLeaf = {
+	axiom: 'Y---Y',
+	axiomApplied: true,
+	iterations: 5,
+	lineLength: 4,
+	name: 'mango leaf',
+	rules: _List_fromArray(
+		[
+			_Utils_Tuple2(
+			_Utils_chr('X'),
+			_List_fromArray(
+				[
+					_Utils_chr('{'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('}'),
+					_Utils_chr('{'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('}'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('['),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('X'),
+					_Utils_chr(']'),
+					_Utils_chr('{'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('}'),
+					_Utils_chr('{'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('}'),
+					_Utils_chr('-'),
+					_Utils_chr('-'),
+					_Utils_chr('{'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('}'),
+					_Utils_chr('{'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('}'),
+					_Utils_chr('-')
+				])),
+			_Utils_Tuple2(
+			_Utils_chr('Y'),
+			_List_fromArray(
+				[
+					_Utils_chr('f'),
+					_Utils_chr('-'),
+					_Utils_chr('F'),
+					_Utils_chr('+'),
+					_Utils_chr('X'),
+					_Utils_chr('+'),
+					_Utils_chr('F'),
+					_Utils_chr('-'),
+					_Utils_chr('f'),
+					_Utils_chr('Y')
+				]))
+		]),
+	startingAngle: -90,
+	turningAngle: 60
 };
 var $author$project$Presets$pentaPlex = {
 	axiom: 'F++F++F++F++F',
@@ -5773,7 +5914,7 @@ var $author$project$Presets$sqrSierp = {
 	turningAngle: 90
 };
 var $author$project$Presets$presets = _List_fromArray(
-	[$author$project$Presets$plant1, $author$project$Presets$plant2, $author$project$Presets$kochIslandVar, $author$project$Presets$pentaPlex, $author$project$Presets$sqrSierp, $author$project$Presets$crystal, $author$project$Presets$rings, $author$project$Presets$kolam]);
+	[$author$project$Presets$plant1, $author$project$Presets$plant2, $author$project$Presets$kochIslandVar, $author$project$Presets$pentaPlex, $author$project$Presets$sqrSierp, $author$project$Presets$crystal, $author$project$Presets$rings, $author$project$Presets$kolam, $author$project$Presets$hilbert, $author$project$Presets$krishnaAnklets, $author$project$Presets$mangoLeaf]);
 var $nunntom$elm_ui_select$Internal$Model$setItems = F2(
 	function (items, _v0) {
 		var model = _v0.a;
