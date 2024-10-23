@@ -19,7 +19,13 @@ generateSequence iterations axiom rules =
                     Array.fromList [ symbol ]
     in
     List.foldl
-        (\_ seq -> Array.map expandSymbol seq |> Array.toList |> List.map Array.toList |> List.concat |> Array.fromList)
+        (\_ seq ->
+            Array.map expandSymbol seq
+                |> Array.toList
+                |> List.map Array.toList
+                |> List.concat
+                |> Array.fromList
+        )
         (String.toList axiom |> Array.fromList)
         (List.range 1 (round iterations))
 
@@ -89,7 +95,12 @@ generateTurtle cfg =
                         updatedPolygons =
                             List.drop 1 turtle.polygons
                     in
-                    { turtle | polygons = currentPolygon :: updatedPolygons, filledPolygons = ( currentPolygon, cfg.state.polygonFillColor ) :: turtle.filledPolygons }
+                    { turtle
+                        | polygons =
+                            currentPolygon :: updatedPolygons
+                        , filledPolygons =
+                            ( currentPolygon, cfg.state.polygonFillColor ) :: turtle.filledPolygons
+                    }
 
                 MultiplyLength ->
                     let

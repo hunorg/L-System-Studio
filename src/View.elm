@@ -3,7 +3,7 @@ module View exposing (..)
 import Array
 import Color exposing (black)
 import ColorPicker
-import Element exposing (Element, fill, padding, spacing)
+import Element exposing (Element, fill, padding, px, spacing)
 import Element.Background as Background
 import Element.Border as Border
 import Element.Events as Events exposing (onMouseDown)
@@ -30,24 +30,32 @@ view state =
         canvas =
             Element.el
                 [ Element.width fill
-                , Element.height fill
+                , Element.height (px (state.windowHeight - 20))
                 , Background.color Styles.black
                 , Border.rounded 5
-                , Element.padding 10
+
+                --   , Element.padding 10
                 , Border.width 2
                 , Border.color midGray
                 , Element.pointer
-                , Mouse.onDown (\event -> UpdateStartingPoint event.button event.offsetPos) |> Element.htmlAttribute
                 ]
             <|
                 Element.html <|
                     svg
-                        [ TypedSvg.Attributes.viewBox 0 0 state.canvasWidth state.canvasHeight ]
+                        [ TypedSvg.Attributes.viewBox
+                            0
+                            0
+                            state.canvasWidth
+                            (Basics.toFloat (state.windowHeight - 20))
+                        , Mouse.onDown
+                            (\event -> UpdateStartingPoint event.button event.offsetPos)
+                        ]
                     <|
                         let
                             progress : Float
                             progress =
-                                Basics.min state.renderingProgress (toFloat (Array.length state.generatedSequence))
+                                Basics.min state.renderingProgress
+                                    (toFloat (Array.length state.generatedSequence))
 
                             progressSequence : Array.Array Char
                             progressSequence =
@@ -70,22 +78,17 @@ view state =
                             ++ [ Turtle.drawFilledPolygons progress turtle.filledPolygons ]
                             ++ Turtle.renderTurtleDots progress turtle
     in
-    Element.layout [] <|
+    Element.layout
+        [ Element.height (px state.windowHeight)
+        , Element.clipY
+        , padding 10
+        ]
+    <|
         Element.row
-            [ padding 10
-            , Element.width fill
+            [ Element.width fill
             , spacing 10
             ]
-            [ {-
-
-                 , viewIf state.loadingIconVisible <|
-                     icon
-                         { name = "hourglass_empty"
-                         , onTap = NoOp
-                         , classes = "absolute right-2 top-2 text-white"
-                         }
-              -}
-              sidebar state
+            [ sidebar state
             , canvas
             ]
 
@@ -98,6 +101,15 @@ view state =
                        , colorPickerView model.polygonFillColor model.colorPicker
                        ]
 
+-}
+{-
+
+   , viewIf state.loadingIconVisible <|
+       icon
+           { name = "hourglass_empty"
+           , onTap = NoOp
+           , classes = "absolute right-2 top-2 text-white"
+           }
 -}
 
 

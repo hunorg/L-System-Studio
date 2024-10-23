@@ -1,10 +1,9 @@
-module Model exposing (Model, init)
+module Model exposing (Flags, Model, init)
 
 import Array exposing (Array)
 import Color
 import ColorPicker
 import Presets exposing (..)
-import Random
 import Select exposing (Select)
 import SymbolAssignments exposing (Rule, Symbol, allSymbolAssignments)
 import Time
@@ -38,49 +37,59 @@ type alias Model =
     , showSidebar : Bool
     , selectedPreset : Select Preset
     , presets : List Preset
-    , randomGenerator : Random.Generator Int
     , renderingProgress : Float
     , animationSpeed : Float
     , animationStartTime : Maybe Time.Posix
     , loadingIconVisible : Bool
     , lastAnimationFrameTimestamp : Maybe Time.Posix
     , selectSymbol : Select Symbol
+    , windowWidth : Int
+    , windowHeight : Int
     }
 
 
-init : Model
-init =
-    { symbolAssignments = allSymbolAssignments
-    , syntaxDisplay = False
-    , rules = []
-    , selectedRule = Nothing
-    , selectedSymbol = "F"
-    , selectedAction = Move
-    , newRuleInput = ""
-    , axiomApplied = False
-    , turningAngle = 0
-    , turningAngleIncrement = 0
-    , lineLength = 1
-    , lineLengthScale = 0
-    , lineWidthIncrement = 0
-    , axiom = ""
-    , recursionDepth = 0
-    , startingPoint = ( 250, 250 )
-    , startingAngle = 0
-    , polygonFillColor = Color.black
-    , colorPicker = ColorPicker.empty
-    , generatedSequence = Array.empty
-    , drawnTurtle = False
-    , canvasWidth = 500
-    , canvasHeight = 500
-    , showSidebar = True
-    , selectedPreset = Select.init "preset-select" |> Select.setItems presets
-    , presets = presets
-    , randomGenerator = Random.int 0 (List.length presets - 1)
-    , renderingProgress = 0
-    , animationSpeed = 1
-    , animationStartTime = Nothing
-    , loadingIconVisible = False
-    , lastAnimationFrameTimestamp = Nothing
-    , selectSymbol = Select.init "symbol-select" |> Select.setItems allSymbolAssignments
+type alias Flags =
+    { width : Int
+    , height : Int
     }
+
+
+init : Flags -> ( Model, Cmd msg )
+init flags =
+    ( { symbolAssignments = allSymbolAssignments
+      , syntaxDisplay = False
+      , rules = []
+      , selectedRule = Nothing
+      , selectedSymbol = "F"
+      , selectedAction = Move
+      , newRuleInput = ""
+      , axiomApplied = False
+      , turningAngle = 0
+      , turningAngleIncrement = 0
+      , lineLength = 1
+      , lineLengthScale = 0
+      , lineWidthIncrement = 0
+      , axiom = ""
+      , recursionDepth = 0
+      , startingPoint = ( 250, 250 )
+      , startingAngle = 0
+      , polygonFillColor = Color.black
+      , colorPicker = ColorPicker.empty
+      , generatedSequence = Array.empty
+      , drawnTurtle = False
+      , canvasWidth = 500
+      , canvasHeight = 500
+      , showSidebar = True
+      , selectedPreset = Select.init "preset-select" |> Select.setItems presets
+      , presets = presets
+      , renderingProgress = 0
+      , animationSpeed = 1
+      , animationStartTime = Nothing
+      , loadingIconVisible = False
+      , lastAnimationFrameTimestamp = Nothing
+      , selectSymbol = Select.init "symbol-select" |> Select.setItems allSymbolAssignments
+      , windowWidth = flags.width
+      , windowHeight = flags.height
+      }
+    , Cmd.none
+    )

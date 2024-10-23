@@ -43,6 +43,7 @@ type Msg
     | AnimationFrame Time.Posix
     | SelectSymbol (Select.Msg Symbol)
     | SelectPreset (Select.Msg Preset)
+    | Resize ( Int, Int )
     | NoOp
 
 
@@ -331,6 +332,9 @@ update msg state =
                             ( updatedState, Cmd.none )
             in
             ( newState, Cmd.batch [ cmd, task ] )
+
+        Resize ( newWidth, newHeight ) ->
+            ( { state | windowWidth = newWidth, windowHeight = newHeight }, Cmd.none )
 
         NoOp ->
             ( state, Cmd.none )

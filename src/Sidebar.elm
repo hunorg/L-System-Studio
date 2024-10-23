@@ -147,23 +147,22 @@ sidebar state =
                         , spacing 8
                         , pointer
                         ]
-                        (row [ alignRight, spacing 8 ]
+                    <|
+                        row [ alignRight, spacing 8 ]
                             [ paragraph []
                                 [ text <| String.fromChar (Tuple.first rule) ++ " -> " ++ String.fromList (Tuple.second rule)
                                 ]
                             , if isRuleSelected then
-                                el []
-                                    (Input.button
+                                el [] <|
+                                    Input.button
                                         btnAttrs
                                         { onPress = Just (RemoveRule rule)
                                         , label = text "X"
                                         }
-                                    )
 
                               else
                                 Element.none
                             ]
-                        )
 
                 symbolSelect : Element Msg
                 symbolSelect =
@@ -257,6 +256,9 @@ sidebar state =
             , Border.color midGray
             , Background.color white
             , Element.width (px 300)
+            , Element.height (px (state.windowHeight - 20))
+            , clipY
+            , scrollbarY
             ]
             [ el [ Font.bold, Font.size 24 ] (text "L-System Studio")
             , info
@@ -266,6 +268,7 @@ sidebar state =
             , turtleSettings state
             , drawBtn
             , attribution
+            , text ("window size: " ++ String.fromInt state.windowWidth ++ ", " ++ String.fromInt state.windowHeight)
             ]
 
     else
@@ -282,7 +285,7 @@ turtleSettings state =
                 { onChange = UpdateStartingAngle
                 , text = state.startingAngle |> toString
                 , placeholder = Nothing
-                , label = Input.labelAbove [ Font.size 16 ] (Element.text "starting angle")
+                , label = Input.labelAbove [ Font.size 16 ] (Element.text "starting angle:")
                 }
 
         turningAngle : Element Msg
@@ -292,7 +295,7 @@ turtleSettings state =
                 { onChange = UpdateTurningAngle
                 , text = state.turningAngle |> toString
                 , placeholder = Nothing
-                , label = Input.labelAbove [ Font.size 16 ] (Element.text "turning angle")
+                , label = Input.labelAbove [ Font.size 16 ] (Element.text "turning angle:")
                 }
 
         turningAngleIncrement : Element Msg
@@ -302,7 +305,7 @@ turtleSettings state =
                 { onChange = UpdateTurningAngleIncrement
                 , text = state.turningAngle |> toString
                 , placeholder = Nothing
-                , label = Input.labelAbove [ Font.size 16 ] (Element.text "turning angle increment")
+                , label = Input.labelAbove [ Font.size 16 ] (Element.text "turning angle increment:")
                 }
 
         lineLength : Element Msg

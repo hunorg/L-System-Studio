@@ -1,11 +1,9 @@
 port module Main exposing (main, subscriptions)
 
 import Browser
-import Browser.Events
-import Element
-import Html
+import Browser.Events exposing (onResize)
 import Json.Decode as Decode exposing (Value)
-import Model exposing (Model, init)
+import Model exposing (Flags, Model, init)
 import Time
 import Update exposing (Msg(..), update)
 import View exposing (view)
@@ -14,10 +12,10 @@ import View exposing (view)
 port updateCanvasSize : (Value -> msg) -> Sub msg
 
 
-main : Program () Model.Model Update.Msg
+main : Program Flags Model Msg
 main =
     Browser.element
-        { init = \_ -> ( init, Cmd.none )
+        { init = init
         , update = update
         , view = view
         , subscriptions = subscriptions
@@ -59,4 +57,5 @@ subscriptions model =
             )
         , tick
         , animationFrameSub
+        , onResize (\width height -> Resize ( width, height ))
         ]

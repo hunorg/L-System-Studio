@@ -228,5 +228,5 @@ presets =
     , kolam
     , hilbert
     , krishnaAnklets
-    , mangoLeaf
+    , mangoLeaf -- check for reason why the drawing is incorrect
     ]

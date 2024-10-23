@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
     <head>
         <link
@@ -23,6 +23,10 @@
         <script>
             var app = Elm.Main.init({
                 node: document.getElementById("app"),
+                flags: {
+                    width: window.innerWidth,
+                    height: window.innerHeight,
+                },
             });
 
             var canvas = document.querySelector(".canvasContent");
